@@ -1,3 +1,3 @@
-# Scoop Cool Bucket [![Build status](https://ci.appveyor.com/api/projects/status/o6gvfyqe6121altr/branch/master?svg=true)](https://ci.appveyor.com/project/HueLiu/cool-scoop-bucket/branch/master)
+# Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/master?svg=true)](https://ci.appveyor.com/project/Hue/scoop-muggle/branch/master)
 
-`scoop bucket add might_be_cool 'https://github.com/HueLiu/Might-be-Cool-scoop-bucket.git'`
+`scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'`
