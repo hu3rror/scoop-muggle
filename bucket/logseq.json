@@ -1,0 +1,34 @@
+{
+    "version": "0.0.13",
+    "description": "Logseq is a privacy-first, open-source(frontend now, backend later) platform for knowledge sharing and management.",
+    "homepage": "https://logseq.com/",
+    "license": {
+        "identifier": "GNU Affero General Public License v3.0",
+        "url": "https://github.com/logseq/logseq/blob/master/LICENSE.md"
+    },
+    "notes": "We don't persist your Logseq data, they are still storaged in \"%APPDATA%\\Logseq\".",
+    "url": "https://github.com/logseq/logseq/releases/download/0.0.13/logseq-win-x64-0.0.13.exe#/dl.7z",
+    "hash": "d4276b46a29b1c564cf0157e5752674c521ca296de751beea597466fd527a875",
+    "installer": {
+        "script": [
+            "$nupkg = (Get-ChildItem \"$dir\" 'logseq-*-full.nupkg' | Select-Object -First 1).FullName",
+            "Expand-7ZipArchive \"$nupkg\" \"$dir\" -Removal",
+            "$dotnet = (Get-ChildItem \"$dir\\lib\" 'net*' | Select-Object -First 1).FullName",
+            "Move-Item \"$dotnet\\*\" \"$dir\""
+        ]
+    },
+    "post_install": "Remove-Item \"$dir\\lib\",\"$dir\\_rels\" -Recurse -Force",
+    "shortcuts": [
+        [
+            "Logseq.exe",
+            "Logseq"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/logseq/logseq/releases"
+    },
+    "autoupdate": {
+        "url": "https://github.com/logseq/logseq/releases/download/$version/logseq-win-x64-$version.exe#/dl.7z"
+        }
+}
+
