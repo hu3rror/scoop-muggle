@@ -1,5 +1,5 @@
 {
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "Logseq is a privacy-first, open-source(frontend now, backend later) platform for knowledge sharing and management.",
     "homepage": "https://logseq.com/",
     "license": {
@@ -7,8 +7,8 @@
         "url": "https://github.com/logseq/logseq/blob/master/LICENSE.md"
     },
     "notes": "We don't persist your Logseq data, they are still storaged in \"%APPDATA%\\Logseq\".",
-    "url": "https://github.com/logseq/logseq/releases/download/0.0.14/logseq-win-x64-0.0.14.exe#/dl.7z",
-    "hash": "2c89b925997b268413d4bcf2d3e21618b7071550bbeffc0214f64dd5f38433ff",
+    "url": "https://github.com/logseq/logseq/releases/download/0.0.15/logseq-win-x64-0.0.15.exe#/dl.7z",
+    "hash": "d7e4a74067b96f240bbd076e3d3a3da876f31cc07c7effd8430d2dd3a6ada406",
     "installer": {
         "script": [
             "$nupkg = (Get-ChildItem \"$dir\" 'logseq-*-full.nupkg' | Select-Object -First 1).FullName",
