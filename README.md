@@ -32,6 +32,11 @@ Just execute the following command in Powershell
 
 ## 中文参考教程
 
+### 添加本仓库 Bucket
+
+`scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'`
+
+
 目前该 Scoop 仓库仅添加 Logseq 这一款软件，后续视情况添加更多软件。
 
 #### scoop 是什么？
