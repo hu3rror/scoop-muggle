@@ -45,3 +45,5 @@ https://cn.logseq.com/t/topic/491
 5. 关于下载速度慢的原因，有两种方式解决
     1. 在 Logseq 中安装 aria2，实现多线程下载安装包： `scoop install aria2`
     2. 让 Windows 终端（Powershell/CMD）走系统代理，也许可以参考：[在 Windows 终端中设置代理](https://www.yixuju.cn/other/talking-about-proxy/)
+
+### End
