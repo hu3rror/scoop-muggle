@@ -23,9 +23,9 @@ Just execute the following command in Powershell
     `scoop update logseq`
 
 #### P.S.
-1. Only supported Logseq Desktop for Windows. 
+1. Only supported Logseq Desktop for Windows.
 2. Powershell is recommended to be run by administrator privileges.
-3. This tutorial is available up to Logseq version v0.0.15. If Logseq is updated with a major version, this may not work. 
+3. This tutorial is available up to Logseq version v0.0.15. If Logseq is updated with a major version, this may not work.
 4. As I am new to Scoop, I will try to maintain it as much as possible.
 
 ---
