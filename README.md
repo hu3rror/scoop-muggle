@@ -9,12 +9,12 @@
 https://cn.logseq.com/t/topic/491
 
 ### scoop 是什么？
-参考 [SpencerWoo](https://sspai.com/u/spencerwoo/updates) 撰写的 [「一行代码」搞定软件安装卸载，用 Scoop 管理你的 Windows 软件](https://sspai.com/post/52496) 
+参考 [SpencerWoo](https://sspai.com/u/spencerwoo/updates) 撰写的 [「一行代码」搞定软件安装卸载，用 Scoop 管理你的 Windows 软件](https://sspai.com/post/52496)
 
 ### scoop 简明安装教程
 > 内容摘抄自上述 scoop 介绍[文章](https://sspai.com/post/52496)，更多详情请参考 [scoop 官网](https://scoop.sh/)
 
-1. 右键开始菜单按钮，在右键菜单中打开 PowerShell 
+1. 右键开始菜单按钮，在右键菜单中打开 PowerShell
 2. 在 PowerShell 中输入下面内容，保证允许本地脚本的执行：
     `set-executionpolicy remotesigned -scope currentuser`
 
