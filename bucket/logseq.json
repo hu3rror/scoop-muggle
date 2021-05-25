@@ -10,7 +10,7 @@
         }
     },
     "pre_install": [
-        "Expand-7ZipArchive \"$dir\\LogseqCanary-*-full.nupkg\" -ExtractDir 'lib\\net45' -Removal",
+        "Expand-7ZipArchive \"$dir\\Logseq-*-full.nupkg\" -ExtractDir 'lib\\net45' -Removal",
         "Remove-Item \"$dir\\lib\", \"$dir\\Update*\" -Recurse"
     ],
     "shortcuts": [
