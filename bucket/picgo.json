@@ -22,8 +22,8 @@
                     "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\" -Removal",
                     "Remove-Item \"$dir\\`$PLUGINSDIR\"  -Force -Recurse"
                 ]
-			}
-		}
+            }
+        }
     },
     "bin": "PicGo.exe",
     "shortcuts": [
@@ -43,14 +43,14 @@
                     "url": "$baseurl/latest.yml",
                     "regex": "sha512:\\s+$base64"
                 }
-			},
+            },
             "64bit": {
                 "url": "https://github.com/Molunerfinn/PicGo/releases/download/v$version/PicGo-Setup-$version-x64.exe/#dl.7z",
                 "hash": {
                     "url": "$baseurl/latest.yml",
                     "regex": "sha512:\\s+$base64"
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }
