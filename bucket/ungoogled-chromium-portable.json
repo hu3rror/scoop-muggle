@@ -9,11 +9,6 @@
             "url": "https://github.com/macchrome/winchrome/releases/download/v92.0.4515.159-r885287-Win64/ungoogled-chromium-92.0.4515.159-1_Win64.7z",
             "hash": "sha1:e8db78c40fc6fd93093c7855ab0b9e733209657b",
             "extract_dir": "ungoogled-chromium-92.0.4515.159-1_Win64"
-        },
-        "32bit": {
-            "url": "https://github.com/macchrome/winchrome/releases/download/v92.0.4515.159-r885287-Win64/ungoogled-chromium-92.0.4515.159-1_Win32.7z",
-            "hash": "sha1:505061b67191a94c1f2032bd77b35651901043eb",
-            "extract_dir": "ungoogled-chromium-92.0.4515.159-1_Win32"
         }
     },
     "bin": [
@@ -45,10 +40,6 @@
             "64bit": {
                 "url": "https://github.com/macchrome/winchrome/releases/download/v$version-r$matchBuild-Win64/ungoogled-chromium-$version-1_Win64.7z",
                 "extract_dir": "ungoogled-chromium-$version-1_Win64"
-            },
-            "32bit": {
-                "url": "https://github.com/macchrome/winchrome/releases/download/v$version-r$matchBuild-Win64/Ungoogled-Chromium-$version-1_Win32.7z",
-                "extract_dir": "Ungoogled-Chromium-$version-1_Win32"
             }
         },
         "hash": {
