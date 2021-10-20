@@ -1,13 +1,13 @@
 {
-    "version": "2.7.0",
+    "version": "2.6.6",
     "description": "Community fork of KeePass Snapshot Builds",
     "homepage": "https://keepassxc.org",
     "license": "GPL-2.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://snapshot.keepassxc.org/latest/KeePassXC-2.7.0-snapshot-Win64.zip",
-            "hash": "488fc97cc8276fd3e065c3533f116244b44276ff1fc86b3332290a1b372b51c4",
-            "extract_dir": "KeePassXC-2.7.0-Win64"
+            "url": "https://github.com/keepassxreboot/keepassxc/releases/download/2.6.6/KeePassXC-2.6.6-Win64-Portable.zip",
+            "hash": "45a4cd19f02ad617808aa814fac2ed61b59eff467d8c464d94ba5304d7ccabc0",
+            "extract_dir": "KeePassXC-2.6.6-Win64"
         }
     },
     "post_install": "if (Test-Path \"$persist_dir\\keepassxc.ini\") { Move-Item \"$persist_dir\\keepassxc.ini\" \"$dir\\config\" -Force }",
