@@ -7,7 +7,7 @@
         "64bit": {
             "url": "https://snapshot.keepassxc.org/latest/KeePassXC-2.7.0-snapshot-Win64.zip",
             "hash": "488fc97cc8276fd3e065c3533f116244b44276ff1fc86b3332290a1b372b51c4",
-            "extract_dir": "KeePassXC-2.7.0-Win64"
+            "extract_dir": "KeePassXC-2.7.0-snapshot-Win64"
         }
     },
     "post_install": "if (Test-Path \"$persist_dir\\keepassxc.ini\") { Move-Item \"$persist_dir\\keepassxc.ini\" \"$dir\\config\" -Force }",
