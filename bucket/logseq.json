@@ -1,12 +1,12 @@
 {
-    "version": "0.4.5",
+    "version": "0.4.4",
     "description": "A privacy-first platform for knowledge sharing and management",
     "homepage": "https://logseq.com",
     "license": "AGPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/logseq/logseq/releases/download/0.4.5/logseq-win-x64-0.4.5.exe#/dl.7z",
-            "hash": "E0947EC4021D1A16A4A6B5995C6090C2F858E6D5EC466B8978A111319E4DA545"
+            "url": "https://github.com/logseq/logseq/releases/download/0.4.4/logseq-win-x64-0.4.4.exe#/dl.7z",
+            "hash": "3eacd1beaba1ef6d0ac10666efde696bd77ee73e7537592a3bdc5a9c365cf145"
         }
     },
     "pre_install": [
