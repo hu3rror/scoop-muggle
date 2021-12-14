@@ -15,8 +15,8 @@
     ],
     "shortcuts": [
         [
-            "Logseq nightly.exe",
-            "Logseq_nightly"
+            "Logseq.exe",
+            "Logseq"
         ]
     ],
     "checkver": {
