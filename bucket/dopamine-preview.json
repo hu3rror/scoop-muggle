@@ -1,0 +1,32 @@
+{
+    "version": "3.0.0-preview.7",
+    "description": "Audio player which tries to make organizing and listening to music as simple and pretty as possible.",
+    "homepage": "https://www.digimezzo.com/software/dopamine/",
+    "license": "GPL-3.0-only",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/digimezzo/dopamine/releases/download/v3.0.0-preview.7/Dopamine-3.0.0-preview.7.exe#/dl.7z",
+            "hash": "f4010bd8ac598ee497e0eb1a81a5cbea74e380b497571b7f4ed50f3955bc0f3d",
+            "pre_install": [
+                "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\"",
+                "Remove-Item \"$dir\\`$*\", \"$dir\\Uninst*\" -Recurse"
+            ]
+        }
+    },
+    "shortcuts": [
+        [
+            "Dopamine.exe",
+            "Dopamine"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/digimezzo/Dopamine-windows"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/digimezzo/dopamine/releases/download/v$version/Dopamine-$version.exe#/dl.7z"
+            }
+        }
+    }
+}
