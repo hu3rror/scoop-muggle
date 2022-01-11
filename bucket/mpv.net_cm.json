@@ -21,7 +21,7 @@
     ],
     "checkver": {
         "github": "https://github.com/hooke007/mpv.net_CM",
-        "regex": "(\\d{4,}_(CM)$)"
+        "regex": "mpvnet_CM_\\d+_portable_x64"
     },
     "autoupdate": {
         "architecture": {
