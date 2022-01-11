@@ -1,0 +1,24 @@
+{
+  "version": "v1.1.2",
+  "description": "Unlocker for VMWare macOS.",
+  "homepage": "https://github.com/paolo-projects/auto-unlocker",
+  "license": "GPL-3.0-only",
+  "architecture": {
+    "64bit": {
+        "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/v1.1.2/Unlocker_Win_x64.zip",
+        "hash": "386d6e4b575b4185c581116828fd8f0ac0b99b615d7b0e85a0d0d795214d150b"
+    }
+  },
+  "bin": "Unlocker.exe",
+  "checkver": {
+    "url": "https://github.com/paolo-projects/auto-unlocker/releases",
+  },
+  "autoupdate": {
+      "architecture": {
+          "64bit": {
+              "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/$version/Unlocker-x64.zip"
+          }
+      }
+  }
+}
+
