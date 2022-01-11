@@ -105,17 +105,22 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
     scoop update logseq
     ```
 
-2. 若希望其他 scoop 库的软件都一并更新，则可以在 `Powershell` 中执行以下命令：
+2. 若希望其他 `Scoop` 库的软件都一并更新，则可以在 `Powershell` 中执行以下命令：
     
     ```  pwsh
     scoop update *
     ```
 
 #### 注意事项
-1. 仅支持 Windows 版本的 Logseq Desktop 更新
-2. Powershell 建议在管理员权限身份下运行，避免一些额外的权限问题（当然上述 Logseq 的安装不需要管理员权限）
+1. 仅支持 **Windows** 版本的 `Logseq` 更新
+2. `Powershell` 建议在管理员权限身份下运行，避免一些额外的权限问题（当然上述 `Logseq` 的安装不需要管理员权限）
 3. 关于下载速度慢的原因，有两种方式解决
-    1. 在 Logseq 中安装 aria2，实现多线程下载安装包： `scoop install aria2`
+    1. 在 `Logseq` 中安装 `aria2`，实现多线程下载安装包： 
+    
+    ``` pwsh
+    scoop install aria2
+    ```
+
     2. 让 Windows 终端（Powershell/CMD）走系统代理，也许可以参考：[在 Windows 终端中设置代理](https://www.yixuju.cn/other/talking-about-proxy/)
 
 🎉🎉 大功告成！
