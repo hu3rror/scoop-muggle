@@ -10,10 +10,10 @@
         }
     },
     "bin": "Unlocker.exe",
-    "persist": [ 
-        "backup", 
-        "tools" 
-    ],    
+    "persist": [
+        "backup",
+        "tools"
+    ],
     "checkver": {
         "github": "https://github.com/paolo-projects/auto-unlocker"
     },
