@@ -1,17 +1,17 @@
 {
-    "version": "0.9.5p13",
+    "version": "0.9.5p14",
     "description": "An editor for Animal Crossing: New Horizons design patterns",
     "homepage": "https://logseq.com",
     "license": "AGPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/0.9.5p13/ACNHDesignPatternEditorv0.9.5p13-WinX64.zip",
-            "hash": "bc4c05f0dd86c593870f23fa3288cd3e9829f484726d47c4aa5aa6c9c31b14b9",
+            "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/0.9.5p14/ACNHDesignPatternEditorv0.9.5p14-WinX64.zip",
+            "hash": "3ca1276bf224248319bec7d34f13909f9e8b776ea657d9a28f1ff670e19b3571",
             "extract_dir": "ACNHDesignPatternEditorv${tag}-WinX64"
         },
         "32bit": {
-            "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/0.9.5p13/ACNHDesignPatternEditorv0.9.5p13-WinX86.zip",
-            "hash": "52e1198d8a811c1d3eec91b8199abc511e476add2ba0d0a44296a5cdb092beec",
+            "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/0.9.5p14/ACNHDesignPatternEditorv0.9.5p14-WinX86.zip",
+            "hash": "1cc919c05e80fbcb4e97fd1aa3b15adcdd1bc25197e5f4757cfed4a708f78248",
             "extract_dir": "ACNHDesignPatternEditorv${tag}-WinX86"
         }
     },
