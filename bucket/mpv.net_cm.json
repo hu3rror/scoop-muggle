@@ -11,6 +11,7 @@
         }
     },
     "bin": "mpvnet.exe",
+    "persist": "portable_config",
     "shortcuts": [
         [
             "mpvnet.exe",
