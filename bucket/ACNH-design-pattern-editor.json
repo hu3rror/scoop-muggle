@@ -7,12 +7,12 @@
         "64bit": {
             "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/0.9.5p14/ACNHDesignPatternEditorv0.9.5p14-WinX64.zip",
             "hash": "3ca1276bf224248319bec7d34f13909f9e8b776ea657d9a28f1ff670e19b3571",
-            "extract_dir": "ACNHDesignPatternEditorv${tag}-WinX64"
+            "extract_dir": "ACNHDesignPatternEditorv0.9.5p14-WinX64"
         },
         "32bit": {
             "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/0.9.5p14/ACNHDesignPatternEditorv0.9.5p14-WinX86.zip",
             "hash": "1cc919c05e80fbcb4e97fd1aa3b15adcdd1bc25197e5f4757cfed4a708f78248",
-            "extract_dir": "ACNHDesignPatternEditorv${tag}-WinX86"
+            "extract_dir": "ACNHDesignPatternEditorv0.9.5p14-WinX86"
         }
     },
     "pre_install": [
@@ -33,10 +33,12 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/$matchTag/ACNHDesignPatternEditorv$matchTag-WinX64.zip"
+                "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/$matchTag/ACNHDesignPatternEditorv$matchTag-WinX64.zip",
+                "extract_dir": "ACNHDesignPatternEditorv${tag}-WinX64"
             },
             "32bit": {
-                "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/$matchTag/ACNHDesignPatternEditorv$matchTag-WinX86.zip"
+                "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases/download/$matchTag/ACNHDesignPatternEditorv$matchTag-WinX86.zip",
+                "extract_dir": "ACNHDesignPatternEditorv${tag}-WinX86"
             }
         }
     }
