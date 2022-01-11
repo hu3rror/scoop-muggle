@@ -21,8 +21,8 @@
     ],
     "checkver": {
         "url": "https://github.com/digimezzo/dopamine/releases",
-        "regex": "Dopamine-(?<major>[\\d.]+)-preview\\.(?<build>([0-9]+))",
-        "replace": "${major}-preview\\.${build}"
+        "regex": "Dopamine-(?<major>[\\d.]+)-preview\\.(?<build>\\d+)",
+        "replace": "${major}-preview.${build}"
     },
     "autoupdate": {
         "architecture": {
