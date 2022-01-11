@@ -20,12 +20,14 @@
         ]
     ],
     "checkver": {
-        "github": "https://github.com/digimezzo/dopamine"
+        "url": "https://github.com/digimezzo/dopamine/releases",
+        "regex": "Dopamine-(?<major>[\\d.]+)-preview.(?<build>\\d+).exe",
+        "replace": "${major}-preview\\.${build}"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/digimezzo/dopamine/releases/download/v$version/Dopamine-$version.exe#/dl.7z"
+                "url": "https://github.com/digimezzo/dopamine/releases/download/v$matchMajor-preview.$matchBuild/Dopamine-$matchMajor-preview.$matchBuild.exe#/dl.7z"
             }
         }
     }
