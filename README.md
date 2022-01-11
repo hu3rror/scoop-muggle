@@ -6,75 +6,116 @@
 
 `scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'`
 
-### Just for reference
+---
 
-#### What is Scoop?
-Please visit the official website https://scoop.sh/ and it included the installation tutorial.
+### Reference
 
-#### How to install Logseq?
+#### What is `Scoop`?
+Please visit the [official website](https://scoop.sh/) and it included the installation tutorial.
+
+#### How to install `Logseq` or `Logseq Nightly`?
 1. Once Scoop is installed, executing the following command in Powershell and it would add this Scoop Bucket into your system:
-    `scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'`
 
-2. Then try to install Logseq:
-    `scoop install muggle/logseq`
+    ``` pwsh
+    scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
+    ```
 
-#### How to update Logseq?
-Just execute the following command in Powershell
-    `scoop update logseq`
+2. Then try to install `Logseq`:
 
-#### P.S.
-1. Only supported Logseq Desktop for Windows.
-2. Powershell is recommended to be run by administrator privileges.
-3. This tutorial is available up to Logseq version v0.0.15. If Logseq is updated with a major version, this may not work.
-4. As I am new to Scoop, I will try to maintain it as much as possible.
+    ``` pwsh
+    scoop install muggle/logseq
+    ``` 
+    or for `Logseq nightly`:
+
+    ``` pwsh
+    scoop install muggle/logseq-nightly
+    ```
+
+#### How to update `Logseq`?
+Execute the following command in `Powershell`:
+
+``` pwsh
+scoop update logseq
+```
+
+or update all programs by:
+
+``` pwsh
+scoop update *
+```
+
+#### Tips
+1. Only supported `Logseq for Windows`.
+
+🎉🎉 Everything set.
 
 ---
 
-## 中文参考教程
+## 中文教程
 
-### 添加本仓库 Bucket
+### 添加本 `Bucket` 仓库
 
-`scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'`
+``` pwsh
+scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
+```
 
-
-目前该 Scoop 仓库仅添加 Logseq 这一款软件，后续视情况添加更多软件。
-
-#### scoop 是什么？
+#### `Scoop` 是什么？
 参考 [SpencerWoo](https://sspai.com/u/spencerwoo/updates) 撰写的 [「一行代码」搞定软件安装卸载，用 Scoop 管理你的 Windows 软件](https://sspai.com/post/52496)
 
-#### scoop 简明安装教程
-> 内容摘抄自上述 scoop 介绍[文章](https://sspai.com/post/52496)，更多详情请参考 [scoop 官网](https://scoop.sh/)
+#### `Scoop` 简明安装教程
+> 内容摘抄自上述 scoop [文章介绍](https://sspai.com/post/52496)，更多详情请参考 [Scoop 官网](https://scoop.sh/)
 
-1. 右键开始菜单按钮，在右键菜单中打开 PowerShell
-2. 在 PowerShell 中输入下面内容，保证允许本地脚本的执行：
-    `set-executionpolicy remotesigned -scope currentuser`
+1. 右键开始菜单按钮，在右键菜单中打开 `PowerShell`
+2. 在 `PowerShell` 中输入下面内容，保证允许本地脚本的执行：
 
-3. 然后执行下面的命令安装 Scoop：
-    `iex (new-object net.webclient).downloadstring('https://get.scoop.sh')`
+    ``` pwsh
+    set-executionpolicy remotesigned -scope currentuser
+    ```
 
-#### 使用 scoop 安装 Logseq Desktop 教程
-1. 在 Powershell 中继续执行以下命令
-    `scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'`
+3. 然后执行下面的命令安装 `Scoop`：
 
-2. 上述代码是添加 scoop bucket 库，然后继续执行以下命令安装 Logseq Desktop
-    `scoop install muggle/logseq`
+    ``` pwsh
+    iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+    ```
 
-3. 等待下载完毕即自动完成安装，默认会在系统开始菜单添加 Logseq 的快捷方式。
+#### 使用 `Scoop` 安装 `Logseq` 教程
+1. 在 Powershell 中继续执行以下命令以添加本 `Bucket` 仓库:
 
-#### 使用 scoop 更新 Logseq Desktop
-1. 若仅更新 Logseq Desktop 版本，可以在 Powershell 中执行以下命令：
-    `scoop update logseq`
+    ``` pwsh
+    scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
+    ```
 
-2. 若希望其他 scoop 库的软件都一并更新，则可以在 Powershell 中执行以下命令：
-    `scoop update *`
+2. 继续执行以下命令安装 `Logseq`
+    
+    ``` pwsh
+    scoop install muggle/logseq
+    ```
+    或安装 `Logseq Nightly`
+
+    ``` pwsh
+    scoop install muggle/logseq-nightly
+    ```
+
+3. 等待下载完毕即自动完成安装即可，之后可在开始菜单中找到 `Logseq` 的启动快捷方式。
+
+#### 使用 `Scoop` 更新 `Logseq`
+1. 若仅更新 `Logseq` ，可以在 `Powershell` 中执行以下命令：
+    
+    ``` pwsh
+    scoop update logseq
+    ```
+
+2. 若希望其他 scoop 库的软件都一并更新，则可以在 `Powershell` 中执行以下命令：
+    
+    ```  pwsh
+    scoop update *
+    ```
 
 #### 注意事项
 1. 仅支持 Windows 版本的 Logseq Desktop 更新
 2. Powershell 建议在管理员权限身份下运行，避免一些额外的权限问题（当然上述 Logseq 的安装不需要管理员权限）
-3. 该教程至 Logseq 0.0.13 版本可用。后续 Logseq 如果更换安装模式，上述方式可能不适用。
-4. 由于个人也是 scoop 新手，所以后续的维护会尽量而为。
-5. 关于下载速度慢的原因，有两种方式解决
+3. 关于下载速度慢的原因，有两种方式解决
     1. 在 Logseq 中安装 aria2，实现多线程下载安装包： `scoop install aria2`
     2. 让 Windows 终端（Powershell/CMD）走系统代理，也许可以参考：[在 Windows 终端中设置代理](https://www.yixuju.cn/other/talking-about-proxy/)
 
-🎉🎉 Everything set.
+🎉🎉 大功告成！
