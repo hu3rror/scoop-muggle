@@ -20,7 +20,7 @@
         ]
     ],
     "checkver": {
-        "github": "https://github.com/digimezzo/Dopamine-windows"
+        "github": "https://github.com/digimezzo/dopamine"
     },
     "autoupdate": {
         "architecture": {
