@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/YanxinTang/clipboard-online/releases/download/v0.2.6/clipboard-online.exe",
-            "hash": "a9717fcf4aeabc0da9d3e089ff7868275daf4ecf47b767a07f4997a2af5431ae"
+            "hash": "bec26c8f04ae826ce80888c9d2480a06d2ac9b3f0a62933121440531cf9260a2"
         }
     },
     "bin": "clipboard-online.exe",
