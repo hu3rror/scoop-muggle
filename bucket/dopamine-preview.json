@@ -1,7 +1,7 @@
 {
     "version": "3.0.0-preview.7",
-    "description": "Audio player which tries to make organizing and listening to music as simple and pretty as possible.",
-    "homepage": "https://www.digimezzo.com/software/dopamine/",
+    "description": "The audio player that keeps it simple, written using Electron, Angular and Typescript.",
+    "homepage": "https://github.com/digimezzo/dopamine",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
