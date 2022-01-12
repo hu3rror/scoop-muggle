@@ -1,19 +1,25 @@
-# Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/main?svg=true)](https://ci.appveyor.com/project/Hue/scoop-muggle/branch/main)
+# Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/main?svg=true)](https://ci.appveyor.com/project/Hue/scoop-muggle/branch/master)
 
-### Add this Bucket / 添加本 Bucket 仓库
+## Add this Bucket / 添加本 Bucket 仓库
 
 ``` pwsh
 scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
 ```
 
+## Software list / 软件清单
+
+Find the software lis in this bucket: [Click here](bucket)
+
+本 Bucket 包含的软件清单: [点击查看](bucket)
+
 ---
 
-### What & How to
+## What & How to
 
-#### What is `Scoop`?
+### What is `Scoop`?
 Please visit the [official website](https://scoop.sh/) and it included the installation tutorial.
 
-#### [Example] How to install `Logseq` or `Logseq Nightly`?
+### [Example] How to install `Logseq` or `Logseq Nightly`?
 1. Once Scoop is installed, executing the following command in Powershell and it would add this Scoop Bucket into your system:
 
     ``` pwsh
@@ -25,24 +31,24 @@ Please visit the [official website](https://scoop.sh/) and it included the insta
     ``` pwsh
     scoop install muggle/logseq
     ```
-    or for `Logseq nightly`:
+    or install `Logseq nightly` version:
 
     ``` pwsh
     scoop install muggle/logseq-nightly
     ```
 
-#### [Example] How to update `Logseq`?
-Execute the following command in `Powershell`:
+### [Example] How to update `Logseq`?
+1. Execute the following command in `Powershell`:
 
-``` pwsh
-scoop update logseq
-```
+    ``` pwsh
+    scoop update logseq
+    ```
 
-or update all programs by:
+2. or update all programs by:
 
-``` pwsh
-scoop update *
-```
+    ``` pwsh
+    scoop update *
+    ```
 
 🎉🎉 Everything set.
 
@@ -62,7 +68,7 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
 #### `Scoop` 简明安装教程
 > 内容摘抄自上述 scoop [文章介绍](https://sspai.com/post/52496)，更多详情请参考 [Scoop 官网](https://scoop.sh/)
 
-1. 右键开始菜单按钮，在右键菜单中打开 `PowerShell`
+1. 右键开始菜单按钮，在右键菜单中打开 `PowerShell`;
 2. 在 `PowerShell` 中输入下面内容，保证允许本地脚本的执行：
 
     ``` pwsh
@@ -87,7 +93,7 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
     ``` pwsh
     scoop install muggle/logseq
     ```
-    或安装 `Logseq Nightly`
+3. 或安装正快速修复 Bugs 的 `Logseq Nightly` 版本
 
     ``` pwsh
     scoop install muggle/logseq-nightly
