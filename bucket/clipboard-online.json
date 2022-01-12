@@ -1,0 +1,33 @@
+{
+    "version": "0.2.6",
+    "description": "Share content between Windows and iOS/Android",
+    "homepage": "https://github.com/YanxinTang/clipboard-online",
+    "license": "Unknown",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/YanxinTang/clipboard-online/releases/download/v0.2.6/clipboard-online.exe",
+            "hash": "a9717fcf4aeabc0da9d3e089ff7868275daf4ecf47b767a07f4997a2af5431ae"
+        }
+    },
+    "bin": "clipboard-online.exe",
+    "persist": [
+        "log.txt",
+        "config.json"
+    ],
+    "shortcuts": [
+        [
+            "clipboard-online.exe",
+            "clipboard-online"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/YanxinTang/clipboard-online"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/YanxinTang/clipboard-online/releases/download/v$version/clipboard-online.exe"
+            }
+        }
+    }
+}
