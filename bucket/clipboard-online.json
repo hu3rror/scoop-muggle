@@ -12,7 +12,6 @@
     "bin": "clipboard-online.exe",
     "pre_install": [
         "$config = \"$persist_dir\\config.json\"",
-        "$log = \"$dir\\log.txt\"",
         "if (!(Test-Path $config)) {",
         "    @{",
         "         'port' = '8086'",
@@ -25,8 +24,7 @@
         "           'paste' = $false",
         "         }",
         "       } | ConvertToPrettyJson | Set-Content \"$dir\\config.json\" -Encoding Ascii",
-        "}",
-        "if (!(Test-Path $log)) { New-Item $log -Type File -Force | Out-Null }"
+        "}"
     ],
     "notes": "By default, config.json and tempDir are stored in '$persist_dir'.",
     "persist": [
