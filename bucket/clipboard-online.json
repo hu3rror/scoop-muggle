@@ -10,9 +10,29 @@
         }
     },
     "bin": "clipboard-online.exe",
+    "pre_install": [
+        "$config = \"$persist_dir\\config.json\"",
+        "$log = \"$persist_dir\\log.txt\"",
+        "if (!(Test-Path $config)) {",
+        "    @{",
+        "         'port' = '8086'",
+        "         'authkey' = ''",
+        "         'logLevel' = 'warning'",
+        "         'tempDir' = './temp'",
+        "         'reserveHistory' = $false",
+        "         'notify' = @{",
+        "           'copy' = $false",
+        "           'paste' = $false",
+        "         }",
+        "       } | ConvertToPrettyJson | Set-Content \"$dir\\config.json\" -Encoding Ascii",
+        "}",
+        "if (!(Test-Path $log)) { New-Item $log -Type File -Force | Out-Null }"
+    ],
+    "notes": "Tips: By default, config/log/temp are stored in '$persist_dir'.",
     "persist": [
         "log.txt",
-        "config.json"
+        "config.json",
+        "temp"
     ],
     "shortcuts": [
         [
