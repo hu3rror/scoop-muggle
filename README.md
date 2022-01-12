@@ -1,6 +1,6 @@
 # Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/main?svg=true)](https://ci.appveyor.com/project/Hue/scoop-muggle/branch/main)
 
-### Add Bucket / 添加 Bucket 仓库
+### Add this Bucket / 添加本 Bucket 仓库
 
 ``` pwsh
 scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
@@ -8,12 +8,12 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
 
 ---
 
-### Reference
+### What & How to
 
 #### What is `Scoop`?
 Please visit the [official website](https://scoop.sh/) and it included the installation tutorial.
 
-#### How to install `Logseq` or `Logseq Nightly`?
+#### [Example] How to install `Logseq` or `Logseq Nightly`?
 1. Once Scoop is installed, executing the following command in Powershell and it would add this Scoop Bucket into your system:
 
     ``` pwsh
@@ -31,7 +31,7 @@ Please visit the [official website](https://scoop.sh/) and it included the insta
     scoop install muggle/logseq-nightly
     ```
 
-#### How to update `Logseq`?
+#### [Example] How to update `Logseq`?
 Execute the following command in `Powershell`:
 
 ``` pwsh
@@ -43,9 +43,6 @@ or update all programs by:
 ``` pwsh
 scoop update *
 ```
-
-#### Tips
-1. Only supported `Logseq for Windows`.
 
 🎉🎉 Everything set.
 
@@ -78,7 +75,7 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
     iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
     ```
 
-#### 使用 `Scoop` 安装 `Logseq` 教程
+#### [参考例子] 使用 `Scoop` 安装 `Logseq` 教程
 1. 在 Powershell 中继续执行以下命令以添加本 `Bucket` 仓库:
 
     ``` pwsh
@@ -98,7 +95,7 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
 
 3. 等待下载完毕即自动完成安装即可，之后可在开始菜单中找到 `Logseq` 的启动快捷方式。
 
-#### 使用 `Scoop` 更新 `Logseq`
+#### [参考例子] 使用 `Scoop` 更新 `Logseq`
 1. 若仅更新 `Logseq` ，可以在 `Powershell` 中执行以下命令：
 
     ``` pwsh
@@ -112,13 +109,29 @@ scoop bucket add muggle 'https://github.com/HueLiu/scoop-muggle.git'
     ```
 
 #### 注意事项
-1. 仅支持 **Windows** 版本的 `Logseq` 更新
-2. `Powershell` 建议在管理员权限身份下运行，避免一些额外的权限问题（当然上述 `Logseq` 的安装不需要管理员权限）
-3. 关于下载速度慢的原因，有两种方式解决
-    1. 在 `Logseq` 中安装 `aria2`，实现多线程下载安装包：
+1. `Powershell` 建议在管理员权限身份下运行，可通过安装 `sudo` 包来快速实现:
+
+    ``` pwsh
+    scoop install sudo
+    ```
+
+    后续若需要快速提权，只需在命令最前面添加 `sudo`:
+
+    ``` pwsh
+    sudo scoop install aria2 -g
+    ```
+
+2. 关于下载速度慢的原因，有两种方式解决
+    1. 在 `Scoop` 中安装 `aria2`，实现多线程下载安装包：
 
         ``` pwsh
         scoop install aria2
+        ```
+
+        或全局安装
+
+        ``` pwsh
+        sudo scoop install aria2 -g
         ```
 
     2. 让 Windows 终端（Powershell/CMD）走系统代理，也许可以参考：[在 Windows 终端中设置代理](https://www.yixuju.cn/other/talking-about-proxy/)
