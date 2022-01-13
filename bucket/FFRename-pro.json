@@ -1,0 +1,25 @@
+{
+    "version": "4.0",
+    "description": "菲菲更名宝贝之得意非凡，一款优秀的批量更名软件和批量文件处理工具",
+    "homepage": "http://www.ffhome.com/works/1406.html",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/HueLiu/Binary/raw/master/utils/FFRenamePro_x64.7z#dl.7z_",
+            "hash": "81223ddb12c88383a0546c58269e70aba19ec3fb3a230c62d14987b61d36e499",
+            "pre_install": [
+                "$7z = ( Get-ChildItem \"$dir\\FFRenamePro_x64*\").Name",
+                "7z x \"$dir\\$7z\" -pmuggle $('-o' + $dir) | Out-Null",
+                "Move-Item \"$dir\\FFRenamePro_x64\\*\" $dir",
+                "Remove-Item \"$dir\\*dl.7z_\", \"$dir\\FFRenamePro_x64\\\" -Force -Recurse"
+            ]
+        }
+    },
+    "shortcuts": [
+        [
+            "FFRenamePro.exe",
+            "FF Rename Pro"
+        ]
+    ],
+    "notes": "版权所有：FFHOME.COM"
+}
