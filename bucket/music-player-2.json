@@ -1,0 +1,37 @@
+{
+    "homepage": "https://github.com/zhongyang219/MusicPlayer2",
+    "description": "一款可以播放常见音频格式的音频播放器。支持歌词显示、歌词卡拉OK样式显示、歌词在线下载、歌词编辑、歌曲标签识别、Win10小娜搜索显示歌词、频谱分析、音效设置、任务栏缩略图按钮、主题颜色等功能。 播放内核为BASS音频库",
+    "license": "GPL-3.0-only",
+    "version": "2.73",
+    "architecture": {
+        "32bit": {
+            "url": "https://github.com/zhongyang219/MusicPlayer2/releases/download/V2.73/MusicPlayer2_V2.73_x86.zip",
+            "hash": "2ddfc916a38709358a9a8376156627534d663947704b2cdeefcb7737863f94d2",
+            "extract_dir": "MusicPlayer2_x64"
+        },
+        "64bit": {
+            "url": "https://github.com/zhongyang219/MusicPlayer2/releases/download/V2.73/MusicPlayer2_V2.73_x64.zip",
+            "hash": "406cdac7dbc820474fdbe0334ee3578e5e0a376d0a8e4ae301e4ab50b167bebe",
+            "extract_dir": "MusicPlayer2"
+        }
+    },
+    "shortcuts": [
+        [
+            "MusicPlayer2.exe",
+            "MusicPlayer2"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/zhongyang219/MusicPlayer2"
+    },
+    "autoupdate": {
+        "architecture": {
+            "32bit": {
+                "url": "https://github.com/zhongyang219/MusicPlayer2/releases/download/V$version/MusicPlayer2_V$version_x86.zip"
+            },
+            "64bit": {
+                "url": "https://github.com/zhongyang219/MusicPlayer2/releases/download/V$version/MusicPlayer2_V$version_x64.zip"
+            }
+        }
+    }
+}
