@@ -7,7 +7,7 @@
     "hash": "sha256:f626033880833f593bf67397e11d31bebf81922c81bdfd40b97af3bc0e52548a",
     "extract_dir": "ProperTree-da07e88a95eadc7fbeb5c3739f4e2c293eed764e",
     "bin": "ProperTree.bat",
-    "pre_install": "Remove-Item \"$dir\\LICENSE*\", \"$dir\\ProperTree.command\", \"$dir\\.gitignore\" -Recurse",
+    "pre_install": "Remove-Item \"$dir\\LICENSE*\", \"$dir\\.gitignore\" -Recurse",
     "checkver": {
         "url": "https://github.com/corpnewt/ProperTree/commits/master.atom",
         "regex": "(?s)>(\\d+)-(\\d+)-(\\d+)T.*?/(?<sha>[0-9a-f]{40})",
