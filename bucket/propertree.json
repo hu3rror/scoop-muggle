@@ -5,7 +5,7 @@
     "license": "BSD-3-Clause",
     "url": "https://github.com/corpnewt/ProperTree/archive/da07e88a95eadc7fbeb5c3739f4e2c293eed764e.zip",
     "hash": "sha256:f626033880833f593bf67397e11d31bebf81922c81bdfd40b97af3bc0e52548a",
-    "extract_dir": "ProperTree",
+    "extract_dir": "ProperTree-da07e88a95eadc7fbeb5c3739f4e2c293eed764e",
     "bin": "ProperTree.bat",
     "pre_install": "Remove-Item \"$dir\\LICENSE*\", \"$dir\\ProperTree.command\", \"$dir\\.gitignore\" -Recurse",
     "checkver": {
@@ -15,6 +15,6 @@
     },
     "autoupdate": {
         "url": "https://github.com/corpnewt/ProperTree/archive/$matchSha.zip",
-        "extract_dir": "ProperTree"
+        "extract_dir": "ProperTree-$matchSha"
     }
 }
