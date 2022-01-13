@@ -1,0 +1,31 @@
+{
+    "version": "1.0.8.0",
+    "homepage": "https://www.cnblogs.com/vinlxc/p/11347744.html",
+    "description": "『音乐标签』是一款可以编辑歌曲的标题，专辑，艺术家，歌词，封面等信息的应用程序， 支持FLAC, APE, WAV, AIFF, WV, TTA, MP3, MP4, M4A, OGG, MPC, OPUS, WMA, DSF, DFF等音频格式，绿色无广告，无任何功能限制。",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/HueLiu/Binary/raw/master/utils/MusicTag v1.0.8.0.7z#dl.7z_",
+            "hash": "d68358f950f29ed3803066ebf787a19fd89137eaadcac33c35b6d1f1847d4d98",
+            "pre_install": [
+                "$7z = ( Get-ChildItem \"$dir\\MusicTag*\").Name",
+                "7z x \"$dir\\$7z\" -p\"www.coolapk.com\" $('-o' + $dir) | Out-Null",
+                "Remove-Item \"$dir\\*dl.7z_\" -Force",
+                "if(!(Test-Path \"$persist_dir\\MusicTag.config\")) { New-Item \"$dir\\MusicTag.config\" -ItemType File -Force | Out-Null }",
+                "if(!(Test-Path \"$persist_dir\\MusicTag.dat\")) { New-Item \"$dir\\MusicTag.dat\" -ItemType File -Force | Out-Null }",
+                "if(!(Test-Path \"$persist_dir\\MusicTag.db\")) { New-Item \"$dir\\MusicTag.db\" -ItemType File -Force | Out-Null }"
+            ]
+        }
+    },
+    "persist":[
+        "MusicTag.config",
+        "MusicTag.dat",
+        "MusicTag.db"
+    ],
+    "shortcuts": [
+        [
+            "MusicTag.exe",
+            "MusicTag"
+        ]
+    ]
+}
