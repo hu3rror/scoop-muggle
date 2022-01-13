@@ -10,7 +10,7 @@
             "installer": {
                 "script": [
                     "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-32.7z\" \"$dir\" -Removal",
-                    "Remove-Item \"$dir\\`$PLUGINSDIR\"  -Force -Recurse"
+                    "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse"
                 ]
             }
         },
