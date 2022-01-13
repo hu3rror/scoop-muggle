@@ -15,7 +15,7 @@
             }
         }
     },
-    "bin": "$dir\\resources\\server\\kopia.exe",
+    "bin": "resources\\server\\kopia.exe",
     "shortcuts": [
         [
             "KopiaUI.exe",
