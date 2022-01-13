@@ -1,0 +1,39 @@
+{
+    "version": "0.9.8",
+    "description": "Fast and secure open source backup.",
+    "homepage": "https://kopia.io/",
+    "license": "Apache-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/kopia/kopia/releases/download/v0.9.8/KopiaUI-Setup-0.9.8.exe/#dl.7z",
+            "hash": "sha512:3ec21eb8312e9627e6aababeba9798055721ead422d06ef2648de1bc4f8c156465748b51d2c31c40c239beb34feb7cd54652f83ef025a0bd1ab5012ed50a0e9e",
+            "installer": {
+                "script": [
+                    "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\" -Removal",
+                    "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse"
+                ]
+            }
+        }
+    },
+    "bin": "$dir\\resources\\server\\kopia.exe",
+    "shortcuts": [
+        [
+            "KopiaUI.exe",
+            "Kopia UI"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/kopia/kopia"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/kopia/kopia/releases/download/v$version/KopiaUI-Setup-$version.exe/#dl.7z",
+                "hash": {
+                    "url": "$baseurl/latest.yml",
+                    "regex": "sha512:\\s+$base64"
+                }
+            }
+        }
+    }
+}
