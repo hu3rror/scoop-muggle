@@ -2,9 +2,7 @@
     "version": "1.6.7",
     "description": " 新雨相似图片查找助手能快速准确地清理电脑中相似或重复的照片",
     "homepage": "https://www.newrain.cn/app/info/1",
-    "license": {
-        "identifier": "Freeware"
-    },
+    "license": "Freeware",
     "architecture": {
         "64bit": {
             "url": "https://www.newrain.cn/app/DuplicatePhotoFinder1.6.7.zip",
