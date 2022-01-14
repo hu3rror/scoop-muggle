@@ -7,7 +7,10 @@
         "64bit": {
             "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/926772/download#/dl.7z",
             "hash": "f5b6f6d8eac795e7ac76b8d01cafb4f6257aae2b4832c003087f9a093f5483f2",
-            "extract_dir": "$basename"
+            "pre_install":[
+                "$fold = (Get-ChildItem \"$dir\" | Select-Object -First 1).FullName",
+                "Move-Item \"$fold\\*\" \"$dir\""
+            ]
         }
     },
     "shortcuts": [
@@ -23,7 +26,6 @@
         "replace": "${ver}"
     },
     "autoupdate": {
-        "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/$matchTag/download#/dl.7z",
-        "extract_dir": "$basename"
+        "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/$matchTag/download#/dl.7z"
     }
 }
