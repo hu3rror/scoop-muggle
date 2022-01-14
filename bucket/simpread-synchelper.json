@@ -1,0 +1,35 @@
+{
+    "version": "1.0.1",
+    "description": "简悦·同步助手为简悦高级账户提供了增强型的功能",
+    "homepage": "https://simpread.pro/pro.html",
+    "license": "Unknown",
+    "architecture": {
+        "64bit": {
+            "url": "https://onedrive-vercel-index-hueliu.vercel.app/api?path=/Public/utils/SimpRead_Synchelper_x64_v1.0.1.7z&raw=true#dl.7z_",
+            "hash": "e93555e9cd8bb5a493e4c54d7b879b641baf50d26b8256fbfeb2833bb8c36d47",
+            "pre_install": [
+                "$7z = ( Get-ChildItem \"$dir\\SimpRead_Synchelper*\").Name",
+                "7z x \"$dir\\$7z\" -pmuggle $('-o' + $dir) | Out-Null",
+                "Move-Item \"$dir\\SimpRead_Synchelper_x64\\*\" $dir",
+                "Remove-Item \"$dir\\*dl.7z_\", \"$dir\\SimpRead_Synchelper_x64\\\" -Force -Recurse"
+            ]
+        },
+        "32bit": {
+            "url": "https://onedrive-vercel-index-hueliu.vercel.app/api?path=/Public/utils/SimpRead_Synchelper_x86_v1.0.1.7z&raw=true#dl.7z_",
+            "hash": "2e6951f01587b9f6aafddb25f913f04bb828f892e63a3accf4c9bc59c776524c",
+            "pre_install": [
+                "$7z = ( Get-ChildItem \"$dir\\SimpRead_Synchelper*\").Name",
+                "7z x \"$dir\\$7z\" -pmuggle $('-o' + $dir) | Out-Null",
+                "Move-Item \"$dir\\SimpRead_Synchelper_x86\\*\" $dir",
+                "Remove-Item \"$dir\\*dl.7z_\", \"$dir\\SimpRead_Synchelper_x86\\\" -Force -Recurse"
+            ]
+        }
+    },
+    "shortcuts": [
+        [
+            "简悦 · 同步助手.exe",
+            "简悦 · 同步助手"
+        ]
+    ],
+    "notes": "The sync-helper desktop app requires the SimpRead (https://simpread.pro) extension to be installed in your Chromium Based Browsers."
+}
