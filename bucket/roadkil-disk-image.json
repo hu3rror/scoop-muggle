@@ -8,7 +8,7 @@
     },
     "url": "https://roadkil.net/download.php?FileID=409&ProgramID=12",
     "hash": "00dfa24c8307d39c460d8467e667a1f2c041ac60c0a21211ff4e874af49a8aff",
-    "pre_install": "Get-ChildItem \"$dir\" 'DiskImage*.exe' | Select-Object -First 1 | Rename-Item -NewName 'DiskImage.exe'",
+    "pre_install": "Get-ChildItem \"$dir\" '*.php' | Select-Object -First 1 | Rename-Item -NewName 'DiskImage.exe'",
     "shortcuts": [
         [
             "DiskImage.exe",
