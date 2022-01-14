@@ -1,0 +1,28 @@
+{
+    "version": "3.2",
+    "description": "Windows 网易云音乐歌词获取",
+    "homepage": "https://github.com/jitwxs/163MusicLyrics",
+    "license": "Apache-2.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v3.2/v3.2-green.zip",
+            "hash": "2053df057c83a3edeec37348f7de28e413e97aa7d53f22d38f9f7fe822cda5d3"
+        }
+    },
+    "shortcuts": [
+        [
+            "163MusicLyrics.exe",
+            "网易云音乐歌词下载"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/jitwxs/163MusicLyrics"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v$version/v$version-green.zip"
+            }
+        }
+    }
+}
