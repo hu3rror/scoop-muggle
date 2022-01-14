@@ -1,0 +1,43 @@
+{
+    "version": "2.2.0b",
+    "homepage": "https://biu.tls.moe",
+    "description": "一款 Pixiv 搜索辅助工具，可免会员按收藏数排序、免代理浏览以及多种图片下载",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/txperl/PixivBiu/releases/download/v2.2.0b/PixivBiu_v2.2.0b_win_x64.zip",
+            "hash": "b909cb0592544c4e172c0f7d431a4df017bea7306989e72bd264053ad9f3e9a9"
+        },
+        "32bit": {
+            "url": "https://github.com/txperl/PixivBiu/releases/download/v2.2.0b/PixivBiu_v2.2.0b_win_x86.zip",
+            "hash": "beca9cb04be04a29610bd557a5adf6b39a5661bf8e83e22eb841779ed8b81533"
+        }
+    },
+    "persist": [
+        "config.yml",
+        "user",
+        "downloads"
+    ],
+    "shortcuts": [
+        [
+            "PixivBiu.exe",
+            "PixivBiu"
+        ]
+    ],
+    "bin": "PixivBiu.exe",
+    "checkver": {
+        "url": "https://github.com/txperl/PixivBiu/releases",
+        "regex": "PixivBiu_v(?<tag>(?<ver>[\\d.]+)(?<build>[a-z]?))_win",
+        "replace": "${ver}${build}"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/txperl/PixivBiu/releases/download/v$matchTag/PixivBiu_v$matchTag_win_x64.zip"
+            },
+            "32bit": {
+                "url": "https://github.com/txperl/PixivBiu/releases/download/v$matchTag/PixivBiu_v$matchTag_win_x86.zip"
+            }
+        }
+    }
+}
