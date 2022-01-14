@@ -21,7 +21,9 @@
             "Open Video Downloader"
         ]
     ],
-    "checkver": "github",
+    "checkver": {
+        "github": "https://github.com/jely2002/youtube-dl-gui"
+    },
     "autoupdate": {
         "architecture": {
             "64bit": {
