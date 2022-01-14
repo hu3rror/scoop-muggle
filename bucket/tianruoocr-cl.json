@@ -6,6 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/899175/download#/dl.7z",
+            "hash": "3a6264e105f25f3fef6de864bb6c93655a857e4d355593fa4e846bc1cc103a0d",
             "extract_dir": "天若OCR开源版本地版"
         }
     },
