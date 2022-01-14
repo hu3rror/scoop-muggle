@@ -5,8 +5,8 @@
     "license": "Freeware",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/HueLiu/Binary/raw/master/utils/MusicTag_v1.0.8.0.7z#dl.7z_",
-            "hash": "d68358f950f29ed3803066ebf787a19fd89137eaadcac33c35b6d1f1847d4d98",
+            "url": "https://onedrive-vercel-index-hueliu.vercel.app/api?path=/Public/utils/MusicTag_v1.0.8.0.7z&raw=true#dl.7z_",
+            "hash": "a85da8fb86df64db83188107896d2e3c70d291a498e1b6d84ab3a9250022e6ce",
             "pre_install": [
                 "$7z = ( Get-ChildItem \"$dir\\MusicTag*\").Name",
                 "7z x \"$dir\\$7z\" -p\"www.coolapk.com\" $('-o' + $dir) | Out-Null",
