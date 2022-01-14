@@ -1,13 +1,12 @@
 {
-    "version": "1.3.0",
+    "version": "1.2.6",
     "description": "天若ocr开源版本的本地版，采用 Chinese-lite 和 paddleocr 识别框架",
     "homepage": "https://gitee.com/wanglifree/tianruoocr-cl",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/926772/download/Release.7z",
-            "hash": "f5b6f6d8eac795e7ac76b8d01cafb4f6257aae2b4832c003087f9a093f5483f2",
-            "extract_dir": "Release"
+            "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/899175/download#/dl.7z",
+            "extract_dir": "天若OCR开源版本地版"
         }
     },
     "shortcuts": [
@@ -19,7 +18,11 @@
     "persist": "Data",
     "checkver": {
         "url": "https://gitee.com/api/v5/repos/wanglifree/tianruoocr-cl/releases?page=1&per_page=20&direction=desc",
-        "regex": "版本\\s+V(?<ver>[\\d.]+)",
+        "regex": "版本\\s+V(?<ver>[\\d.]+).*?https://gitee.com/wanglifree/tianruoocr-cl/attach_files/(?<tag>\\d{6})",
         "replace": "${ver}"
+    },
+    "autoupdate": {
+        "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/$matchTag/download#/dl.7z",
+        "extract_dir": "$basename"
     }
 }
