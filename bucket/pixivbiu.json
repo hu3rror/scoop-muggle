@@ -15,7 +15,7 @@
     },
     "persist": [
         "config.yml",
-        "user",
+        "usr",
         "downloads"
     ],
     "shortcuts": [
