@@ -22,7 +22,7 @@
     "persist": "Data",
     "checkver": {
         "url": "https://gitee.com/api/v5/repos/wanglifree/tianruoocr-cl/releases?page=1&per_page=20&direction=desc",
-        "regex": "\\s版本\\s+V(?<ver>[\\d.]+).*?\\/attach_files\\/(?<tag>\\d{6,}\\/download)",
+        "regex": "\\s+版本\\s+V(?<ver>[\\d.]+).*?\\/attach_files\\/(?<tag>\\d{6,}\\/download)",
         "replace": "${ver}"
     },
     "autoupdate": {
