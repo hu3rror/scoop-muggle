@@ -17,8 +17,7 @@
     ],
     "checkver": {
         "url": "https://roadkil.net/program.php/P12/Disk%20Image",
-        "regex": "<a href=\".*?FileID=(?<id>\\d+)&ProgramID=12\".*?<small>(?<ver>[\\d.]+)</small>",
-        "replace": "${ver}"
+        "regex": "<a href=\".*?FileID=(?<id>\\d+)&ProgramID=12\".*?<small>([\\d.]+)</small>"
     },
     "autoupdate": {
         "url": "https://roadkil.net/download.php?FileID=$matchId&ProgramID=12"
