@@ -10,7 +10,7 @@
         "persist": "backups",
         "checkver": {
             "url": "https://git.irs.sh/KNOXDEV/scoop-backup/graph",
-            "re": "(?<sha>[0-9a-f]{40})(.|\\s)*?(\\d{4})-(\\d{2})-(\\d{2})",
+            "regex": "(?<sha>[0-9a-f]{40})(.|\\s)*?(\\d{4})-(\\d{2})-(\\d{2})",
             "replace": "0.${2}.${3}.${4}"
         },
         "autoupdate": {
