@@ -19,13 +19,12 @@
     ],
     "checkver": {
         "url": "https://www.newrain.cn/app/info/1",
-        "regex": "<span class=\"lineinfo info\">当前发布版本：(?<ver>[\\d.]+)</span>",
-        "replace": "${ver}"
+        "regex": "当前发布版本.*?([\\d.]+)"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://www.newrain.cn/app/DuplicatePhotoFinder$matchVer.zip"
+                "url": "https://www.newrain.cn/app/DuplicatePhotoFinder$version.zip"
             }
         }
     }
