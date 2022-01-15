@@ -1,0 +1,29 @@
+{
+    "version": "1.6",
+    "description": "KMS Local Activation ...",
+    "homepage": "https://github.com/laomms/KmsTool",
+    "license": "Unknown",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/laomms/KmsTool/releases/download/1.6/ActTools1.6.exe",
+            "hash": "2254ba98d2e361ba39e40ab26157bcb8951bdd489a012a650651bb4ee9080e4e"
+        }
+    },
+    "notes": "本工具只可用来做个人系统证书环境调试用，一切与之有关的商业活动都是非法的。请支持正版软件。",
+    "shortcuts": [
+        [
+            "ActTools1.6.exe",
+            "KMS ActTools"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/laomms/KmsTool"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/laomms/KmsTool/releases/download/$version/ActTools$version.exe"
+            }
+        }
+    }
+}
