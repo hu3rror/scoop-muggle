@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0-beta4",
+    "homepage": "http://nullice.com/limitPNG/",
+    "description": "『音乐标签』是一款可以编辑歌曲的标题，专辑，艺术家，歌词，封面等信息的应用程序， 支持FLAC, APE, WAV, AIFF, WV, TTA, MP3, MP4, M4A, OGG, MPC, OPUS, WMA, DSF, DFF等音频格式，绿色无广告，无任何功能限制。",
+    "license": {
+        "identifier": "Public Domain",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://onedrive-vercel-index-hueliu.vercel.app/api?path=/Public/utils/limitPNG_x64_v2.0.0_beta4.7z&raw=true#dl.7z_",
+            "hash": "c6e68f1b7fea1cd74d8b1c9963151065f19dd810fda845e4c81bbf832a923244",
+            "pre_install": [
+                "$7z = ( Get-ChildItem \"$dir\\limitPNG*\").Name",
+                "7z x \"$dir\\$7z\" -pmuggle $('-o' + \"$dir\") | Out-Null",
+                "Move-Item \"$dir\\limitPNG\\*\" $dir",
+                "Remove-Item \"$dir\\*dl.7z_\", \"$dir\\limitPNG\\\" -Force -Recurse"
+            ]
+        }
+    },
+    "shortcuts": [
+        [
+            "limitPNG2.exe",
+            "limitPNG"
+        ]
+    ]
+}
