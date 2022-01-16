@@ -3,7 +3,7 @@
 ## Add this Bucket / 添加本 Bucket 仓库
 
 ``` pwsh
-scoop bucket add muggle 'https://github.com/Hu3rrorL/scoop-muggle.git'
+scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
 ```
 
 ## Software list / 软件清单
@@ -23,7 +23,7 @@ Please visit the [official website](https://scoop.sh/) and it included the insta
 1. Once Scoop is installed, executing the following command in Powershell and it would add this Scoop Bucket into your system:
 
     ``` pwsh
-    scoop bucket add muggle 'https://github.com/Hu3rrorL/scoop-muggle.git'
+    scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
     ```
 
 2. Then try to install `Logseq`:
@@ -59,7 +59,7 @@ Please visit the [official website](https://scoop.sh/) and it included the insta
 ### 添加本 `Bucket` 仓库
 
 ``` pwsh
-scoop bucket add muggle 'https://github.com/Hu3rrorL/scoop-muggle.git'
+scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
 ```
 
 #### `Scoop` 是什么？
@@ -85,7 +85,7 @@ scoop bucket add muggle 'https://github.com/Hu3rrorL/scoop-muggle.git'
 1. 在 Powershell 中继续执行以下命令以添加本 `Bucket` 仓库:
 
     ``` pwsh
-    scoop bucket add muggle 'https://github.com/Hu3rrorL/scoop-muggle.git'
+    scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
     ```
 
 2. 继续执行以下命令安装 `Logseq`
