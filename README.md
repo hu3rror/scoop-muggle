@@ -1,4 +1,4 @@
-# Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/main?svg=true)](https://ci.appveyor.com/project/Hu3rrorL/scoop-muggle/branch/master)
+# Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/main?svg=true)](https://ci.appveyor.com/project/hu3rror/scoop-muggle/branch/master)
 
 ## Add this Bucket / 添加本 Bucket 仓库
 
