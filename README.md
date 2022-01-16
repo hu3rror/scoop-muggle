@@ -57,7 +57,6 @@ Please visit the [official website](https://scoop.sh/) and it included the insta
 ## 中文教程
 
 ### 添加本 `Bucket` 仓库
-
 ``` pwsh
 scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
 ```
