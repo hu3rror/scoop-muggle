@@ -3,6 +3,9 @@
     "description": "A cross-platform GUI for youtube-dl made in Electron and node.js",
     "homepage": "https://jely2002.github.io/youtube-dl-gui/",
     "license": "AGPL-3.0-only",
+    "suggest": {
+        "vcredist": "extras/vcredist2010"
+    },
     "architecture": {
         "64bit": {
             "url": "https://github.com/jely2002/youtube-dl-gui/releases/download/v2.4.0/Open-Video-Downloader-Setup-2.4.0.exe/#dl.7z",
