@@ -1,11 +1,11 @@
 {
-    "version": "0.2022.01.17",
+    "version": "0.2022.01.19",
     "description": "Cross platform GUI plist editor written in python.",
     "homepage": "https://github.com/corpnewt/ProperTree",
     "license": "BSD-3-Clause",
-    "url": "https://github.com/corpnewt/ProperTree/archive/d2e676333401a49ad39e2e26e058f3e5477ef6f7.zip",
-    "hash": "92a04cced7a3f93e9e6005c617383c3602db3059609d1a19e8c2e1ea02ac7bec",
-    "extract_dir": "ProperTree-d2e676333401a49ad39e2e26e058f3e5477ef6f7",
+    "url": "https://github.com/corpnewt/ProperTree/archive/2cb2bc7023f2b2bc709f7e8e237aee51e184144b.zip",
+    "hash": "4e7ba6ecc0c2283af46ee24ea554c50f57576a12a03d0f36c8758c04e5a301f7",
+    "extract_dir": "ProperTree-2cb2bc7023f2b2bc709f7e8e237aee51e184144b",
     "bin": "ProperTree.bat",
     "pre_install": "Remove-Item \"$dir\\LICENSE*\", \"$dir\\.gitignore\" -Recurse",
     "checkver": {
