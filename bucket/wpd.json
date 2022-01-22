@@ -2,10 +2,7 @@
     "version": "1.5.2042RC1",
     "description": "A small but powerful portable tool that works through the Windows API. WPD is the most convenient way to configure various privacy settings in Windows.",
     "homepage": "https://wpd.app/",
-    "license": {
-        "identifier": "Freeware",
-        "url": "https://wpd.app/#:~:text=WPD%20is%20free%2C%20portable%2C%20w/o%20ads%2C%20support%20various%20command%20line%20arguments%2C%20custom%20switches%20and%20multiple%20languages.%20And%20it%20has%20a%20dark%20theme!"
-    },
+    "license": "Freeware|Proprietary",
     "architecture": {
         "64bit": {
             "url": "https://wpd.app/get/latest.zip",
@@ -13,7 +10,6 @@
         }
     },
     "bin": "WPD.exe",
-    "persist": "Constructor.json",
     "shortcuts": [
         [
             "WPD.exe",
