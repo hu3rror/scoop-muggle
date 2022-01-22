@@ -5,7 +5,7 @@
     "license": "Freeware",
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-hueliu.vercel.app/api?path=/Public/utils/MusicTag_v1.0.8.0.7z&raw=true#dl.7z_",
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/MusicTag_v1.0.8.0.7z&raw=true#dl.7z_",
             "hash": "a85da8fb86df64db83188107896d2e3c70d291a498e1b6d84ab3a9250022e6ce",
             "pre_install": [
                 "$7z = ( Get-ChildItem \"$dir\\MusicTag*\").Name",

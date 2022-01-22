@@ -5,7 +5,7 @@
     "license": "Freeware",
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-hueliu.vercel.app/api?path=/Public/utils/FFRenamePro_v4.0.7z&raw=true#dl.7z_",
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/FFRenamePro_v4.0.7z&raw=true#dl.7z_",
             "hash": "81223ddb12c88383a0546c58269e70aba19ec3fb3a230c62d14987b61d36e499",
             "pre_install": [
                 "$7z = ( Get-ChildItem \"$dir\\FFRenamePro_x64*\").Name",
