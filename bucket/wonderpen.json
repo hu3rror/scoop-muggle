@@ -1,6 +1,6 @@
 {
     "homepage": "https://www.atominn.com/wonderpen",
-    "description": "妙笔是一款专业的写作软件，致力于为写作者们提供专注且流畅的写作体验",
+    "description": "WonderPen is a professional writing app with a focused and fluid writing experience.",
     "version": "2.0.5",
     "license": {
         "identifier": "Proprietary",
@@ -34,10 +34,10 @@
     ],
     "checkver": {
         "url": "https://www.atominn.com/wonderpen/download/all",
-        "regex": "WonderPen\\/(?<tag>[\\d.]+)\\/WonderPen_win_installer_(?<major>[\\d.]+)\\((?<build>[\\d]+)\\)",
+        "regex": "WonderPen/(?<tag>[\\d.]+)/WonderPen_win_installer_(?<major>[\\d.]+)\\((?<build>[\\d]+)\\)",
         "replace": "${major}"
     },
     "autoupdate": {
-        "url": "https://www.atominn.com/to/get-file/cdn?file=WonderPen/$matchTag/WonderPen_win_installer_$matchMajor($matchBuild).exe"
+        "url": "https://www.atominn.com/to/get-file/cdn?file=WonderPen/$matchTag/WonderPen_win_installer_$matchMajor($matchBuild).exe#/dl.7z"
     }
 }
