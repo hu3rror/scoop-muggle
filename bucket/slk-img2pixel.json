@@ -19,7 +19,7 @@
         ]
     ],
     "checkver": {
-        "github": "https://captain4lk.itch.io/slk-img2pixel",
+        "url": "https://captain4lk.itch.io/slk-img2pixel",
         "regex": "Version ([\\d.]+)"
     }
 }
