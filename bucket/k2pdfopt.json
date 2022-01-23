@@ -1,0 +1,27 @@
+{
+    "version": "2.53",
+    "homepage": "https://www.willus.com/k2pdfopt/",
+    "description": "K2pdfopt optimizes PDF/DJVU files for mobile e-readers (e.g. the Kindle) and smartphones.",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/k2pdfopt_x64_v2.53.7z&raw=true#dl.7z_",
+            "hash": "1838c8c9bba9609ab9fd67468daf98b4e215417ee75d0745451eebaf531617e3"
+        },
+        "32bit": {
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/k2pdfopt_x86_v2.53.7z&raw=true#dl.7z_",
+            "hash": "f5e4abc8b133aa5752c76fa836b0b92b56fdcb4f51f4b674b341baf5fb9598a0"
+        }
+    },
+    "pre_install": [
+        "$7z = ( Get-ChildItem \"$dir\\k2pdfopt*\").Name",
+        "7z x \"$dir\\$7z\" -pmuggle $('-o' + \"$dir\") | Out-Null",
+        "Remove-Item \"$dir\\*dl.7z_\" -Force -Recurse"
+    ],
+    "shortcuts": [
+        [
+            "k2pdfopt.exe",
+            "k2pdfopt.exe"
+        ]
+    ]
+}
