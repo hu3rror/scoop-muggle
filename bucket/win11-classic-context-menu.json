@@ -1,0 +1,34 @@
+{
+    "homepage": "https://www.sordum.org/14479/windows-11-classic-context-menu-v1-1/",
+    "license": "Freeware",
+    "version": "1.1",
+    "description": "Easily toggle between Old Windows 10 Right Click Context Menu and default Windows 11 Context menu.",
+    "architecture": {
+        "64bit": {
+            "url": "https://www.sordum.org/files/download/win11-classic-context-menu/W11ClassicMenu.zip",
+            "hash": "d640e5172495e6f5d135fcec952f966e5c2ab3af95a74ea3e9ae52cc3bad880d",
+            "extract_dir": "W11ClassicMenu"
+        }
+    },
+    "shortcuts": [
+        [
+            "W11ClassicMenu.exe",
+            "Windows 11 Classic Context Menu"
+        ]
+    ],
+    "bin": "W11ClassicMenu.exe",
+    "checkver": {
+        "url": "https://www.sordum.org/14479/windows-11-classic-context-menu-v1-1/",
+        "regex": "Windows 11 Classic Context Menu v([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://www.sordum.org/files/download/win11-classic-context-menu/W11ClassicMenu.zip"
+            }
+        }
+    },
+    "notes":[
+        "`W11ClassicMenu.exe /C /R`: Enable classical menu style and restart explorer"
+    ]
+}
