@@ -5,7 +5,7 @@
     "license": "BSD-3-Clause",
     "depends": "python",
     "url": "https://github.com/corpnewt/ProperTree/archive/84efe662d907267fbef69432232ff57ab597c11d.zip",
-    "hash": "d236fa75061c2cd148be66feb5a758296b9585dac8867b7f6c051e1f1c657bad",
+    "hash": "916fe494b50791b36d456d6a96a50e1872ded296ef598bb885edc5bee2eda69b",
     "extract_dir": "ProperTree-84efe662d907267fbef69432232ff57ab597c11d",
     "bin": "ProperTree.bat",
     "checkver": {
