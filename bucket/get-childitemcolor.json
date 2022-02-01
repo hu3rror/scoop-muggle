@@ -5,7 +5,7 @@
     "license": "MIT",
     "notes": "See usage: https://github.com/joonro/Get-ChildItemColor#usage",
     "url": "https://github.com/joonro/Get-ChildItemColor/archive/develop.zip",
-    "hash": "f2e2b48708e5488252bd397e925517eeaa5f9cba7017e0bfdea42472b8b6db77",
+    "hash": "53eb6cb075b6f4531faf37c76930bae22ce9c77be9b6c9928db4aee55f308441",
     "extract_dir": "Get-ChildItemColor-develop\\src",
     "psmodule": {
         "name": "Get-ChildItemColor"
