@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://www.sordum.org/files/download/win11-classic-context-menu/W11ClassicMenu.zip",
-            "hash": "d640e5172495e6f5d135fcec952f966e5c2ab3af95a74ea3e9ae52cc3bad880d",
+            "hash": "796dc2f227117b22483f55fb9a0a889c76e703d0adf8fdb48dd6be35e35fcd7c",
             "extract_dir": "W11ClassicMenu"
         }
     },
@@ -28,7 +28,7 @@
             }
         }
     },
-    "notes":[
+    "notes": [
         "`W11ClassicMenu.exe /C /R`: Enable classical menu style and restart explorer.",
         "`W11ClassicMenu.exe /D /R`: Enable new menu style and restart explorer."
     ]
