@@ -5,14 +5,14 @@
     "license": "Unknown",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/laomms/KmsTool/releases/download/1.6/ActTools1.6.exe",
-            "hash": "2254ba98d2e361ba39e40ab26157bcb8951bdd489a012a650651bb4ee9080e4e"
+            "url": "https://github.com/laomms/KmsTool/releases/download/1.6/ActTools1.61.exe",
+            "hash": "ACD4B577746C4DC9C28FB2297BAE6319540A064E08F20B7B476A6578D4C1072E"
         }
     },
     "notes": "本工具只可用来做个人系统证书环境调试用，一切与之有关的商业活动都是非法的。请支持正版软件。",
     "shortcuts": [
         [
-            "ActTools1.6.exe",
+            "ActTools1.61.exe",
             "KMS ActTools"
         ]
     ],
