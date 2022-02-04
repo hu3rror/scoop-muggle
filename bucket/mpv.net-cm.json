@@ -1,11 +1,11 @@
 {
-    "version": "5600",
+    "version": "5600re",
     "description": "mpv.net_CM 是基于 mpv.net 上游的中文分支模组",
     "homepage": "https://github.com/hooke007/mpv.net_CM",
     "license": "GPL-2.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/hooke007/mpv.net_CM/releases/download/5600/mpvnet_CM_5600_portable_x64.7z",
+            "url": "https://github.com/hooke007/mpv.net_CM/releases/download/5600re/mpvnet_CM_5600_re.7z",
             "hash": "54de6c44d6ec4b0558f50f3141d2c91a54b275684fecb84d272321063b4f5ce4",
             "extract_dir": "mpvnet"
         }
@@ -24,7 +24,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/hooke007/mpv.net_CM/releases/download/$version/mpvnet_CM_$version_portable_x64.7z"
+                "url": "https://github.com/hooke007/mpv.net_CM/releases/download/$version/mpvnet_CM_$version_re.7z"
             }
         }
     }
