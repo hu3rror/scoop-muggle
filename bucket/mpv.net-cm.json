@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/hooke007/mpv.net_CM/releases/download/5600re/mpvnet_CM_5600_re.7z",
-            "hash": "54de6c44d6ec4b0558f50f3141d2c91a54b275684fecb84d272321063b4f5ce4",
+            "hash": "cdafa51fd9bb22e888449a9ba1cf911a69716cc541e20ff54ce18978b059e427",
             "extract_dir": "mpvnet"
         }
     },
