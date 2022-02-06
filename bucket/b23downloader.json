@@ -1,0 +1,31 @@
+{
+    "homepage": "https://github.com/vooidzero/B23Downloader",
+    "version": "0.9.5.4",
+    "description": "下载B站视频、直播、漫画（能看=能下载）",
+    "license": "GPL-3.0-only",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/vooidzero/B23Downloader/releases/download/v0.9.5/B23Dld-v0.9.5.4-win_64.zip",
+            "hash": "bc41e1e9a1561bb0ec54cd451e2c9526ed8233baa5da5214cf7ea61dad01728a",
+            "extract_dir": "B23Dld-v0.9.5.4"
+        }
+    },
+    "shortcuts": [
+        [
+            "B23Downloader.exe",
+            "B23Downloader"
+        ]
+    ],
+    "checkver": {
+        "url": "https://github.com/vooidzero/B23Downloader/releases",
+        "regex": "B23Downloader-v([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/vooidzero/B23Downloader/releases/download/v$matchHead/B23Dld-v$version-win_64.zip",
+                "extract_dir": "B23Dld-v$version"
+            }
+        }
+    }
+}
