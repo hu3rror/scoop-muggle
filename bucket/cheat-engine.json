@@ -9,12 +9,12 @@
     "architecture": {
         "64bit": {
             "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/CheatEngine_v7.4.7z&raw=true#/dl.7z_",
-            "hash": "fcb4e3a80bda66df111b8a5497597feeac152f6ea565fb528f47e30e9c80b026",
+            "hash": "82ddc257e98c05fa8d4946def6e5e2851dd7332487222cf434c3408355bbc4b3",
             "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'Cheat Engine 7.4' -Removal -Switches '-pmuggle'"
         },
         "32bit": {
             "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/CheatEngine_v7.4.7z&raw=true#/dl.7z_",
-            "hash": "fcb4e3a80bda66df111b8a5497597feeac152f6ea565fb528f47e30e9c80b026",
+            "hash": "82ddc257e98c05fa8d4946def6e5e2851dd7332487222cf434c3408355bbc4b3",
             "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'Cheat Engine 7.4' -Removal -Switches '-pmuggle'"
         }
     },
