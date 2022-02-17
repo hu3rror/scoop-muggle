@@ -11,6 +11,13 @@
     },
     "persist": "backup",
     "checkver": "github",
+    "bin": "unlocker.exe",
+    "shortcuts": [
+        [
+            "unlocker.exe",
+            "auto unlocker"
+        ]
+    ],
     "autoupdate": {
         "architecture": {
             "64bit": {
