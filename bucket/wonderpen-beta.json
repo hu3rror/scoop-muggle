@@ -1,0 +1,51 @@
+{
+    "homepage": "https://www.tominlab.com/en/wonderpen",
+    "description": "Professional writing app with a focused and fluid writing experience.",
+    "version": "2.0.7",
+    "license": {
+        "identifier": "Proprietary",
+        "url": "https://www.tominlab.com/en/term/privacy"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/beta/WonderPen_win_installer_x64_2.0.7(6198).exe#/dl.7z",
+            "hash": "394a3fb789b2bd4bdad26c47ffdedd45ffe6409509e5554b86ccf0664fc8197b",
+            "installer": {
+                "script": [
+                    "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\" -Removal",
+                    "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\Uninstall*\" -Force -Recurse"
+                ]
+            }
+        },
+        "32bit": {
+            "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/beta/WonderPen_win_portable_ia32_2.0.7(6198).exe#/dl.7z",
+            "hash": "b3a0ee91cb28cf53228f3d9ed477dd34e22117e2d3bbb1e5b7c6250a9e0d9183",
+            "installer": {
+                "script": [
+                    "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-32.7z\" \"$dir\" -Removal",
+                    "Remove-Item \"$dir\\`$PLUGINSDIR\" -Force -Recurse"
+                ]
+            }
+        }
+    },
+    "shortcuts": [
+        [
+            "WonderPen.exe",
+            "WonderPen"
+        ]
+    ],
+    "checkver": {
+        "url": "https://www.tominlab.com/wonderpen/download/beta",
+        "regex": "([\\d.]+)\\((?<build>[\\d]+)\\)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/beta/WonderPen_win_installer_x64_$version($matchBuild).exe#/dl.7z"
+            },
+            "32bit": {
+                "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/beta/WonderPen_win_portable_ia32_$version($matchBuild).exe#/dl.7z"
+            }
+        }
+    }
+}
