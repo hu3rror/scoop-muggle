@@ -1,20 +1,15 @@
 {
     "version": "3.3.3.1",
-    "description": "🖱️ 纯粹的Windows右键菜单管理程序 ",
+    "description": "Pure Windows right-click context menu manager",
     "homepage": "https://bluepointlilac.github.io/ContextMenuManager",
     "license": "MIT",
     "architecture": {
         "64bit": {
             "url": "https://github.com/BluePointLilac/ContextMenuManager/releases/download/3.3.3.1/ContextMenuManager.zip",
-            "hash": "sha256:3faecb2ae6c9d025df54bdc72d4b0f850a4931dd41235f7f46b291824d3b5dbe",
-            "bin":[
-                [
-                    "ContextMenuManager.NET.4.0.exe",
-                    "ContextMenuManager.NET.3.5.exe"
-                ]
-            ]
+            "hash": "sha256:3faecb2ae6c9d025df54bdc72d4b0f850a4931dd41235f7f46b291824d3b5dbe"
         }
     },
+    "bin": "ContextMenuManager.NET.4.0.exe",
     "persist": [
         "Config"
     ],
@@ -22,10 +17,6 @@
         [
             "ContextMenuManager.NET.4.0.exe",
             "Context Menu Manager"
-        ],
-        [
-            "ContextMenuManager.NET.3.5.exe",
-            "Context Menu Manager .NET3.5"
         ]
     ],
     "checkver": {
