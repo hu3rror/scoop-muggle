@@ -15,9 +15,7 @@
             "iLyrics for iTunes"
         ]
     ],
-    "checkver": {
-        "github": "https://github.com/lujjjh/iLyrics"
-    },
+    "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
