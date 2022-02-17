@@ -1,30 +1,20 @@
 {
-    "version": "1.1.3",
+    "version": "2.0.0a",
     "description": "Unblock macOS system installations in VMware",
     "homepage": "https://github.com/paolo-projects/auto-unlocker",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/v1.1.3/Unlocker-x64.zip",
-            "hash": "a9717fcf4aeabc0da9d3e089ff7868275daf4ecf47b767a07f4997a2af5431ae"
+            "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/v2.0.0a/Unlocker-v2.0.0a-x64.zip",
+            "hash": "1304BB7072073AC2F5C47886E2F688930918CC4FB25986D1B6FFE230BEDF354B"
         }
-    },
-    "pre_install": "if (-not (is_admin)) { throw 'Administrator privileges are required' }",
-    "installer": {
-        "file": "Unlocker.exe",
-        "args": "--install",
-        "keep": true
-    },
-    "uninstaller": {
-        "file": "Unlocker",
-        "args": "--uninstall"
     },
     "persist": "backup",
     "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/v$version/Unlocker-x64.zip"
+                "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/v$version/Unlocker-v$version-x64.zip"
             }
         }
     }
