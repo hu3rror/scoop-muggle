@@ -37,9 +37,7 @@
             "clipboard-online"
         ]
     ],
-    "checkver": {
-        "github": "https://github.com/YanxinTang/clipboard-online"
-    },
+    "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
