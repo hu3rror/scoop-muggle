@@ -20,7 +20,7 @@
         ]
     ],
     "checkver": {
-        "url": "https://github.com/digimezzo/dopamine/releases",
+        "github": "https://github.com/digimezzo/dopamine",
         "regex": "Dopamine-(?<major>[\\d.]+)-preview\\.(?<build>\\d+)",
         "replace": "${major}-preview.${build}"
     },
