@@ -1,7 +1,7 @@
 {
     "homepage": "http://nullice.com/archives/1998",
     "version": "1.2beta",
-    "license":"Freeware",
+    "license": "Freeware",
     "description": "快速无损压缩大批量 PNG 图片，支持保存进度，断点续压",
     "persist": "gluttonyPNG_Data",
     "url": "http://cdn-nullice-old-download.nullice.com/gluttonyPNG_1.2.zip",

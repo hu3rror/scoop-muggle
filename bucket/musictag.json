@@ -17,7 +17,7 @@
             ]
         }
     },
-    "persist":[
+    "persist": [
         "MusicTag.config",
         "MusicTag.dat",
         "MusicTag.db"

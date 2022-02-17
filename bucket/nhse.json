@@ -5,7 +5,7 @@
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://dev.azure.com/project-pokemon/b1a724de-3609-454c-ae59-ab567024e1ac/_apis/build/builds/4551/artifacts?artifactName=NHSE&api-version=6.0&%24format=zip#/dl.zip",
+            "url": "https://dev.azure.com/project-pokemon/b1a724de-3609-454c-ae59-ab567024e1ac/_apis/build/builds/4813/artifacts?artifactName=NHSE&api-version=6.0&%24format=zip#/dl.zip",
             "hash": "a557cc89a41bd8a2dcd61dc1ea109480012cb76a06ba3a69e8d2e1db91b17a59",
             "extract_dir": "NHSE"
         }

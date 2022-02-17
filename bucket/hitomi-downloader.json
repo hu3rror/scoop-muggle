@@ -10,7 +10,7 @@
             "pre_install": "if(!(Test-Path \"$persist_dir\\hitomi_downloader_GUI.ini\")) { New-Item \"$dir\\hitomi_downloader_GUI.ini\" -ItemType File -Force | Out-Null }"
         }
     },
-    "persist":[
+    "persist": [
         "hitomi_downloader_GUI.ini",
         "hitomi_downloaded"
     ],

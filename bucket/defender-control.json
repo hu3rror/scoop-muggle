@@ -9,7 +9,7 @@
         "Expand-7zipArchive -Path \"$dir\\dl.zip.noautoextract\" -DestinationPath \"$dir\" -ExtractDir 'dControl' -Removal",
         "Expand-7zipArchive -Path \"$dir\\dControl.zip\" -DestinationPath \"$dir\" -ExtractDir 'dControl' '-psordum'"
     ],
-    "notes":["If the installation is blocked by Windows Defender, please temporarily suspend the real-time protection first."],
+    "notes": "If the installation is blocked by Windows Defender, please temporarily suspend the real-time protection first.",
     "shortcuts": [
         [
             "dfControl.exe",

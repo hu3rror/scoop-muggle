@@ -10,9 +10,7 @@
         }
     },
     "bin": "ContextMenuManager.NET.4.0.exe",
-    "persist": [
-        "Config"
-    ],
+    "persist": "Config",
     "shortcuts": [
         [
             "ContextMenuManager.NET.4.0.exe",

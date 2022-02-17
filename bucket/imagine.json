@@ -25,8 +25,8 @@
             "64bit": {
                 "url": "https://github.com/meowtec/Imagine/releases/download/v$version/Imagine-Setup-$version.exe#/dl.7z",
                 "hash": {
-                  "url": "$baseurl/latest.yml",
-                  "regex": "sha512:\\s+$base64"
+                    "url": "$baseurl/latest.yml",
+                    "regex": "sha512:\\s+$base64"
                 }
             }
         }
