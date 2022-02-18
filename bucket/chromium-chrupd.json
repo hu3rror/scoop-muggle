@@ -4,7 +4,7 @@
     "homepage": "https://github.com/mkorthof/chrupd",
     "license": "GPL-2.0-only",
     "url": "https://github.com/mkorthof/chrupd/archive/e46affb6b96257fb18f0f6759b3c1622047985f5.zip",
-    "hash": "493BD15EB3891B85BD4B6B97DD55C1B4D821F62177CD3D31BCC7D25F69C9E5AE",
+    "hash": "493bd15eb3891b85bd4b6b97dd55c1b4d821f62177cd3d31bcc7d25f69c9e5ae",
     "extract_dir": "chrupd-e46affb6b96257fb18f0f6759b3c1622047985f5",
     "bin": "chrupd.cmd",
     "checkver": {
