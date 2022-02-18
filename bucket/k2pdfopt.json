@@ -1,27 +1,45 @@
 {
     "version": "2.53",
+    "description": "Optimize PDF/DJVU files for mobile e-readers and smartphones.",
     "homepage": "https://www.willus.com/k2pdfopt/",
-    "description": "K2pdfopt optimizes PDF/DJVU files for mobile e-readers (e.g. the Kindle) and smartphones.",
-    "license": "Freeware",
+    "license": "AGPL-3.0-or-later",
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/k2pdfopt_x64_v2.53.7z&raw=true#dl.7z_",
-            "hash": "1838c8c9bba9609ab9fd67468daf98b4e215417ee75d0745451eebaf531617e3"
+            "url": "https://github.com/davidxuang/k2pdfopt/releases/download/v2.53/k2pdfopt-win-x64.exe#/k2pdfopt.exe",
+            "hash": "7f82a4351d1d08a8703b9af56df9acf17b1ffe37837a8734c7b2f1a0a2465214"
         },
         "32bit": {
-            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/k2pdfopt_x86_v2.53.7z&raw=true#dl.7z_",
-            "hash": "f5e4abc8b133aa5752c76fa836b0b92b56fdcb4f51f4b674b341baf5fb9598a0"
+            "url": "https://github.com/davidxuang/k2pdfopt/releases/download/v2.53/k2pdfopt-win-x86.exe#/k2pdfopt.exe",
+            "hash": "4d9098ea81de8cd6741c97e2eb0068f044579679d470f68b7aa3e84172342c3e"
         }
     },
-    "pre_install": [
-        "$7z = ( Get-ChildItem \"$dir\\k2pdfopt*\").Name",
-        "7z x \"$dir\\$7z\" -pmuggle $('-o' + \"$dir\") | Out-Null",
-        "Remove-Item \"$dir\\*dl.7z_\" -Force -Recurse"
-    ],
+    "bin": "k2pdfopt.exe",
     "shortcuts": [
         [
             "k2pdfopt.exe",
-            "k2pdfopt.exe"
+            "k2pdfopt"
         ]
-    ]
+    ],
+    "checkver": {
+        "url": "https://www.willus.com/k2pdfopt/k2pdfopt_version.txt",
+        "regex": "[vV](\\d[\\d.a-z]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/davidxuang/k2pdfopt/releases/download/v$version/k2pdfopt-win-x64.exe#/k2pdfopt.exe",
+                "hash": {
+                    "url": "https://www.willus.com/k2pdfopt/download/sha256/$version/win64/sha256.txt",
+                    "find": "$sha256"
+                }
+            },
+            "32bit": {
+                "url": "https://github.com/davidxuang/k2pdfopt/releases/download/v$version/k2pdfopt-win-x86.exe#/k2pdfopt.exe",
+                "hash": {
+                    "url": "https://www.willus.com/k2pdfopt/download/sha256/$version/win32/sha256.txt",
+                    "find": "$sha256"
+                }
+            }
+        }
+    }
 }
