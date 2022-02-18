@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/logseq/logseq/releases/download/nightly/Logseq-win-x64-0.5.9+nightly.20220217.exe#/dl.7z",
-            "hash": "a3a2c08f1944d174f49b2dee0b6724264651484a1dcb5f7ee4a7aeaae43903d6"
+            "hash": "c2504c166c6bc752ae221d59174a9937169dfe1fe56fc4a96996725fddc1e318"
         }
     },
     "pre_install": [
