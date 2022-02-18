@@ -1,3 +1,2 @@
 # retain windows line-endings in case checked out on mac or linux
 * text eol=crlf
-.git/hooks/* text eol=lf

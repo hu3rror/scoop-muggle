@@ -1,6 +1,3 @@
-/checkver*
-/.cache/
-/.vagrant/
 *.sublime-workspace
 *~
 ._*
