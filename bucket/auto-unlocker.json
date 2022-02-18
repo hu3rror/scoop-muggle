@@ -6,11 +6,14 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/paolo-projects/auto-unlocker/releases/download/v2.0.0a/Unlocker-v2.0.0a-x64.zip",
-            "hash": "1304BB7072073AC2F5C47886E2F688930918CC4FB25986D1B6FFE230BEDF354B"
+            "hash": "1304bb7072073ac2f5c47886e2f688930918cc4fb25986d1b6ffe230bedf354b"
         }
     },
     "persist": "backup",
-    "checkver": "github",
+    "checkver": {
+        "url": "https://github.com/paolo-projects/auto-unlocker/releases",
+        "regex": "/download/v([\\d.]+\\w?)"
+    },
     "bin": "unlocker.exe",
     "shortcuts": [
         [
