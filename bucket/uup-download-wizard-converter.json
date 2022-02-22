@@ -5,7 +5,7 @@
     "license": "MIT",
     "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v3.0/UUPdownload_with_converter_v3.0.7z",
     "hash": "fb51806d930dd052ef06232aee5034a67afce60ac055de2a5de016931bdc87cb",
-    "bin": "uup_download.cmd",
+    "bin": "uupdownload.cmd",
     "checkver": "github",
     "autoupdate": {
         "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v$version/UUPdownload_with_converter_v$version.7z"
