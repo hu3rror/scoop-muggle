@@ -19,15 +19,15 @@
     "bin": [
         [
             "bin\\nvim.exe",
-            "nvim.exe"
+            "nvim"
         ],
         [
             "bin\\nvim.exe",
-            "vim.exe"
+            "vim"
         ],
         [
             "bin\\nvim.exe",
-            "vi.exe"
+            "vi"
         ],
         [
             "bin\\nvim-qt.exe",
