@@ -6,11 +6,8 @@
     "url": "https://www.dogfight360.com/blog/wp-content/uploads/2017/03/UsbEAm-Hosts-Editor-v3.62_%E8%A7%A3%E5%8E%8B%E5%AF%86%E7%A0%81dogfight360.zip#/dl.zip_",
     "hash": "cbeb27c7c8c63ca7ef10dbc09b6da4325893b5b1807d13161901a3725218fe0f",
     "pre_install": [
-        "$zip = ( Get-ChildItem \"$dir\\UsbEAm-Hosts-Editor*\").Name",
-        "7z x \"$dir\\$zip\" -pdogfight360 $('-o' + \"$dir\") | Out-Null",
-        "Move-Item \"$dir\\UsbEAm Hosts Editor\\*\" $dir",
-        "Get-ChildItem \"$dir\" 'UsbEAm Hosts Editor*.exe' | Select-Object -First 1 | Rename-Item -NewName 'UsbEAm Hosts Editor.exe'",
-        "Remove-Item \"$dir\\*dl.zip_\", \"$dir\\UsbEAm Hosts Editor\" -Force -Recurse"
+        "Expand-7zipArchive -Path \"$dir\\dl.zip_\" -DestinationPath \"$dir\" -ExtractDir 'UsbEAm Hosts Editor' -Removal -Switches '-pdogfight360'",
+        "Get-ChildItem \"$dir\" 'UsbEAm Hosts Editor*.exe' | Select-Object -First 1 | Rename-Item -NewName 'UsbEAm Hosts Editor.exe'"
     ],
     "shortcuts": [
         [
