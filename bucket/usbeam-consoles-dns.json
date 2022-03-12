@@ -6,11 +6,8 @@
     "url": "https://www.dogfight360.com/blog/wp-content/uploads/2021/01/UsbEAm_Consoles_DNS_v1.5_%E8%A7%A3%E5%8E%8B%E5%AF%86%E7%A0%81dogfight360.zip#/dl.zip_",
     "hash": "5dc835f42fba9484eac0cda5baf6111524c57f3d6ddc53beac491d590dca530a",
     "pre_install": [
-        "$zip = ( Get-ChildItem \"$dir\\UsbEAm_Consoles_DNS*\").Name",
-        "7z x \"$dir\\$zip\" -pdogfight360 $('-o' + \"$dir\") | Out-Null",
-        "Move-Item \"$dir\\UsbEAm_Consoles_DNS\\*\" $dir",
-        "Get-ChildItem \"$dir\" 'UsbEAm_Consoles_DNS*.exe' | Select-Object -First 1 | Rename-Item -NewName 'UsbEAm_Consoles_DNS.exe'",
-        "Remove-Item \"$dir\\*dl.zip_\", \"$dir\\UsbEAm_Consoles_DNS\" -Force -Recurse",
+        "Expand-7zipArchive -Path \"$dir\\dl.zip_\" -DestinationPath \"$dir\" -ExtractDir 'UsbEAm_Consoles_DNS' -Removal -Switches '-pdogfight360'",
+        "Get-ChildItem \"$dir\" 'UsbEAm_Consoles_DNS_*.exe' | Select-Object -First 1 | Rename-Item -NewName 'UsbEAm_Consoles_DNS.exe'",
         "if (!(Test-Path \"$persist_dir\\UsbEAm_Consoles_DNS.ini\")) { Set-Content -Encoding ASCII -Path \"$dir\\UsbEAm_Consoles_DNS.ini\" -Value $null }",
         "if (!(Test-Path \"$persist_dir\\UsbEAm_Consoles_DNS.hosts\")) { Set-Content -Encoding ASCII -Path \"$dir\\UsbEAm_Consoles_DNS.hosts\" -Value $null }"
     ],
@@ -21,8 +18,8 @@
         ]
     ],
     "checkver": {
-        "url": "https://www.dogfight360.com/Usbeam/usbeam_console.xml",
-        "regex": "VERSION=([\\d.]+)"
+        "url": "https://www.dogfight360.com/blog/1845/",
+        "regex": "UsbEAm_Consoles_DNS_v([\\d.]+)_解压密码"
     },
     "autoupdate": {
         "url": "https://www.dogfight360.com/blog/wp-content/uploads/2021/01/UsbEAm_Consoles_DNS_v$version_%E8%A7%A3%E5%8E%8B%E5%AF%86%E7%A0%81dogfight360.zip#/dl.zip_"
