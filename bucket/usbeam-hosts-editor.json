@@ -19,8 +19,8 @@
         ]
     ],
     "checkver": {
-        "url": "https://www.dogfight360.com/Usbeam/usbeam_new_20.xml",
-        "regex": "VERSION=([\\d.]+)"
+        "url": "https://www.dogfight360.com/blog/475/",
+        "regex": "UsbEAm-Hosts-Editor-v([\\d.]+)_解压密码"
     },
     "autoupdate": {
         "url": "https://www.dogfight360.com/blog/wp-content/uploads/2017/03/UsbEAm-Hosts-Editor-v$version_%E8%A7%A3%E5%8E%8B%E5%AF%86%E7%A0%81dogfight360.zip#/dl.zip_"
