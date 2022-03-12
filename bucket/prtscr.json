@@ -3,14 +3,9 @@
     "description": "支持快捷键、不规则截图，具备放大镜功能",
     "homepage": "https://www.fiastarta.com/PrtScr/",
     "license": "Freeware",
-    "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/PrtScr_v1.7.0.0.7z&raw=true#dl.7z_",
+    "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/PrtScr_v1.7.0.0.7z&raw=true#/dl.7z_",
     "hash": "9b69632daf4a56de7d65e8ef8b70821702ff58edfa351346fa0ac7b38e8ec957",
-    "pre_install": [
-        "$7z = ( Get-ChildItem \"$dir\\PrtScr*\").Name",
-        "7z x \"$dir\\$7z\" -pmuggle $('-o' + $dir) | Out-Null",
-        "Move-Item \"$dir\\PrtScr\\*\" $dir",
-        "Remove-Item \"$dir\\*dl.7z_\", \"$dir\\PrtScr\\\" -Force -Recurse"
-    ],
+    "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'PrtScr' -Removal -Switches '-pmuggle'",
     "notes": [
         "Please read ReadME.md in $dir",
         "-----",
