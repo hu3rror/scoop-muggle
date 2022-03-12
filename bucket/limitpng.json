@@ -8,14 +8,9 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/limitPNG_x64_v2.0.0_beta4.7z&raw=true#dl.7z_",
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api?path=/Public/utils/limitPNG_x64_v2.0.0_beta4.7z&raw=true#/dl.7z_",
             "hash": "c6e68f1b7fea1cd74d8b1c9963151065f19dd810fda845e4c81bbf832a923244",
-            "pre_install": [
-                "$7z = ( Get-ChildItem \"$dir\\limitPNG*\").Name",
-                "7z x \"$dir\\$7z\" -pmuggle $('-o' + \"$dir\") | Out-Null",
-                "Move-Item \"$dir\\limitPNG\\*\" $dir",
-                "Remove-Item \"$dir\\*dl.7z_\", \"$dir\\limitPNG\\\" -Force -Recurse"
-            ]
+            "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'limitPNG' -Removal -Switches '-pmuggle'"
         }
     },
     "shortcuts": [
