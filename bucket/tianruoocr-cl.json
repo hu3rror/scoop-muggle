@@ -7,16 +7,13 @@
         "64bit": {
             "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/992742/download#/dl.7z",
             "hash": "5dbc6bb4fdfc046a3ba8e8d09fe78055a003f1dba066de22e9cf3d29af7235fb",
-            "pre_install": [
-                "$fold = (Get-ChildItem \"$dir\" | Select-Object -First 1).FullName",
-                "Move-Item \"$fold\\*\" \"$dir\""
-            ]
+            "extract_dir": "天若OCR开源版本地版"
         }
     },
     "shortcuts": [
         [
             "天若OCR文字识别.exe",
-            "天若OCR文字识别开源版"
+            "天若OCR开源版"
         ]
     ],
     "persist": "Data",
