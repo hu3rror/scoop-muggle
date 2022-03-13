@@ -1,16 +1,16 @@
 {
-    "version": "2.3.2a",
+    "version": "2.4.0a",
     "homepage": "https://biu.tls.moe",
     "description": "一款 Pixiv 搜索辅助工具，可免会员按收藏数排序、免代理浏览以及多种图片下载",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/txperl/PixivBiu/releases/download/v2.3.2a/PixivBiu_v2.3.2a_win_x64.zip",
-            "hash": "52131202b333c7148efd17f292646c81bd2ab44fce56229f7b9f21affdd97dde"
+            "url": "https://github.com/txperl/PixivBiu/releases/download/v2.4.0a/PixivBiu_v2.4.0a_win_x64.zip",
+            "hash": "868b9d890a9a76659a0b880742d9c3dd2b331c6c26805187b7762e71d205a771"
         },
         "32bit": {
-            "url": "https://github.com/txperl/PixivBiu/releases/download/v2.3.2a/PixivBiu_v2.3.2a_win_x86.zip",
-            "hash": "e2c5b8bb715e7f4f299bc863827c3b848a69aeb96da211f19735614d79eb29ba"
+            "url": "https://github.com/txperl/PixivBiu/releases/download/v2.4.0a/PixivBiu_v2.4.0a_win_x86.zip",
+            "hash": "043d7d5f5bc5145c74eb99e2accbe97db120c1360adf51b6d55ba371c5d54ce0"
         }
     },
     "persist": [
