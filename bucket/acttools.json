@@ -1,26 +1,27 @@
 {
-    "version": "1.8",
+    "version": "1.8.2",
     "description": "KMS Local Activation...",
     "homepage": "https://github.com/laomms/KmsTool",
     "license": "Unknown",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/laomms/KmsTool/releases/download/1.8/ActTools1.8.exe",
-            "hash": "4c64ed418072747e3ec6c5fdb2114c153bef7fa600cfa4af67c649290133ea42"
+            "url": "https://github.com/laomms/KmsTool/releases/download/1.8.2/ActTools1.82.exe",
+            "hash": "7eb5c69cbe9e61770d5332726ec89e3191d855c2c2cfe5f998da8d25ae8f49c7"
         }
     },
+    "pre_install": "Rename-Item \"$dir\\*.exe\" \"$dir\\ActTools.exe\"",
     "notes": "This tool can only be used for personal system certificate environment debugging, all commercial activities related to it are illegal. Please support the genuine software.",
     "shortcuts": [
         [
-            "ActTools1.61.exe",
-            "KMS ActTools"
+            "ActTools.exe",
+            "ActTools for KMS"
         ]
     ],
     "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/laomms/KmsTool/releases/download/$version/ActTools$version.exe"
+                "url": "https://github.com/laomms/KmsTool/releases/download/$version/ActTools$majorVersion.$minorVersion$patchVersion.exe"
             }
         }
     }
