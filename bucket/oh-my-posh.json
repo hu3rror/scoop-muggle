@@ -1,12 +1,12 @@
 {
-    "version": "7.55.0",
+    "version": "7.55.1",
     "description": "A prompt theme engine for any shell",
     "homepage": "https://ohmyposh.dev",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v7.55.0/posh-windows-amd64.7z",
-            "hash": "6eb7fe7c1f88bc91f0c095c66d09057326bcd339421957d83248cec4dd5de5e0",
+            "url": "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v7.55.1/posh-windows-amd64.7z",
+            "hash": "f9ef34e2f9dbaad7678da5d9aa1af24b6de0cad04248336898af63593ad6081b",
             "pre_install": "if(!(Test-Path \"$persist_dir\\my.omp.json\")) { New-Item \"$dir\\my.omp.json\" -ItemType File -Force | Out-Null }"
         }
     },
