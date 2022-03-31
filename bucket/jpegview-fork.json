@@ -1,10 +1,10 @@
 {
-    "version": "1.0.39.1",
+    "version": "1.0.40",
     "description": "The semi-official re-release of JPEGView, Fast and highly configurable image viewer/editor with a minimal GUI.",
     "homepage": "https://github.com/sylikc/jpegview",
     "license": "GPL-2.0-only",
-    "url": "https://github.com/sylikc/jpegview/releases/download/v1.0.39.1/JPEGView_1.0.39.1.7z",
-    "hash": "691957d8c3858ce8962db5aefdd9ea07d33dc950c7fb9a2f2e16cf9267d9ac70",
+    "url": "https://github.com/sylikc/jpegview/releases/download/v1.0.40/JPEGView_1.0.40.7z",
+    "hash": "82ba6f84a7d7c88c655253acb41ffed9e8667cf1f3ac9573836952c08c4dc82c",
     "architecture": {
         "64bit": {
             "extract_dir": "JPEGView64"
