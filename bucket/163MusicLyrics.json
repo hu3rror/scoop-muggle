@@ -11,8 +11,8 @@
     },
     "shortcuts": [
         [
-            "163MusicLyrics.exe",
-            "网易云音乐歌词下载器"
+            "MusicLyricApp.exe",
+            "云音乐歌词提取"
         ]
     ],
     "checkver": "github",
