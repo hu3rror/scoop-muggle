@@ -1,0 +1,33 @@
+{
+    "version": "22.4.Summer-f9978dd1",
+    "description": "A feature-rich dictionary lookup program",
+    "homepage": "https://github.com/xiaoyifang/goldendict",
+    "license": "GPL-3.0-only",
+    "url": "https://github.com/xiaoyifang/goldendict/releases/download/v22.4.Summer-f9978dd1/6.2.3-GoldenDict-master.f9978dd1-131019.zip",
+    "hash": "8f651833a38995261cef21ee3d156048be3904de944d3e95f911198544891efc",
+    "extract_dir": "GoldenDict-master.f9978dd1-131019",
+    "bin": [
+        [
+            "GoldenDict.exe",
+            "GoldenDict-we.exe"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "GoldenDict.exe",
+            "GoldenDict (Webengine)"
+        ]
+    ],
+    "persist": [
+        "portable",
+        "content"
+    ],
+    "checkver": {
+        "url": "https://github.com/xiaoyifang/goldendict/releases",
+        "regex": "/download/v(.*)/([6-9][\\d+.]+)-GoldenDict-master\\.(\\w+)-(\\d+)",
+        "replace": "${1}"
+    },
+    "autoupdate": {
+        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1/$match2-GoldenDict-master.$match3-$match4.zip"
+    }
+}
