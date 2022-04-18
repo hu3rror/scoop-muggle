@@ -5,7 +5,7 @@
     "license": "GPL-3.0-only",
     "url": "https://github.com/xiaoyifang/goldendict/releases/download/v22.4.18-Summer.220418.f6ce1c22/6.3.0-GoldenDict-master.f6ce1c22-123328.zip",
     "hash": "66820e0f93f0523652a80699d75c258ef61f20987d3663a372246a76d5c95219",
-    "extract_dir": "GoldenDict-master.f9978dd1-131019",
+    "extract_dir": "GoldenDict-master.f6ce1c22-123328",
     "bin": [
         [
             "GoldenDict.exe",
@@ -28,6 +28,7 @@
         "replace": "${1}"
     },
     "autoupdate": {
-        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1/$match2-GoldenDict-master.$match3-$match4.zip"
+        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1/$match2-GoldenDict-master.$match3-$match4.zip",
+        "extract_dir": "GoldenDict-master.$match3-$match4"
     }
 }
