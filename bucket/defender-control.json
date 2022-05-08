@@ -12,12 +12,12 @@
     "notes": "If the installation is blocked by Windows Defender, please temporarily suspend the real-time protection first.",
     "shortcuts": [
         [
-            "dfControl.exe",
+            "dControl.exe",
             "Defender Control"
         ]
     ],
     "checkver": {
-        "url": "https://www.sordum.org/9480/defender-control-v2-0/",
+        "url": "https://www.sordum.org/9480/",
         "regex": "Defender Control v([\\d.]+) – What\\’s New"
     },
     "autoupdate": {
