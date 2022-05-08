@@ -4,7 +4,7 @@
     "description": "A small Portable freeware which will allow you to disable Microsoft Defenderr in Windows 10 completely.",
     "license": "Freeware",
     "url": "https://www.sordum.org/files/download/d-control/dControl.zip#/dl.zip.noautoextract",
-    "hash": "18aef74e619cafebf90a44d67766b232e9bd88d0af6cad45f5f414f827150cb4",
+    "hash": "62442fd70bde2bf31b677447cb4216daeeeff48fcc0aac4495cabc30092a5533",
     "pre_install": [
         "Expand-7zipArchive -Path \"$dir\\dl.zip.noautoextract\" -DestinationPath \"$dir\" -ExtractDir 'dControl' -Removal",
         "Expand-7zipArchive -Path \"$dir\\dControl.zip\" -DestinationPath \"$dir\" -ExtractDir 'dControl' '-psordum'"
