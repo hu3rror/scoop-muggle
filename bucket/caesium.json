@@ -1,13 +1,13 @@
 {
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0-rc.2",
     "description": "A cross-platform image compression software aimed at helping photographers, bloggers, webmasters, businesses or casual users at storing, sending and sharing digital pictures. Based on libcaesium.",
     "homepage": "https://saerasoft.com/caesium",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Lymphatus/caesium-image-compressor/releases/download/v2.0.0-rc.1/caesium-image-compressor-2.0.0-rc.1-win.zip",
-            "hash": "32010c45b4258cde7f8f94d1b88ad45d1d928e61abdcbdf57cd1f9aac3dd1e68",
-            "extract_dir": "caesium-image-compressor-2.0.0-rc.1-win"
+            "url": "https://github.com/Lymphatus/caesium-image-compressor/releases/download/v2.0.0-rc.2/caesium-image-compressor-2.0.0-rc.2-win.zip",
+            "hash": "34152cb09a364cdd6d82f1b99a7152273a4c23ece969beae5df4b0c5f3d53d83",
+            "extract_dir": "caesium-image-compressor-2.0.0-rc.2-win"
         }
     },
     "shortcuts": [
