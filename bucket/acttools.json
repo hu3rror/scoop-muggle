@@ -1,12 +1,12 @@
 {
-    "version": "1.8.2",
+    "version": "1.8.3",
     "description": "KMS Local Activation...",
     "homepage": "https://github.com/laomms/KmsTool",
     "license": "Unknown",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/laomms/KmsTool/releases/download/1.8.2/ActTools1.82.exe",
-            "hash": "7eb5c69cbe9e61770d5332726ec89e3191d855c2c2cfe5f998da8d25ae8f49c7"
+            "url": "https://github.com/laomms/KmsTool/releases/download/1.8.3/ActTools1.83.exe",
+            "hash": "29515dc73799ba965a8272b185f41884af55e6ab9ae3d939a2db44abfd1908fd"
         }
     },
     "pre_install": "Rename-Item \"$dir\\*.exe\" \"$dir\\ActTools.exe\"",
