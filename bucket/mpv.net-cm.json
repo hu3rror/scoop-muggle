@@ -1,12 +1,12 @@
 {
-    "version": "5800-20220403",
+    "version": "5900-20220515",
     "description": "mpv.net_CM 是基于 mpv.net 上游的中文分支模组",
     "homepage": "https://bbs.acgrip.com/thread-7798-1-1.html",
     "license": "GPL-2.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/hooke007/mpv.net_CM/releases/download/5800/mpvnet-CM-20220403.7z",
-            "hash": "c3d9916f53b46dc77c8e09a6005b8959052d76770490cae41d502e8f9a741f6e",
+            "url": "https://github.com/hooke007/mpv.net_CM/releases/download/5900/mpvnet-CM-20220515.exe/#dl.7z",
+            "hash": "2435300ee77e14f6b693edad8848e8fa8039425469a92514788f3a23b778fc4a",
             "extract_dir": "mpvnet"
         }
     },
@@ -25,7 +25,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/hooke007/mpv.net_CM/releases/download/$matchTag/mpvnet-CM-$matchBuild.7z"
+                "url": "https://github.com/hooke007/mpv.net_CM/releases/download/$matchTag/mpvnet-CM-$matchBuild.exe/#dl.7z"
             }
         }
     }
