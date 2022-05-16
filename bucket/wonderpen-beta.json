@@ -1,13 +1,13 @@
 {
     "homepage": "https://www.tominlab.com/en/wonderpen",
     "description": "Professional writing app with a focused and fluid writing experience.",
-    "version": "2.1.4",
+    "version": "2.1.5",
     "license": {
         "identifier": "Proprietary",
         "url": "https://www.tominlab.com/en/term/privacy"
     },
-    "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/beta/WonderPen_win_installer_2.1.4(6296).exe#/dl.7z",
-    "hash": "752314df7d65d980129ce667c746e15132e63c0f0c6fbc4c31728b12f104566e",
+    "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/beta/WonderPen_win_installer_2.1.5(6309).exe#/dl.7z",
+    "hash": "e3fa95f26ac35425ed0b20689ef1de31597b7f45dac7fab60a534d88b4163c9a",
     "architecture": {
         "64bit": {
             "installer": {
