@@ -1,11 +1,11 @@
 {
-    "version": "22.4.23-GrainRain.220423.4a325c41",
+    "version": "22.5.21-GrainBuds.220521.4bb8ef41",
     "description": "A feature-rich dictionary lookup program",
     "homepage": "https://github.com/xiaoyifang/goldendict",
     "license": "GPL-3.0-only",
-    "url": "https://github.com/xiaoyifang/goldendict/releases/download/v22.4.23-GrainRain.220423.4a325c41/6.2.4-GoldenDict-master.4a325c41-061221.zip",
-    "hash": "0f7d08fd45bff71b0085537002d67b1ae1358ff5328050fa04ffb936fffdd327",
-    "extract_dir": "GoldenDict-master.4a325c41-061221",
+    "url": "https://github.com/xiaoyifang/goldendict/releases/download/v22.5.21-GrainBuds.220521.4bb8ef41/6.3.0-GoldenDict-Windows.4bb8ef41-002328.zip",
+    "hash": "cba401365bfcf3b87c34e65d88d61be3cba6c1c51c4291c42283f750f2344f43",
+    "extract_dir": "GoldenDict-Windows.4bb8ef41-002328",
     "bin": [
         [
             "GoldenDict.exe",
@@ -23,12 +23,13 @@
         "content"
     ],
     "checkver": {
-        "url": "https://github.com/xiaoyifang/goldendict/releases",
-        "regex": "/download/v(.*)/([6-9][\\d+.]+)-GoldenDict-master\\.(\\w+)-(\\d+)",
-        "replace": "${1}"
+        "github": "https://github.com/xiaoyifang/goldendict",
+        "regex": "/download/v(.*)/([\\d+.]+)-GoldenDict-Windows\\.(\\w+)-(\\d+)",
+        "replace": "${1}",
+        "reverse": true
     },
     "autoupdate": {
-        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1/$match2-GoldenDict-master.$match3-$match4.zip",
-        "extract_dir": "GoldenDict-master.$match3-$match4"
+        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1/$match2-GoldenDict-Windows.$match3-$match4.zip",
+        "extract_dir": "GoldenDict-Windows.$match3-$match4"
     }
 }
