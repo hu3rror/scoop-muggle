@@ -1,12 +1,12 @@
 {
-    "version": "4.3",
+    "version": "4.4",
     "description": "NetEase cloud music lyrics downloader for Windows",
     "homepage": "https://github.com/jitwxs/163MusicLyrics",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v4.3/v4.3-green.zip",
-            "hash": "7bfba148c9ce4cdf24f0e609f0a5454249d00f40cb85536ed9bc43793ade5509"
+            "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v4.4/v4.4-green.zip",
+            "hash": "462b614d5a6f007e56da584fd29692e2541a8fffe1a9f9f90633969f66c61ddd"
         }
     },
     "shortcuts": [
