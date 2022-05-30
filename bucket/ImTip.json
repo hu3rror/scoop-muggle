@@ -1,10 +1,10 @@
 {
-    "version": "2.4",
+    "version": "2.5",
     "description": "Input Method Status Indicator Tool",
     "homepage": "https://imtip.aardio.com/",
     "license": "MIT",
     "url": "https://imtip.aardio.com/update/ImTip.7z",
-    "hash": "0adceee444ddefd769b821cb51880290e54282acb2d622a14002db3e98a9f53f",
+    "hash": "d308eca11cbc9252f31d8c89ba4910138eb1240e23c7917fbe3e8507ea95d3da",
     "shortcuts": [
         [
             "ImTip.exe",
