@@ -1,10 +1,10 @@
 {
     "homepage": "https://github.com/JRJSheep/UUP-Download-Wizard",
-    "version": "4.0.650.6",
+    "version": "4.0.650.8",
     "description": "羊牌 UUP 下载向导",
     "license": "MIT",
-    "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v4.0.650.6-v4.0-r2/UUPdownload_with_converter_v4.0.650.6.7z",
-    "hash": "c7bde34f10cfb9c8f5ebf2bf9ebd8ada9f41a5b7f95b10673dd9dff541263934",
+    "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v4.0.650.8-v4.0-r3/UUPdownload_with_converter_v4.0.650.8.7z",
+    "hash": "31a8d78f16c9ede05d57e738342120a300346d4cf968457b3a63dcabe44e7400",
     "bin": "uupdownload.cmd",
     "checkver": {
         "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/latest",
