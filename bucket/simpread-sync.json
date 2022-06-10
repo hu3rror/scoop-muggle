@@ -1,16 +1,16 @@
 {
-    "version": "0.6.5",
+    "version": "0.6.6",
     "description": "CLI for simpread sync helper",
     "homepage": "https://github.com/j1g5awi/simpread-sync",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/j1g5awi/simpread-sync/releases/download/v0.6.5/simpread-sync_windows_amd64.zip",
-            "hash": "3dbf6147a4fe5b67b797a5e28919af89106c1f6529a31fb95f82512a8c4a21b3"
+            "url": "https://github.com/j1g5awi/simpread-sync/releases/download/v0.6.6/simpread-sync_windows_amd64.zip",
+            "hash": "512effac136e16661edb5e65167a626feb24ac3b81bc834186dc9d071ed7ee0f"
         },
         "32bit": {
-            "url": "https://github.com/j1g5awi/simpread-sync/releases/download/v0.6.5/simpread-sync_windows_386.zip",
-            "hash": "952a4ffb9edb8877bd8daadc1c2b9fa80f23c7f23acd2e7028f8f7b0988d3173"
+            "url": "https://github.com/j1g5awi/simpread-sync/releases/download/v0.6.6/simpread-sync_windows_386.zip",
+            "hash": "3b1f5b709eb7f437f21a64e75d64bd0c78e5b17c75ae731e69538ebe186379ff"
         }
     },
     "bin": "simpread-sync.exe",
