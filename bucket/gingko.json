@@ -2,11 +2,11 @@
     "homepage": "https://github.com/gingko/client",
     "description": "Tree-based writing software, written in Elm.",
     "license": "MIT",
-    "version": "2.4.15",
+    "version": "2.4.14",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/gingko/client/releases/download/v2.4.15/Gingko-Setup-2.4.15.exe#/dl.7z",
-            "hash": "sha512:acf898ccd415d363d7b5e69e1b00737125ef728b22b802874d1eb5a1448a9641503a094cfa1e51f70f4d1feded12e9b5dfb2f9da05b760b357b2b58b97d2cd15"
+            "url": "https://github.com/gingko/client/releases/download/v2.4.14/Gingko-Setup-2.4.14.exe#/dl.7z",
+            "hash": "sha512:5a14a9f964c8db44de7dff161aface9c62d76746fcf55de70ff8cac4933addb105fd202871b0d0523b101be9d5c1a853bfe8727b13ff9ffda7cecbc97526c17b"
         }
     },
     "pre_install": [
