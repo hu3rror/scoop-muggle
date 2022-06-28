@@ -1,15 +1,15 @@
 {
-    "version": "22.5.21-GrainBuds.220521.4bb8ef41",
+    "version": "22.6.21",
     "description": "A feature-rich dictionary lookup program",
     "homepage": "https://github.com/xiaoyifang/goldendict",
     "license": "GPL-3.0-only",
-    "url": "https://github.com/xiaoyifang/goldendict/releases/download/v22.5.21-GrainBuds.220521.4bb8ef41/6.3.0-GoldenDict-Windows.4bb8ef41-002328.zip",
-    "hash": "cba401365bfcf3b87c34e65d88d61be3cba6c1c51c4291c42283f750f2344f43",
-    "extract_dir": "GoldenDict-Windows.4bb8ef41-002328",
+    "url": "https://github.com/xiaoyifang/goldendict/releases/download/v22.6.21-SummerSolstice.220620.59698b53/6.3.1-GoldenDict-v22-Install.exe#/dl.7z",
+    "hash": "f9e4f14bcbe90de749cd946da2fd92a7fd11f8962c5e99aec086e8620075a43a",
+    "pre_install": "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\[LICENSE].txt\", \"$dir\\*.nsi\", \"$dir\\uninstall.exe\" -Recurse",
     "bin": [
         [
             "GoldenDict.exe",
-            "GoldenDict-we.exe"
+            "goldendict-webengine.exe"
         ]
     ],
     "shortcuts": [
@@ -24,12 +24,10 @@
     ],
     "checkver": {
         "github": "https://github.com/xiaoyifang/goldendict",
-        "regex": "/download/v(.*)/([\\d+.]+)-GoldenDict-Windows\\.(\\w+)-(\\d+)",
-        "replace": "${1}",
+        "regex": "/download/v([\\d+.]+)-(.*)/([\\d+.]+)-GoldenDict-v",
         "reverse": true
     },
     "autoupdate": {
-        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1/$match2-GoldenDict-Windows.$match3-$match4.zip",
-        "extract_dir": "GoldenDict-Windows.$match3-$match4"
+        "url": "https://github.com/xiaoyifang/goldendict/releases/download/v$match1-$match2/$match3-GoldenDict-v$majorVersion-Install.exe#/dl.7z"
     }
 }
