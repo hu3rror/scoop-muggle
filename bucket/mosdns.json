@@ -9,11 +9,9 @@
             "hash": "3f7ffb39ff1f4da7ff833f0c94706fa442b5e149adea79285cdb439895fd05a9"
         }
     },
-    "shortcuts": [
-        [
-            "service_control.bat",
-            "mosdns service control"
-        ]
+    "pre_install": [
+        "Rename-Item \"$dir\\config.yaml\" \"$dir\\config-template.yaml\"",
+        "if(!(Test-Path \"$persist_dir\\config.yaml\")) { New-Item \"$dir\\config.yaml\" -ItemType File -Force | Out-Null }"
     ],
     "persist": "config.yaml",
     "bin": "mosdns.exe",
