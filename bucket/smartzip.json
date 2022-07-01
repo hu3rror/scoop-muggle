@@ -1,0 +1,31 @@
+{
+    "version": "3.4",
+    "description": "A tool extends system menu of all windows in the system.",
+    "homepage": "https://github.com/vvyoko/SmartZip",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/vvyoko/SmartZip/releases/download/3.4/SmartZip.3.2fix2.zip",
+            "hash": "31951da1412186b1d639a92520b1b4a5cfb963a85d62ac50573eede1bee412c0",
+            "extract_dir": "SmartZip"
+        }
+    },
+    "shortcuts": [
+        [
+            "SmartZip.exe",
+            "SmartZip"
+        ]
+    ],
+    "bin": "SmartZip.exe",
+    "checkver": {
+        "github": "https://github.com/vvyoko/SmartZip",
+        "regex": "/download/([\\d.]+)/SmartZip\\.([[\\d.(?:fix)(?:\\d+)]+).zip"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/vvyoko/SmartZip/releases/download/$match1/SmartZip.$match2.zip"
+            }
+        }
+    }
+}
