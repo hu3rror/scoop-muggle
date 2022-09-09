@@ -1,10 +1,10 @@
 {
-    "version": "9.46.1",
+    "version": "9.46.4",
     "description": "a web app for encryption, encoding, compression and data analysis",
     "homepage": "https://github.com/gchq/CyberChef",
     "license": "Apache-2.0",
-    "url": "https://github.com/gchq/CyberChef/releases/download/v9.46.1/CyberChef_v9.46.1.zip",
-    "hash": "7aae3a68edc2669cb0e1ba5b61d96e914a405819b005bab65cea5d8e7bb77185",
+    "url": "https://github.com/gchq/CyberChef/releases/download/v9.46.4/CyberChef_v9.46.4.zip",
+    "hash": "25a2c7649095c49538f74c366bc84f13227fd8e2ad58ad986f6a1199b6670b4d",
     "pre_install": "Rename-Item \"$dir\\*.html\" \"$dir\\CyberChef.html\"",
     "shortcuts": [
         [
