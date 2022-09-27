@@ -24,7 +24,7 @@
     ],
     "checkver": {
         "url": "https://github.com/xiaoyifang/goldendict/releases",
-        "regex": "/download/v([\\d.]+)-(\\w+)\\.(.*)/([\\d.]+)-",
+        "regex": "/download/v([\\d.]+)-(\\w+)\\.(.*)/([\\d.]+)-.*\\.exe",
         "reverse": true
     },
     "autoupdate": {
