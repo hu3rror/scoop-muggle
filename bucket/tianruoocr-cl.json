@@ -1,13 +1,12 @@
 {
-    "version": "1.3.2",
-    "description": "天若ocr开源版本的本地版，采用 Chinese-lite 和 paddleocr 识别框架",
+    "version": "1.3.5",
+    "description": "Tianruo ORC with local OCR, using Chinese-lite and paddleocr recognition framework",
     "homepage": "https://gitee.com/wanglifree/tianruoocr-cl",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/992742/download#/dl.7z",
-            "hash": "5dbc6bb4fdfc046a3ba8e8d09fe78055a003f1dba066de22e9cf3d29af7235fb",
-            "extract_dir": "天若OCR开源版本地版"
+            "url": "https://gitee.com/wanglifree/tianruoocr-cl/releases/download/v1.3.5/tianruoocr-cl-v1.3.5.7z",
+            "hash": "e38f55670b5bcac44fd061262ec0a06b793527b2ecbcd88346e217888f1585fc"
         }
     },
     "shortcuts": [
@@ -19,10 +18,13 @@
     "persist": "Data",
     "checkver": {
         "url": "https://gitee.com/api/v5/repos/wanglifree/tianruoocr-cl/releases?page=1&per_page=20&direction=desc",
-        "regex": "版本\\s+V(?<ver>[\\d.]+)(?:.*?\\/attach_files\\/)(?<tag>\\d{6,})",
-        "replace": "${ver}"
+        "regex": "tianruoocr-cl-v([\\d.]+)\\.7z"
     },
     "autoupdate": {
-        "url": "https://gitee.com/wanglifree/tianruoocr-cl/attach_files/$matchTag/download#/dl.7z"
+        "architecture":{
+            "64bit":{
+                "url": "https://gitee.com/wanglifree/tianruoocr-cl/releases/download/v$version/tianruoocr-cl-v$version.7z"
+            }
+        }
     }
 }
