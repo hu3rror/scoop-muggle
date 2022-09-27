@@ -1,36 +1,23 @@
 {
     "homepage": "https://github.com/dream7180/foobox-cn",
-    "description": "CUI 整合 for foobar2000",
-    "version": "6.1.6.11.2",
+    "description": "Foobar2000 interface configuration based on CUI",
+    "version": "6.6.12",
     "license": {
         "identifier": "Freeware",
         "url": "https://www.foobar2000.org/license"
     },
-    "url": "https://github.com/dream7180/foobox-cn/releases/download/6.1.6.11.2/foobox_6.1.6.11.2.zip",
-    "hash": "989c87969722ef31274a84e5d6c32c1d632a93b353dff031b176678e91bd06d6",
-    "pre_install": [
-        "Expand-7zipArchive \"$dir\\*oobox*.exe\" \"$dir\"",
-        "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\uninstall*\", \"$dir\\*oobox*.exe\" -Force -Recurse"
-    ],
-    "persist": [
-        "configuration",
-        "library",
-        "playlists-v1.4",
-        "index-data",
-        "Lyrics",
-        "MusicArt"
-    ],
+    "url": "https://github.com/dream7180/foobox-cn/releases/download/6.6.12/foobox-6.6.12.7z",
+    "extract_dir": "foobar2000",
+    "hash": "6225d10bb4b0db7eaa67345446f99915765b245ee7ec5adff63985b431e9a403",
+    "persist": "profile",
     "shortcuts": [
         [
             "foobar2000.exe",
             "Foobox"
         ]
     ],
-    "checkver": {
-        "url": "https://github.com/dream7180/foobox-cn/releases/latest",
-        "regex": "/download/(?<tag>.*?)/foobox_(.*?).zip"
-    },
+    "checkver": "github",
     "autoupdate": {
-        "url": "https://github.com/dream7180/foobox-cn/releases/download/$matchTag/foobox_$version.zip"
+        "url": "https://github.com/dream7180/foobox-cn/releases/download/$version/foobox-$version.7z"
     }
 }
