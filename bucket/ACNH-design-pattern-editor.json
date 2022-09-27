@@ -21,7 +21,7 @@
     ],
     "checkver": {
         "url": "https://github.com/FluffyFishGames/ACNHDesignPatternEditor/releases",
-        "regex": "/download/([\\d.]+\\w+)/"
+        "regex": "Pattern\\sEditor\\s([\\d.]+\\w+)"
     },
     "autoupdate": {
         "architecture": {
