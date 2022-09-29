@@ -1,13 +1,13 @@
 {
-    "version": "1.0.0.4094",
+    "version": "1.0.0.4105",
     "description": "PDF工具箱，可以编辑书签、剪裁旋转页面、解除限制、提取或合并文档，探查文档结构，提取图片、转成图片等等",
     "homepage": "https://pdfpatcher.cnblogs.com/",
     "license": {
         "identifier": "AGPL-3.0-only|Freeware",
         "url": "https://github.com/wmjordan/PDFPatcher/blob/master/%E6%8E%88%E6%9D%83%E5%8D%8F%E8%AE%AE.txt"
     },
-    "url": "https://github.com/wmjordan/PDFPatcher/files/9423065/PDFPatcher.1.0.0.4094.7z.zip",
-    "hash": "8e7dfe8f116b4d6acbfdea11c7dd5188c1a561e246359cd3ab36d7c275c20399",
+    "url": "https://github.com/wmjordan/PDFPatcher/files/9673338/PDFPatcher.1.0.0.4105.7z.zip",
+    "hash": "1c570804b75145ba5dba942d01e82d3fca934b9848b3ff7452cdac433ae13d6f",
     "pre_install": "if (!(Test-Path \"$persist_dir\\AppConfig.json\")) { New-Item \"$dir\\AppConfig.json\" -ItemType \"file\" -Value \"{}\" | Out-Null }",
     "bin": "PDFPatcher.exe",
     "shortcuts": [
