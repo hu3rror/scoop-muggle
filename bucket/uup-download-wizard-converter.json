@@ -1,20 +1,20 @@
 {
     "homepage": "https://github.com/JRJSheep/UUP-Download-Wizard",
-    "version": "4.1",
+    "version": "4.2",
     "description": "羊牌 UUP 下载向导",
     "license": "MIT",
-    "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v4.1/UUPdownload_with_converter_v4.1.7z",
-    "hash": "9a1095d31e84fef7aaa9cb7c6838513a69ec9b836c1493a4c1b380b00e802474",
+    "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v4.2/UUPdownload_with_converter_v4.2.7z",
+    "hash": "cd9718bac807efd3aa5f903fc12fd544ef00915c6c4d42b2fd564144e4b7bd4c",
     "bin": [
         "uupdownload - app.cmd",
         "lot_size_files_clear_away.cmd"
     ],
     "checkver": {
-        "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/latest",
-        "regex": "/download/(?<tag>.*?)/UUPdownload_v(?<ver>[\\d.]+)\\.7z",
-        "replace": "${ver}"
+        "url": "https://api.github.com/repos/JRJSheep/UUP-Download-Wizard/tags",
+        "jsonpath": "$..name",
+        "regex": "v([\\d.]+)"
     },
     "autoupdate": {
-        "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/$matchTag/UUPdownload_with_converter_v$matchVer.7z"
+        "url": "https://github.com/JRJSheep/UUP-Download-Wizard/releases/download/v$version/UUPdownload_with_converter_v$version.7z"
     }
 }
