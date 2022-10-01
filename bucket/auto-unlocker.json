@@ -11,8 +11,9 @@
     },
     "persist": "backup",
     "checkver": {
-        "url": "https://github.com/paolo-projects/auto-unlocker/releases",
-        "regex": "/download/v([\\d.]+\\w?)"
+        "url": "https://api.github.com/repos/paolo-projects/auto-unlocker/tags",
+        "jsonpath": "$..name",
+        "regex": "v([\\d.a-z]+)"
     },
     "bin": "unlocker.exe",
     "shortcuts": [
