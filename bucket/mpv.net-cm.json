@@ -18,7 +18,7 @@
         ]
     ],
     "checkver": {
-        "github": "https://github.com/hooke007/mpv.net_CM",
+        "url": "https://api.github.com/repos/hooke007/mpv.net_CM/releases",
         "regex": "/releases/download/(?<tag>\\w+)/mpvnet-CM-(?<build>\\d{8})",
         "replace": "${tag}-${build}"
     },
