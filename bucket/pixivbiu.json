@@ -26,17 +26,17 @@
     ],
     "bin": "PixivBiu.exe",
     "checkver": {
-        "url": "https://github.com/txperl/PixivBiu/releases",
-        "regex": "PixivBiu_v(?<tag>(?<ver>[\\d.]+)(?<build>[a-z]?))_win",
-        "replace": "${ver}${build}"
+        "url": "https://api.github.com/repos/txperl/PixivBiu/tags",
+        "jsonpath": "$..name",
+        "regex": "v([\\d.a-z]+)"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/txperl/PixivBiu/releases/download/v$matchTag/PixivBiu_v$matchTag_win_x64.zip"
+                "url": "https://github.com/txperl/PixivBiu/releases/download/v$version/PixivBiu_v$version_win_x64.zip"
             },
             "32bit": {
-                "url": "https://github.com/txperl/PixivBiu/releases/download/v$matchTag/PixivBiu_v$matchTag_win_x86.zip"
+                "url": "https://github.com/txperl/PixivBiu/releases/download/v$version/PixivBiu_v$version_win_x86.zip"
             }
         }
     }
