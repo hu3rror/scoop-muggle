@@ -1,12 +1,12 @@
 {
     "homepage": "https://github.com/IrineSistiana/mosdns",
-    "version": "4.4.1",
+    "version": "4.4.2",
     "description": "A DNS forwarder",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/IrineSistiana/mosdns/releases/download/v4.4.1/mosdns-windows-amd64.zip",
-            "hash": "0178c5cdbda4eec538978bdd000acb10c5649954d6b7d81fc0ec4eaf52304e88"
+            "url": "https://github.com/IrineSistiana/mosdns/releases/download/v4.4.2/mosdns-windows-amd64.zip",
+            "hash": "dcf714e9864a1d7bb7b182c1560c9371632c07e8deb51fb2507a166db7a2c75e"
         }
     },
     "pre_install": [
