@@ -20,7 +20,7 @@
         ]
     ],
     "checkver": {
-        "url": "https://api.github.com/repos/logseq/logseq/releases",
+        "url": "https://api.github.com/repos/logseq/logseq/releases/tags/nightly",
         "regex": "Logseq-win-x64-(?<main>[\\d.]+)\\+nightly\\.(?<date>\\d{8})",
         "replace": "${main}-${date}"
     },
