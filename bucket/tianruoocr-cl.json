@@ -17,7 +17,7 @@
     ],
     "persist": "Data",
     "checkver": {
-        "url": "https://gitee.com/api/v5/repos/wanglifree/tianruoocr-cl/releases?page=1&per_page=20&direction=desc",
+        "url": "https://api.github.com/repos/wangfreexx/wangfreexx-tianruoocr-cl-paddle/releases/latest",
         "regex": "tianruoocr-cl-v([\\d.]+)\\.7z"
     },
     "autoupdate": {
