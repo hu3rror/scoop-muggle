@@ -7,7 +7,7 @@
         "url": "https://github.com/neovim/neovim/blob/master/LICENSE"
     },
     "suggest": {
-        "vcredist": "extras/vcredist2015"
+        "vcredist": "extras/vcredist2022"
     },
     "architecture": {
         "64bit": {
@@ -15,7 +15,7 @@
             "hash": "c52e0a93e8bd7e0192c3fe4552d8b0fb66fc8e08b6949e92340cccc4fa3a9bd0"
         }
     },
-    "extract_dir": "Neovim",
+    "extract_dir": "nvim-win64",
     "bin": [
         [
             "bin\\nvim.exe",
@@ -41,8 +41,7 @@
         ]
     ],
     "checkver": {
-        "github": "https://github.com/neovim/neovim",
-        "regex": "NVIM v([\\d.]+)"
+        "github": "https://github.com/neovim/neovim"
     },
     "autoupdate": {
         "architecture": {
