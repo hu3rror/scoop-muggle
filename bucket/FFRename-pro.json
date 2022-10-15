@@ -1,13 +1,12 @@
 {
-    "version": "4.0",
-    "description": "菲菲更名宝贝之得意非凡，一款优秀的批量更名软件和批量文件处理工具",
+    "version": "5.0.9.21",
+    "description": "Batch renamer and batch file processor utility",
     "homepage": "http://www.ffhome.com/works/1406.html",
     "license": "Freeware",
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/910%20win/FFRenamePro_v4.0.7z#/dl.7z_",
-            "hash": "81223ddb12c88383a0546c58269e70aba19ec3fb3a230c62d14987b61d36e499",
-            "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'FFRenamePro_x64' -Removal -Switches '-pmuggle'"
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/910%20win/FFRenamePro_x64_5.0.9.21.zip",
+            "hash": "b5eaff6c1978288e3d1d9e96e4ce9cba539f39fce9991cd48a28bd2f6298404a"
         }
     },
     "shortcuts": [
@@ -16,5 +15,9 @@
             "FF Rename Pro"
         ]
     ],
-    "notes": "版权所有: FFHOME.COM"
+    "notes": "Copyright: FFHOME.COM",
+    "checkver":{
+        "url": "http://www.ffhome.com/works/1406.html",
+        "regex": "\\s+([\\d.]+)\\s+for Windows"
+    }
 }
