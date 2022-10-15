@@ -1,6 +1,6 @@
 {
     "version": "1.0.0.4106",
-    "description": "PDF工具箱，可以编辑书签、剪裁旋转页面、解除限制、提取或合并文档，探查文档结构，提取图片、转成图片等等",
+    "description": "Edit PDF bookmarks, cut and rotate pages, lift restrictions, extract or merge PDFs, explore the structure of the PDFs, extract images from PDFs, convert PDFs to images etc.",
     "homepage": "https://pdfpatcher.cnblogs.com/",
     "license": {
         "identifier": "AGPL-3.0-only|Freeware",
@@ -19,9 +19,10 @@
     "persist": "AppConfig.json",
     "checkver": {
         "url": "https://github.com/wmjordan/PDFPatcher/issues/2",
-        "regex": "(?<path>https://github.com/wmjordan/PDFPatcher/files/[\\d]+/PDFPatcher\\.([\\d.]+)\\.7z\\.zip)"
+        "regex": "files/([\\d]+)/PDFPatcher\\.([\\d.]+)\\.7z",
+        "replace": "$2"
     },
     "autoupdate": {
-        "url": "$matchPath"
+        "url": "https://github.com/wmjordan/PDFPatcher/files/$match1/PDFPatcher.$match2.7z.zip"
     }
 }
