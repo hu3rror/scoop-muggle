@@ -1,11 +1,11 @@
 {
     "version": "1.0.1",
-    "description": "简悦·同步助手为简悦高级账户提供了增强型的功能",
+    "description": "Providing enhanced features for SimpRead",
     "homepage": "https://simpread.pro/pro.html",
     "license": "Unknown",
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/910%20win/SimpRead_Synchelper_x64_v1.0.1.7z#/dl.7z_",
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/910%20win/SimpRead_Synchelper_x64_v1.1.2.7z#/dl.7z_",
             "hash": "e93555e9cd8bb5a493e4c54d7b879b641baf50d26b8256fbfeb2833bb8c36d47",
             "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'SimpRead_Synchelper_x64' -Removal -Switches '-pmuggle'"
         },
@@ -15,11 +15,20 @@
             "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'SimpRead_Synchelper_x86' -Removal -Switches '-pmuggle'"
         }
     },
+    "suggest": {
+        "Export": [
+            "pandoc"
+        ]
+    },
     "shortcuts": [
         [
             "简悦 · 同步助手.exe",
             "简悦 · 同步助手"
         ]
     ],
-    "notes": "The sync-helper desktop app requires the SimpRead (https://simpread.pro) extension to be installed in your Chromium Based Browsers."
+    "notes": "The sync-helper desktop app requires the SimpRead (https://simpread.pro) extension to be installed in your Chromium Based Browsers.",
+    "checkver":{
+        "url": "https://api.github.com/repos/OverflowCat/neko-scoop-bucket/tags",
+        "regex": "simpread-([\\d.]+)"
+    }
 }
