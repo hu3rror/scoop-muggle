@@ -1,6 +1,6 @@
 {
     "version": "6032-20221014",
-    "description": "mpv.net_CM 是基于 mpv.net 上游的中文分支模组",
+    "description": "Chinese translation and mods for mpv.net",
     "homepage": "https://bbs.acgrip.com/thread-7798-1-1.html",
     "license": "GPL-2.0-only",
     "architecture": {
