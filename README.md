@@ -10,14 +10,14 @@ scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
 
 Find the software lis in this bucket: [Click here](bucket) / 本 Bucket 包含的软件清单: [点击查看](bucket)
 
----
-
 ## What & How to
 
 ### What is `Scoop`?
 Please visit the [official website](https://scoop.sh/) and it included the installation tutorial.
 
-### [Example] How to install `Logseq` or `Logseq Nightly`?
+### Example
+
+#### How to install `Logseq` or `Logseq Nightly`?
 1. Once Scoop is installed, executing the following command in Powershell and it would add this Scoop Bucket into your system:
 
     ``` pwsh
@@ -35,7 +35,7 @@ Please visit the [official website](https://scoop.sh/) and it included the insta
     scoop install muggle/logseq-nightly
     ```
 
-### [Example] How to update `Logseq`?
+#### How to update `Logseq`?
 1. Execute the following command in `Powershell`:
 
     ``` pwsh
