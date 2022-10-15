@@ -1,7 +1,7 @@
 {
     "version": "2.5.3a",
     "homepage": "https://biu.tls.moe",
-    "description": "一款 Pixiv 搜索辅助工具，可免会员按收藏数排序、免代理浏览以及多种图片下载",
+    "description": "A Pixiv search assistant with member-free sorting by favorites, proxy-free browsing, and multiple image downloads",
     "license": "MIT",
     "architecture": {
         "64bit": {
