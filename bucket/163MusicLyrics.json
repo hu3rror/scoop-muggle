@@ -12,7 +12,7 @@
     "shortcuts": [
         [
             "MusicLyricApp.exe",
-            "云音乐歌词提取"
+            "Music Lyric"
         ]
     ],
     "checkver": "github",
