@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/910%20win/SimpRead_Synchelper_x64_v1.1.2.7z#/dl.7z_",
-            "hash": "7cd18f31f6f7869bf0fed0a707349a90c87b5166f3fe71d167d2d0638ae03a58",
+            "hash": "a05e09b59822588aff0822fa863408eb3b9fc771b60da8e39a4cdb23d517e93e",
             "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'SimpRead_Synchelper_x64' -Removal -Switches '-pmuggle'"
         },
         "32bit": {
