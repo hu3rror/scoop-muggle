@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/910%20win/SimpRead_Synchelper_x64_v1.1.2.7z#/dl.7z_",
-            "hash": "e93555e9cd8bb5a493e4c54d7b879b641baf50d26b8256fbfeb2833bb8c36d47",
+            "hash": "7cd18f31f6f7869bf0fed0a707349a90c87b5166f3fe71d167d2d0638ae03a58",
             "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'SimpRead_Synchelper_x64' -Removal -Switches '-pmuggle'"
         },
         "32bit": {
@@ -16,9 +16,7 @@
         }
     },
     "suggest": {
-        "Export": [
-            "pandoc"
-        ]
+        "Export": "pandoc"
     },
     "shortcuts": [
         [
@@ -27,7 +25,7 @@
         ]
     ],
     "notes": "The sync-helper desktop app requires the SimpRead (https://simpread.pro) extension to be installed in your Chromium Based Browsers.",
-    "checkver":{
+    "checkver": {
         "url": "https://api.github.com/repos/OverflowCat/neko-scoop-bucket/tags",
         "regex": "simpread-([\\d.]+)"
     }
