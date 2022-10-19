@@ -1,5 +1,5 @@
 {
-    "version": "0.63.0",
+    "version": "0.64.0",
     "description": "AIO Repack for latest Microsoft Visual C++ Redistributable Runtimes.",
     "homepage": "https://github.com/abbodi1406/vcredist",
     "license": {
@@ -7,8 +7,8 @@
         "url": "https://github.com/abbodi1406/vcredist/blob/master/LICENSE"
     },
     "notes": "You can now remove vcredist-aio installers with 'scoop uninstall vcredist-aio'",
-    "url": "https://github.com/abbodi1406/vcredist/releases/download/v0.63.0/VisualCppRedist_AIO_x86_x64_63.zip",
-    "hash": "b17386cb101b4a513973c0b2cfb6e1f1a0c11f30c7f20ae13fd18c006249009a",
+    "url": "https://github.com/abbodi1406/vcredist/releases/download/v0.64.0/VisualCppRedist_AIO_x86_x64_64.zip",
+    "hash": "365628a5d67cb99fc48f7f823d57bb3a812adc74584d798582d70f69aeffd7f1",
     "post_install": "Start-Process -FilePath \"$dir\\VisualCppRedist_AIO_x86_x64.exe\" -ArgumentList '/y' -Verb RunAs",
     "checkver": "github",
     "autoupdate": {
