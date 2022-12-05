@@ -15,8 +15,8 @@
             "extract_dir": "32bit"
         }
     },
-    "bin": ["ProcessHacker.exe", "peview.exe"],
-    "shortcuts": [["ProcessHacker.exe", "Process Hacker"]],
+    "bin": ["SystemInformer.exe", "peview.exe"],
+    "shortcuts": [["SystemInformer.exe", "Process Hacker"]],
     "checkver": {
         "url": "https://processhacker.sourceforge.io/nightly.php",
         "regex": "Build: ([\\d.]+)"
