@@ -25,7 +25,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/Him188/animation-garden-desktop/releases/download/v$version/AnimationGarden-$matchHead-windows-amd64.zip"
+                "url": "https://github.com/Him188/animation-garden-desktop/releases/download/v$version/AnimationGarden-$version-windows-amd64.zip"
             }
         }
     }
