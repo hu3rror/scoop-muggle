@@ -7,7 +7,7 @@
         "64bit": {
             "url": "https://github.com/Him188/animation-garden-desktop/releases/download/v2.0.0-beta04/AnimationGarden-2.0.0-beta04-windows-amd64.zip",
             "hash": "b84cae1fe9acbcb7ee875590b672af4a939d76ad721ae2a2119983b29f1adb20",
-            "extract_dir": "app/AnimationGarden"
+            "extract_dir": "AnimationGarden"
         }
     },
     "bin": "AnimationGarden.exe",
