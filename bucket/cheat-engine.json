@@ -1,5 +1,5 @@
 {
-    "version": "7.4",
+    "version": "7.5",
     "description": "A development environment focused on modding",
     "homepage": "http://cheatengine.org/",
     "license": {
@@ -8,14 +8,14 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/100%20win/CheatEngine_v7.4.7z#/dl.7z_",
-            "hash": "82ddc257e98c05fa8d4946def6e5e2851dd7332487222cf434c3408355bbc4b3",
-            "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'Cheat Engine 7.4' -Removal -Switches '-pmuggle'"
+            "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/100%20win/CheatEngine_v7.5.7z#/dl.7z_",
+            "hash": "a1f6b60eaf96556b7f070015172f74ae87ee54afd6eb66c035ce534caa5b892b",
+            "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'Cheat Engine 7.5' -Removal -Switches '-pmuggle'"
         },
         "32bit": {
             "url": "https://onedrive-vercel-index-liard.vercel.app/api/raw/?path=/100%20win/CheatEngine_v7.4.7z#/dl.7z_",
-            "hash": "82ddc257e98c05fa8d4946def6e5e2851dd7332487222cf434c3408355bbc4b3",
-            "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'Cheat Engine 7.4' -Removal -Switches '-pmuggle'"
+            "hash": "a1f6b60eaf96556b7f070015172f74ae87ee54afd6eb66c035ce534caa5b892b",
+            "pre_install": "Expand-7zipArchive -Path \"$dir\\dl.7z_\" -DestinationPath \"$dir\" -ExtractDir 'Cheat Engine 7.5' -Removal -Switches '-pmuggle'"
         }
     },
     "shortcuts": [
