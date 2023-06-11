@@ -9,31 +9,21 @@
     "architecture": {
         "64bit": {
             "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/2.3/WonderPen_win_installer_x64_2.3.3(6882).exe#/dl.7z",
-            "hash": "80700eb6065107f215ac5effbfee85c3fe340bca3c335d80bf67322402d63470",
-            "pre_install": [
-                "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\" -Removal",
-                "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\Uninstall*\" -Force -Recurse"
-            ]
+            "hash": "80700eb6065107f215ac5effbfee85c3fe340bca3c335d80bf67322402d63470"
         },
         "32bit": {
             "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/2.3/WonderPen_win_installer_ia32_2.3.3(6882).exe#/dl.7z",
-            "hash": "16587be0cd5c1cc5fa90de165c3616bff510ed12e0b463d4a9f583dc0a4f3e2f",
-            "pre_install": [
-                "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-32.7z\" \"$dir\" -Removal",
-                "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\Uninstall*\" -Force -Recurse"
-            ]
+            "hash": "16587be0cd5c1cc5fa90de165c3616bff510ed12e0b463d4a9f583dc0a4f3e2f"
         },
         "arm64": {
             "url": "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/2.3/WonderPen_win_installer_arm64_2.3.3(6882).exe#/dl.7z",
-            "hash": "716cf09d29d48347e1e3fae4419dceb8ccb2a806df91cbc492f5d2a64e4651bd",
-            "pre_install": [
-                "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-arm64.7z\" \"$dir\" -Removal",
-                "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\Uninstall*\" -Force -Recurse"
-            ]
+            "hash": "716cf09d29d48347e1e3fae4419dceb8ccb2a806df91cbc492f5d2a64e4651bd"
         }
     },
     "installer": {
         "script": [
+            "Expand-7ZipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\" -Removal",
+            "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\Uninstall*\" -Force -Recurse",
             "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name muggle) scripts/DoradoUtils.psm1)",
             "Mount-ExternalRuntimeData -Source \"$persist_dir\\WonderPen\" -Target \"$env:APPDATA\\WonderPen\"",
             "Remove-Module -Name DoradoUtils"
