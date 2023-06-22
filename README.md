@@ -12,7 +12,7 @@
 | [DocBox](https://www.daokeyuedu.com/) | A reader that supports more than 30 formats of documents such as PDF, XDF, XPS, EPUB, MOBI, etc., with the advantages of small size, low resource consumption, fast program startup and document opening speed. |  |
 | [MiSans](https://web.vip.miui.com/page/info/mio/mio/detail?postId=33935854) | Xiaomi produces a wide range of OpenType functions to select different forms of characters according to specific needs, for free commercial use by the whole community. |  |
 | [animation-garden](https://github.com/Him188/animation-garden) | A beautiful and useful multi-platform application for dmhy.org(动漫花园) |  |
-| [chatbox](https://github.com/Bin-Huang/chatbox) | A desktop app for GPT/LLM that supports Windows, Mac, Linux & Web Online |  |
+| [chatbox](https://github.com/Bin-Huang/chatbox) | A desktop app for GPT/LLM that supports Windows, Mac, Linux & Web Online | 👍 |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | A well-designed cross-platform ChatGPT UI | 👍 |
 | [dota2_realblood](https://www.dota2hd.com/) | Remove petroleum blood from Dota 2's Chinese server |  |
 | [emby_carnival](https://t.me/EmbyNoisyX) | An Emby client with some patches | 👍 |
