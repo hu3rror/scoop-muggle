@@ -42,8 +42,13 @@ scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
 
 📦 Install apps from this bucket using the following command:
 
-``` pwsh
+```pwsh
 scoop install muggle/<app_name>
+```
+
+For example:
+```pwsh
+scoop install muggle/mpv-lazy
 ```
 
 ### 2. How to update the apps?
