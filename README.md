@@ -2,7 +2,9 @@
 
 🪣 A bucket for [Scoop](https://scoop.sh/) with lots of cool and unique applications 🌟
 
-## Some unique, featured applications
+## Some unique, featured applications 💕 
+
+> The following manifests are only part of the Bucket!
 
 | manifest | Description | Personal recommendation |
 | --- | --- |:---:|
