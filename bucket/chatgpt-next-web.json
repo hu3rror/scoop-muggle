@@ -16,7 +16,7 @@
     "shortcuts": [
         [
             "chatgpt-next-web.exe",
-            "ChatGPT-Next-Web"
+            "ChatGPT Next Web"
         ]
     ],
     "checkver": "github",
