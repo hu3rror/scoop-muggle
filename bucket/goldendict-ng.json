@@ -24,11 +24,12 @@
     ],
     "checkver": {
         "url": "https://api.github.com/repos/xiaoyifang/goldendict-ng/releases/latest",
-        "jsonpath": "$..tag_name",
-        "regex": "v([\\d.]+)(-[\\w.]+)?",
+        "jsonpath": "$...browser_download_url",
+        "regex": "download/v([\\d.]+)(-[\\w.]+)?/([\\d.]+)-GoldenDict-ng-Installer\\.exe",
+        "reverse": true,
         "replace": "$1"
     },
     "autoupdate": {
-        "url": "https://github.com/xiaoyifang/goldendict-ng/releases/download/v$match1$match2/6.4.3-GoldenDict-ng-Installer.exe##/dl.7z"
+        "url": "https://github.com/xiaoyifang/goldendict-ng/releases/download/v$match1$match2/$match3-GoldenDict-ng-Installer.exe##/dl.7z"
     }
 }
