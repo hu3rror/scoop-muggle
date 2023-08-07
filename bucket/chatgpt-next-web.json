@@ -21,6 +21,6 @@
     ],
     "checkver": "github",
     "autoupdate": {
-        "url": "https://github.com/Yidadaa/ChatGPT-Next-Web/releases/download/v$version/chatgpt-next-web_$version_x64_en-US.msi"
+        "url": "https://github.com/Yidadaa/ChatGPT-Next-Web/releases/download/v$version/ChatGPT.Next.Web_$version_x64_en-US.msi"
     }
 }
