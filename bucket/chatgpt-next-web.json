@@ -12,10 +12,10 @@
             "hash": "d24969e987f7717112acfe24e9243b91c23067fe2f1f05cc099cd7fe80c025da"
         }
     },
-    "extract_dir": "PFiles\\chatgpt-next-web",
+    "extract_dir": "PFiles\\ChatGPT Next Web",
     "shortcuts": [
         [
-            "chatgpt-next-web.exe",
+            "ChatGPT Next Web.exe",
             "ChatGPT Next Web"
         ]
     ],
