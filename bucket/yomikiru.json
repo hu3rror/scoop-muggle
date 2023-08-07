@@ -2,15 +2,15 @@
     "homepage": "https://github.com/mienaiyami/yomikiru",
     "description": "Desktop app to read manga",
     "license": "Unlicense",
-    "version": "2.15.4",
+    "version": "2.16.2",
     "architecture": {
         "64bit": {
             "url": "https://github.com/mienaiyami/yomikiru/releases/download/v2.16.2/Yomikiru-win32-v2.16.2-Portable-x64.zip",
-            "hash": "a73ddddb09c2fe9c49c4936fae6abb04d6370c564a862d38ae9523918539773b"
+            "hash": "7fd94595cc1b6b34e4339853aaffa16f29b136fbf2829fb0b2dfae4acdf24d2f"
         },
         "32bit": {
             "url": "https://github.com/mienaiyami/yomikiru/releases/download/v2.16.2/Yomikiru-win32-v2.16.2-Portable.zip",
-            "hash": "a73ddddb09c2fe9c49c4936fae6abb04d6370c564a862d38ae9523918539773b"
+            "hash": "20fa1c3d11d5aaa8a9c7080a31fe575ad0c1ef5d95a9bdf6b3821512fd3d79ce"
         }
     },
     "shortcuts": [
@@ -24,7 +24,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url":  "https://github.com/mienaiyami/yomikiru/releases/download/v$version/Yomikiru-win32-v$version-Portable-x64.zip"
+                "url": "https://github.com/mienaiyami/yomikiru/releases/download/v$version/Yomikiru-win32-v$version-Portable-x64.zip"
             },
             "32bit": {
                 "url": "https://github.com/mienaiyami/yomikiru/releases/download/v$version/Yomikiru-win32-v$version-Portable.zip"
