@@ -3,8 +3,8 @@
     "description": "A feature-rich dictionary lookup program",
     "homepage": "https://github.com/xiaoyifang/goldendict-ng",
     "license": "GPL-3.0-only",
-    "url": "https://github.com/xiaoyifang/goldendict-ng/releases/download/v23.09.08-WhiteDew.61b1e0a9/5.15.2-GoldenDict-ng-Installer.exe##/dl.7z",
-    "hash": "074461030df5e5013750a6ffed12edf4c1ff971979cc3c38e22a1df761b65bb8",
+    "url": "https://github.com/xiaoyifang/goldendict-ng/releases/download/v23.09.08-WhiteDew.216505c9/6.5.2-GoldenDict-ng-Installer.exe##/dl.7z",
+    "hash": "422c9a5c5c7a787a5d0b67443ab70b377b8f692eb4005aa8b0e6c215ad7f224a",
     "pre_install": "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\[LICENSE].txt\", \"$dir\\*.nsi\", \"$dir\\uninstall.exe\" -Recurse",
     "bin": [
         [
