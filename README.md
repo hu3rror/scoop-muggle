@@ -10,8 +10,8 @@
 | --- | --- |:---:|
 | [ACNH-design-pattern-editor](https://github.com/FluffyFishGames/ACNHDesignPatternEditor) | An editor for Animal Crossing: New Horizons design patterns. |  |
 | [animation-garden](https://github.com/Him188/animation-garden) | A beautiful and useful multi-platform application for dmhy.org(动漫花园) |  |
-| [calibre-cjk](https://github.com/hu3rror/calibre-cjk) | Calibre *portable* version with CJK language path support, Thanks to [Cirn09](https://github.com/Cirn09/calibre-do-not-translate-my-path) | 👍 |
-| [calibre-normal-cjk](https://github.com/hu3rror/calibre-cjk-plugin) | Calibre *installer* version with CJK language path support, Thanks to [Cirn09](https://github.com/Cirn09/calibre-do-not-translate-my-path) | 👍 |
+| [calibre-cjk](https://calibre-ebook.com) | Calibre *portable* version with CJK language path support, Thanks to [Cirn09](https://github.com/Cirn09/calibre-do-not-translate-my-path) | 👍 |
+| [calibre-normal-cjk](https://calibre-ebook.com) | Calibre *installer* version with CJK language path support, Thanks to [Cirn09](https://github.com/Cirn09/calibre-do-not-translate-my-path) | 👍 |
 | [chatbox](https://github.com/Bin-Huang/chatbox) | A desktop app for GPT/LLM that supports Windows, Mac, Linux & Web Online | 👍 |
 | [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | A well-designed cross-platform ChatGPT UI | 👍 |
 | [DocBox](https://www.daokeyuedu.com/) | A reader that supports more than 30 formats of documents such as PDF, XDF, XPS, EPUB, MOBI, etc., with the advantages of small size, low resource consumption, fast program startup and document opening speed. |  |
