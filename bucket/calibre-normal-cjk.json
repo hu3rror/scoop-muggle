@@ -6,7 +6,7 @@
     "suggest":{
         "calibre-normal-cjk-patch": "muggle/calibre-normal-cjk-patch"
     },
-    "notes": "This package must work with 'muggle/calibre-normal-cjk-patch'",
+    "notes": "This package must be worked with 'muggle/calibre-normal-cjk-patch'",
     "architecture": {
         "64bit": {
             "url": "https://download.calibre-ebook.com/6.28.0/calibre-64bit-6.28.0.msi",

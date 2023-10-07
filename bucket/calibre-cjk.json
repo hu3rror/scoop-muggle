@@ -6,7 +6,7 @@
     "suggest":{
         "calibre-cjk-patch": "muggle/calibre-cjk-patch"
     },
-    "notes": "This package must work with 'muggle/calibre-cjk-patch'",
+    "notes": "This package must be worked with 'muggle/calibre-cjk-patch'",
     "architecture": {
         "64bit": {
             "url": "https://download.calibre-ebook.com/6.28.0/calibre-portable-installer-6.28.0.exe",
