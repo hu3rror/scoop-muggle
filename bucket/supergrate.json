@@ -5,7 +5,7 @@
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/belowaverage-org/SuperGrate/releases/download/1.3.5.1/Release.zip",
+            "url": "https://github.com/belowaverage-org/SuperGrate/releases/download/1.4.0.0/SuperGrate-x64.zip",
             "hash": "a6333671265a209c9f581ce879f8f0c391d473e95920fec8ce71eddfff845ed4",
             "extract_dir": "Release",
             "pre_install": [
@@ -33,10 +33,10 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/belowaverage-org/SuperGrate/releases/download/$version/Release.zip"
+                "url": "https://github.com/belowaverage-org/SuperGrate/releases/download/$version/SuperGrate-x64.zip"
             },
             "32bit": {
-                "url": "https://github.com/belowaverage-org/SuperGrate/releases/download/$version/Release.zip"
+                "url": "https://github.com/belowaverage-org/SuperGrate/releases/download/$version/SuperGrate-x86.zip"
             }
         }
     }
