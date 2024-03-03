@@ -21,8 +21,16 @@
                     "qaac"
                 ],
                 [
+                    "qaac64.exe",
+                    "qaac64"
+                ],
+                [
                     "refalac64.exe",
                     "refalac"
+                ],
+                [
+                    "refalac64.exe",
+                    "refalac64"
                 ]
             ]
         },
