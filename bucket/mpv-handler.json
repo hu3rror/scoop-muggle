@@ -1,12 +1,12 @@
 {
-    "version": "0.3.6",
+    "version": "0.3.8",
     "description": "Play videos and songs on the website with mpv player without any background service",
     "homepage": "https://github.com/akiirui/mpv-handler",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/akiirui/mpv-handler/releases/download/v0.3.6/mpv-handler-windows-amd64.zip",
-            "hash": "sha512:944fb6fc9d4cd0552b61b4603079b125081e735894813122bf401e7bd013b1ce0d34cfc6f0dbcab5b85a1c92355d4f0347c05b7d63e391fc1d03021f7434e17b"
+            "url": "https://github.com/akiirui/mpv-handler/releases/download/v0.3.8/mpv-handler-windows-amd64.zip",
+            "hash": "sha512:08058f0e3ff71640c26d0fbd20bfabdd50705193efa7f64aba5e2da5fb24abee0eee4a95d1c7cf321cbe2338de94ce3341a3a09cd81600e781966d4f582f253d"
         }
     },
     "bin": "mpv-handler.exe",
