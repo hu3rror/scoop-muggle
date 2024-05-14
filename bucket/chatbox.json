@@ -1,12 +1,12 @@
 {
-    "version": "1.3.8",
+    "version": "1.3.9",
     "description": "A desktop app for GPT/LLM that supports Windows, Mac, Linux & Web Online",
     "homepage": "https://github.com/Bin-Huang/chatbox",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Bin-Huang/chatbox/releases/download/v1.3.8/Chatbox-1.3.8-Setup.exe#/dl.7z",
-            "hash": "sha512:098f649200cdd2dae18c797f2556e45733cf528ae8cc7eb4575cd05a58d95b76571b9e679a5e686423aa9426a44100b609fb1cb033f69736453da7c8c2d3bdeb"
+            "url": "https://github.com/Bin-Huang/chatbox/releases/download/v1.3.9/Chatbox-1.3.9-Setup.exe#/dl.7z",
+            "hash": "sha512:00d0f5da05f7a0da96bc56378af66a5eb80bc3858e2ebdbf3b826668d5526b4c5837014062c0f50d265e3a685826ac24dc2d82a14412bd904bf908e96790e14d"
         }
     },
     "pre_install": [
