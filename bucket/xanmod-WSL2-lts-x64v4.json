@@ -1,6 +1,5 @@
 {
     "homepage": "https://github.com/Locietta/xanmod-kernel-WSL2",
-    "description": "Xanmod Kernel for WSL2.",
     "license": "GPL-2.0",
     "extract_dir": "",
     "bin": "",
@@ -12,8 +11,8 @@
         "$ini = Add-Type -memberDefinition @\"",
         "[DllImport(\"Kernel32\")]",
         "public static extern long WritePrivateProfileString (string section, string key, string val, string filePath);",
-        "\"@ -passthru -name CustomWSL2ProfileInstall -UsingNamespace System.Text",
-        "$kernel_path=\"$dir\\bzImage-x64v3\" -replace \"\\\\\", \"\\\\\" # double all back-slashess",
+        "[DllImport(\"Kernel32\")]",
+        "$kernel_path=\"$dir\\bzImage-x64v4\" -replace \"\\\\\", \"\\\\\" # double all back-slashess",
         "$null = $ini::WritePrivateProfileString(\"wsl2\", \"kernel\", $kernel_path, \"$env:USERPROFILE\\.wslconfig\")"
     ],
     "post_uninstall": [
@@ -26,21 +25,21 @@
         "\"@ -passthru -name CustomWSL2ProfileUninstall -UsingNamespace System.Text",
         "$null = $ini::WritePrivateProfileString(\"wsl2\", \"kernel\", $null, \"$env:USERPROFILE\\.wslconfig\")"
     ],
-    "version": "6.8.10-1.1",
-    "url": "https://github.com/Locietta/xanmod-kernel-WSL2/releases/download/6.8.10-locietta-WSL2-xanmod1.1/bzImage-x64v3",
-    "hash": "be6f5d269e6f1bafdb2845382985135f105df8494c8217336fa5f1a9637487ac",
+    "version": "6.6.31-1.2",
+    "url": "https://github.com/Locietta/xanmod-kernel-WSL2/releases/download/6.6.31-locietta-WSL2-xanmod1.2-lts/bzImage-x64v4",
+    "hash": "9b28b32d31ca02473073ca951cc6fb637a0e42335b17e3c44c8df440c1f00e94",
     "checkver": {
         "script": [
-            "$LATEST = ((curl.exe -sL -H \"Authorization: Bearer $(Get-GitHubToken)\" https://api.github.com/repos/Locietta/xanmod-kernel-WSL2/tags?per_page=60 | ConvertFrom-Json).name | Select-String 'lts' -NotMatch)[0]",
+            "$LATEST = ((curl.exe -sL -H \"Authorization: Bearer $(Get-GitHubToken)\" https://api.github.com/repos/Locietta/xanmod-kernel-WSL2/tags?per_page=60 | ConvertFrom-Json).name | Select-String 'lts')[0]",
             "$LATEST"
         ],
         "regex": "(?<main>[\\d.]+)-locietta-WSL2-xanmod(?<xanmod>[\\d.]+)",
         "replace": "${1}-${2}"
     },
     "autoupdate": {
-        "url": "https://github.com/Locietta/xanmod-kernel-WSL2/releases/download/$matchMain-locietta-WSL2-xanmod$matchXanmod/bzImage-x64v3",
+        "url": "https://github.com/Locietta/xanmod-kernel-WSL2/releases/download/$matchMain-locietta-WSL2-xanmod$matchXanmod-lts/bzImage-x64v4",
         "hash": {
-            "url": "https://github.com/Locietta/xanmod-kernel-WSL2/releases/download/$matchMain-locietta-WSL2-xanmod$matchXanmod/bzImage-x64v3.sha256"
+            "url": "https://github.com/Locietta/xanmod-kernel-WSL2/releases/download/$matchMain-locietta-WSL2-xanmod$matchXanmod-lts/bzImage-x64v4.sha256"
         }
     }
 }
