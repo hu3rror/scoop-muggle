@@ -1,5 +1,5 @@
 {
-    "version": "12.10.11",
+    "version": "12.13.2.3",
     "description": "Use qaac without installing iTunes",
     "homepage": "https://github.com/AnimMouse/QTFiles",
     "license": "MPL-2.0",
@@ -7,12 +7,12 @@
     "architecture": {
         "64bit": {
             "url": [
-                "https://github.com/AnimMouse/QTFiles/releases/download/v12.10.11/QTfiles64.7z",
-                "https://github.com/AnimMouse/QTFiles/releases/download/v12.10.11/QTfiles64-msvc.7z"
+                "https://github.com/hu3rror/QTFiles/releases/download/v12.13.2.3/QTfiles64.7z",
+                "https://github.com/hu3rror/QTFiles/releases/download/v12.13.2.3/QTfiles64-msvc.7z"
             ],
             "hash": [
-                "32fcd058936410f7eabd3b55a8931bce5f45bb7892d6a2c65387820daca52f58",
-                "740977b8bcd259fe8e92d3e5c2585337f5ad2c2641f94bbda033bf9c8e8b6cdd"
+                "f9923f313cf6d68be140e7cf7e1b5b2331f717d2c70bb146b6e9e314680f96ab",
+                "3e07a9202232823ddb9d7516adf8c44abbc0271b37f29ace2983d744fca33d6a"
             ],
             "installer": {
                 "script": [
@@ -26,12 +26,12 @@
         },
         "32bit": {
             "url": [
-                "https://github.com/AnimMouse/QTFiles/releases/download/v12.10.11/QTfiles.7z",
-                "https://github.com/AnimMouse/QTFiles/releases/download/v12.10.11/QTfiles-msvc.7z"
+                "https://github.com/hu3rror/QTFiles/releases/download/v12.13.2.3/QTfiles.7z",
+                "https://github.com/hu3rror/QTFiles/releases/download/v12.13.2.3/QTfiles-msvc.7z"
             ],
             "hash": [
-                "c6c582fe1af4e0c2b1eb7c141ad929a81f14d123aedd3b16df8226c104fb3028",
-                "ac73af12e56b054c09e4aa45565116abc84725cc54ed3c2e05bd3fcaf8dc8358"
+                "0de24401ec922eac1f9e1e7123b5d088963ebd7acf727da1c1edb7296f21ccfb",
+                "064747717969db8358a23563a7688c27342d6160c40162adcbe63f2835ef602f"
             ],
             "installer": {
                 "script": [
@@ -52,19 +52,21 @@
             "}"
         ]
     },
-    "checkver": "github",
+    "checkver": {
+        "github": "https://github.com/hu3rror/QTFiles"
+    },
     "autoupdate": {
         "architecture": {
             "64bit": {
                 "url": [
-                    "https://github.com/AnimMouse/QTFiles/releases/download/v$version/QTfiles64.7z",
-                    "https://github.com/AnimMouse/QTFiles/releases/download/v$version/QTfiles64-msvc.7z"
+                    "https://github.com/hu3rror/QTFiles/releases/download/v$version/QTfiles64.7z",
+                    "https://github.com/hu3rror/QTFiles/releases/download/v$version/QTfiles64-msvc.7z"
                 ]
             },
             "32bit": {
                 "url": [
-                    "https://github.com/AnimMouse/QTFiles/releases/download/v$version/QTfiles.7z",
-                    "https://github.com/AnimMouse/QTFiles/releases/download/v$version/QTfiles-msvc.7z"
+                    "https://github.com/hu3rror/QTFiles/releases/download/v$version/QTfiles.7z",
+                    "https://github.com/hu3rror/QTFiles/releases/download/v$version/QTfiles-msvc.7z"
                 ]
             }
         }
