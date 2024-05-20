@@ -29,7 +29,7 @@
     "persist": "SystemInformer.exe.settings.xml",
     "checkver": {
         "url": "https://api.github.com/repos/winsiderss/si-builds/releases",
-        "jsonpath": "$.name",
+        "jsonpath": "$..name",
         "regex": "([\\d.]+)"
     },
     "autoupdate": {
