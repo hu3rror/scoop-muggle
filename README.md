@@ -8,12 +8,10 @@
 
 | Manifest | Description | Recommendation |
 | --- | --- | --- |
-| [ACNH-design-pattern-editor](https://github.com/FluffyFishGames/ACNHDesignPatternEditor) | Editor for Animal Crossing: New Horizons design patterns. | |
-| [animation-garden](https://github.com/Him188/animation-garden) | Multi-platform app for dmhy.org (Anime Garden). | |
 | [calibre-cjk](https://calibre-ebook.com) | Portable Calibre version with CJK language path support. | 👍 |
 | [calibre-normal-cjk](https://calibre-ebook.com) | Installer Calibre version with CJK language path support. | 👍 |
 | [chatbox](https://github.com/Bin-Huang/chatbox) | Desktop app for GPT/LLM that supports Windows, Mac, Linux & Web. | 👍 |
-| [chatgpt-next-web](https://github.com/Yidadaa/ChatGPT-Next-Web) | Cross-platform ChatGPT UI. | 👍 |
+| [chatgpt-next-web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) | Cross-platform ChatGPT UI. | 👍 |
 | [DocBox](https://www.daokeyuedu.com/) | Reader that supports 30+ document formats (PDF, XDF, XPS, EPUB, MOBI, etc.) with small size, low resource consumption, and fast startup and opening speeds. | |
 | [dota2_realblood](https://www.dota2hd.com/) | Removes censored blood from Dota 2's Chinese server. | |
 | [emby_carnival](https://t.me/EmbyNoisyX) | Emby client with patches. | 👍 |
