@@ -17,11 +17,12 @@
         ]
     ],
     "checkver": {
-        "url": "https://github.com/Lymphatus/caesium-image-compressor/releases",
-        "regex": "tag/v([\\w.-]+)"
+        "url": "https://api.github.com/repos/Lymphatus/caesium-image-compressor/tags",
+        "jsonpath": "$..name",
+        "regex": "v([\\d.]+)"
     },
     "autoupdate": {
-        "url": "https://github.com/Lymphatus/caesium-image-compressor/releases/download/v$version/caesium-image-compressor-$version-win.zip",
+        "url": "https://github.com/Lymphatus/caesium-image-compressor/releases/download/v$version/caesium-image-compressor-$version-win-portable.zip",
         "extract_dir": "caesium-image-compressor-$version-win"
     }
 }
