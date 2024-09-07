@@ -1,5 +1,5 @@
 {
-    "version": "2.15.0",
+    "version": "2.15.1",
     "description": "A well-designed cross-platform ChatGPT UI",
     "homepage": "https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web",
     "license": {
@@ -8,8 +8,8 @@
     },
     "architecture": {
         "64bit": {
-            "url": "https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/releases/download/v2.15.0/NextChat_2.15.0_x64_en-US.msi",
-            "hash": "9842162444dd54af02c324d041dcf0c5ad524b11d1261779c4eee160756ae69d"
+            "url": "https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/releases/download/v2.15.1/NextChat_2.15.1_x64_en-US.msi",
+            "hash": "4fd368b9166d2a2bfeed0cbaab5a973173393931f55456a62edf79cf0fcedd00"
         }
     },
     "extract_dir": "PFiles\\NextChat",
