@@ -10,7 +10,7 @@
             "extract_dir": "mpv-lazy"
         }
     },
-    "notes": "Although the portable_config folder is retained by default, it is recommended to manually compare the configuration files in the old and new portable_config folders to track the latest changes. It is suggested to use WinMerge to compare the differences between the two folders.",
+    "notes": "Although the portable_config folder is retained by default, it is recommended to manually compare the configuration files in the old `portable_config` and new `portable_config.original` folders to track the latest changes. It is suggested to use WinMerge to compare the differences between the two folders.",
     "persist": "portable_config",
     "bin": [
         [
