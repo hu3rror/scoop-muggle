@@ -9,7 +9,7 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web/releases/download/v2.15.3/NextChat_2.15.3_x64_en-US.msi",
-            "hash": "3da3b2b5a9db9dfb478993842979c49a488dc4c72f6fb589566b322e3b7b9a92"
+            "hash": "e5a58592f7be52d1dd5210aac802e2045cb7dbbc8a3a604acec4ded15904f6fa"
         }
     },
     "extract_dir": "PFiles\\NextChat",
