@@ -25,7 +25,7 @@
     "checkver": {
         "url": "https://api.github.com/repos/xiaoyifang/goldendict-ng/releases/latest",
         "jsonpath": "$...browser_download_url",
-        "regex": "download/v([\\d.]+)-Release.([\\w]+)/GoldenDict-ng-([\\d.]+)-Qt([\\d.]+)\\.exe",
+        "regex": "download/v([\\d.]+)-Release\\.([\\w]+)/GoldenDict-ng-([\\d.]+)-Qt([\\d.]+)\\.exe",
         "reverse": true,
         "replace": "$1"
     },
