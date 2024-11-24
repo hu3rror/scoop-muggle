@@ -26,8 +26,8 @@
         ]
     ],
     "checkver": {
-        "url": "https://www.vector.co.jp/soft/dl/winnt/art/se512262.html",
-        "regex": "<span class=\"version\">([\\d\\.]+)</span>"
+        "url": "https://api.bitbucket.org/2.0/repositories/neelabo/neeview/refs/tags?sort=-target.date",
+        "jsonpath": "$.values[0].name"
     },
     "autoupdate": {
         "architecture": {
