@@ -1,12 +1,12 @@
 {
-    "version": "4.1.0-beta03",
+    "version": "4.0.2",
     "description": "One-stop online barrage drama tracking platform",
     "homepage": "https://github.com/open-ani/ani",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/open-ani/ani/releases/download/v4.1.0-beta03/ani-4.1.0-beta03-windows-x86_64.zip",
-            "hash": "a27f5c8ff46f159cca111d339b150f76d7ce05e4c5f3fe9b6415c90a107d2f33",
+            "url": "https://github.com/open-ani/ani/releases/download/v4.0.2/ani-4.0.2-windows-x86_64.zip",
+            "hash": "6da9ae16d295b17d5c331a3fe35c2fe85e8df945299171e120eae5f10e6832c6",
             "extract_dir": "Ani"
         }
     },
