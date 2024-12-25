@@ -1,10 +1,10 @@
 {
-    "version": "3.1.24333",
+    "version": "3.1.24360",
     "description": "Originally called Process Hacker, A powerful, multi-purpose tool that helps you monitor system resources, debug software and detect malware.",
     "homepage": "https://processhacker.sourceforge.io/nightly.php",
     "license": "GPL-3.0-only",
-    "url": "https://github.com/winsiderss/si-builds/releases/download/3.1.24333/systeminformer-3.1.24333-release-bin.zip",
-    "hash": "de26c2da3b020df369d8bfa779161a6e762e5632b1a283acfbdba0bd88b0512d",
+    "url": "https://github.com/winsiderss/si-builds/releases/download/3.1.24360/systeminformer-3.1.24360-release-bin.zip",
+    "hash": "8cf1899e3e23577063810c22a15040d8f1dc5eecb88b882a71e01daaa74663a0",
     "architecture": {
         "64bit": {
             "extract_dir": "amd64"
