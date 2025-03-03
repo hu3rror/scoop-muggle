@@ -1,12 +1,12 @@
 {
-    "version": "2.1.2",
+    "version": "2.1.1",
     "description": "A dedicated scratchpad for developers",
     "homepage": "https://github.com/heyman/heynote",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/heyman/heynote/releases/download/v2.1.2/Heynote_2.1.2.exe#/dl.7z",
-            "hash": "sha512:991fa91bdf0566febc32940eff4cbce6ab762a152cd716ab94849346194a78c7df234859f4ede6e523009e3c4615751009f8dec2275cd4bc2c7ff89cbc879a15"
+            "url": "https://github.com/heyman/heynote/releases/download/v2.1.1/Heynote_2.1.1.exe#/dl.7z",
+            "hash": "sha512:5b9680f2501b1c51fdd6842e0114a2a4d649acafbd3ab79a0a93939d006cb7e16a7783dffca2f01a835f22f0cc04e63c8e3d1bcadf5d3f3dd23af64630521200"
         }
     },
     "pre_install": [
