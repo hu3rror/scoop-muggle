@@ -1,12 +1,12 @@
 {
-    "version": "4.7.0-alpha02",
+    "version": "4.6.1",
     "description": "One-stop online barrage drama tracking platform",
     "homepage": "https://github.com/open-ani/ani",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/open-ani/ani/releases/download/v4.7.0-alpha02/ani-4.7.0-alpha02-windows-x86_64.zip",
-            "hash": "89fb2d37b24ec4f0630ac811b0f1210e6fe6508ccc0abeaa4d1af08614d6ace6",
+            "url": "https://github.com/open-ani/ani/releases/download/v4.6.1/ani-4.6.1-windows-x86_64.zip",
+            "hash": "f4deeb25dae35d26dbfb1013a6858852e91fa38576c2fa990273afbed2c202ce",
             "extract_dir": "Ani"
         }
     },
@@ -31,11 +31,7 @@
             "Remove-Module -Name DoradoUtils"
         ]
     },
-    "checkver": {
-        "url": "https://api.github.com/repos/open-ani/ani/releases",
-        "jsonpath": "$..tag_name",
-        "regex": "v([-\\d.\\w]+)"
-    },
+    "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
