@@ -1,12 +1,12 @@
 {
-    "version": "1.0.12.1",
+    "version": "1.0.12.2",
     "description": "A mod manager for Baldur's Gate 3",
     "homepage": "https://github.com/LaughingLeader/BG3ModManager",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/LaughingLeader/BG3ModManager/releases/download/1.0.12.1/BG3ModManager_Latest.zip",
-            "hash": "8ced6a1583681f1cd65fc33df1ab276614e6070a02d5ea2f5ecf056c15741383"
+            "url": "https://github.com/LaughingLeader/BG3ModManager/releases/download/1.0.12.2/BG3ModManager_Latest.zip",
+            "hash": "d5998df0676d027bc7455c5c4592a7dc34dbd3cf9e56134d9462afc0fd7f9e42"
         }
     },
     "bin": "BG3ModManager.exe",
