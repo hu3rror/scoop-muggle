@@ -15,6 +15,7 @@
             "DLSS Swapper"
         ]
     ],
+    "persist": "StoredData",
     "checkver": "github",
     "autoupdate": {
         "architecture": {
