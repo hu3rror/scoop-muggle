@@ -1,12 +1,12 @@
 {
-    "version": "2.11.0",
+    "version": "2.11.1",
     "description": "desktop AI assistant / universal MCP client",
     "homepage": "https://witsyai.com/",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/nbonamy/witsy/releases/download/v2.11.0/Witsy-2.11.0-win32-x64.zip",
-            "hash": "3e5ea7751d3d9c9c0b5cf8242f151f930c830a0d02f0403b5393736ebf321c5b"
+            "url": "https://github.com/nbonamy/witsy/releases/download/v2.11.1/Witsy-2.11.1-win32-x64.zip",
+            "hash": "816a6ecdaf2b0d73cf07a500998da850d60b699be94dae1ebec2070ca2f3d0c9"
         }
     },
     "bin": "Witsy.exe",
