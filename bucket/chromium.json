@@ -31,10 +31,10 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/Hibbiki/chromium-win64/releases/download/v$version/chrome.sync.7z",
+                "url": "https://github.com/Hibbiki/chromium-win64/releases/download/v$version/chrome.7z",
                 "hash": {
                     "url": "https://github.com/Hibbiki/chromium-win64/releases/latest",
-                    "regex": "$sha1 \\.\\./out/x64/chrome.sync.7z"
+                    "regex": "$sha1 \\.\\./out/x64/chrome.7z"
                 }
             }
         }
