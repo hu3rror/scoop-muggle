@@ -13,6 +13,6 @@
     ],
     "checkver": "github",
     "autoupdate": {
-        "url": "https://github.com/xHybred/NvidiaProfileInspectorRevamped/releases/download/v$version/NVPI-Revamped.zip"
+        "url": "https://github.com/xHybred/NvidiaProfileInspectorRevamped/releases/download/v$version/NVPI-R.zip"
     }
 }
