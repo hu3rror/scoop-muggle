@@ -1,12 +1,12 @@
 {
-    "version": "1.8.0",
+    "version": "1.8.1",
     "description": "Featuring powerful AI capabilities and supporting various e-book formats, it makes reading smarter and more focused.",
     "homepage": "https://github.com/Anxcye/anx-reader",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Anxcye/anx-reader/releases/download/v1.8.0/Anx-Reader-windows-1.8.0.zip",
-            "hash": "f8c56f3b33ea0710f23647474c1ab078c0a96b50565bacd529b3277a9041fcf5"
+            "url": "https://github.com/Anxcye/anx-reader/releases/download/v1.8.1/Anx-Reader-windows-1.8.1.zip",
+            "hash": "f0ee249b1ae107a6d62ecf3f4da45e215814c45efe9170cd0a9f5577d217ffc9"
         }
     },
     "shortcuts": [
