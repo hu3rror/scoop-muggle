@@ -9,12 +9,12 @@
             "hash": "bd1ae3eb79f0ec95c492a30959e8697c65f573d39eeaf56f2b3415021bfe3129"
         }
     },
-    "bin": "geminicommit.exe",
+    "bin": "gmc.exe",
     "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/tfkhdyt/geminicommit/releases/download/v$version/geminicommit-v$version-windows-amd64.zip"
+                "url": "https://github.com/tfkhdyt/geminicommit/releases/download/v$version/gmc-v$version-windows-amd64.zip"
             }
         },
         "hash": {
