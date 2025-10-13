@@ -4,7 +4,7 @@
     "homepage": "https://github.com/SpotX-Official/SpotX",
     "license": "MIT",
     "url": "https://raw.githubusercontent.com/SpotX-Official/SpotX/main/run.ps1",
-    "hash": "bfa63cfd99f93856ee1cf3ccedd1df6950e4be7c91dde399304cf256058bb0db",
+    "hash": "cbcb6c00d916b14817a4d6a428ea5ff1fdbd0e99d630c711b5e6da0e9b65a99d",
     "notes": "The manifest is from https://github.com/Ast3risk-ops/spotx-bucket/blob/master/bucket/spotx.json",
     "installer": {
         "script": [
