@@ -1,12 +1,12 @@
 {
-    "version": "1.5.9.21535",
+    "version": "1.6.0.22821",
     "description": "GreenLuma's easy-to-use Chinese graphical interface developed with WPF.",
     "homepage": "https://github.com/clinlx/CN_GreenLumaGUI",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/clinlx/CN_GreenLumaGUI/releases/download/v1.5.9/CN_GreenLumaGUI.v1.5.9.21535.zip",
-            "hash": "37f009787c8d4ee6d5e60b31c9ca3e4a66dc1de6f73ad27f4c8fb3263dcf9abf"
+            "url": "https://github.com/clinlx/CN_GreenLumaGUI/releases/download/v1.6.0/CN_GreenLumaGUI.v1.6.0.22821.zip",
+            "hash": "6ee957c42181f6a84f951f4a5433c4f6575a345e27a4e13f9b9c1947657290c7"
         }
     },
     "shortcuts": [
