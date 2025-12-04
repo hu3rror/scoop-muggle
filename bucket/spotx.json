@@ -1,10 +1,10 @@
 {
-    "version": "1.9-20251130-fcd40c",
+    "version": "1.9-20251204-9cf696",
     "description": "Modified Spotify client. Blocks ads, updates and more. (fixed up-to-date version, preserves Spotify settings and user data on update)",
     "homepage": "https://github.com/SpotX-Official/SpotX",
     "license": "MIT",
     "url": "https://raw.githubusercontent.com/SpotX-Official/SpotX/main/run.ps1",
-    "hash": "10b6de5c040f4698ddd8f0e86b965c890db18b0ad4b4e70a69d1c25a53cb4d5d",
+    "hash": "39f21d859b8a60bd9197c7bc442dc5959a83d77aae13fb4996b9e5de630d4e75",
     "notes": "The manifest is from https://github.com/Ast3risk-ops/spotx-bucket/blob/master/bucket/spotx.json",
     "installer": {
         "script": [
