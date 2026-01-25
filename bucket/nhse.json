@@ -1,12 +1,12 @@
 {
-    "version": "9013",
+    "version": "9014",
     "description": "Animal Crossing: New Horizons save editor",
     "homepage": "https://berichan.github.io/GetNHSE/",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://dev.azure.com/project-pokemon/b1a724de-3609-454c-ae59-ab567024e1ac/_apis/build/builds/9013/artifacts?artifactName=NHSE&api-version=6.0&%24format=zip#/dl.zip",
-            "hash": "8187e5c4c18a8b5d18eaf2dfdec94d081194d37acfb75819401f5887a6833a69",
+            "url": "https://dev.azure.com/project-pokemon/b1a724de-3609-454c-ae59-ab567024e1ac/_apis/build/builds/9014/artifacts?artifactName=NHSE&api-version=6.0&%24format=zip#/dl.zip",
+            "hash": "a3b81d6dadee37f77891341fba9ed63e0087be7a7f2ee8c08c4bad4a15d06932",
             "extract_dir": "NHSE"
         }
     },
