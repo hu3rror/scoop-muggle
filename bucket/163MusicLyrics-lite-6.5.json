@@ -14,13 +14,5 @@
             "MusicLyricApp.exe",
             "Music Lyric Lite"
         ]
-    ],
-    "checkver": "github",
-    "autoupdate": {
-        "architecture": {
-            "64bit": {
-                "url": "https://github.com/jitwxs/163MusicLyrics/releases/download/v$version/MusicLyricApp.v$version.lite.zip"
-            }
-        }
-    }
+    ]
 }
