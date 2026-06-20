@@ -34,7 +34,7 @@
         }
     },
     "pre_install": [
-        "'mp3tag.cfg', 'data\\columns.ini', 'data\\sources\\Apple Music.inc', 'data\\sources\\Apple Music#United States.src', 'data\\sources\\Apple Music#Japan.src', 'data\\sources\\Apple Music#Hong Kong.src', 'data\\sources\\Apple Music#Taiwan.src', 'data\\sources\\Apple Music#China.src' | ForEach-Object {",
+        "'mp3tag.cfg', 'data\\columns.ini', 'data\\sources\\Apple Music.inc', 'data\\sources\\Apple Music#United States.src', 'data\\sources\\Apple Music#Japan.src', 'data\\sources\\Apple Music#Hong Kong.src', 'data\\sources\\Apple Music#Taiwan.src', 'data\\sources\\Apple Music#China.src', 'data\\sources\\&Apple Music#Settings….settings', 'data\\sources\\&Apple Music#USA (English).src', 'data\\sources\\&Apple Music#中国大陆 (中文).src', 'data\\sources\\&Apple Music#日本 (日本語).src', 'data\\sources\\&Apple Music#美国 (简体中文).src' | ForEach-Object {",
         "    if (!(Test-Path \"$persist_dir\\$_\")) { New-Item \"$dir\\$_\" | Out-Null }",
         "}",
         "Remove-Item \"$dir\\`$*\", \"$dir\\Mp3tagUninst*\" -Recurse",
@@ -61,6 +61,11 @@
         "data\\sources\\Apple Music#Hong Kong.src",
         "data\\sources\\Apple Music#Taiwan.src",
         "data\\sources\\Apple Music#China.src",
+        "data\\sources\\&Apple Music#Settings….settings",
+        "data\\sources\\&Apple Music#USA (English).src",
+        "data\\sources\\&Apple Music#中国大陆 (中文).src",
+        "data\\sources\\&Apple Music#日本 (日本語).src",
+        "data\\sources\\&Apple Music#美国 (简体中文).src",
         "mp3tag.cfg"
     ],
     "pre_uninstall": [
