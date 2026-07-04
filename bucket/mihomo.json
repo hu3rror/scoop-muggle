@@ -24,7 +24,7 @@
         "proxies",
         "rules"
     ],
-    "note": "config.yaml should be placed in the 'config' folder, WebUI should be placed in the 'ui' folder, and proxy providers and rule providers should be placed in the 'proxies' and 'rules' folders respectively.",
+    "notes": "config.yaml should be placed in the 'config' folder, WebUI should be placed in the 'ui' folder, and proxy providers and rule providers should be placed in the 'proxies' and 'rules' folders respectively.",
     "bin": [
         "mihomo.exe",
         [
