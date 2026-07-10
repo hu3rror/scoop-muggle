@@ -24,7 +24,7 @@
         "$logDir = \"$dir\\logs\"",
         "$argsList = @(",
         "    'add',",
-        "    '--name', 'mihomo',",
+        "    '--name', 'mihomo-shawl',",
         "    '--cwd', \"$mihomoDir\",",
         "    '--log-dir', \"$logDir\",",
         "    '--log-rotate', 'bytes=10485760',",
@@ -36,13 +36,13 @@
         "    '-f', 'config\\config.yaml'",
         ")",
         "if ($isAdmin) {",
-        "    sc.exe delete mihomo | Out-Null",
+        "    sc.exe delete mihomo-shawl | Out-Null",
         "    & \"$servicePath\" $argsList | Out-Null",
-        "    sc.exe config mihomo start= auto | Out-Null",
+        "    sc.exe config mihomo-shawl start= auto | Out-Null",
         "    Write-Host 'Mihomo Windows service registered successfully.' -ForegroundColor Green",
         "} else {",
         "    Write-Host 'Not running as Administrator. Requesting UAC elevation to register Windows service...' -ForegroundColor Yellow",
-        "    $cmdString = \"sc.exe delete mihomo | Out-Null; & '$servicePath' \" + ($argsList | ForEach-Object { \"'$_'\" }) -join ' ' + \"; sc.exe config mihomo start= auto | Out-Null\"",
+        "    $cmdString = \"sc.exe delete mihomo-shawl | Out-Null; & '$servicePath' \" + ($argsList | ForEach-Object { \"'$_'\" }) -join ' ' + \"; sc.exe config mihomo-shawl start= auto | Out-Null\"",
         "    try {",
         "        Start-Process powershell -ArgumentList '-NoProfile', '-WindowStyle', 'Hidden', '-Command', $cmdString -Verb RunAs -Wait -ErrorAction Stop",
         "        Write-Host 'Mihomo Windows service registered successfully.' -ForegroundColor Green",
@@ -54,7 +54,7 @@
     "uninstaller": {
         "script": [
             "$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
-            "$serviceName = 'mihomo'",
+            "$serviceName = 'mihomo-shawl'",
             "$service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue",
             "if ($service) {",
             "    if ($isAdmin) {",
@@ -82,7 +82,7 @@
         ]
     },
     "persist": "logs",
-    "notes": "Ensure 'config.yaml' is placed in 'mihomo/config'.\nTo start: 'sudo sc start mihomo'\nTo stop:  'sudo sc stop mihomo'\nTo Set auto-start: 'sudo sc config mihomo start= auto'",
+    "notes": "Ensure 'config.yaml' is placed in 'mihomo/config'.\n\n=== SERVICE CONTROL COMMANDS ===\n\nStart Service:\nsudo sc.exe start mihomo-shawl\n\nStop Service:\nsudo sc.exe stop mihomo-shawl\n\nEnable Auto-Start (on boot):\nsudo sc.exe config mihomo-shawl start= auto\n\nDisable Auto-Start (manual start):\nsudo sc.exe config mihomo-shawl start= demand",
     "checkver": {
         "github": "https://github.com/mtkennerly/shawl"
     },
