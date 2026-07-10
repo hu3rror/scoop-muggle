@@ -21,11 +21,6 @@
         }
     },
     "pre_install": [
-        "if (installed 'mihomo-v3') {",
-        "    error 'System conflict detected: [mihomo-v3] is already installed.'",
-        "    error 'Please run [scoop uninstall mihomo-v3] first before installing this package.'",
-        "    exit 1",
-        "}",
         "Get-ChildItem \"$dir\\mihomo*.exe\" | Rename-Item -NewName 'mihomo.exe'",
         "if (!(Test-Path \"$persist_dir\")) { New-Item -Path \"$persist_dir\" -ItemType Directory | Out-Null }",
         "if (!(Test-Path \"$persist_dir\\cache.db\")) { New-Item -Path \"$persist_dir\\cache.db\" -ItemType File | Out-Null }"
