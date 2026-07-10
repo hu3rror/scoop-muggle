@@ -3,10 +3,9 @@
     "description": "A wrapper executable that can be used to host any executable as a Windows service (Pre-release version).",
     "homepage": "https://github.com/winsw/winsw",
     "license": "MIT",
-    "suggest": [
-        "muggle/mihomo",
-        "muggle/mihomo-v3"
-    ],
+    "suggest": {
+        "mihomo": "muggle/mihomo"
+    },
     "architecture": {
         "64bit": {
             "url": "https://github.com/winsw/winsw/releases/download/v3.0.0-alpha.11/WinSW-x64.exe#/mihomo-service.exe",
@@ -19,18 +18,15 @@
     },
     "bin": "mihomo-service.exe",
     "pre_install": [
-        "$targetApp = 'mihomo'",
-        "if (installed 'mihomo-v3') { $targetApp = 'mihomo-v3' }",
-        "$xmlPath = \"$persist_dir\\mihomo-service.xml\"",
-        "if (!(Test-Path $xmlPath)) {",
+        "if (!(Test-Path \"$persist_dir\\mihomo-service.xml\")) {",
         "    $xml = @(",
         "        '<service>'",
         "        '  <id>mihomo</id>'",
         "        '  <name>Mihomo Service</name>'",
         "        '  <description>Mihomo Windows Service run by Scoop</description>'",
-        "        \"  <executable>%BASE%\\..\\..\\$targetApp\\current\\mihomo.exe</executable>\"",
+        "        '  <executable>%BASE%\\..\\..\\mihomo\\current\\mihomo.exe</executable>'",
         "        '  <arguments>-d . -f config\\config.yaml</arguments>'",
-        "        \"  <workingdirectory>%BASE%\\..\\..\\$targetApp\\current</workingdirectory>\"",
+        "        '  <workingdirectory>%BASE%\\..\\..\\mihomo\\current</workingdirectory>'",
         "        '  <startmode>Automatic</startmode>'",
         "        '  <hidewindow>true</hidewindow>'",
         "        '  <onfailure action=\"restart\" delay=\"10 sec\"/>'",
@@ -42,13 +38,6 @@
         "        '</service>'",
         "    )",
         "    Set-Content -Encoding UTF8 -Path \"$dir\\mihomo-service.xml\" -Value $xml",
-        "} else {",
-        "    $content = Get-Content -Raw -Path $xmlPath -Encoding UTF8",
-        "    $newContent = $content -replace '(<executable>.*?\\\\)(mihomo|mihomo-v3)(\\\\current\\\\mihomo\\.exe</executable>)', (\"`$1\" + $targetApp + \"`$3\")",
-        "    $newContent = $newContent -replace '(<workingdirectory>.*?\\\\)(mihomo|mihomo-v3)(\\\\current</workingdirectory>)', (\"`$1\" + $targetApp + \"`$3\")",
-        "    if ($content -ne $newContent) {",
-        "        Set-Content -Path $xmlPath -Value $newContent -Encoding UTF8",
-        "    }",
         "}"
     ],
     "uninstaller": {
