@@ -72,7 +72,7 @@
     "notes": "Please ensure that the 'muggle/mihomo' package is installed and 'config.yaml' is placed in the 'mihomo/config' folder. Then, run 'mihomo-service.exe install; mihomo-service.exe start' to install and start the Mihomo service.",
     "persist": "mihomo-service.xml",
     "checkver": {
-        "github": "https://api.github.com/repos/winsw/winsw/releases",
+        "url": "https://api.github.com/repos/winsw/winsw/releases",
         "jsonpath": "$[?(@.prerelease == true)].tag_name",
         "regex": "v(?<version>[\\w-.]+)"
     },
