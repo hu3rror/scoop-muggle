@@ -3,8 +3,9 @@
     "description": "A wrapper executable that can be used to host any executable as a Windows service (Pre-release version).",
     "homepage": "https://github.com/winsw/winsw",
     "license": "MIT",
-    "depends": [
-        "muggle/mihomo"
+    "suggest": [
+        "muggle/mihomo",
+        "muggle/mihomo-v3"
     ],
     "architecture": {
         "64bit": {
