@@ -1,0 +1,113 @@
+{
+    "version": "1.19.28",
+    "description": "A rule-based tunnel in Go (formerly Clash.Meta).",
+    "homepage": "https://github.com/MetaCubeX/mihomo",
+    "license": "GPL-3.0-or-later",
+    "suggest": {
+        "mihomo-service": "muggle/winsw-mihomo-service"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.28/mihomo-windows-amd64-v3-v1.19.28.zip",
+            "hash": "3af2d73314979355e82152c9ac113541a6893a0ec921f573933a5a1ed5062cc6"
+        }
+    },
+    "pre_install": [
+        "if (installed 'mihomo') {",
+        "    error 'System conflict detected: [mihomo] is already installed.'",
+        "    error 'Please run [scoop uninstall mihomo] first before installing this package.'",
+        "    exit 1",
+        "}",
+        "Get-ChildItem \"$dir\\mihomo*.exe\" | Rename-Item -NewName 'mihomo.exe'",
+        "if (!(Test-Path \"$persist_dir\")) { New-Item -Path \"$persist_dir\" -ItemType Directory | Out-Null }",
+        "if (!(Test-Path \"$persist_dir\\cache.db\")) { New-Item -Path \"$persist_dir\\cache.db\" -ItemType File | Out-Null }"
+    ],
+    "post_install": [
+        "$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
+        "if ($isAdmin) {",
+        "    Remove-NetFirewallRule -DisplayName 'Mihomo-In' -ErrorAction SilentlyContinue | Out-Null",
+        "    Remove-NetFirewallRule -DisplayName 'Mihomo-Out' -ErrorAction SilentlyContinue | Out-Null",
+        "    New-NetFirewallRule -DisplayName 'Mihomo-In' -Direction Inbound -Program \"$original_dir\\mihomo.exe\" -Action Allow -Profile Any -ErrorAction SilentlyContinue | Out-Null",
+        "} else {",
+        "    Write-Host 'Not running as Administrator. Requesting elevation via UAC to configure inbound firewall rule...' -ForegroundColor Yellow",
+        "    try {",
+        "        Start-Process powershell -ArgumentList '-NoProfile', '-WindowStyle', 'Hidden', '-Command', \"Remove-NetFirewallRule -DisplayName 'Mihomo-In','Mihomo-Out' -ErrorAction SilentlyContinue; New-NetFirewallRule -DisplayName 'Mihomo-In' -Direction Inbound -Program '$original_dir\\mihomo.exe' -Action Allow -Profile Any -ErrorAction SilentlyContinue\" -Verb RunAs -Wait -ErrorAction Stop",
+        "    } catch {",
+        "        Write-Warning 'UAC elevation denied. Inbound firewall rule was not added.'",
+        "    }",
+        "}",
+        "Write-Host ''",
+        "Write-Host 'INFO: Inbound rule (Mihomo-In) has been configured and updated automatically.' -ForegroundColor Cyan",
+        "Write-Host 'INFO: If your TUN/Mixed mode requires outbound rule, run PowerShell as Administrator and execute:' -ForegroundColor Cyan",
+        "Write-Host \"New-NetFirewallRule -DisplayName 'Mihomo-Out' -Direction Outbound -Program '$original_dir\\mihomo.exe' -Action Allow -Profile Any\" -ForegroundColor Gray",
+        "Write-Host ''"
+    ],
+    "uninstaller": {
+        "script": [
+            "$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
+            "$serviceName = 'mihomo'",
+            "$service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue",
+            "$servicePrefix = ''",
+            "if (installed 'winsw-mihomo-service' $false) { $servicePrefix = currentdir 'winsw-mihomo-service' $false }",
+            "elseif (installed 'winsw-mihomo-service' $true) { $servicePrefix = currentdir 'winsw-mihomo-service' $true }",
+            "$servicePath = ''",
+            "if ($servicePrefix -and (Test-Path \"$servicePrefix\\mihomo-service.exe\")) {",
+            "    $servicePath = \"$servicePrefix\\mihomo-service.exe\"",
+            "}",
+            "if ($isAdmin) {",
+            "    if ($service) {",
+            "        if ($service.Status -eq 'Running') {",
+            "            Write-Host \"Stopping '$serviceName' service...\" -ForegroundColor Yellow",
+            "            if ($servicePath) { & \"$servicePath\" stop | Out-Null } else { Stop-Service -Name $serviceName -Force -ErrorAction SilentlyContinue | Out-Null }",
+            "        }",
+            "        Write-Host \"Uninstalling '$serviceName' service...\" -ForegroundColor Yellow",
+            "        if ($servicePath) { & \"$servicePath\" uninstall | Out-Null } else { sc.exe delete $serviceName | Out-Null }",
+            "    }",
+            "    Remove-NetFirewallRule -DisplayName 'Mihomo-In' -ErrorAction SilentlyContinue | Out-Null",
+            "    Remove-NetFirewallRule -DisplayName 'Mihomo-Out' -ErrorAction SilentlyContinue | Out-Null",
+            "} else {",
+            "    Write-Host 'Not running as Administrator. Requesting elevation via UAC to stop/uninstall service and remove firewall rules...' -ForegroundColor Yellow",
+            "    $elevatedCmds = @()",
+            "    if ($service) {",
+            "        if ($servicePath) {",
+            "            $elevatedCmds += \"& '$servicePath' stop\"",
+            "            $elevatedCmds += \"& '$servicePath' uninstall\"",
+            "        } else {",
+            "            $elevatedCmds += \"Stop-Service -Name '$serviceName' -Force -ErrorAction SilentlyContinue\"",
+            "            $elevatedCmds += \"sc.exe delete '$serviceName'\"",
+            "        }",
+            "    }",
+            "    $elevatedCmds += \"Remove-NetFirewallRule -DisplayName 'Mihomo-In','Mihomo-Out' -ErrorAction SilentlyContinue\"",
+            "    $cmdString = $elevatedCmds -join '; '",
+            "    try {",
+            "        Start-Process powershell -ArgumentList '-NoProfile', '-WindowStyle', 'Hidden', '-Command', $cmdString -Verb RunAs -Wait -ErrorAction Stop",
+            "    } catch {",
+            "        Write-Warning 'UAC elevation denied. Failed to stop/uninstall service and remove firewall rules.'",
+            "    }",
+            "}"
+        ]
+    },
+    "persist": [
+        "config",
+        "ui",
+        "proxies",
+        "rules",
+        "cache.db"
+    ],
+    "notes": "config.yaml should be placed in the 'config' folder, WebUI should be placed in the 'ui' folder, and proxy providers and rule providers should be placed in the 'proxies' and 'rules' folders respectively.",
+    "bin": [
+        "mihomo.exe",
+        [
+            "mihomo.exe",
+            "clash"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/MetaCubeX/mihomo/releases/download/v$version/mihomo-windows-amd64-v3-v$version.zip"
+            }
+        }
+    }
+}
