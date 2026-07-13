@@ -33,7 +33,7 @@
         "    '--',",
         "    \"$mihomoDir\\mihomo.exe\",",
         "    '-d', '.',",
-        "    '-f', 'config\\config.yaml'",
+        "    '-f', 'config.yaml'",
         ")",
         "if ($isAdmin) {",
         "    sc.exe delete mihomo-shawl | Out-Null",
@@ -82,10 +82,8 @@
         ]
     },
     "persist": "logs",
-    "notes": "Ensure 'config.yaml' is placed in 'mihomo/config'.\n\n=== SERVICE CONTROL COMMANDS ===\n\nStart Service:\nsudo sc.exe start mihomo-shawl\n\nStop Service:\nsudo sc.exe stop mihomo-shawl\n\nEnable Auto-Start (on boot):\nsudo sc.exe config mihomo-shawl start= auto\n\nDisable Auto-Start (manual start):\nsudo sc.exe config mihomo-shawl start= demand",
-    "checkver": {
-        "github": "https://github.com/mtkennerly/shawl"
-    },
+    "notes": "Ensure 'config.yaml' is placed in the root directory of 'mihomo'.\n\n=== SERVICE CONTROL COMMANDS ===\n\nStart Service:\nsudo sc.exe start mihomo-shawl\n\nStop Service:\nsudo sc.exe stop mihomo-shawl\n\nEnable Auto-Start (on boot):\nsudo sc.exe config mihomo-shawl start= auto\n\nDisable Auto-Start (manual start):\nsudo sc.exe config mihomo-shawl start= demand",
+    "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
