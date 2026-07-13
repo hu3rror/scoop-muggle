@@ -23,7 +23,8 @@
     "pre_install": [
         "Get-ChildItem \"$dir\\mihomo*.exe\" | Rename-Item -NewName 'mihomo.exe'",
         "if (!(Test-Path \"$persist_dir\")) { New-Item -Path \"$persist_dir\" -ItemType Directory | Out-Null }",
-        "if (!(Test-Path \"$persist_dir\\cache.db\")) { New-Item -Path \"$persist_dir\\cache.db\" -ItemType File | Out-Null }"
+        "if (!(Test-Path \"$persist_dir\\cache.db\")) { New-Item -Path \"$persist_dir\\cache.db\" -ItemType File | Out-Null }",
+        "if (!(Test-Path \"$persist_dir\\config.yaml\")) { New-Item -Path \"$persist_dir\\config.yaml\" -ItemType File | Out-Null }"
     ],
     "post_install": [
         "$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)",
@@ -81,13 +82,13 @@
         ]
     },
     "persist": [
-        "config",
+        "config.yaml",
         "ui",
         "proxies",
         "rules",
         "cache.db"
     ],
-    "notes": "config.yaml should be placed in the 'config' folder, WebUI should be placed in the 'ui' folder, and proxy providers and rule providers should be placed in the 'proxies' and 'rules' folders respectively.",
+    "notes": "config.yaml should be placed in the root folder, WebUI should be placed in the 'ui' folder, and proxy providers and rule providers should be placed in the 'proxies' and 'rules' folders respectively.",
     "bin": [
         "mihomo.exe",
         [
