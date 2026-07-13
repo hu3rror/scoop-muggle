@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)]
     [ValidateSet('pre_install', 'post_install', 'uninstall')]
     [string]$Phase,
