@@ -1,4 +1,4 @@
-﻿param (
+param (
     [Parameter(Mandatory = $true)]
     [ValidateSet('Mount', 'Dismount')]
     [string]$Action,
