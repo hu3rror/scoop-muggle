@@ -3,14 +3,22 @@
     [ValidateSet('pre_install', 'post_install', 'uninstall')]
     [string]$Phase,
 
+    # 对应安装/更新阶段的 apps\<app>\current 目录路径 ($dir)
     [string]$Dir,
-    [string]$PersistDir
+
+    # 对应持久化目录路径 ($persist_dir)
+    [string]$PersistDir,
+
+    # 对应 Scoop 的真实版本物理目录 ($original_dir)。
+    # Windows 防火墙规则（New-NetFirewallRule -Program）在运行时是通过进程内核镜像路径做匹配的。
+    # 如果传入 current 这类 Junction 联接点路径，会导致规则创建成功但因内核路径不匹配而失效。
+    # 因此，创建防火墙规则时必须传入物理路径 $OriginalDir。
+    [string]$OriginalDir
 )
 
 switch ($Phase) {
     'pre_install' {
-        # 1. 重命名程序与服务包装器
-        # 用 -First 1 兜底，避免 mihomo*.exe 意外匹配多个文件时 Rename-Item 因目标名重复而报错中止
+        # 1. 规范化程序及服务包装器的执行文件名（获取第一个匹配项，避免通配符碰撞）
         $mihomoExe = Get-ChildItem "$Dir\mihomo*.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
         if ($mihomoExe) {
             Rename-Item $mihomoExe.FullName -NewName 'mihomo.exe'
@@ -19,7 +27,7 @@ switch ($Phase) {
             Rename-Item "$Dir\shawl.exe" -NewName 'mihomo-service.exe'
         }
 
-        # 2. 预创建需要持久化的文件/文件夹以防止 Scoop 报错
+        # 2. 预创建关键持久化文件与目录，避免 Scoop 建立软链接时因目标缺失而报错
         if (!(Test-Path "$PersistDir")) {
             New-Item -Path "$PersistDir" -ItemType Directory | Out-Null
         }
@@ -32,14 +40,15 @@ switch ($Phase) {
     }
 
     'post_install' {
-        # 注意：此处 $Dir 是本次安装/更新对应的版本目录（apps\<app>\<version>），
-        # 而不是 "current" 符号链接路径。由于每次安装/更新都会重新执行 post_install
-        # 并重建服务注册，因此服务路径会在每次更新后自动刷新，不会因为旧版本目录被
-        # `scoop cleanup` 清理而失效。
         $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
         $servicePath = "$Dir\mihomo-service.exe"
         $logDir = "$Dir\logs"
 
+        # 若未显式传入 $OriginalDir（如手动调用测试），则使用 $Dir 兜底，防止脚本抛错
+        $RealDir = if ($OriginalDir) { $OriginalDir } else { $Dir }
+        $RealMihomoExe = "$RealDir\mihomo.exe"
+
+        # 构造注册至 Shawl 的后台服务命令及运行参数
         $argsList = @(
             'add',
             '--name', 'mihomo-shawl',
@@ -55,28 +64,27 @@ switch ($Phase) {
         )
 
         if ($isAdmin) {
+            # 配置 Windows 服务 (管理员上下文直接执行)
             sc.exe delete mihomo-shawl | Out-Null
             & "$servicePath" $argsList | Out-Null
             sc.exe config mihomo-shawl start= auto | Out-Null
+
+            # 配置网络入站防火墙规则 (管理员上下文直接执行)
             Remove-NetFirewallRule -DisplayName 'Mihomo-In-TCP', 'Mihomo-In-UDP', 'Mihomo-Out' -ErrorAction SilentlyContinue | Out-Null
-            New-NetFirewallRule -DisplayName 'Mihomo-In-TCP' -Direction Inbound -Program "$Dir\mihomo.exe" -Action Allow -Profile Any -Protocol TCP -ErrorAction SilentlyContinue | Out-Null
-            New-NetFirewallRule -DisplayName 'Mihomo-In-UDP' -Direction Inbound -Program "$Dir\mihomo.exe" -Action Allow -Profile Any -Protocol UDP -ErrorAction SilentlyContinue | Out-Null
+            New-NetFirewallRule -DisplayName 'Mihomo-In-TCP' -Direction Inbound -Program $RealMihomoExe -Action Allow -Profile Any -Protocol TCP -ErrorAction SilentlyContinue | Out-Null
+            New-NetFirewallRule -DisplayName 'Mihomo-In-UDP' -Direction Inbound -Program $RealMihomoExe -Action Allow -Profile Any -Protocol UDP -ErrorAction SilentlyContinue | Out-Null
             Write-Host 'Mihomo Windows service registered and firewall rules configured successfully.' -ForegroundColor Green
         } else {
             Write-Host 'Not running as Administrator. Requesting UAC elevation to configure Windows service and firewall rules...' -ForegroundColor Yellow
 
-            # 修复点：原代码写作
-            #   $cmdString = "..." + ($argsList | ForEach-Object {"'$_'"}) -join ' ' + "..."
-            # PowerShell 中二元 -join 的优先级低于 +（详见 about_Operator_Precedence），
-            # 上面这行会被解析成 (A + B) -join (' ' + C)，导致 "; sc.exe config ... start= auto"
-            # 及后面所有防火墙规则命令被静默丢弃，且不会报任何错误。
-            # 这里先把 -join 单独算出来，再用 + 拼接，避免优先级陷阱。
+            # 此处须提前拼合参数。因 PowerShell 中 '+' 的运算优先级高于 '-join'，
+            # 直接在长字符串中使用会使后续追加的所有防火墙配置被合入 join 拼接符内导致丢失。
             $joinedArgs = ($argsList | ForEach-Object { "'$_'" }) -join ' '
             $cmdString = "sc.exe delete mihomo-shawl | Out-Null; & '$servicePath' " + $joinedArgs + `
                 "; sc.exe config mihomo-shawl start= auto | Out-Null" + `
                 "; Remove-NetFirewallRule -DisplayName 'Mihomo-In-TCP','Mihomo-In-UDP','Mihomo-Out' -ErrorAction SilentlyContinue" + `
-                "; New-NetFirewallRule -DisplayName 'Mihomo-In-TCP' -Direction Inbound -Program '$Dir\mihomo.exe' -Action Allow -Profile Any -Protocol TCP -ErrorAction SilentlyContinue | Out-Null" + `
-                "; New-NetFirewallRule -DisplayName 'Mihomo-In-UDP' -Direction Inbound -Program '$Dir\mihomo.exe' -Action Allow -Profile Any -Protocol UDP -ErrorAction SilentlyContinue | Out-Null"
+                "; New-NetFirewallRule -DisplayName 'Mihomo-In-TCP' -Direction Inbound -Program '$RealMihomoExe' -Action Allow -Profile Any -Protocol TCP -ErrorAction SilentlyContinue | Out-Null" + `
+                "; New-NetFirewallRule -DisplayName 'Mihomo-In-UDP' -Direction Inbound -Program '$RealMihomoExe' -Action Allow -Profile Any -Protocol UDP -ErrorAction SilentlyContinue | Out-Null"
 
             try {
                 Start-Process powershell -ArgumentList '-NoProfile', '-WindowStyle', 'Hidden', '-Command', $cmdString -Verb RunAs -Wait -ErrorAction Stop
@@ -87,7 +95,7 @@ switch ($Phase) {
         }
         Write-Host ''
         Write-Host 'INFO: If your TUN/Mixed mode requires outbound rule, run PowerShell as Administrator and execute:' -ForegroundColor Cyan
-        Write-Host "New-NetFirewallRule -DisplayName 'Mihomo-Out' -Direction Outbound -Program '$Dir\mihomo.exe' -Action Allow -Profile Any" -ForegroundColor Gray
+        Write-Host "New-NetFirewallRule -DisplayName 'Mihomo-Out' -Direction Outbound -Program '$RealMihomoExe' -Action Allow -Profile Any" -ForegroundColor Gray
         Write-Host ''
     }
 
@@ -96,6 +104,7 @@ switch ($Phase) {
         $services = @('mihomo', 'mihomo-shawl') | Get-Service -ErrorAction SilentlyContinue
 
         if ($isAdmin) {
+            # 停止并移除所有相关服务
             if ($services) {
                 foreach ($service in $services) {
                     if ($service.Status -eq 'Running') {
@@ -106,11 +115,14 @@ switch ($Phase) {
                     sc.exe delete $service.Name | Out-Null
                 }
             }
+            # 清理可能残留的后台进程与关联防火墙规则
             Write-Host 'Stopping any remaining Mihomo processes...' -ForegroundColor Yellow
             Stop-Process -Name 'mihomo', 'mihomo-service' -Force -ErrorAction SilentlyContinue | Out-Null
             Remove-NetFirewallRule -DisplayName 'Mihomo-In-TCP', 'Mihomo-In-UDP', 'Mihomo-Out' -ErrorAction SilentlyContinue | Out-Null
         } else {
             Write-Host 'Not running as Administrator. Requesting elevation via UAC to stop/uninstall service, terminate processes, and remove firewall rules...' -ForegroundColor Yellow
+
+            # 构造需要在管理员权限下合并执行的命令队列
             $elevatedCmds = @()
             if ($services) {
                 foreach ($service in $services) {

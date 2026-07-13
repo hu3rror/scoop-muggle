@@ -43,7 +43,7 @@
     "post_install": [
         "$helper = (Resolve-Path \"$bucketsdir\\*\\scripts\\mihomo-helper.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
         "if (!$helper) { throw 'mihomo-helper.ps1 not found in bucket/scripts!' }",
-        "& \"$helper\" -Phase post_install -Dir \"$dir\""
+        "& \"$helper\" -Phase post_install -Dir \"$dir\" -OriginalDir \"$original_dir\""
     ],
     "uninstaller": {
         "script": [
