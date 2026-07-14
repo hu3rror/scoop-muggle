@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Position = 0)]
-    [ValidateSet('start', 'stop', 'restart', 'status', 'enable', 'disable', 'log', 'help')]
+    [ValidateSet('start', 'stop', 'restart', 'status', 'enable', 'disable', 'log', 'edit', 'help')]
     [string]$Action = 'status',
 
     [Parameter()]
@@ -27,11 +27,167 @@ function Show-Help {
     Write-Host "  enable   " -NoNewline; Write-Host "- Set service to start automatically on boot (Requires Admin)" -ForegroundColor Gray
     Write-Host "  disable  " -NoNewline; Write-Host "- Set service to manual start (Requires Admin)" -ForegroundColor Gray
     Write-Host "  log      " -NoNewline; Write-Host "- View log files" -ForegroundColor Gray
+    Write-Host "  edit     " -NoNewline; Write-Host "- Open config.yaml with the best available editor" -ForegroundColor Gray
     Write-Host "  help     " -NoNewline; Write-Host "- Show this help message" -ForegroundColor Gray
     Write-Host ""
     Write-Host "Options:" -ForegroundColor DarkGray
     Write-Host "  -Tail    " -NoNewline; Write-Host "- Tail the log dynamically (only works with 'log' action)" -ForegroundColor Gray
     Write-Host ""
+}
+
+# ---------------------------------------------------------------------------
+# Helpers for the 'edit' action: locate a usable editor for config.yaml
+# ---------------------------------------------------------------------------
+
+# Reads the user's explicitly-configured default app for a given file
+# extension (e.g. '.yaml') from the registry, and returns the raw
+# "shell\open\command" string (e.g. '"C:\Path\App.exe" "%1"').
+# Returns $null if no explicit association is found or it can't be resolved.
+function Get-FileAssociationCommand {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Extension
+    )
+
+    try {
+        $userChoiceKeyPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$Extension\UserChoice"
+        if (!(Test-Path -Path $userChoiceKeyPath)) {
+            return $null
+        }
+
+        $progId = (Get-ItemProperty -Path $userChoiceKeyPath -ErrorAction Stop).ProgId
+        if ([string]::IsNullOrWhiteSpace($progId)) {
+            return $null
+        }
+
+        $commandKeyPath = "Registry::HKEY_CLASSES_ROOT\$progId\shell\open\command"
+        if (!(Test-Path -Path $commandKeyPath)) {
+            return $null
+        }
+
+        $commandKey = Get-Item -Path $commandKeyPath -ErrorAction Stop
+        $command = $commandKey.GetValue('')
+        if ([string]::IsNullOrWhiteSpace($command)) {
+            return $null
+        }
+
+        return $command
+    } catch {
+        return $null
+    }
+}
+
+# Parses a "shell\open\command" style string, verifies the target
+# executable actually exists, and launches it with the given file.
+# Returns $true on successful launch, $false otherwise.
+function Invoke-AssociatedEditor {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$CommandTemplate,
+        [Parameter(Mandatory = $true)]
+        [string]$FilePath
+    )
+
+    $CommandTemplate = [Environment]::ExpandEnvironmentVariables($CommandTemplate)
+
+    $exe = $null
+    $argTemplate = ''
+
+    if ($CommandTemplate -match '^\s*"([^"]+)"(.*)$') {
+        $exe = $Matches[1]
+        $argTemplate = $Matches[2]
+    } elseif ($CommandTemplate -match '^\s*(\S+)(.*)$') {
+        $exe = $Matches[1]
+        $argTemplate = $Matches[2]
+    } else {
+        return $false
+    }
+
+    if (!(Test-Path -Path $exe -PathType Leaf)) {
+        return $false
+    }
+
+    if ($argTemplate -match '%1') {
+        $argString = $argTemplate -replace '%1', "`"$FilePath`""
+    } elseif ([string]::IsNullOrWhiteSpace($argTemplate)) {
+        $argString = "`"$FilePath`""
+    } else {
+        $argString = "$argTemplate `"$FilePath`""
+    }
+
+    try {
+        Start-Process -FilePath $exe -ArgumentList $argString -ErrorAction Stop | Out-Null
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+# Attempts to open $FilePath with, in order:
+#   1) the user's explicit default app for .yaml / .yml
+#   2) VS Code (PATH, then common install locations)
+#   3) notepad.exe
+function Open-ConfigFile {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$FilePath
+    )
+
+    if (!(Test-Path -Path $FilePath -PathType Leaf)) {
+        Write-Host "Config file not found: $FilePath" -ForegroundColor Red
+        return $false
+    }
+
+    # 1) User's explicit default association for .yaml / .yml
+    foreach ($ext in @('.yaml', '.yml')) {
+        $cmdTemplate = Get-FileAssociationCommand -Extension $ext
+        if ($cmdTemplate) {
+            if (Invoke-AssociatedEditor -CommandTemplate $cmdTemplate -FilePath $FilePath) {
+                Write-Host "Opened with system default ($ext) association." -ForegroundColor Green
+                return $true
+            }
+        }
+    }
+
+    # 2) VS Code via PATH
+    $codeCmd = Get-Command 'code' -ErrorAction SilentlyContinue
+    if ($codeCmd) {
+        try {
+            Start-Process -FilePath $codeCmd.Source -ArgumentList "`"$FilePath`"" -ErrorAction Stop | Out-Null
+            Write-Host "Opened with VS Code." -ForegroundColor Green
+            return $true
+        } catch {
+            # fall through to next strategy
+        }
+    }
+
+    # 2b) VS Code via common install locations (in case it's not on PATH)
+    $vscodeCandidates = @(
+        "$env:LOCALAPPDATA\Programs\Microsoft VS Code\Code.exe",
+        "$env:ProgramFiles\Microsoft VS Code\Code.exe",
+        "${env:ProgramFiles(x86)}\Microsoft VS Code\Code.exe"
+    )
+    foreach ($candidate in $vscodeCandidates) {
+        if ($candidate -and (Test-Path -Path $candidate -PathType Leaf)) {
+            try {
+                Start-Process -FilePath $candidate -ArgumentList "`"$FilePath`"" -ErrorAction Stop | Out-Null
+                Write-Host "Opened with VS Code." -ForegroundColor Green
+                return $true
+            } catch {
+                continue
+            }
+        }
+    }
+
+    # 3) notepad.exe fallback
+    try {
+        Start-Process -FilePath 'notepad.exe' -ArgumentList "`"$FilePath`"" -ErrorAction Stop | Out-Null
+        Write-Host "Opened with Notepad (fallback)." -ForegroundColor Yellow
+        return $true
+    } catch {
+        Write-Host "Failed to open config file with any known editor." -ForegroundColor Red
+        return $false
+    }
 }
 
 # 需要管理员权限的动作队列
@@ -110,6 +266,11 @@ switch ($Action) {
         } else {
             Get-Content -Path $logPath -Tail 100
         }
+    }
+    'edit' {
+        $configPath = Join-Path $PSScriptRoot 'config.yaml'
+        Write-Host "Target config file: $configPath" -ForegroundColor DarkGray
+        Open-ConfigFile -FilePath $configPath | Out-Null
     }
     'help' {
         Show-Help
