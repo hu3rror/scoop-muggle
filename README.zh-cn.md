@@ -1,61 +1,108 @@
 # Scoop Muggle Bucket [![Build status](https://ci.appveyor.com/api/projects/status/eiyp2qhs11n83jo0/branch/main?svg=true)](https://ci.appveyor.com/project/hu3rror/scoop-muggle/branch/master)
 
-这是一个专为 [Scoop](https://scoop.sh/) 准备的精品软件仓库
+面向 [Scoop](https://scoop.sh/) 的软件仓库，收录其他 bucket 中较少见的 Windows 应用：阅读/文档工具、媒体播放器、网络工具、AI 客户端及系统工具。
 
-## 🌟 精选推荐
+[English](README.md)
 
-> 这里随便挑几个列举一下
-
-| 软件名称 | 描述 | 亮点 |
-|---|---|---|
-| [DocBox](https://www.daokeyuedu.com/) | 轻量级阅读器，支持30+文件格式 | 电子书阅读神器 |
-| [dota2_realblood](https://www.dota2hd.com/) | Dota2反和谐黑血补丁 |  |
-| [goldendict-ng](https://github.com/xiaoyifang/goldendict-ng) | 功能强大的词典查询程序 | 👍 **编辑推荐**：终极词典工具！ |
-| [locale-remulator](https://github.com/InWILL/Locale_Remulator) | 为64位应用调整系统区域和语言设置 | 👍 **编辑推荐**：测试与兼容性调试利器 |
-| [mangadex-dl](https://mangadex-dl.mansuf.link/) | 命令行版MangaDex漫画下载器 |  |
-| [MiSans](https://web.vip.miui.com/page/info/mio/mio/detail?postId=33935854) | 小米出品可商用的多字重免费字体 |  |
-| [mpv-lazy](https://github.com/hooke007/MPV_lazy) | 开箱即用的mpv播放器配置方案 | 👍 **编辑推荐**：免配置的mpv终极形态 |
-| [musicplayer2](https://github.com/zhongyang219/MusicPlayer2) | 集播放/歌单/歌词/格式转换于一体的音乐播放器 | 👍 **编辑推荐**：一站式音乐管理中心 |
-| [nanarun](https://github.com/M2Team/NanaRun) | 应用程序运行时环境定制工具 |  |
-| [newrain-duplicate-photo-finder](https://www.newrain.cn/app/info/1) | 快速查找删除重复照片 |  |
-| [nora](https://github.com/Sandakan/Nora) | 仿Android版Oto Music的极简音乐播放器 |  |
-| [pixivbiu](https://biu.tls.moe) | Pixiv增强工具：会员排序/免代理/批量下载 |  |
-| [pot-desktop](https://pot.pylogmon.com/) | 跨平台划词翻译工具 | 👍 **编辑推荐**：全场景翻译利器 |
-| [spek-X](https://github.com/MikeWang000000/spek-X) | 专业音频频谱分析工具 |  |
-| [tianruoocr-cl](https://gitee.com/wanglifree/tianruoocr-cl) | 本地化OCR（中文轻量版+PaddleOCR引擎） |  |
-| [yomikiru](https://github.com/mienaiyami/yomikiru) | 专注漫画阅读的桌面客户端 |  |
-
-[完整列表](bucket)
-
-## 🛠️ 快速上手
-1. 添加仓库：
-
-在PowerShell里输入：
+## 安装
 
 ```pwsh
 scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
+scoop install muggle/<软件名>
 ```
 
-2. 安装软件：
+示例：
 
 ```pwsh
-scoop install muggle/软件名
+scoop install muggle/keepassxc
 ```
 
-比如装个懒人版mpv：
-
-```pwsh
-scoop install muggle/mpv-lazy
-```
-
-3. 更新姿势：
+更新所有已安装软件：
 
 ```pwsh
 scoop update *
 ```
 
-## 💡 小贴士
-- 遇到问题？直接提issue
-- 发现更好版本？欢迎提交PR！
+## 分类
 
-🎉 用得开心！有什么好货也欢迎推荐！
+### 阅读 / 文档
+- [goldendict-ng](https://github.com/xiaoyifang/goldendict-ng) — 词典查询程序
+- [anx-reader](https://github.com/Anxcye/anx-reader) — 带 AI 功能的电子书阅读器
+- [pdfpatcher](bucket/pdfpatcher.json) / [k2pdfopt](bucket/k2pdfopt.json) / [briss](bucket/briss.json) — PDF 编辑与排版优化
+- [zlibrary](bucket/zlibrary.json) — Z-Library 官方客户端
+
+### 漫画
+- [yomikiru](https://github.com/mienaiyami/yomikiru)
+- [mangadex-dl](https://mangadex-dl.mansuf.link/)
+- [manhuagui-downloader](bucket/manhuagui-downloader.json)
+- [PicaComic](bucket/PicaComic.json)
+- [neeview](bucket/neeview.json)
+
+### 音乐 / 音频
+- [musicplayer2](https://github.com/zhongyang219/MusicPlayer2) — 播放、歌单、歌词、格式转换
+- [nora](https://github.com/Sandakan/Nora)
+- [dopamine-legacy](bucket/dopamine-legacy.json) / [dopamine-preview](bucket/dopamine-preview.json)
+- [lx-music-desktop](bucket/lx-music-desktop.json)
+- [163MusicLyrics](bucket/163MusicLyrics.json)（含 lite/pro 版本）
+- [mp3tag](bucket/mp3tag.json) — 标签编辑器
+- [qaac](bucket/qaac.json) / [m4acut](bucket/m4acut.json) — AAC/ALAC 编码与无损切割
+- [vitomu](bucket/vitomu.json) / [deemix-portable](bucket/deemix-portable.json) / [qbldx-mod](bucket/qbldx-mod.json) — 音频下载工具
+
+### 网络 / 代理
+- [mihomo-shawl-service](bucket/mihomo-shawl-service.json) — mihomo 内置 Windows 服务封装
+- [sparkle](bucket/sparkle.json) / [clash-nyanpasu-nightly](bucket/clash-nyanpasu-nightly.json) / [goclashz](bucket/goclashz.json) — Mihomo/Clash 图形客户端
+- [mosdns](bucket/mosdns.json) / [mosdns-cn](bucket/mosdns-cn.json) — DNS 转发器
+- [q](bucket/q.json) — 支持 UDP/TCP/DoT/DoH/DoQ/ODoH 的 DNS 客户端
+- [opentrace](bucket/opentrace.json) / [NatTypeTester](bucket/NatTypeTester.json) / [cdnlookup](bucket/cdnlookup.json) — 网络诊断工具
+- [gopeed](bucket/gopeed.json) / [pget](bucket/pget.json) — 多线程下载器
+
+### AI 工具
+- [cherry-studio](https://cherry-ai.com) — 多 LLM 桌面客户端
+- [chatall](http://chatall.ai) — 同时向多个模型提问
+- [witsy](bucket/witsy.json) — 桌面 AI 助手 / MCP 客户端
+- [ainiee](https://github.com/NEKOparapa/AiNiee) — 游戏/小说/字幕的 AI 翻译工具
+- [pot-desktop](https://pot.pylogmon.com/) — 跨平台划词翻译
+- [geminicommit-cli](bucket/geminicommit-cli.json) — 基于 Gemini 的 commit message 生成
+
+### 系统 / 效率
+- [keepassxc](https://keepassxc.org) — 密码管理器
+- [locale-remulator](https://github.com/InWILL/Locale_Remulator) — 按应用调整区域和语言设置
+- [context-menu-manager](bucket/context-menu-manager.json) / [win11-classic-context-menu](bucket/win11-classic-context-menu.json)
+- [notepad3](bucket/notepad3.json) / [heynote](bucket/heynote.json) — 文本编辑器
+- [run-hidden](bucket/run-hidden.json) / [run-hidden-console](bucket/run-hidden-console.json) — 隐藏控制台窗口运行程序
+- [posh-git](bucket/posh-git.json) / [get-childitemcolor](bucket/get-childitemcolor.json) — PowerShell 模块
+- [eza](bucket/eza.json) — `ls` 的现代替代品
+
+### 图像处理
+- [caesium](bucket/caesium.json) / [rimage](bucket/rimage.json) — 图片压缩
+- [jpegview-fork](https://github.com/sylikc/jpegview) — 轻量图片查看/编辑器
+- [picgo](bucket/picgo.json) — 图床上传工具
+- [icns](bucket/icns.json) — `.icns` 图标文件生成
+
+### 游戏
+- [cheat-engine](bucket/cheat-engine.json)
+- [game-cheats-manager](https://github.com/dyang886/Game-Cheats-Manager)
+- [bg3-mod-manager](bucket/bg3-mod-manager.json)
+- [nhse](bucket/nhse.json) / [ACNH-design-pattern-editor](bucket/ACNH-design-pattern-editor.json) — 集合啦工具
+- [betterjoy-lts](bucket/betterjoy-lts.json) — Switch 手柄重映射
+- [RyuSAK](bucket/RyuSAK.json) — Ryujinx 存档/Mod 管理
+- [NsEmuTools](bucket/NsEmuTools.json) — Switch 模拟器安装工具
+
+完整清单：[bucket/](bucket)
+
+## 值得参考的 Manifest
+
+以下几个 manifest 使用了不常见的 Scoop 特性，可作为编写参考，来源均直接指向上游项目自身的发布渠道。
+
+| Manifest | 技术要点 |
+|---|---|
+| [mihomo-shawl-service](bucket/mihomo-shawl-service.json) | 同时打包两个上游发行包，通过外部辅助脚本将程序注册为 Windows 服务，`pre_install`/`post_install`/`pre_uninstall`/`persist` 协同工作 |
+| [goldendict-ng](bucket/goldendict-ng.json) | `checkver` 用 `jsonpath` + `regex` + `replace` 从带 Qt 版本号的资源文件名中提取版本号，与 `autoupdate` 保持一致 |
+| [musicplayer2](bucket/musicplayer2.json) | `pre_install` 中预先创建占位文件，使 `persist` 在首次安装时即有可链接的目标 |
+| [qaac](bucket/qaac.json) + [qaac-qtfiles](bucket/qaac-qtfiles.json) | 两个 manifest 通过 `depends`/`suggest` 关联，后者在 `installer.script` 中将自身链接进前者的安装目录 |
+| [spotx](bucket/spotx.json) | `checkver` 用完整 PowerShell 脚本组合 GitHub release 标签、commit 日期与短 SHA，而非单一正则 |
+| [vcredist-aio](bucket/vcredist-aio.json) | `hash` 通过多行正则从 HTML 发行说明页面中抓取，而非校验和文件 |
+
+## 反馈
+
+发现失效链接或过时 manifest，请提交 [issue](https://github.com/hu3rror/scoop-muggle/issues) 或直接提 PR。
