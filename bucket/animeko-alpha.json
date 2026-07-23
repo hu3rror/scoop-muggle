@@ -18,8 +18,8 @@
         ]
     ],
     "persist_external": [
-        [ "$env:APPDATA\\Him188", "AppData-Him188" ],
-        [ "$env:LOCALAPPDATA\\Him188", "LocalAppData-Him188" ]
+        [ "$env:APPDATA\\Him188", "data", "directory" ],
+        [ "$env:LOCALAPPDATA\\Him188", "cache", "directory" ]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
