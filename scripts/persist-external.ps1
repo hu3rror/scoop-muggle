@@ -51,7 +51,7 @@ function Convert-ExternalPath {
             $varName = $m.Groups['name'].Value
             $val = [Environment]::GetEnvironmentVariable($varName)
             if ([string]::IsNullOrEmpty($val)) {
-                throw "persist_external: 未知环境变量 `$env:$varName（来源路径: $RawPath）"
+                throw "persist_external: 未知环境变量 `$env:$varName (来源路径: $RawPath)"
             }
             $val
         }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
@@ -62,14 +62,14 @@ function Convert-ExternalPath {
             $varName = $m.Groups['name'].Value
             $val = [Environment]::GetEnvironmentVariable($varName)
             if ([string]::IsNullOrEmpty($val)) {
-                throw "persist_external: 未知环境变量 %$varName%（来源路径: $RawPath）"
+                throw "persist_external: 未知环境变量 %$varName% (来源路径: $RawPath)"
             }
             $val
         }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
     # 校验是否为绝对路径，拦截因前缀漏写导致的当前工作目录误拼接
     if (-not [System.IO.Path]::IsPathRooted($p)) {
-        throw "persist_external: 路径 '$RawPath' 展开后不是绝对路径（结果: '$p'），请检查是否漏写 `$env:/`$home/%...% 前缀"
+        throw "persist_external: 路径 '$RawPath' 展开后不是绝对路径 (结果: '$p')，请检查是否漏写 `$env: / `$home / %...% 前缀 "
     }
 
     return [System.IO.Path]::GetFullPath($p)
@@ -134,7 +134,7 @@ function Resolve-ExternalItemType {
 
     # 点前缀且无二级扩展名时无法自动推断，强制要求三元组显式标注
     if ($leaf.StartsWith('.') -and $leaf -eq $ext) {
-        throw "persist_external: 无法从名字 '$leaf' 推断占位类型（文件/目录），请在 manifest 中使用三元数组显式指定，例如 [`"`$Source`", `"`$leaf`", `"file`"]"
+        throw "persist_external: 无法从名字 '$leaf' 推断占位类型（文件/目录），请在 manifest 中使用三元数组显式指定，例如 ['$Source', '$leaf', 'file']"
     }
 
     if ($ext) { return 'File' }
@@ -248,7 +248,7 @@ function New-ExternalPersistLink {
             $normCurrent = [System.IO.Path]::GetFullPath(($currentTarget -replace '^\\\\\?\\', ''))
             $normPersist = [System.IO.Path]::GetFullPath($PersistTarget)
             if ($normCurrent -eq $normPersist -and ($null -ne $targetItem)) {
-                Write-Verbose "persist_external: '$Source' 已有效链接至 '$PersistTarget'，跳过"
+                Write-Verbose "persist_external: '$Source' 已有效链接至 '$PersistTarget' "
                 return $sourceItem.LinkType
             }
         }
@@ -286,7 +286,7 @@ function New-ExternalPersistLink {
     # 3. 处理冲突：持久化存储区与外域同时存在真实数据，备份外域旧数据
     if ($sourceIsRealData) {
         $backup = "$Source.pre-persist-backup-$(Get-Date -Format 'yyyyMMddHHmmss')"
-        warn "persist_external: '$Source' 与已有持久化数据冲突，原数据已自动备份至 '$backup'"
+        warn "persist_external: '$Source' 与已有持久化数据冲突，原数据已自动备份至 '$backup' "
         Move-Item -LiteralPath $Source -Destination $backup -Force
         $sourceItem = $null
         $sourceIsRealData = $false
@@ -311,7 +311,7 @@ function New-ExternalPersistLink {
         New-Item -ItemType Junction -Path $Source -Target $PersistTarget -Force | Out-Null
     } else {
         if (-not (Test-CanCreateSymlink)) {
-            throw "persist_external: 创建文件符号链接需要管理员权限或启用开发者模式（目标: $Source）"
+            throw "persist_external: 创建文件符号链接需要管理员权限或启用开发者模式 (目标: $Source)"
         }
         New-Item -ItemType SymbolicLink -Path $Source -Target $PersistTarget -Force | Out-Null
     }
@@ -371,7 +371,7 @@ function Invoke-PersistExternalUninstall {
         if ($removed) {
             Write-Verbose "persist_external: 已剥离外部链接 '$($r.Source)'"
         } elseif ($null -ne (Get-Item -LiteralPath $r.Source -Force -ErrorAction SilentlyContinue)) {
-            warn "persist_external: '$($r.Source)' 不是预期链接，跳过删除以保护真实数据，请手动检查"
+            warn "persist_external: '$($r.Source)' 不是预期链接，跳过删除以保护真实数据，请手动检查 "
         }
     }
 }
