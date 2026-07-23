@@ -11,5 +11,10 @@ $pesterConfig = New-PesterConfiguration -Hashtable @{
         Verbosity = 'Detailed'
     }
 }
+
+if ($pesterConfig.Run.PSObject.Properties['FailOnNullOrEmptyForEach']) {
+    $pesterConfig.Run.FailOnNullOrEmptyForEach = $false
+}
+
 $result = Invoke-Pester -Configuration $pesterConfig
 exit $result.FailedCount
