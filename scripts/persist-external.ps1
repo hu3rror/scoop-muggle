@@ -134,7 +134,7 @@ function Resolve-ExternalItemType {
 
     # 点前缀且无二级扩展名时无法自动推断，强制要求三元组显式标注
     if ($leaf.StartsWith('.') -and $leaf -eq $ext) {
-        throw "persist_external: 无法从名字 '$leaf' 推断占位类型（文件/目录），请在 manifest 中使用三元数组显式指定，例如 [`"$Source`", `"$leaf`", `"file`"]"
+        throw "persist_external: 无法从名字 '$leaf' 推断占位类型（文件/目录），请在 manifest 中使用三元数组显式指定，例如 [`"`$Source`", `"`$leaf`", `"file`"]"
     }
 
     if ($ext) { return 'File' }
