@@ -10,7 +10,7 @@
         }
     },
     "persist_external": [
-        "$env:AppData\\com.lanyeeee.manhuagui-downloader"
+        ["$env:AppData\\com.lanyeeee.manhuagui-downloader", "com.lanyeeee.manhuagui-downloader", "directory"]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
