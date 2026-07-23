@@ -51,7 +51,7 @@ function Convert-ExternalPath {
             $varName = $m.Groups['name'].Value
             $val = [Environment]::GetEnvironmentVariable($varName)
             if ([string]::IsNullOrEmpty($val)) {
-                throw "persist_external: 未知环境变量 `$env:$($varName) (来源路径: $RawPath)"
+                throw "persist_external: 未知环境变量 `$env:$varName (来源路径: $RawPath)"
             }
             $val
         }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
@@ -146,8 +146,7 @@ function Test-CanCreateSymlink {
     [CmdletBinding()]
     param()
 
-    $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-    ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
     if ($isAdmin) { return $true }
 
     try {
@@ -208,7 +207,7 @@ function Remove-ReparsePointSafe {
 
     # 清除 ReadOnly 属性，防止 .NET Delete() 报 UnauthorizedAccessException
     if ($item.Attributes -band [System.IO.FileAttributes]::ReadOnly) {
-        $item.Attributes = $item.Attributes -band -bnot [System.IO.FileAttributes]::ReadOnly
+        $item.Attributes = $item.Attributes -band (-bnot [System.IO.FileAttributes]::ReadOnly)
     }
 
     if ($item.PSIsContainer) {
