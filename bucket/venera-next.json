@@ -17,14 +17,8 @@
         ]
     ],
     "persist_external": [
-        [
-            "$env:AppData\\com.github.cyrilpeng",
-            "data"
-        ],
-        [
-            "$env:LocalAppData\\com.github.cyrilpeng",
-            "cache"
-        ]
+        [ "$env:AppData\\com.github.cyrilpeng", "data", "directory" ],
+        [ "$env:LocalAppData\\com.github.cyrilpeng", "cache", "directory" ]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
