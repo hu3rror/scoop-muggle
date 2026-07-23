@@ -1,14 +1,13 @@
-Strictly follow Scoop Bucket commit conventions (short, clear, no trailing periods):
-- In English
-- If any manifest `.json` is added or updated in the `deprecated/` directory:
-  Format: `<app name>: Deprecate manifest`
-- If a **NEW** manifest `.json` is created/added in the `bucket/` directory:
-  Format: `<app name>: Add version <version>`
-- If an **EXISTING** manifest `.json` in the `bucket/` directory is updated/modified:
-  Format: `<app name>@<version>: <small description>`
-- For all other changes (non-manifest or general files):
-  Format: `(chore): <small description>`
+Generate a short English commit message without trailing periods based on staged files:
+1. Manifest `deprecated/<app>.json`:
+   `<app>: Deprecate manifest`
+2. New manifest `bucket/<app>.json`:
+   `<app>: Add version <version>`
+3. Updated manifest `bucket/<app>.json`:
+   `<app>@<version>: <summary>`
+4. Non-JSON / general files (`.ps1`, `.bat`, markdown, etc.):
+   `(chore): <summary>`
 
-Rules for variable placeholders:
-1. `<app name>`: Filename without `.json` extension (e.g., `git.json` -> `git`).
-2. `<version>`: Extract the new `version` value from the JSON diff.
+Rules:
+- `<app>`: Filename without extension
+- `<version>`: Value of `version` in JSON
