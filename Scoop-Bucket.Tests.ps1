@@ -12,6 +12,12 @@ if (Test-Path $targetSchema) {
 try {
     # Install the local schema for bucket tests and run them
     Copy-Item "$PSScriptRoot\schema.json" $targetSchema -Force
+
+    if (Get-Command 'New-PesterConfiguration' -ErrorAction SilentlyContinue) {
+        $PesterPreference = New-PesterConfiguration
+        $PesterPreference.Run.FailOnNullOrEmptyForEach = $false
+    }
+
     . "$env:SCOOP_HOME\test\Import-Bucket-Tests.ps1"
 } finally {
     # Restore the original schema after tests complete
