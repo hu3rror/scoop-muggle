@@ -96,11 +96,11 @@ scoop update *
 
 | Manifest | 技术要点 |
 |---|---|
+| [163MusicLyrics](bucket/163MusicLyrics.json) / [PicaComic](bucket/PicaComic.json) | 通过扩展字段 `persist_external` 与辅助脚本 `scripts/persist-external.ps1`，实现应用安装目录（`$dir`）外路径（如 `%APPDATA%`）的无损实时持久化 |
 | [mihomo-shawl-service](bucket/mihomo-shawl-service.json) | 同时打包两个上游发行包，通过外部辅助脚本将程序注册为 Windows 服务，`pre_install`/`post_install`/`pre_uninstall`/`persist` 协同工作 |
 | [goldendict-ng](bucket/goldendict-ng.json) | `checkver` 用 `jsonpath` + `regex` + `replace` 从带 Qt 版本号的资源文件名中提取版本号，与 `autoupdate` 保持一致 |
 | [musicplayer2](bucket/musicplayer2.json) | `pre_install` 中预先创建占位文件，使 `persist` 在首次安装时即有可链接的目标 |
 | [qaac](bucket/qaac.json) + [qaac-qtfiles](bucket/qaac-qtfiles.json) | 两个 manifest 通过 `depends`/`suggest` 关联，后者在 `installer.script` 中将自身链接进前者的安装目录 |
-| [spotx](bucket/spotx.json) | `checkver` 用完整 PowerShell 脚本组合 GitHub release 标签、commit 日期与短 SHA，而非单一正则 |
 | [vcredist-aio](bucket/vcredist-aio.json) | `hash` 通过多行正则从 HTML 发行说明页面中抓取，而非校验和文件 |
 
 ## 反馈

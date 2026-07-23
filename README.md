@@ -96,11 +96,11 @@ A few manifests use less common Scoop features and are useful as reference. All 
 
 | Manifest | Notable technique |
 |---|---|
+| [163MusicLyrics](bucket/163MusicLyrics.json) / [PicaComic](bucket/PicaComic.json) | Persists data outside the install directory (`$dir`), such as `%APPDATA%`, via the custom `persist_external` field paired with `scripts/persist-external.ps1` helper script. |
 | [mihomo-shawl-service](bucket/mihomo-shawl-service.json) | Bundles two upstream release URLs, wraps the binary as a Windows service through an external helper script, coordinates `pre_install`/`post_install`/`pre_uninstall`/`persist`. |
 | [goldendict-ng](bucket/goldendict-ng.json) | `checkver` pulls the version out of a Qt-tagged asset name using `jsonpath` + `regex` + `replace`, kept consistent with `autoupdate`. |
 | [musicplayer2](bucket/musicplayer2.json) | Creates placeholder files in `pre_install` so `persist` has valid targets on first run. |
 | [qaac](bucket/qaac.json) + [qaac-qtfiles](bucket/qaac-qtfiles.json) | Two manifests coordinated through `depends`/`suggest`; the second links itself into the first's install directory via `installer.script`. |
-| [spotx](bucket/spotx.json) | `checkver` is a full PowerShell script that combines a GitHub release tag with a commit date and short SHA, rather than a single regex. |
 | [vcredist-aio](bucket/vcredist-aio.json) | `hash` is scraped from an HTML release-notes page with a multiline regex instead of a checksum file. |
 
 ## Contributing

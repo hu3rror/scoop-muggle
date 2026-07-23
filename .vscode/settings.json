@@ -3,13 +3,18 @@
     "[powershell]": {
         "editor.formatOnSave": true
     },
+    "[json]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
     "powershell.scriptAnalysis.settingsPath": "PSScriptAnalyzerSettings.psd1",
     "powershell.codeFormatting.preset": "OTBS",
     "powershell.codeFormatting.alignPropertyValuePairs": true,
     "powershell.codeFormatting.ignoreOneLineBlock": true,
     "json.schemas": [
         {
-            "url": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
+            // 改为指向本地根目录的 schema.json，以支持 persist_external 的 IntelliSense 补全与校验
+            "url": "./schema.json",
             "fileMatch": [
                 "bucket/**/*.json"
             ]
