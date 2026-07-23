@@ -16,7 +16,8 @@
         ]
     ],
     "persist_external": [
-        [ "$env:APPDATA\\com.anxcye", "com.anxcye", "directory" ]
+        [ "$env:APPDATA\\com.anxcye", "data", "directory" ],
+        [ "$env:LOCALAPPDATA\\com.anxcye", "cache", "directory" ]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
