@@ -51,7 +51,7 @@ function Convert-ExternalPath {
             $varName = $m.Groups['name'].Value
             $val = [Environment]::GetEnvironmentVariable($varName)
             if ([string]::IsNullOrEmpty($val)) {
-                throw "persist_external: 未知环境变量 `$env:$varName (来源路径: $RawPath)"
+                throw "persist_external: 未知环境变量 `$env:$($varName) (来源路径: $RawPath)"
             }
             $val
         }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
