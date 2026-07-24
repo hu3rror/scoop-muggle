@@ -1,37 +1,35 @@
 if (!$env:SCOOP_HOME) { $env:SCOOP_HOME = Resolve-Path (scoop prefix scoop) }
 
-# Paths for the schema file and its backup copies
+# 1. Locate the custom schema.json in the repository
+$sourceSchema = if (Test-Path "$PSScriptRoot\schema.json") {
+    "$PSScriptRoot\schema.json"
+} else {
+    "$PSScriptRoot\..\schema.json"
+}
+
+if (-not (Test-Path $sourceSchema)) {
+    throw "Custom schema.json not found at '$sourceSchema'!"
+}
+
+# 2. Target path inside Scoop Core (where Scoop.Validator loads schema.json)
 $targetSchema = "$env:SCOOP_HOME\schema.json"
 $backupSchema = "$env:SCOOP_HOME\schema.json.bak"
 
-$rootSchema = "$PSScriptRoot\..\schema.json"
-$rootBackupSchema = "$PSScriptRoot\..\schema.json.bak"
-
-# Backup existing schemas if they exist
+# Backup existing Scoop Core schema.json
 if (Test-Path $targetSchema) {
     Copy-Item $targetSchema $backupSchema -Force
 }
-if (Test-Path $rootSchema) {
-    Copy-Item $rootSchema $rootBackupSchema -Force
-}
 
 try {
-    # Install local schema for bucket tests at both potential lookup locations
-    Copy-Item "$PSScriptRoot\schema.json" $targetSchema -Force
-    Copy-Item "$PSScriptRoot\schema.json" $rootSchema -Force
+    # Copy custom schema.json to Scoop Core
+    Copy-Item $sourceSchema $targetSchema -Force
 
-    # Use call operator (&) instead of dot-sourcing (.) to ensure script scopes match
-    & "$env:SCOOP_HOME\test\Import-Bucket-Tests.ps1"
+    # Dot-source official test runner as per official Scoop specification
+    . "$env:SCOOP_HOME\test\Import-Bucket-Tests.ps1"
 } finally {
-    # Restore original schemas after tests complete
+    # Restore original Scoop Core schema.json
     if (Test-Path $backupSchema) {
         Copy-Item $backupSchema $targetSchema -Force
         Remove-Item $backupSchema -Force
-    }
-    if (Test-Path $rootBackupSchema) {
-        Copy-Item $rootBackupSchema $rootSchema -Force
-        Remove-Item $rootBackupSchema -Force
-    } else {
-        Remove-Item $rootSchema -Force -ErrorAction SilentlyContinue
     }
 }
