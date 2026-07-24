@@ -23,6 +23,26 @@ Update all installed apps:
 scoop update *
 ```
 
+## Post-Reinstall Recovery
+
+If you reinstall Windows while preserving your Scoop installation directory, run these two commands to restore standard Scoop apps and re-link all `persist_external` directories:
+
+```pwsh
+# 1. Restore standard Scoop apps (shims, shortcuts, environment variables)
+scoop reset *
+
+# 2. Restore external persistence links and re-register the 'persist-external-reset' alias
+. "$HOME\scoop\buckets\muggle\scripts\persist-external.ps1"; Invoke-PersistExternalReset
+```
+
+> Note: If Scoop is installed in a custom directory, replace $HOME\scoop with your $env:SCOOP path.
+
+After running step 2, you can re-link external persistence paths anytime via:
+
+```pwsh
+scoop persist-external-reset
+```
+
 ## Categories
 
 ### Reading & Documents

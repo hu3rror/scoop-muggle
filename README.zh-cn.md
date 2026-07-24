@@ -23,6 +23,26 @@ scoop install muggle/keepassxc
 scoop update *
 ```
 
+## 重装系统后恢复
+
+如果你在重装 Windows 系统时保留了 Scoop 安装目录，只需依次运行以下两条命令，即可恢复所有常规 Scoop 软件并重新挂载 `persist_external` 外部持久化链接：
+
+```pwsh
+# 1. 重置 Scoop apps (shims, shortcuts, environment variables)
+scoop reset *
+
+# 2. 重新注册 'persist-external-reset' 别名
+. "$HOME\scoop\buckets\muggle\scripts\persist-external.ps1"; Invoke-PersistExternalReset
+```
+
+> 注意：如果你的 Scoop 安装在自定义路径，请将命令中的 $HOME\scoop 替换为你的实际安装路径（如 $env:SCOOP）。
+
+完成第 2 步后，今后需要重新挂载外部持久化链接时，直接运行以下命令即可：
+
+```pwsh
+scoop persist-external-reset
+```
+
 ## 分类
 
 ### 阅读 / 文档
