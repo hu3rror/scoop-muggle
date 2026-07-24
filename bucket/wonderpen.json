@@ -40,7 +40,7 @@
         ]
     ],
     "checkver": {
-        "url": "https://www.tominlab.com/en/wonderpen/downloads/all",
+        "url": "https://www.tominlab.com/wonderpen/downloads/all",
         "regex": "WonderPen-v([\\d.]+)\\.(?<build>\\d+)-win-x64-installer\\.exe"
     },
     "autoupdate": {
