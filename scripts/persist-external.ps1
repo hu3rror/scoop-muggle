@@ -413,3 +413,70 @@ function Invoke-PersistExternalUninstall {
         }
     }
 }
+
+# ---------------------------------------------------------------------------
+# 7. Public entry point for resetting persist_external links
+# ---------------------------------------------------------------------------
+function Invoke-PersistExternalReset {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0)]
+        [string]$AppName,
+        [switch]$Global
+    )
+
+    # Disable StrictMode to support Scoop core's dynamic config property access
+    Set-StrictMode -Off
+
+    $isGlobal = [bool]$Global
+
+    # Ensure required Scoop core libraries are loaded
+    $scoopLibDir = Join-Path (versiondir 'scoop' 'current') 'lib'
+    if (-not (Get-Command 'Select-CurrentVersion' -ErrorAction SilentlyContinue)) {
+        $versionsPath = Join-Path $scoopLibDir 'versions.ps1'
+        if (Test-Path -LiteralPath $versionsPath) { . $versionsPath }
+    }
+    if (-not (Get-Command 'installed_manifest' -ErrorAction SilentlyContinue)) {
+        $manifestPath = Join-Path $scoopLibDir 'manifest.ps1'
+        if (Test-Path -LiteralPath $manifestPath) { . $manifestPath }
+    }
+
+    $appsToProcess = @()
+    if ($AppName -and $AppName -ne '*') {
+        $appsToProcess += $AppName
+    } else {
+        $appsToProcess = installed_apps $isGlobal
+    }
+
+    foreach ($app in $appsToProcess) {
+        $version = Select-CurrentVersion -AppName $app -Global:$isGlobal
+        if (-not $version) {
+            if ($AppName -and $AppName -ne '*') {
+                warn "persist_external: App '$app' is not installed $(if ($isGlobal) { 'globally' } else { 'locally' })."
+            }
+            continue
+        }
+
+        $dir = currentdir $app $isGlobal
+        $recordPath = Get-ExternalLinkRecordPath -Dir $dir
+
+        # Only target apps that have generated .scoop-persist-external.json
+        if (-not (Test-Path -LiteralPath $recordPath)) {
+            if ($AppName -and $AppName -ne '*') {
+                info "persist_external: App '$app' does not have an external persist record (.scoop-persist-external.json)."
+            }
+            continue
+        }
+
+        $manifest = installed_manifest $app $version $isGlobal
+        if (-not $manifest) {
+            warn "persist_external: Manifest for '$app' ($version) could not be loaded."
+            continue
+        }
+
+        $persistDir = persistdir $app $isGlobal
+
+        Write-Host "Resetting persist_external links for '$app' ($version)..."
+        Invoke-PersistExternalInstall -Manifest $manifest -PersistDir $persistDir -Dir $dir
+    }
+}
