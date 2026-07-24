@@ -45,8 +45,8 @@ function Initialize-ScoopEnvironment {
     [CmdletBinding()]
     param()
 
-    # Skip if Scoop core functions are already loaded
-    if (Get-Command 'versiondir' -ErrorAction SilentlyContinue) {
+    # Skip if Scoop core functions are already loaded in current scope
+    if ((Get-Command 'Select-CurrentVersion' -ErrorAction SilentlyContinue) -and (Get-Command 'add_alias' -ErrorAction SilentlyContinue)) {
         return
     }
 
@@ -63,15 +63,13 @@ function Initialize-ScoopEnvironment {
         $scoopRoot = Join-Path $HOME 'scoop'
     }
 
-    # Load core Scoop libraries
-    $corePs1 = Join-Path $scoopRoot 'apps\scoop\current\lib\core.ps1'
-    if (Test-Path -LiteralPath $corePs1) {
-        . $corePs1
-    }
-
-    $bucketsPs1 = Join-Path $scoopRoot 'apps\scoop\current\lib\buckets.ps1'
-    if (Test-Path -LiteralPath $bucketsPs1) {
-        . $bucketsPs1
+    # Load all required core Scoop libraries into caller scope
+    $libDir = Join-Path $scoopRoot 'apps\scoop\current\lib'
+    foreach ($lib in 'core.ps1', 'buckets.ps1', 'versions.ps1', 'manifest.ps1', 'commands.ps1') {
+        $libPath = Join-Path $libDir $lib
+        if (Test-Path -LiteralPath $libPath) {
+            . $libPath
+        }
     }
 }
 
@@ -407,7 +405,7 @@ function Initialize-PersistExternalAlias {
     [CmdletBinding()]
     param()
 
-    Initialize-ScoopEnvironment
+    . Initialize-ScoopEnvironment
 
     $aliasName = 'persist-external-reset'
     $shimPath = Join-Path (shimdir $false) "scoop-$aliasName.ps1"
@@ -526,23 +524,12 @@ function Invoke-PersistExternalReset {
         [switch]$Global
     )
 
-    Initialize-ScoopEnvironment
-
-    $isGlobal = [bool]$Global
-
-    # Ensure required Scoop core libraries are loaded
-    $scoopLibDir = Join-Path (versiondir 'scoop' 'current') 'lib'
-    if (-not (Get-Command 'Select-CurrentVersion' -ErrorAction SilentlyContinue)) {
-        $versionsPath = Join-Path $scoopLibDir 'versions.ps1'
-        if (Test-Path -LiteralPath $versionsPath) { . $versionsPath }
-    }
-    if (-not (Get-Command 'installed_manifest' -ErrorAction SilentlyContinue)) {
-        $manifestPath = Join-Path $scoopLibDir 'manifest.ps1'
-        if (Test-Path -LiteralPath $manifestPath) { . $manifestPath }
-    }
+    . Initialize-ScoopEnvironment
 
     # Re-register Scoop alias if missing
     Initialize-PersistExternalAlias
+
+    $isGlobal = [bool]$Global
 
     $appsToProcess = @()
     if ($AppName -and $AppName -ne '*') {
