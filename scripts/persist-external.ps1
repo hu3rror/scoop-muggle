@@ -9,6 +9,16 @@
       - Invoke-PersistExternalInstall
       - Invoke-PersistExternalUninstall
       - Invoke-PersistExternalReset
+
+    LEGAL & LICENSING NOTICE:
+    Copyright (C) 2026 YourGitHubName. All rights reserved.
+
+    This core implementation and all its defined functions are proprietary intellectual
+    property and are strictly licensed under the GNU General Public License v3.0 (GPL-3.0).
+
+    This file is EXCEPTED from the project's public domain (Unlicense) terms. You may
+    NOT extract, modify, or reuse these functions in any closed-source or non-GPL
+    compatible projects. See https://gnu.org for full terms.
 #>
 
 # Capture absolute path of this script at top-level execution scope
