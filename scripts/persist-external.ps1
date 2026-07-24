@@ -11,8 +11,6 @@
       - Invoke-PersistExternalReset
 #>
 
-Set-StrictMode -Version Latest
-
 # Capture absolute path of this script at top-level execution scope
 $script:PersistExternalScriptPath = $PSCommandPath
 if (-not $script:PersistExternalScriptPath) {
@@ -28,6 +26,9 @@ if (-not (Get-Command 'warn' -ErrorAction SilentlyContinue)) {
 }
 if (-not (Get-Command 'error' -ErrorAction SilentlyContinue)) {
     function error($msg) { Write-Error $msg }
+}
+if (-not (Get-Command 'info' -ErrorAction SilentlyContinue)) {
+    function info($msg) { Write-Host "INFO  $msg" -ForegroundColor DarkGray }
 }
 
 # Normalize trailing path separators (preserve root paths like "C:\")
@@ -200,7 +201,12 @@ function Save-ExternalLinkRecord {
         [Parameter(Mandatory)][array]$Records
     )
     $path = Get-ExternalLinkRecordPath -Dir $Dir
-    $Records | ConvertTo-Json -Depth 5 | Out-File -FilePath $path -Force -Encoding utf8
+    $json = $Records | ConvertTo-Json -Depth 5
+    if (Get-Command 'Out-UTF8File' -ErrorAction SilentlyContinue) {
+        $json | Out-UTF8File -FilePath $path
+    } else {
+        [System.IO.File]::WriteAllText($path, $json, [System.Text.Encoding]::UTF8)
+    }
 }
 
 function Read-ExternalLinkRecord {
@@ -335,7 +341,11 @@ function New-ExternalPersistLink {
     $linkType = if ($isDirTarget) { 'Junction' } else { 'SymbolicLink' }
 
     if ($isDirTarget) {
-        New-Item -ItemType Junction -Path $Source -Target $PersistTarget -Force | Out-Null
+        if (Get-Command 'New-DirectoryJunction' -ErrorAction SilentlyContinue) {
+            New-DirectoryJunction $Source $PersistTarget | Out-Null
+        } else {
+            New-Item -ItemType Junction -Path $Source -Target $PersistTarget -Force | Out-Null
+        }
     } else {
         if (-not (Test-CanCreateSymlink)) {
             throw "persist_external: Symlink creation requires Administrator privilege or Developer Mode (Target: $Source)"
@@ -352,9 +362,6 @@ function New-ExternalPersistLink {
 function Ensure-PersistExternalAlias {
     [CmdletBinding()]
     param()
-
-    # Disable StrictMode for Scoop core compatibility ($aliases property checks in add_alias)
-    Set-StrictMode -Off
 
     $aliasName = 'persist-external-reset'
     $shimPath = Join-Path (shimdir $false) "scoop-$aliasName.ps1"
@@ -377,7 +384,7 @@ function Ensure-PersistExternalAlias {
         return
     }
 
-    $command = ". `"$scriptPath`"`nInvoke-PersistExternalReset @args"
+    $command = ". `"$scriptPath`"; Invoke-PersistExternalReset @args"
     $description = 'Reset persist_external links for installed apps'
 
     try {
@@ -395,9 +402,6 @@ function Invoke-PersistExternalInstall {
         [Parameter(Mandatory)][string]$PersistDir,
         [Parameter(Mandatory)][string]$Dir
     )
-
-    # Disable StrictMode for Scoop core compatibility
-    Set-StrictMode -Off
 
     Ensure-PersistExternalAlias
 
@@ -475,9 +479,6 @@ function Invoke-PersistExternalReset {
         [string]$AppName,
         [switch]$Global
     )
-
-    # Disable StrictMode to support Scoop core's dynamic config property access
-    Set-StrictMode -Off
 
     $isGlobal = [bool]$Global
 
