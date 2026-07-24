@@ -8,9 +8,16 @@
     Public entry points:
       - Invoke-PersistExternalInstall
       - Invoke-PersistExternalUninstall
+      - Invoke-PersistExternalReset
 #>
 
 Set-StrictMode -Version Latest
+
+# Capture absolute path of this script at top-level execution scope
+$script:PersistExternalScriptPath = $PSCommandPath
+if (-not $script:PersistExternalScriptPath) {
+    $script:PersistExternalScriptPath = $MyInvocation.MyCommand.Path
+}
 
 # ---------------------------------------------------------------------------
 # 0. Compatibility layer: prefer Scoop native warn/error functions;
@@ -342,6 +349,45 @@ function New-ExternalPersistLink {
 # ---------------------------------------------------------------------------
 # 6. Public entry points
 # ---------------------------------------------------------------------------
+function Ensure-PersistExternalAlias {
+    [CmdletBinding()]
+    param()
+
+    # Disable StrictMode for Scoop core compatibility ($aliases property checks in add_alias)
+    Set-StrictMode -Off
+
+    $aliasName = 'persist-external-reset'
+    $shimPath = Join-Path (shimdir $false) "scoop-$aliasName.ps1"
+
+    # Skip if alias shim already exists
+    if (Test-Path -LiteralPath $shimPath) {
+        return
+    }
+
+    # Use captured top-level script path
+    $scriptPath = $script:PersistExternalScriptPath
+    if (-not $scriptPath -or -not (Test-Path -LiteralPath $scriptPath)) {
+        if ($PSScriptRoot) {
+            $scriptPath = Join-Path $PSScriptRoot 'persist-external.ps1'
+        }
+    }
+
+    if (-not $scriptPath -or -not (Test-Path -LiteralPath $scriptPath)) {
+        warn "persist_external: Could not resolve script path to register alias '$aliasName'."
+        return
+    }
+
+    $command = ". `"$scriptPath`"`nInvoke-PersistExternalReset @args"
+    $description = 'Reset persist_external links for installed apps'
+
+    try {
+        add_alias $aliasName $command $description
+        info "persist_external: Automatically registered Scoop alias '$aliasName'."
+    } catch {
+        warn "persist_external: Skip registering alias '$aliasName': $_"
+    }
+}
+
 function Invoke-PersistExternalInstall {
     [CmdletBinding()]
     param(
@@ -349,6 +395,11 @@ function Invoke-PersistExternalInstall {
         [Parameter(Mandatory)][string]$PersistDir,
         [Parameter(Mandatory)][string]$Dir
     )
+
+    # Disable StrictMode for Scoop core compatibility
+    Set-StrictMode -Off
+
+    Ensure-PersistExternalAlias
 
     $defs = Get-PersistExternalDefinition -Manifest $Manifest
     if (-not $defs) { return }
