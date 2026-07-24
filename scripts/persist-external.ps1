@@ -359,7 +359,7 @@ function New-ExternalPersistLink {
 # ---------------------------------------------------------------------------
 # 6. Public entry points
 # ---------------------------------------------------------------------------
-function Ensure-PersistExternalAlias {
+function Initialize-PersistExternalAlias {
     [CmdletBinding()]
     param()
 
@@ -403,7 +403,7 @@ function Invoke-PersistExternalInstall {
         [Parameter(Mandatory)][string]$Dir
     )
 
-    Ensure-PersistExternalAlias
+    Initialize-PersistExternalAlias
 
     $defs = Get-PersistExternalDefinition -Manifest $Manifest
     if (-not $defs) { return }
