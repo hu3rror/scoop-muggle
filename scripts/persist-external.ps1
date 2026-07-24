@@ -353,6 +353,24 @@ function Invoke-PersistExternalInstall {
     $defs = Get-PersistExternalDefinition -Manifest $Manifest
     if (-not $defs) { return }
 
+    # 1. Collect all target paths defined in the new Manifest
+    $newTargets = @($defs | ForEach-Object { ConvertTo-TrimmedPath -Path (Join-Path $PersistDir $_.TargetName) })
+
+    # 2. Detect orphaned/unmapped persist data from previous versions
+    if (Test-Path -LiteralPath $PersistDir) {
+        $existingItems = Get-ChildItem -LiteralPath $PersistDir -Force -ErrorAction SilentlyContinue
+        foreach ($item in $existingItems) {
+            # Skip internal record file
+            if ($item.Name -eq '.scoop-persist-external.json') { continue }
+
+            $itemPath = ConvertTo-TrimmedPath -Path $item.FullName
+            if ($newTargets -notcontains $itemPath) {
+                warn "persist_external: Found unmapped/orphaned persist item '$($item.Name)' in '$PersistDir'. If this item contains previous data, you may need to manually migrate it."
+            }
+        }
+    }
+
+    # 3. Process external persist links
     $records = @()
     foreach ($d in $defs) {
         $target = Join-Path $PersistDir $d.TargetName
