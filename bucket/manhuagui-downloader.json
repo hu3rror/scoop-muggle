@@ -10,7 +10,11 @@
         }
     },
     "persist_external": [
-        [ "$env:AppData\\com.lanyeeee.manhuagui-downloader", "data", "directory" ]
+        [
+            "$env:AppData\\com.lanyeeee.manhuagui-downloader",
+            "data",
+            "directory"
+        ]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
@@ -27,11 +31,7 @@
             "Manhuagui Downloader"
         ]
     ],
-    "checkver": {
-        "url": "https://api.github.com/repos/lanyeeee/manhuagui-downloader/releases/latest",
-        "jsonpath": "$..tag_name",
-        "regex": "v([\\d.]+)"
-    },
+    "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
