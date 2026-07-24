@@ -124,10 +124,26 @@ function Resolve-ExternalItemType {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][string]$Source,
-        [string]$TypeHint
+        [string]$TypeHint,
+        [string]$PersistTarget
     )
 
     if ($TypeHint) { return $TypeHint }
+
+    # Check physical paths if either exists on disk
+    if (Test-Path -LiteralPath $Source) {
+        $item = Get-Item -LiteralPath $Source -Force -ErrorAction SilentlyContinue
+        if ($null -ne $item) {
+            if ($item.PSIsContainer) { return 'Directory' } else { return 'File' }
+        }
+    }
+
+    if ($PersistTarget -and (Test-Path -LiteralPath $PersistTarget)) {
+        $item = Get-Item -LiteralPath $PersistTarget -Force -ErrorAction SilentlyContinue
+        if ($null -ne $item) {
+            if ($item.PSIsContainer) { return 'Directory' } else { return 'File' }
+        }
+    }
 
     $leaf = Split-Path $Source -Leaf
     $ext = [System.IO.Path]::GetExtension($leaf)
@@ -136,7 +152,12 @@ function Resolve-ExternalItemType {
         throw "persist_external: Cannot infer placeholder type for '$leaf'. Please specify explicit type hint in manifest, e.g. ['$Source', '$leaf', 'file']"
     }
 
-    if ($ext) { return 'File' }
+    # Standard file extension heuristic:
+    # 1. $ext matches .ext format with 1-5 alphanumeric chars (no hyphens)
+    # 2. $leaf is not a multi-dot name (e.g. reverse-DNS names like com.company.app)
+    $isStandardExt = ($ext -match '^\.[a-zA-Z0-9]{1,5}$') -and (($leaf -split '\.').Count -le 2)
+
+    if ($isStandardExt) { return 'File' }
     return 'Directory'
 }
 
@@ -272,7 +293,7 @@ function New-ExternalPersistLink {
                 $sourceIsLink = $false
             }
             # Create empty file/directory placeholder
-            $itemType = Resolve-ExternalItemType -Source $Source -TypeHint $TypeHint
+            $itemType = Resolve-ExternalItemType -Source $Source -TypeHint $TypeHint -PersistTarget $PersistTarget
             if ($itemType -eq 'File') {
                 New-Item -ItemType File -Path $PersistTarget -Force | Out-Null
             } else {
