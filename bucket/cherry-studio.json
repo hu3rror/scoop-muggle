@@ -29,7 +29,11 @@
     ],
     "persist_external": [
         "$env:APPDATA\\CherryStudio",
-        [ "$home\\.cherrystudio", ".cherrystudio", "directory" ]
+        [
+            "$home\\.cherrystudio",
+            ".cherrystudio",
+            "directory"
+        ]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
