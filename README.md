@@ -7,7 +7,13 @@ A [Scoop](https://scoop.sh/) bucket of Windows applications not commonly found i
 ## Installation
 
 ```pwsh
+# Add the bucket and install apps:
 scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
+
+# Install muggle/persist-external first to get the persistent data scripts featured in this Bucket.
+scoop install muggle/persist-external
+
+# Then install apps
 scoop install muggle/<app_name>
 ```
 
@@ -25,21 +31,13 @@ scoop update *
 
 ## Post-Reinstall Recovery
 
-If you reinstall Windows while preserving your Scoop installation directory, run these two commands to restore standard Scoop apps and re-link all `persist_external` directories:
+If you reinstall Windows while preserving your Scoop installation directory, restore all applications and external persistence links with two simple commands:
 
 ```pwsh
-# 1. Restore standard Scoop apps (shims, shortcuts, environment variables)
+# 1. Restore standard Scoop apps (shims, shortcuts, and environment variables)
 scoop reset *
 
-# 2. Restore external persistence links and re-register the 'persist-external-reset' alias
-. "$HOME\scoop\buckets\muggle\scripts\persist-external.ps1"; Invoke-PersistExternalReset
-```
-
-> Note: If Scoop is installed in a custom directory, replace $HOME\scoop with your $env:SCOOP path.
-
-After running step 2, you can re-link external persistence paths anytime via:
-
-```pwsh
+# 2. Restore all external persistence links
 scoop persist-external-reset
 ```
 

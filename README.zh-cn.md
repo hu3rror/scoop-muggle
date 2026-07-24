@@ -7,7 +7,13 @@
 ## 安装
 
 ```pwsh
+# 添加 Bucket 并安装软件
 scoop bucket add muggle 'https://github.com/hu3rror/scoop-muggle.git'
+
+# 先安装 muggle/persist-external 获得本 Bucket 特色的持久化数据脚本
+scoop install muggle/persist-external
+
+# 然后可以安装你想要的软件
 scoop install muggle/<软件名>
 ```
 
@@ -25,21 +31,11 @@ scoop update *
 
 ## 重装系统后恢复
 
-如果你在重装 Windows 系统时保留了 Scoop 安装目录，只需依次运行以下两条命令，即可恢复所有常规 Scoop 软件并重新挂载 `persist_external` 外部持久化链接：
+如果你在重装 Windows 系统时保留了 Scoop 安装目录，只需依次运行以下两条简单命令，即可一键恢复所有常规软件及 `persist_external` 外部持久化链接：
 
 ```pwsh
-# 1. 重置 Scoop apps (shims, shortcuts, environment variables)
 scoop reset *
 
-# 2. 重新注册 'persist-external-reset' 别名
-. "$HOME\scoop\buckets\muggle\scripts\persist-external.ps1"; Invoke-PersistExternalReset
-```
-
-> 注意：如果你的 Scoop 安装在自定义路径，请将命令中的 $HOME\scoop 替换为你的实际安装路径（如 $env:SCOOP）。
-
-完成第 2 步后，今后需要重新挂载外部持久化链接时，直接运行以下命令即可：
-
-```pwsh
 scoop persist-external-reset
 ```
 
