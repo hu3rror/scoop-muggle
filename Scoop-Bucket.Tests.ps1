@@ -11,25 +11,11 @@ if (-not (Test-Path $sourceSchema)) {
     throw "Custom schema.json not found at '$sourceSchema'!"
 }
 
-# 2. Target path inside Scoop Core (where Scoop.Validator loads schema.json)
+# 2. Target path inside Scoop Core where Scoop.Validator loads schema.json
 $targetSchema = "$env:SCOOP_HOME\schema.json"
-$backupSchema = "$env:SCOOP_HOME\schema.json.bak"
 
-# Backup existing Scoop Core schema.json
-if (Test-Path $targetSchema) {
-    Copy-Item $targetSchema $backupSchema -Force
-}
+# Replace Scoop Core schema.json so it remains updated during Pester 5 execution phase
+Copy-Item $sourceSchema $targetSchema -Force
 
-try {
-    # Copy custom schema.json to Scoop Core
-    Copy-Item $sourceSchema $targetSchema -Force
-
-    # Dot-source official test runner as per official Scoop specification
-    . "$env:SCOOP_HOME\test\Import-Bucket-Tests.ps1"
-} finally {
-    # Restore original Scoop Core schema.json
-    if (Test-Path $backupSchema) {
-        Copy-Item $backupSchema $targetSchema -Force
-        Remove-Item $backupSchema -Force
-    }
-}
+# Dot-source official test runner
+. "$env:SCOOP_HOME\test\Import-Bucket-Tests.ps1"
