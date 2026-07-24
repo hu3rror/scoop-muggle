@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "description": "Extension tool for persisting external paths outside Scoop directory.",
+    "homepage": "https://github.com/hu3rror/scoop-muggle",
+    "license": "GPL-3.0-only",
+    "url": "https://raw.githubusercontent.com/hu3rror/scoop-muggle/main/scripts/persist-external.ps1#/persist-external.ps1",
+    "bin": [
+        [
+            "persist-external.ps1",
+            "scoop-persist-external-reset",
+            "Invoke-PersistExternalReset"
+        ]
+    ]
+}
