@@ -480,6 +480,9 @@ function Invoke-PersistExternalReset {
         [switch]$Global
     )
 
+    # Ensure alias is registered/re-registered if missing
+    Initialize-PersistExternalAlias
+
     $isGlobal = [bool]$Global
 
     # Ensure required Scoop core libraries are loaded
