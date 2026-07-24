@@ -18,8 +18,16 @@
         ]
     ],
     "persist_external": [
-        [ "$env:APPDATA\\Him188", "data", "directory" ],
-        [ "$env:LOCALAPPDATA\\Him188", "cache", "directory" ]
+        [
+            "$env:APPDATA\\Him188",
+            "data",
+            "directory"
+        ],
+        [
+            "$env:LOCALAPPDATA\\Him188",
+            "cache",
+            "directory"
+        ]
     ],
     "post_install": [
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
@@ -30,9 +38,9 @@
         "Invoke-PersistExternalUninstall -Manifest $manifest -Dir $dir"
     ],
     "checkver": {
-        "url": "https://api.github.com/repos/open-ani/ani/releases",
-        "jsonpath": "$..tag_name",
-        "regex": "v([-\\d.\\w]+)"
+        "url": "https://api.github.com/repos/open-ani/animeko/releases?per_page=10",
+        "jsonpath": "$.[?(@.prerelease==true)].tag_name",
+        "regex": "v([\\d.]+[-\\w]*)"
     },
     "autoupdate": {
         "architecture": {
