@@ -18,8 +18,7 @@ if (-not $script:PersistExternalScriptPath) {
 }
 
 # ---------------------------------------------------------------------------
-# 0. Compatibility layer: prefer Scoop native warn/error functions;
-#    fallback to Write-Warning/Error if running standalone (e.g. Pester tests).
+# 0. Compatibility layer: prefer Scoop native warn/error/info functions
 # ---------------------------------------------------------------------------
 if (-not (Get-Command 'warn' -ErrorAction SilentlyContinue)) {
     function warn($msg) { Write-Warning $msg }
@@ -29,6 +28,41 @@ if (-not (Get-Command 'error' -ErrorAction SilentlyContinue)) {
 }
 if (-not (Get-Command 'info' -ErrorAction SilentlyContinue)) {
     function info($msg) { Write-Host "INFO  $msg" -ForegroundColor DarkGray }
+}
+
+# Auto-bootstrap Scoop environment if running in a raw PowerShell session
+function Initialize-ScoopEnvironment {
+    [CmdletBinding()]
+    param()
+
+    # Skip if Scoop core functions are already loaded
+    if (Get-Command 'versiondir' -ErrorAction SilentlyContinue) {
+        return
+    }
+
+    # Resolve Scoop root directory
+    $scoopRoot = $env:SCOOP
+    if (-not $scoopRoot -and $script:PersistExternalScriptPath) {
+        # Resolve 4 levels up: scripts -> <bucket> -> buckets -> <ScoopRoot>
+        $parentDir = Split-Path (Split-Path (Split-Path (Split-Path $script:PersistExternalScriptPath)))
+        if ($parentDir -and (Test-Path -LiteralPath $parentDir)) {
+            $scoopRoot = $parentDir
+        }
+    }
+    if (-not $scoopRoot) {
+        $scoopRoot = Join-Path $HOME 'scoop'
+    }
+
+    # Load core Scoop libraries
+    $corePs1 = Join-Path $scoopRoot 'apps\scoop\current\lib\core.ps1'
+    if (Test-Path -LiteralPath $corePs1) {
+        . $corePs1
+    }
+
+    $bucketsPs1 = Join-Path $scoopRoot 'apps\scoop\current\lib\buckets.ps1'
+    if (Test-Path -LiteralPath $bucketsPs1) {
+        . $bucketsPs1
+    }
 }
 
 # Normalize trailing path separators (preserve root paths like "C:\")
@@ -363,6 +397,8 @@ function Initialize-PersistExternalAlias {
     [CmdletBinding()]
     param()
 
+    Initialize-ScoopEnvironment
+
     $aliasName = 'persist-external-reset'
     $shimPath = Join-Path (shimdir $false) "scoop-$aliasName.ps1"
 
@@ -480,8 +516,7 @@ function Invoke-PersistExternalReset {
         [switch]$Global
     )
 
-    # Ensure alias is registered/re-registered if missing
-    Initialize-PersistExternalAlias
+    Initialize-ScoopEnvironment
 
     $isGlobal = [bool]$Global
 
@@ -495,6 +530,9 @@ function Invoke-PersistExternalReset {
         $manifestPath = Join-Path $scoopLibDir 'manifest.ps1'
         if (Test-Path -LiteralPath $manifestPath) { . $manifestPath }
     }
+
+    # Re-register Scoop alias if missing
+    Initialize-PersistExternalAlias
 
     $appsToProcess = @()
     if ($AppName -and $AppName -ne '*') {
