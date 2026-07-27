@@ -1,10 +1,10 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A manager tool to deploy, uninstall, and update OpenSteamTool DLLs for Steam.",
     "homepage": "https://github.com/hu3rror/opensteamtool-gui-py",
     "license": "MIT",
-    "url": "https://github.com/hu3rror/opensteamtool-gui-py/releases/download/v1.0.1/OpenSteamTool-v1.0.1-Release.zip",
-    "hash": "b88aaf038efa75eea354a5cb0f8ead108bc9fc3f1e630e9ceb3631474eddafe7",
+    "url": "https://github.com/hu3rror/opensteamtool-gui-py/releases/download/v1.0.2/OpenSteamTool-v1.0.2-Release.zip",
+    "hash": "6e87a5574a44d7f7c4254720ebaeec8cc67725bfa7842678b727e7736dfe458b",
     "bin": "OpenSteamToolManager.exe",
     "shortcuts": [
         [
