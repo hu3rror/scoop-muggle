@@ -1,13 +1,13 @@
 {
-    "version": "1.14.1",
+    "version": "1.14.2",
     "description": "A cross-platform manga reader that supports local manga and online manga sources, available on Android, iOS, Windows, Linux, and macOS platforms",
     "homepage": "https://github.com/CyrilPeng/Venera-Next",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/CyrilPeng/Venera-Next/releases/download/v1.14.1/VeneraNext-1.14.1-windows.zip",
-            "hash": "9af2e3955fc4b75fa42fde1417ef4141e83f231658d8a5881685a25344a6c3a1",
-            "extract_dir": "VeneraNext-1.14.1-windows"
+            "url": "https://github.com/CyrilPeng/Venera-Next/releases/download/v1.14.2/VeneraNext-1.14.2-windows.zip",
+            "hash": "ffaaebb4eaa68c2f7c8872943fcaec0bc86bcd70c1e5d02619f9e177f06a665a",
+            "extract_dir": "VeneraNext-1.14.2-windows"
         }
     },
     "shortcuts": [
