@@ -1,10 +1,10 @@
 {
-    "version": "v0.3.0-beta.46",
+    "version": "v0.3.0-beta.47",
     "description": "Street Fighter 6 Training Mod",
     "homepage": "https://sf6cm.sctrip.asia",
     "license": "Freeware",
-    "url": "https://sf6cm.sctrip.asia/downloads/client/v0.3.0-beta.46/SF6CMFF-Client.exe",
-    "hash": "f7e1393e6c5a629d685f96c6f1a58a33a82127b5ad5b939d08927ed96322d065",
+    "url": "https://sf6cm.sctrip.asia/downloads/client/v0.3.0-beta.47/SF6CMFF-Client.exe",
+    "hash": "4e6d549beb09897f2cda714e35dc5746535e4067612770b30b99f2dddb78a435",
     "shortcuts": [
         [
             "SF6CMFF-Client.exe",
