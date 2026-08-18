@@ -13,19 +13,6 @@
         "qaac-qtfiles": "muggle/qaac-qtfiles"
     },
     "pre_install": "Remove-Item \"$dir\\qaac_*\" -Force -Recurse",
-    "post_install": [
-        "$qtfilesDir = $(appdir 'qaac-qtfiles' $global)",
-        "if (Test-Path \"$qtfilesDir\") {",
-        "    $qtfilesCurrent = Join-Path \"$qtfilesDir\" 'current'",
-        "    if (Test-Path \"$qtfilesCurrent\") {",
-        "        $qtfilesTarget = (Get-Item \"$qtfilesCurrent\").Target",
-        "        if (-not $qtfilesTarget) { $qtfilesTarget = \"$qtfilesCurrent\" }",
-        "        Get-ChildItem -Path \"$dir\" -Filter 'QTFiles*' | Remove-Item -Force -Recurse",
-        "        $junctionName = if ((Get-Item \"$qtfilesTarget\").Name -match '64') { 'QTFiles64' } else { 'QTFiles' }",
-        "        New-Item \"$dir\\$junctionName\" -ItemType Junction -Target \"$qtfilesTarget\" | Out-Null",
-        "    }",
-        "}"
-    ],
     "architecture": {
         "64bit": {
             "extract_dir": "qaac_3.03\\x64",
@@ -40,6 +27,16 @@
                     "refalac64.exe",
                     "refalac"
                 ]
+            ],
+            "post_install": [
+                "$qtfilesDir = $(appdir 'qaac-qtfiles' $global)",
+                "if (Test-Path \"$qtfilesDir\") {",
+                "    $qtfilesCurrent = Join-Path \"$qtfilesDir\" 'current'",
+                "    if (Test-Path \"$qtfilesCurrent\") {",
+                "        Get-ChildItem -Path \"$dir\" -Filter 'QTFiles*' | Remove-Item -Force -Recurse",
+                "        New-Item \"$dir\\QTFiles64\" -ItemType Junction -Target \"$qtfilesCurrent\" | Out-Null",
+                "    }",
+                "}"
             ]
         },
         "32bit": {
@@ -47,6 +44,16 @@
             "bin": [
                 "qaac.exe",
                 "refalac.exe"
+            ],
+            "post_install": [
+                "$qtfilesDir = $(appdir 'qaac-qtfiles' $global)",
+                "if (Test-Path \"$qtfilesDir\") {",
+                "    $qtfilesCurrent = Join-Path \"$qtfilesDir\" 'current'",
+                "    if (Test-Path \"$qtfilesCurrent\") {",
+                "        Get-ChildItem -Path \"$dir\" -Filter 'QTFiles*' | Remove-Item -Force -Recurse",
+                "        New-Item \"$dir\\QTFiles\" -ItemType Junction -Target \"$qtfilesCurrent\" | Out-Null",
+                "    }",
+                "}"
             ]
         }
     },
