@@ -65,7 +65,7 @@ scoop persist-external-reset
 - [lx-music-desktop](bucket/lx-music-desktop.json)
 - [163MusicLyrics](bucket/163MusicLyrics.json) (and lite/pro variants)
 - [mp3tag](bucket/mp3tag.json) — tag editor
-- [qaac](bucket/qaac.json) / [m4acut](bucket/m4acut.json) — AAC/ALAC encoding and lossless cutting
+- [qaac](bucket/qaac-qtfiles.json) / [m4acut](bucket/m4acut.json) — AAC/ALAC encoding and lossless cutting
 - [vitomu](bucket/vitomu.json) / [deemix-portable](bucket/deemix-portable.json) / [qbldx-mod](bucket/qbldx-mod.json) — audio downloaders
 
 ### Network & Proxy
