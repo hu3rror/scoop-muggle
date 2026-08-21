@@ -22,14 +22,17 @@
     ],
     "pre_install": "if (!(Test-Path \"$persist_dir\\QuickView.ini\")) { Set-Content -Encoding ASCII -Path \"$dir\\QuickView.ini\" -Value '[General]', 'PortableMode=1', 'CheckUpdates=0' }",
     "persist": "QuickView.ini",
-    "checkver": "github",
+    "checkver": {
+        "github": "https://github.com/justnullname/QuickView",
+        "regex": "v(?<version>(?<short>\\d+\\.\\d+\\.\\d+)(?:\\.\\d+)?)"
+    },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/justnullname/QuickView/releases/download/v$version/QuickView_v$version_X64.zip"
+                "url": "https://github.com/justnullname/QuickView/releases/download/v$version/QuickView_v$matchShort_X64.zip"
             },
             "arm64": {
-                "url": "https://github.com/justnullname/QuickView/releases/download/v$version/QuickView_v$version_ARM64.zip"
+                "url": "https://github.com/justnullname/QuickView/releases/download/v$version/QuickView_v$matchShort_ARM64.zip"
             }
         }
     }
