@@ -41,6 +41,12 @@ Single-context: one root `CONTEXT.md` + `docs/adr/`. See `docs/agents/domain.md`
 - 仓库 `.gitattributes` 为 `* text=auto eol=crlf`，测试强制物理 CRLF 且文件以换行结尾。写/编辑工具产出 LF，改完文本文件后用 .NET 转 CRLF 并补末尾换行：`[IO.File]::ReadAllText` → `-replace "`r`n","`n" -replace "`n","`r`n"` → 补 `"`r`n"` → `WriteAllText`（UTF8 无 BOM，测试禁 BOM）。
 - `core.autocrlf=false` 时 `git status` 会把已按 eol=crlf 正确检出的文件误报为 modified（`git diff` 无内容差异）。鉴别：`git ls-files --eol` 显示 `i/lf w/crlf` + `attr/text=auto eol=crlf` 即规范状态；此时 `git add <文件>` 重新规范化，blob 不变则不产生多余 diff。
 
+### scoop manifest 与安装
+
+- `arch_specific` 对 hook（pre_install/post_install 等）取「架构级优先、有则忽略顶层」：manifest 顶层与 `architecture.<arch>` 同时写时**只有架构版本执行**。架构相关内容（解包、launcher）放架构级；跨架构逻辑（数据迁移）放顶层 `post_install`（在 persist 链接之后执行，可安全操作 `$persist_dir`）。
+- 版本不变时 `scoop update <app>` 不会重装；manifest 变更测试用 `scoop update <app> --force`。
+- 本环境无 `Get-FileHash` cmdlet，scoop 下载后的 hash 校验因此假失败（报 "Hash check failed" 且 Actual 为空）：先注入兼容函数再跑 scoop（`Get-FileHash -Path $file -Algorithm $alg` 与 `-InputStream $urlStream` 两处调用点，函数返回含 `.Hash` 大写 hex 的对象）。
+
 ### 模块安装
 
 - 本机 `Install-Module`（PowerShellGet）不可用（PackageManagement 加载失败），用 PSResourceGet：`Install-PSResource <mod> -Version x.y.z -Scope CurrentUser -TrustRepository`（非交互模式必须显式 trust）。
