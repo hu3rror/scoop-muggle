@@ -1,18 +1,21 @@
-# License Notice
+MIT License
 
-This repository contains software under dual licensing terms. Please read carefully before copying or reusing any parts of this project.
+Copyright (c) 2026 hu3rror (scoop-muggle)
 
-### 1. GNU General Public License v3.0 (GPL-3.0)
-The following core scripts and their internal functions are **strictly copyrighted** by the author and licensed under [GPL-3.0](https://gnu.org). They are NOT in the public domain:
-- `scripts/persist-external.ps1`
-- `scripts/mihomo-shawl-setup.ps1`
-- `scripts/mihomo-helper.ps1`
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-*Any modification, reuse of internal functions, or integration of these scripts into other software must comply with the copyleft terms of the GPL-3.0 (i.e., your derivative work must also be open-sourced under GPL-3.0).*
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
----
-
-### 2. The Unlicense (Public Domain)
-Except for the specific scripts listed above, all other generic configuration files, documentation, and minor setup files in this repository are free and unencumbered software released into the public domain.
-
-Anyone is free to copy, modify, publish, use, compile, sell, or distribute these public domain parts for any purpose. For more information, please refer to <https://unlicense.org>.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
