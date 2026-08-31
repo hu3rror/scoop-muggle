@@ -13,8 +13,7 @@
     "powershell.codeFormatting.ignoreOneLineBlock": true,
     "json.schemas": [
         {
-            // 改为指向本地根目录的 schema.json，以支持 persist_external 的 IntelliSense 补全与校验
-            "url": "./schema.json",
+            "url": "https://raw.githubusercontent.com/ScoopInstaller/Scoop/master/schema.json",
             "fileMatch": [
                 "bucket/**/*.json"
             ]
