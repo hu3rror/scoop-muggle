@@ -1,10 +1,10 @@
 {
-    "version": "0.9.1",
+    "version": "0.9.2",
     "description": "A manager tool to deploy, uninstall, and update OpenSteamTool DLLs for Steam.",
     "homepage": "https://github.com/hu3rror/opensteamtool-gui-rs",
     "license": "MIT",
-    "url": "https://github.com/hu3rror/opensteamtool-gui-rs/releases/download/v0.9.1/opensteamtool-manager-v0.9.1.zip",
-    "hash": "eccab9748e1560dc652ea76d3fdc101c27f6c3c3e2521faca5813f779cb42920",
+    "url": "https://github.com/hu3rror/opensteamtool-gui-rs/releases/download/v0.9.2/opensteamtool-manager-v0.9.2.zip",
+    "hash": "a6f5010514b33717dc4352080799789776cbe15d14fd7ec13fc56b36d1b6fe17",
     "bin": "opensteamtool-manager.exe",
     "shortcuts": [
         [
