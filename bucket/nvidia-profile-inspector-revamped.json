@@ -1,10 +1,10 @@
 {
     "homepage": "https://github.com/xHybred/NvidiaProfileInspectorRevamped",
     "description": "A more modern version of Nvidia Profile Inspector - all features supported & easy to use",
-    "version": "7.3.0.0",
+    "version": "7.3.1.0",
     "license": "MIT",
-    "url": "https://github.com/xHybred/NvidiaProfileInspectorRevamped/releases/download/v7.3.0.0/NVPI-R.zip",
-    "hash": "1ac245f659d1c74b82bb09e49076b65d1b29e423d73e2860e357c0ed948b70ca",
+    "url": "https://github.com/xHybred/NvidiaProfileInspectorRevamped/releases/download/v7.3.1.0/NVPI-R.zip",
+    "hash": "80dfe4767979d1a93d19b7a90449ee345bad0f7acd341f59f40ea6986d1c474c",
     "shortcuts": [
         [
             "NVPI-R App/1. Classic [White Theme - Default]/NVPI-R.exe",
