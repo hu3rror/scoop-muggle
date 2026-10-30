@@ -5,7 +5,7 @@ description: Create a new Scoop manifest for this bucket from a project page or 
 
 # new-manifest
 
-Create one complete Scoop manifest for this bucket from a project or download URL, then stop at local validation. The skill covers the archetype, URL, hash, checkver/autoupdate, and the repo's `persist_external` wiring. It never commits, pushes, or opens a PR.
+Create one complete Scoop manifest for this bucket from a project or download URL, then validate it locally and commit it once in the bucket's message format. The skill covers the archetype, URL, hash, checkver/autoupdate, and the repo's `persist_external` wiring. It ends with a local commit; pushing and opening PRs stay with the user.
 
 ## Inputs
 
@@ -87,11 +87,24 @@ Done when: the file exists and parses as JSON.
 
 Done when: each gate passes, or its failure is fixed in the manifest before moving on.
 
-### 10. Report
+### 10. Commit
 
-Report the archetype, filename, checkver form, persist decision, gate results, and every `[NEED-VERIFY]` item. Stop.
+Stage only the new manifest and commit in the bucket's format:
 
-Done when: the report is delivered; commit, push, and PR stay with the user.
+```
+git add bucket/<name>.json
+git commit -m "<name>: Add version <version>"
+```
+
+The bucket's convention (169 existing "Add version" commits): `<app>: Add version <version>` for new manifests; updates use `<app>: Update to version <version>` (not this skill's concern). Stage the manifest path only, never `git add -A`, so unrelated changes stay out of the commit. The repo signs commits (`commit.gpgsign=true`); when git fails with an agent socket error, set `SSH_AUTH_SOCK` to the running agent's socket (e.g. wsl2-ssh-agent) instead of disabling signing.
+
+Done when: `git log -1 --format=%s` reads `<name>: Add version <version>`, and the commit contains only `bucket/<name>.json`.
+
+### 11. Report
+
+Report the archetype, filename, checkver form, persist decision, gate results, the commit hash, and every `[NEED-VERIFY]` item. Stop.
+
+Done when: the report is delivered; push and PR stay with the user.
 
 ## Boundaries
 
