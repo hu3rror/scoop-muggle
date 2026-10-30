@@ -16,8 +16,7 @@ The default when unsure is native `persist`. Only choose `persist_external` when
 
 Upstream behavior (unchanged by this bucket):
 
-- `"persist": "config"` or `"persist": ["config", "conf"]` — the second element renames the data dir inside `~/scoop/persist/<app>/`.
-- Install links `$dir/<source>` to `$persist_dir/<target>` (directory junction or file hardlink). Existing `$dir` data is migrated into `$persist_dir` on first install.
+- `"persist": "config"` or `["config", "conf"]` — the second element renames the data dir in `~/scoop/persist/<app>/`; existing `$dir` data migrates on first install.
 - **When persisting a file, create it in `pre_install`, never `post_install`** — the persistence runner defaults to a directory when the target does not exist. musicplayer2 precedent.
 - `scoop uninstall -p` purges the persisted data; plain uninstall keeps it.
 
@@ -54,7 +53,7 @@ Hook wiring — dot-source the helper and call the install/uninstall functions. 
 
 Exception — when the install itself runs the real installer under admin (Inno/Silent), the link must exist before the installer runs, and services must be stopped before uninstall; then put the Install call in `pre_install` and keep service control around it. goodsync-10 precedent: `pre_install` = admin guard + dot-source + `Invoke-PersistExternalInstall` + run setup `/S` + stop `gs-server` process; `pre_uninstall` = admin guard + stop process + `gs-runner.exe /stop-remove-services` + dot-source + `Invoke-PersistExternalUninstall`.
 
-Admin nuance: manifests that run setup under admin need `is_admin` guards; silent-setup frames may also need the `$persist_dir` link created before the setup writes `%LOCALAPPDATA%`.
+A silent-setup frame may need the link created before setup writes `%LOCALAPPDATA%`.
 
 Behavior notes:
 
@@ -62,7 +61,7 @@ Behavior notes:
 - `scoop update` re-runs `pre_install`/`post_install`; the functions are idempotent (link present → skip).
 - `scoop persist-external-reset` (alias registered on install) re-links everything after a failed move.
 
-Evidence gate for the decision: a redirection flag exists (native) vs. an observed external path with no redirection (`persist_external`). When neither is verifiable from the app's docs or source, keep native `persist` only if there is something in `$dir` worth persisting; otherwise write neither persist key and mark `[NEED-VERIFY]` in the report.
+When neither is verifiable from docs or source, write native `persist` only if something in `$dir` is worth keeping; otherwise write no persist key and mark `[NEED-VERIFY]`.
 
 ## Precedents in the bucket
 

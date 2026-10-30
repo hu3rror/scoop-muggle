@@ -40,19 +40,16 @@ Mode chain, first success wins: `extract` (default) → `json` → `xpath` → `
 
 ## 4. Verify before reporting
 
-1. `bin/checkver.ps1 -App <name>` — the reported version must equal the manifest's `version`. (The wrapper already passes `-Dir bucket`; never pass `-Dir` yourself, and `-u` is not an accepted parameter here.)
+1. `bin/checkver.ps1 -App <name>` — the reported version must equal the manifest's `version`. The wrapper passes `-Dir bucket`; `-u` is not a parameter.
 2. With autoupdate: `bin/checkver.ps1 -App <name> -ForceUpdate`, then diff. The rewritten `url`, `hash`, and `extract_dir` must equal the values already in the manifest. A mismatch means the URL template or hash rule is wrong.
-3. `scoop config debug $true` before a checkver run when the form misbehaves; capture the regex/JSON match in the output.
-4. The manual round-trip also works: lower `version`, run `-ForceUpdate`, confirm the bump, restore if needed.
+3. A misbehaving form: `scoop config debug $true` first and read the captured regex/JSON match. The manual round-trip — lower `version`, `-ForceUpdate`, confirm the bump — exercises the same path.
 
 Unverifiable at build time (e.g. a source that publishes only a rolling URL): keep the manifest installable, write no autoupdate, and mark `[NEED-VERIFY]`.
 
 ## 5. Bucket precedents
 
-- `checkver: "github"` — 74 manifests.
-- `checkver: {"github": "<repo>"}` — 25.
-- `jsonpath` — 17, e.g. goldendict-ng (`jsonpath` + `regex` + `replace` over a Qt-tagged asset name).
-- `regex` on HTML — e.g. vcredist-aio (multiline regex over a release-notes page).
+- `jsonpath` — goldendict-ng (`jsonpath` + `regex` + `replace` over a Qt-tagged asset name).
+- `regex` on HTML — vcredist-aio (multiline regex over a release-notes page).
 - `script` — 2: hitomi-downloader (multi-page `Invoke-WebRequest` + `[regex]::Match`), spotx (try/catch + `Get-GitHubToken` + commit-date version).
 - `latest.yml` hash source — 8, e.g. cherry-studio (`$baseurl/latest.yml` + regex with `$base64`).
 - `reverse`, `xpath`, `rdf`, `metalink` — 0 in this bucket; valid upstream, use when the source demands it.

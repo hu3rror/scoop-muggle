@@ -1,6 +1,6 @@
 # Manifest field reference
 
-Counts are snapshots of `bucket/*.json` usage and exist to tell you what the bucket actually writes; `0` means the field is upstream-valid but this bucket never uses it. Every section links the official wiki page that defines the field.
+Counts snapshot `bucket/*.json` usage; `0` means upstream-valid but unused here. Wiki pages at the end.
 
 ## Required fields
 
@@ -19,7 +19,7 @@ Counts are snapshots of `bucket/*.json` usage and exist to tell you what the buc
 |---|---|---|
 | `architecture` | 123 | Wraps per-arch `url`, `hash`, `bin`, `checkver`, `extract_dir`, `installer`, `pre_install`, `post_install`, `shortcuts`, `uninstaller`. Put arch-specific content here; see repo `AGENTS.md` for the hook merge rule. |
 | `url` as array | 30 | Multi-asset installs: parallel `url`/`hash` arrays, one entry per asset (mihomo-shawl-service). |
-| `extract_dir` | 23 | The single folder to strip from an archive. Verify the archive's layout before writing it. |
+| `extract_dir` | 23 | Folder to strip from an archive. |
 | `extract_to` | 0 | Extract into a subdirectory of the install dir instead of the root. |
 | `innosetup` | 1 | `true` when the download is an Inno Setup installer that 7z can unpack. game-cheats-manager precedent. |
 | `installer` | 6 | `{file, script, args, keep}` — run an installer from inside the extracted payload; `installer.keep` keeps it after install. Env inside `script`: `$fname`, `$manifest`, `$architecture`, `$dir`. |
@@ -51,20 +51,14 @@ Counts are snapshots of `bucket/*.json` usage and exist to tell you what the buc
 
 Hook variables (upstream): `$app`, `$architecture`, `$cmd`, `$manifest`, `$version`, `$persist_dir`, `$bucketsdir`, `$original_dir`, `$scoopdir`, `$global`. `$dir` is the current versioned directory, except in `post_install` where it points at the live install. `appdir <name>` resolves another scoop app's dir.
 
-## Persistence
+## Persistence and update
 
-`persist` (52) and the bucket-specific `persist_external` (12) are covered in `persistence.md`.
-
-## Update
-
-`checkver` (150) and `autoupdate` (149) are covered in `checkver-autoupdate.md`.
+`persist` (52) / `persist_external` (12): `persistence.md`. `checkver` (150) / `autoupdate` (149): `checkver-autoupdate.md`.
 
 ## Comments and legacy
 
-- `##` — array of comment lines (3 manifests).
 - `_comment` — deprecated; do not add.
-- `license.identifier` — object form above.
-- `extra` — free-form bucket data; no usage here, do not add.
+- `extra` — free-form bucket data; unused here, do not add.
 
 ## Wiki pages
 
