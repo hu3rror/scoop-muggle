@@ -14,20 +14,7 @@ The five canonical triage roles use the default labels: `needs-triage`, `needs-i
 
 ### Domain docs
 
-Single-context: one root `CONTEXT.md` + `docs/adr/`（无则跳过，随 domain-modeling 惰性创建）。See `docs/agents/domain.md`.
-
-## 环境实战（PS 5.1 / gh / git / scoop）
-
-本仓库工作流在 PowerShell 5.1 下交互，照下面写法规避固定坑：
-
-- `gh` 的 `--jq` 表达式含空格 / 管道 / `\(...)` 会被 PowerShell 拆成多个参数；**存变量也救不了含 `| join(...)` 的格式化表达式**（实测仍拆参）。无空格紧凑表达式（`--jq '.[].number'`）可直接用；其余（`gh issue list` / `gh run list` / `gh run view` 的格式化输出）改用 `ConvertFrom-Json` + PowerShell 侧格式化最稳。
-- `--add-assignee @me` 的 `@me` 会被解释成 splatting，必须写 `--add-assignee "@me"`。
-- 多行 `--body` 一律用 `--body-file <file>` 传文件，不要用 here-string 内联（会变成多个参数）。
-- `gh issue close --comment` 的 `✓ Closed` 输出走 stderr、显示为红字，不是失败——以 `gh issue view` 的实际 state 为准。
-- `git push` 的进度输出（`To https://...`）走 stderr 显示为 NativeCommandError 红字，也不是失败——以 `git log` / `git status` / 远端核对实际结果。
-- 循环里 `ConvertFrom-Json` 解析失败会残留上一个对象的引用，导致字段被误判到相邻 manifest：失败时 `continue` 或清空变量。
-- 读含中文的文件（manifest JSON、ps1 脚本头部）在 PS 5.1 可能乱码/解析报错（如 `Get-Content` 读 .ps1 报 ParserError），用 .NET `[IO.File]::ReadAllText` 读取。
-- 更新 map/issue body（`gh issue edit <n> --body-file`）时，PowerShell 双引号字符串里的 markdown 反引号（如 `` `app_data_dir()` ``）会被当作转义符吞掉（反引号+a 变 `^G`）。用单引号字符串拼接，或先写临时文件再 `--body-file`。
+Single-context: one root `GLOSSARY.md` + `docs/adr/`（无则跳过，随 domain-modeling 惰性创建）。See `docs/agents/domain.md`.
 
 ### gh api 与源码获取
 
