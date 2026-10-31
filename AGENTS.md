@@ -52,4 +52,4 @@ Single-context: one root `GLOSSARY.md` + `docs/adr/`（无则跳过，随 domain
 
 ### 跑测试
 
-- `bin\test.ps1` 需要 Pester 5.2.0 + BuildHelpers 2.0.1（预装于 `Documents\WindowsPowerShell\Modules`，默认 PSModulePath 找不到）：先 `$env:PSModulePath = "$env:USERPROFILE\Documents\WindowsPowerShell\Modules;$env:PSModulePath"` 再跑。
+- `bin\test.ps1` 需要 Pester 5.2.0 + BuildHelpers 2.0.1（预装于 `Documents\WindowsPowerShell\Modules`，默认 PSModulePath 找不到）：先 `$env:PSModulePath = "$env:USERPROFILE\Documents\WindowsPowerShell\Modules;$env:PSModulePath"` 再跑；本机执行策略拦截未签名脚本，跑法必须带 Bypass：`powershell -NoProfile -ExecutionPolicy Bypass -File bin\test.ps1`。

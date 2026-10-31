@@ -65,5 +65,5 @@ When neither is verifiable from docs or source, write native `persist` only if s
 
 ## Precedents in the bucket
 
-- Native `persist`: 52 manifests, e.g. mihomo-shawl-service (config, ui, proxies, rules, cache.db, logs), cherry-studio (data after `.cmd` launcher redirects via `PORTABLE_EXECUTABLE_DIR`).
-- `persist_external`: 12 manifests — the ADR-0002 list (163MusicLyrics, PicaComic, neat-reader, goodsync-10, and others): apps writing to `%APPDATA%`/`%LOCALAPPDATA%` with no portable switch. cherry-studio, lx-music-desktop, wonderpen were migrated from `persist_external` to native when upstream gained redirection.
+- Native `persist` — e.g. mihomo-shawl-service (config, ui, proxies, rules, cache.db, logs), cherry-studio (data after a `.cmd` launcher redirects via `PORTABLE_EXECUTABLE_DIR`).
+- `persist_external` (ADR-0002 list) — apps writing to `%APPDATA%`/`%LOCALAPPDATA%` with no portable switch. cherry-studio, lx-music-desktop, wonderpen were migrated from `persist_external` to native when upstream gained redirection.
