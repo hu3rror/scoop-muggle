@@ -44,7 +44,7 @@
 2. **Tauri v2 无内建 portable/数据目录重定向机制**（#78 验证）：`app_data_dir` 由 identifier 派生，需应用自实现 portable 检测（如检测 exe 旁 sentinel 文件）——manhuagui-downloader 未实现，README 的"portable"仅为免安装打包。
 3. **cherry-studio 的最佳路径不是 `--user-data-dir`，而是官方 portable 构建**：Extras 用 `Cherry-Studio-*-portable.exe`（上游官方发布）+ `persist: data` + pre_install 迁移——比 setup.exe 解包 + user-data-dir 更干净，已纳入「迁移 cherry-studio 与 lx-music-desktop」票。
 4. **对"不可迁"档的三种处理选择**（后续 grilling 决策）：
-   - A. 保留 persist_external（现状，10 个 app）
+   - A. 保留 persist_external（现状）
    - B. 学习 Extras：放弃部分 app 的持久化（它们的数据本来就在 %APPDATA%，Scoop 卸载不清理会留残留，但数据不丢）——用 post_uninstall 清理替代 persist
    - C. 混合：保留 persist_external 但只给"数据必须持久化"的 app 用
 
