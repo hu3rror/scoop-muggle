@@ -21,6 +21,11 @@
             "$env:AppData\\rgitui",
             "config",
             "directory"
+        ],
+        [
+            "$env:LocalAppData\\rgitui",
+            "cache",
+            "directory"
         ]
     ],
     "post_install": [
