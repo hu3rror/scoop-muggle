@@ -15,3 +15,10 @@
 - 缓存移出 git 工作区，存 `%LOCALAPPDATA%\muggle-scoop\schema.injected.json`（非 Windows 退回系统临时目录）。
 - `Scoop-Bucket.Tests.ps1` 测试开始前自愈上次残留（若 schema.json 含 `persist_external`，`git checkout -- schema.json` 还原官方版），测试结束由外层 `Describe` 的 `AfterAll` 把原始内容字节级还原（备份在 TEMP，跑后即删）。
 - 受制于官方 `Import-Bucket-Tests.ps1` 硬编码 `$PSScriptRoot/../schema.json`，注入版仍须短暂落在 scoop core；但不再留存，已验证跑完 `bin\test.ps1` 后 scoop core `git status` 干净。
+
+**Revision 2026-11**：注入的 `persist_external` 规则从弱约束（`type: array`，元素不限）收紧为可读、可校的形状定义：
+- 新增 `definitions.persistExternalEntry`：条目要么是字符串，要么是长度 2–3 的数组 `[来源, 目标名]` / `[来源, 目标名, 类型]`，类型枚举 `file` / `dir` / `directory`（`dir` 为 `directory` 的别名），多余元素拒绝。
+- 外层用 `anyOf`（字符串条目本身也是数组，`oneOf` 会把嵌套数组判为重叠而整条拒绝），内层条目用 `oneOf`。
+- 属性带 `$type: array` 与 `description`，读 schema 的工具/AI 能直接看出形状；校验消息仍以 `anyOf` 分支为主。
+- 判定依据（Scoop.Validator 实测）：仓库 188 个 manifest 全部通过；单字符串、纯字符串数组、2/3 元组、`dir` 别名、`file` 类型均通过；4 元组、未知类型、非字符串、空数组均被拒。
+

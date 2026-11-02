@@ -27,7 +27,7 @@ Custom key, documented in `docs/adr/0002-persist-external-retention.md` and impl
 Manifest shape — an array of items, each either:
 
 - a plain external path string: `["$env:AppData\\NeatReader"]`, or
-- a tuple `[source, targetName, kind]` where `kind` is `"directory"` or `"file"`:
+- a tuple `[source, targetName]` or `[source, targetName, kind]`, where `kind` is `"directory"` (alias `"dir"`) or `"file"`:
 
 ```json
 "persist_external": [
@@ -54,6 +54,7 @@ Hook wiring — dot-source the helper and call the install/uninstall functions. 
 Exception — when the install itself runs the real installer under admin (Inno/Silent), the link must exist before the installer runs, and services must be stopped before uninstall; then put the Install call in `pre_install` and keep service control around it. goodsync-10 precedent: `pre_install` = admin guard + dot-source + `Invoke-PersistExternalInstall` + run setup `/S` + stop `gs-server` process; `pre_uninstall` = admin guard + stop process + `gs-runner.exe /stop-remove-services` + dot-source + `Invoke-PersistExternalUninstall`.
 
 A silent-setup frame may need the link created before setup writes `%LOCALAPPDATA%`.
+Every hook string is a contract: `scripts/persist-external-hooks.Tests.ps1` parses each `bucket/*.json`, resolves the called function and its parameters against the script's AST, and fails CI on an undeclared parameter, a renamed function, or a `persist_external` manifest missing the uninstall hook.
 
 Behavior notes:
 

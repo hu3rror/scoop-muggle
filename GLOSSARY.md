@@ -12,6 +12,10 @@ _Avoid_: external persist、persist-ext
 已应用的链接集合的快照，供后续解除或重建链接时认领真实路径。
 _Avoid_: 链接状态文件、记录缓存
 
+**条目（link entry）**：
+`persist_external` 数组中的一个元素：外部路径字符串，或 `[来源, 目标名, 类型]` 元组（类型为 `file` / `directory`，`dir` 是 `directory` 的别名）。
+_Avoid_: 项、item、元素
+
 **对账（reconcile）**：
 把 manifest 声明、链接记录与磁盘现状对齐为同一套链接状态的唯一动作。
 _Avoid_: sync、repair、修复

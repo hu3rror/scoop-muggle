@@ -41,9 +41,33 @@ function Get-InjectedSchemaText {
         $schema = Get-Content -LiteralPath $tmp -Raw | ConvertFrom-Json
         $properties = $schema.properties
         if (-not ($properties.PSObject.Properties.Name -contains 'persist_external')) {
-            $properties | Add-Member -NotePropertyName 'persist_external' `
-                -NotePropertyValue @{ '$ref' = '#/definitions/stringOrArrayOfStringsOrAnArrayOfArrayOfStrings' } `
-                -Force
+            $definitions = $schema.definitions
+            if (-not ($definitions.PSObject.Properties.Name -contains 'persistExternalEntry')) {
+                $definitions | Add-Member -NotePropertyName 'persistExternalEntry' -NotePropertyValue @{
+                    oneOf = @(
+                        @{ type = 'string' },
+                        @{
+                            type            = 'array'
+                            minItems        = 2
+                            maxItems        = 3
+                            additionalItems = $false
+                            items           = @(
+                                @{ type = 'string' },
+                                @{ type = 'string' },
+                                @{ enum = @('file', 'dir', 'directory') }
+                            )
+                        }
+                    )
+                } -Force
+            }
+            $properties | Add-Member -NotePropertyName 'persist_external' -NotePropertyValue @{
+                'description' = 'Bucket-specific: external paths (or [Source, Target, Kind] tuples) that persist-external.ps1 links into the persist directory instead of moving data there.'
+                '$type'       = 'array'
+                anyOf         = @(
+                    @{ '$ref' = '#/definitions/persistExternalEntry' },
+                    @{ type = 'array'; minItems = 1; items = @{ '$ref' = '#/definitions/persistExternalEntry' } }
+                )
+            } -Force
         }
         return ($schema | ConvertTo-Json -Depth 20)
     } finally {
