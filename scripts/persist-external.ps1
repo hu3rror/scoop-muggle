@@ -151,7 +151,7 @@ function Save-ExternalLinkRecord {
         [Parameter(Mandatory)][array]$Records
     )
     $path = Get-ExternalLinkRecordPath -PersistDir $PersistDir
-    $json = $Records | ConvertTo-Json -Depth 5
+    $json = ConvertTo-Json -InputObject @($Records) -Depth 5
     if (Get-Command 'Out-UTF8File' -ErrorAction SilentlyContinue) {
         $json | Out-UTF8File -FilePath $path
     } else {
@@ -252,7 +252,9 @@ function New-ExternalPersistLink {
 
     $sourceItem = Get-Item -LiteralPath $Source -Force -ErrorAction SilentlyContinue
     $targetItem = Get-Item -LiteralPath $PersistTarget -Force -ErrorAction SilentlyContinue
-
+    if ($null -ne $sourceItem -and -not $sourceItem.PSIsContainer) {
+        throw "persist_external: '$Source' is a file; only directories are supported."
+    }
     $sourceIsLink = ($null -ne $sourceItem) -and [bool]$sourceItem.LinkType
     $sourceIsRealData = ($null -ne $sourceItem) -and (-not $sourceItem.LinkType)
 
@@ -264,7 +266,7 @@ function New-ExternalPersistLink {
             $normPersist = [System.IO.Path]::GetFullPath($PersistTarget)
             if ($normCurrent -eq $normPersist -and ($null -ne $targetItem)) {
                 Write-Verbose "persist_external: '$Source' is already linked to '$PersistTarget'"
-                return $sourceItem.LinkType
+                return
             }
         }
     }
@@ -312,6 +314,10 @@ function New-ExternalPersistLink {
         New-Item -ItemType Directory -Path $sourceParent -Force | Out-Null
     }
 
+    if (-not $targetItem.PSIsContainer) {
+        throw "persist_external: '$PersistTarget' is a file; only directories are supported."
+    }
+
     # 6. Create the junction
     if (Get-Command 'New-DirectoryJunction' -ErrorAction SilentlyContinue) {
         New-DirectoryJunction $Source $PersistTarget | Out-Null
@@ -319,7 +325,6 @@ function New-ExternalPersistLink {
         New-Item -ItemType Junction -Path $Source -Target $PersistTarget -Force | Out-Null
     }
 
-    return 'Junction'
 }
 
 # ---------------------------------------------------------------------------
@@ -408,7 +413,7 @@ function Invoke-PersistExternalReconcile {
     $records = @()
     foreach ($d in $desired) {
         try {
-            New-ExternalPersistLink -Source $d.Source -PersistTarget $d.Target | Out-Null
+            New-ExternalPersistLink -Source $d.Source -PersistTarget $d.Target
             $records += $d.Source
         } catch {
             # Log error on individual failure and continue processing remaining items

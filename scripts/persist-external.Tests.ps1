@@ -40,6 +40,18 @@ Describe 'persist_external reconcile' {
         $records[0] | Should -BeOfType [string]
     }
 
+    It 'serializes a single-entry record as a JSON array' {
+        $single = [pscustomobject]@{ persist_external = @(, @($srcA, 'a', 'directory')) }
+
+        Invoke-PersistExternalReconcile -Manifest $single -PersistDir $persistDir -Dir $dir
+
+        $raw = Get-Content -LiteralPath $recordPath -Raw
+        $raw.TrimStart().StartsWith('[') | Should -BeTrue
+        $records = [array](ConvertFrom-Json $raw)
+        $records.Count | Should -Be 1
+        $records | Should -Contain $srcA
+    }
+
     It 'keeps the record at the declared set on repeat runs' {
         Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
         Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
@@ -198,7 +210,7 @@ Describe 'New-ExternalPersistLink' {
         New-Item -ItemType Directory -Path $source -Force | Out-Null
         Set-Content -LiteralPath (Join-Path $source 'f.txt') -Value 'x'
 
-        New-ExternalPersistLink -Source $source -PersistTarget (Join-Path $TestDrive 'persist/data') | Should -Be 'Junction'
+        New-ExternalPersistLink -Source $source -PersistTarget (Join-Path $TestDrive 'persist/data')
 
         (Get-Item -LiteralPath $source -Force).LinkType | Should -Be 'Junction'
         Test-Path -LiteralPath (Join-Path $source 'f.txt') | Should -BeTrue
@@ -208,10 +220,21 @@ Describe 'New-ExternalPersistLink' {
         $source = Join-Path $TestDrive 'missing'
         $target = Join-Path $TestDrive 'persist/missing'
 
-        New-ExternalPersistLink -Source $source -PersistTarget $target | Should -Be 'Junction'
+        New-ExternalPersistLink -Source $source -PersistTarget $target
 
         $target | Should -Exist
         (Get-Item -LiteralPath $target -Force).PSIsContainer | Should -BeTrue
         (Get-Item -LiteralPath $source -Force).LinkType | Should -Be 'Junction'
+    }
+
+    It 'refuses a file source and leaves it untouched' {
+        $source = Join-Path $TestDrive 'config.json'
+        Set-Content -LiteralPath $source -Value 'data'
+        $target = Join-Path $TestDrive 'persist/config.json'
+
+        { New-ExternalPersistLink -Source $source -PersistTarget $target } | Should -Throw '*only directories*'
+
+        (Get-Content -LiteralPath $source -Raw).Trim() | Should -Be 'data'
+        $target | Should -Not -Exist
     }
 }
