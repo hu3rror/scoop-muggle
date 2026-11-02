@@ -106,6 +106,7 @@ Describe 'persist_external reconcile' {
     }
 
     It 'drops the stale record but keeps the legacy one when every link fails' {
+        $ErrorActionPreference = 'Stop'
         Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
         Copy-Item -LiteralPath $recordPath -Destination $legacyPath
         Mock New-ExternalPersistLink { throw 'boom' }
@@ -117,6 +118,7 @@ Describe 'persist_external reconcile' {
     }
 
     It 'records only the links it applied when one link fails' {
+        $ErrorActionPreference = 'Stop'
         Mock New-ExternalPersistLink {
             if ($Source -eq $srcA) { throw 'boom' }
             'Junction'

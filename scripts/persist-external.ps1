@@ -27,7 +27,9 @@ if (-not (Get-Command 'warn' -ErrorAction SilentlyContinue)) {
     function warn($msg) { Write-Warning $msg }
 }
 if (-not (Get-Command 'error' -ErrorAction SilentlyContinue)) {
-    function error($msg) { Write-Error $msg }
+    # Scoop's own `error` writes host text and never throws; per-item failures are
+    # reported and processing continues, so keep the same shape here.
+    function error($msg) { Write-Host "ERROR $msg" -ForegroundColor DarkRed }
 }
 if (-not (Get-Command 'info' -ErrorAction SilentlyContinue)) {
     function info($msg) { Write-Host "INFO  $msg" -ForegroundColor DarkGray }
@@ -527,7 +529,7 @@ function Invoke-PersistExternalReconcile {
             $records += @{ Source = $d.Source; Target = $d.Target; LinkType = $linkType }
         } catch {
             # Log error on individual failure and continue processing remaining items
-            error "persist_external: Failed to process '$($d.Source)': $_" -ErrorAction Continue
+            error "persist_external: Failed to process '$($d.Source)': $_"
         }
     }
 
