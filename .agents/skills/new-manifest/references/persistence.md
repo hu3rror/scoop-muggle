@@ -47,7 +47,7 @@ Hook wiring — dot-source the helper and call the install/uninstall functions. 
 ],
 "pre_uninstall": [
     ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
-    "Invoke-PersistExternalUninstall -Manifest $manifest -Dir $dir"
+    "Invoke-PersistExternalUninstall -Manifest $manifest -Dir $dir -PersistDir $persist_dir"
 ]
 ```
 
@@ -59,6 +59,7 @@ Behavior notes:
 
 - The helper keeps its own link record (`.scoop-persist-external.json`) inside `$persist_dir` per app, so uninstall can remove exactly the links this bucket created — it never touches real user data.
 - `scoop update` re-runs `pre_install`/`post_install`; the functions are idempotent (link present → skip).
+- Reconcile treats the record as the manifest's declared set: an entry removed from the manifest is unlinked on the next install/reset (persist data itself stays in place).
 - `scoop persist-external-reset` (alias registered on install) re-links everything after a failed move.
 
 When neither is verifiable from docs or source, write native `persist` only if something in `$dir` is worth keeping; otherwise write no persist key and mark `[NEED-VERIFY]`.

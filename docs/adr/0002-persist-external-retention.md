@@ -1,5 +1,10 @@
 # persist_external 机制保留：12 个不可迁 app 全部使用，维持精简版现状
 
+**Revision 2026-11（架构审查）**：三条修订：
+- **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，对账成功后自动删除。`pre_uninstall` hook 新增 `-PersistDir $persist_dir`，缺省时从版本目录推导（兼容旧 manifest）。
+- **记录语义为当前集**：对账后记录等于 manifest 声明的链接集；manifest 已不再声明的条目在对账时解除链接。
+- **reset 门卫改读 manifest**：`Invoke-PersistExternalReset` 的门卫从「记录文件存在」改为「manifest 声明 `persist_external`」，记录缺失的 app 不再被静默跳过。
+
 官方 Scoop `persist` 只能持久化 `$dir`（安装目录）内的路径，够不到 `%APPDATA%` / `%LOCALAPPDATA%` 等外部目录。而本仓库部分 app 把用户数据写死在系统路径（Flutter、JVM、.NET、WebView2、商业软件、绿色版均无数据目录重定向机制）。为此本仓库自研 `persist_external`：在 `post_install` 将外部路径通过 Junction（目录）/ SymbolicLink（文件）链接到 `$persist_dir`，实现实时持久化，配套 `pre_uninstall` 解除链接、`.scoop-persist-external.json` 记录链接状态、`Invoke-PersistExternalReset` 重装系统后恢复。
 
 经 wayfinder #68 决策链（#72 去留 grilling → #75 盘点 → #74/#76 迁移 → #78 验证 → #77 最终处置），现决定：**保留自研精简版 `persist_external`，作为无法迁移 app 的持久化机制；12 个不可迁 manifest 全部继续使用；脚本不再改造、不引入外部模块**。可迁的 app（cherry-studio、lx-music-desktop、wonderpen）一律迁移到原生 `persist`。

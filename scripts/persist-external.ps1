@@ -8,6 +8,7 @@
     Public entry points:
       - Invoke-PersistExternalInstall
       - Invoke-PersistExternalUninstall
+      - Invoke-PersistExternalReconcile
       - Invoke-PersistExternalReset
 
     Licensed under the MIT License (see LICENSE in the repository root).
@@ -225,16 +226,24 @@ function Test-CanCreateSymlink {
 # 3. Persistence record (.scoop-persist-external.json)
 # ---------------------------------------------------------------------------
 function Get-ExternalLinkRecordPath {
-    param([Parameter(Mandatory)][string]$Dir)
+    param([Parameter(Mandatory)][string]$PersistDir)
+    Join-Path $PersistDir '.scoop-persist-external.json'
+}
+
+# Legacy record location (version dir), kept for read-only fallback from
+# installs made before the record moved to the persist dir.
+function Get-LegacyExternalLinkRecordPath {
+    param([string]$Dir)
+    if (-not $Dir) { return $null }
     Join-Path $Dir '.scoop-persist-external.json'
 }
 
 function Save-ExternalLinkRecord {
     param(
-        [Parameter(Mandatory)][string]$Dir,
+        [Parameter(Mandatory)][string]$PersistDir,
         [Parameter(Mandatory)][array]$Records
     )
-    $path = Get-ExternalLinkRecordPath -Dir $Dir
+    $path = Get-ExternalLinkRecordPath -PersistDir $PersistDir
     $json = $Records | ConvertTo-Json -Depth 5
     if (Get-Command 'Out-UTF8File' -ErrorAction SilentlyContinue) {
         $json | Out-UTF8File -FilePath $path
@@ -244,17 +253,51 @@ function Save-ExternalLinkRecord {
 }
 
 function Read-ExternalLinkRecord {
-    param([Parameter(Mandatory)][string]$Dir)
-    $path = Get-ExternalLinkRecordPath -Dir $Dir
-    if (-not (Test-Path -LiteralPath $path)) { return $null }
-    try {
-        $content = Get-Content -LiteralPath $path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
-        if ($content -isnot [array]) { $content = @($content) }
-        return $content
-    } catch {
-        warn "persist_external: Failed to read link record '$path', falling back to manifest parsing: $_"
-        return $null
+    param(
+        [Parameter(Mandatory)][string]$PersistDir,
+        [string]$Dir
+    )
+    $candidates = @(
+        (Get-ExternalLinkRecordPath -PersistDir $PersistDir),
+        (Get-LegacyExternalLinkRecordPath -Dir $Dir)
+    ) | Where-Object { $_ -and (Test-Path -LiteralPath $_) }
+    if (-not $candidates) { return $null }
+    foreach ($path in $candidates) {
+        try {
+            $content = Get-Content -LiteralPath $path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+            if ($content -isnot [array]) { $content = @($content) }
+            return @($content)
+        } catch {
+            warn "persist_external: Failed to read link record '$path', falling back to manifest parsing: $_"
+            return $null
+        }
     }
+    return $null
+}
+
+function Remove-ExternalLinkRecord {
+    param(
+        [Parameter(Mandatory)][string]$PersistDir,
+        [string]$Dir
+    )
+    foreach ($path in @(
+        (Get-ExternalLinkRecordPath -PersistDir $PersistDir),
+        (Get-LegacyExternalLinkRecordPath -Dir $Dir)
+    )) {
+        if ($path -and (Test-Path -LiteralPath $path)) {
+            Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
+# Derive the persist dir from a version dir (\SCOOP\apps\<app>\<version>)
+function Resolve-ExternalPersistDir {
+    param([Parameter(Mandatory)][string]$Dir)
+    $cleanDir = ConvertTo-TrimmedPath -Path $Dir
+    $appDir = Split-Path -Parent $cleanDir
+    $appsDir = Split-Path -Parent $appDir
+    $scoopRoot = Split-Path -Parent $appsDir
+    Join-Path (Join-Path $scoopRoot 'persist') (Split-Path -Leaf $appDir)
 }
 
 # ---------------------------------------------------------------------------
@@ -391,7 +434,103 @@ function New-ExternalPersistLink {
 }
 
 # ---------------------------------------------------------------------------
-# 6. Public entry points
+# 6. Reconcile (sole owner of the link record)
+# ---------------------------------------------------------------------------
+function Remove-ExternalLink {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$Source)
+
+    $removed = Remove-ReparsePointSafe -Path $Source
+    if ($removed) {
+        Write-Verbose "persist_external: Removed external link '$Source'"
+    } elseif ($null -ne (Get-Item -LiteralPath $Source -Force -ErrorAction SilentlyContinue)) {
+        warn "persist_external: '$Source' is not expected link, skipped to protect real data"
+    }
+}
+
+function Invoke-PersistExternalReconcile {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]$Manifest,
+        [Parameter(Mandatory)][string]$PersistDir,
+        [string]$Dir,
+        [switch]$Remove
+    )
+
+    if ($Remove) {
+        $records = Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+        if ($null -eq $records) {
+            warn "persist_external: Installation record not found, falling back to manifest parsing"
+            $defs = Get-PersistExternalDefinition -Manifest $Manifest
+            $sources = @($defs | ForEach-Object { $_.Source })
+        } else {
+            $sources = @($records | ForEach-Object { $_.Source })
+        }
+        foreach ($source in ($sources | Select-Object -Unique)) {
+            Remove-ExternalLink -Source $source
+        }
+        Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+        return
+    }
+
+    $defs = @(Get-PersistExternalDefinition -Manifest $Manifest)
+    if (-not $defs) { return }
+
+    $desired = @($defs | ForEach-Object {
+        [PSCustomObject]@{
+            Source   = $_.Source
+            Target   = ConvertTo-TrimmedPath -Path (Join-Path $PersistDir $_.TargetName)
+            TypeHint = $_.TypeHint
+        }
+    })
+
+    # Unlink recorded entries the manifest no longer declares; the record
+    # after this run holds exactly the declared set.
+    $recorded = Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+    foreach ($entry in $recorded) {
+        if ($desired.Source -notcontains $entry.Source) {
+            Remove-ExternalLink -Source $entry.Source
+        }
+    }
+
+    # Warn about unmapped persist data from previous versions
+    if (Test-Path -LiteralPath $PersistDir) {
+        $existingItems = Get-ChildItem -LiteralPath $PersistDir -Force -ErrorAction SilentlyContinue
+        foreach ($item in $existingItems) {
+            # Skip internal record file
+            if ($item.Name -eq '.scoop-persist-external.json') { continue }
+
+            $itemPath = ConvertTo-TrimmedPath -Path $item.FullName
+            if ($desired.Target -notcontains $itemPath) {
+                warn "persist_external: Found unmapped/orphaned persist item '$($item.Name)' in '$PersistDir'. If this item contains previous data, you may need to manually migrate it."
+            }
+        }
+    }
+
+    # Process external persist links
+    $records = @()
+    foreach ($d in $desired) {
+        try {
+            $linkType = New-ExternalPersistLink -Source $d.Source -PersistTarget $d.Target -TypeHint $d.TypeHint
+            $records += @{ Source = $d.Source; Target = $d.Target; LinkType = $linkType }
+        } catch {
+            # Log error on individual failure and continue processing remaining items
+            error "persist_external: Failed to process '$($d.Source)': $_"
+        }
+    }
+
+    if ($records) {
+        Save-ExternalLinkRecord -PersistDir $PersistDir -Records $records
+        # Legacy record (version dir) superseded; drop it once the new record is written
+        $legacyPath = Get-LegacyExternalLinkRecordPath -Dir $Dir
+        if ($legacyPath -and (Test-Path -LiteralPath $legacyPath)) {
+            Remove-Item -LiteralPath $legacyPath -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------
+# 7. Public entry points
 # ---------------------------------------------------------------------------
 function Initialize-PersistExternalAlias {
     [CmdletBinding()]
@@ -436,73 +575,28 @@ function Invoke-PersistExternalInstall {
     param(
         [Parameter(Mandatory)]$Manifest,
         [Parameter(Mandatory)][string]$PersistDir,
-        [Parameter(Mandatory)][string]$Dir
+        [string]$Dir
     )
 
     Initialize-PersistExternalAlias
 
-    $defs = Get-PersistExternalDefinition -Manifest $Manifest
-    if (-not $defs) { return }
-
-    # 1. Collect all target paths defined in the new Manifest
-    $newTargets = @($defs | ForEach-Object { ConvertTo-TrimmedPath -Path (Join-Path $PersistDir $_.TargetName) })
-
-    # 2. Detect orphaned/unmapped persist data from previous versions
-    if (Test-Path -LiteralPath $PersistDir) {
-        $existingItems = Get-ChildItem -LiteralPath $PersistDir -Force -ErrorAction SilentlyContinue
-        foreach ($item in $existingItems) {
-            # Skip internal record file
-            if ($item.Name -eq '.scoop-persist-external.json') { continue }
-
-            $itemPath = ConvertTo-TrimmedPath -Path $item.FullName
-            if ($newTargets -notcontains $itemPath) {
-                warn "persist_external: Found unmapped/orphaned persist item '$($item.Name)' in '$PersistDir'. If this item contains previous data, you may need to manually migrate it."
-            }
-        }
-    }
-
-    # 3. Process external persist links
-    $records = @()
-    foreach ($d in $defs) {
-        $target = Join-Path $PersistDir $d.TargetName
-        try {
-            $linkType = New-ExternalPersistLink -Source $d.Source -PersistTarget $target -TypeHint $d.TypeHint
-            $records += @{ Source = $d.Source; Target = $target; LinkType = $linkType }
-        } catch {
-            # Log error on individual failure and continue processing remaining items
-            error "persist_external: Failed to process '$($d.Source)': $_"
-        }
-    }
-
-    if ($records) {
-        Save-ExternalLinkRecord -Dir $Dir -Records $records
-    }
+    Invoke-PersistExternalReconcile -Manifest $Manifest -PersistDir $PersistDir -Dir $Dir
 }
 
 function Invoke-PersistExternalUninstall {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]$Manifest,
-        [Parameter(Mandatory)][string]$Dir
+        [Parameter(Mandatory)][string]$Dir,
+        [string]$PersistDir
     )
 
-    # Prefer recorded links for accurate unlinking
-    $records = Read-ExternalLinkRecord -Dir $Dir
-
-    if ($null -eq $records) {
-        warn "persist_external: Installation record not found, falling back to manifest parsing"
-        $defs = Get-PersistExternalDefinition -Manifest $Manifest
-        $records = $defs | ForEach-Object { @{ Source = $_.Source } }
+    if (-not $PersistDir) {
+        # Older manifests call this hook without -PersistDir; derive it from the version dir.
+        $PersistDir = Resolve-ExternalPersistDir -Dir $Dir
     }
 
-    foreach ($r in $records) {
-        $removed = Remove-ReparsePointSafe -Path $r.Source
-        if ($removed) {
-            Write-Verbose "persist_external: Removed external link '$($r.Source)'"
-        } elseif ($null -ne (Get-Item -LiteralPath $r.Source -Force -ErrorAction SilentlyContinue)) {
-            warn "persist_external: '$($r.Source)' is not expected link, skipped to protect real data"
-        }
-    }
+    Invoke-PersistExternalReconcile -Manifest $Manifest -PersistDir $PersistDir -Dir $Dir -Remove
 }
 
 # ---------------------------------------------------------------------------
@@ -540,15 +634,6 @@ function Invoke-PersistExternalReset {
         }
 
         $dir = currentdir $app $isGlobal
-        $recordPath = Get-ExternalLinkRecordPath -Dir $dir
-
-        # Only target apps that have generated .scoop-persist-external.json
-        if (-not (Test-Path -LiteralPath $recordPath)) {
-            if ($AppName -and $AppName -ne '*') {
-                info "persist_external: App '$app' does not have an external persist record (.scoop-persist-external.json)."
-            }
-            continue
-        }
 
         $manifest = installed_manifest $app $version $isGlobal
         if (-not $manifest) {
@@ -556,9 +641,17 @@ function Invoke-PersistExternalReset {
             continue
         }
 
+        # Only target apps that declare persist_external in their manifest
+        if (-not $manifest.persist_external) {
+            if ($AppName -and $AppName -ne '*') {
+                info "persist_external: App '$app' does not declare persist_external."
+            }
+            continue
+        }
+
         $persistDir = persistdir $app $isGlobal
 
         Write-Host "Resetting persist_external links for '$app' ($version)..."
-        Invoke-PersistExternalInstall -Manifest $manifest -PersistDir $persistDir -Dir $dir
+        Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
     }
 }
