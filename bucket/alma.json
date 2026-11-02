@@ -18,6 +18,21 @@
             "$env:AppData\\alma",
             "data",
             "directory"
+        ],
+        [
+            "$env:USERPROFILE\\.config\\alma",
+            "config",
+            "directory"
+        ],
+        [
+            "$env:USERPROFILE\\.alma",
+            "activity",
+            "directory"
+        ],
+        [
+            "$env:USERPROFILE\\.cache\\alma",
+            "cache",
+            "directory"
         ]
     ],
     "post_install": [
