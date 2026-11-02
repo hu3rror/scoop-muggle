@@ -277,12 +277,14 @@ function Read-ExternalLinkRecord {
 function Remove-ExternalLinkRecord {
     param(
         [Parameter(Mandatory)][string]$PersistDir,
-        [string]$Dir
+        [string]$Dir,
+        [switch]$PersistOnly
     )
-    foreach ($path in @(
-        (Get-ExternalLinkRecordPath -PersistDir $PersistDir),
-        (Get-LegacyExternalLinkRecordPath -Dir $Dir)
-    )) {
+    $paths = @((Get-ExternalLinkRecordPath -PersistDir $PersistDir))
+    if (-not $PersistOnly) {
+        $paths += Get-LegacyExternalLinkRecordPath -Dir $Dir
+    }
+    foreach ($path in $paths) {
         if ($path -and (Test-Path -LiteralPath $path)) {
             Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
         }
@@ -447,6 +449,27 @@ function Remove-ExternalLink {
     }
 }
 
+function Remove-PersistExternalLinks {
+    [CmdletBinding()]
+    param(
+        $Manifest,
+        [string]$PersistDir,
+        [string]$Dir
+    )
+
+    $records = Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+    if ($null -eq $records) {
+        warn "persist_external: Installation record not found, falling back to manifest parsing"
+        $sources = @(Get-PersistExternalDefinition -Manifest $Manifest | ForEach-Object { $_.Source })
+    } else {
+        $sources = @($records | ForEach-Object { $_.Source })
+    }
+    foreach ($source in ($sources | Select-Object -Unique)) {
+        Remove-ExternalLink -Source $source
+    }
+    Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+}
+
 function Invoke-PersistExternalReconcile {
     [CmdletBinding()]
     param(
@@ -457,29 +480,13 @@ function Invoke-PersistExternalReconcile {
     )
 
     if ($Remove) {
-        $records = Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
-        if ($null -eq $records) {
-            warn "persist_external: Installation record not found, falling back to manifest parsing"
-            $defs = Get-PersistExternalDefinition -Manifest $Manifest
-            $sources = @($defs | ForEach-Object { $_.Source })
-        } else {
-            $sources = @($records | ForEach-Object { $_.Source })
-        }
-        foreach ($source in ($sources | Select-Object -Unique)) {
-            Remove-ExternalLink -Source $source
-        }
-        Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+        Remove-PersistExternalLinks -Manifest $Manifest -PersistDir $PersistDir -Dir $Dir
         return
     }
 
     $defs = @(Get-PersistExternalDefinition -Manifest $Manifest)
-    $defs = @(Get-PersistExternalDefinition -Manifest $Manifest)
     if (-not $defs) {
-        # Nothing declared anymore: unlink every recorded entry and drop the records
-        foreach ($entry in (Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir)) {
-            Remove-ExternalLink -Source $entry.Source
-        }
-        Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+        Remove-PersistExternalLinks -Manifest $Manifest -PersistDir $PersistDir -Dir $Dir
         return
     }
 
@@ -491,8 +498,6 @@ function Invoke-PersistExternalReconcile {
         }
     })
 
-    # Unlink recorded entries the manifest no longer declares; the record
-    # after this run holds exactly the declared set.
     $recorded = Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
     foreach ($entry in $recorded) {
         if ($desired.Source -notcontains $entry.Source) {
@@ -522,20 +527,20 @@ function Invoke-PersistExternalReconcile {
             $records += @{ Source = $d.Source; Target = $d.Target; LinkType = $linkType }
         } catch {
             # Log error on individual failure and continue processing remaining items
-            error "persist_external: Failed to process '$($d.Source)': $_"
+            error "persist_external: Failed to process '$($d.Source)': $_" -ErrorAction Continue
         }
     }
 
-    # Persist the applied subset; when nothing applied, the stale record must go
     if ($records) {
         Save-ExternalLinkRecord -PersistDir $PersistDir -Records $records
+        # Legacy record (version dir) superseded; drop it once the persist record is written
+        $legacyPath = Get-LegacyExternalLinkRecordPath -Dir $Dir
+        if ($legacyPath -and (Test-Path -LiteralPath $legacyPath)) {
+            Remove-Item -LiteralPath $legacyPath -Force -ErrorAction SilentlyContinue
+        }
     } else {
-        Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
-    }
-    # Legacy record (version dir) superseded; drop it once reconcile applied
-    $legacyPath = Get-LegacyExternalLinkRecordPath -Dir $Dir
-    if ($legacyPath -and (Test-Path -LiteralPath $legacyPath)) {
-        Remove-Item -LiteralPath $legacyPath -Force -ErrorAction SilentlyContinue
+        # Nothing applied, so no new record exists; keep the legacy record as the only truth
+        Remove-ExternalLinkRecord -PersistDir $PersistDir -PersistOnly
     }
 }
 

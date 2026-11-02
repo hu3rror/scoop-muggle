@@ -1,7 +1,7 @@
 # persist_external 机制保留：12 个不可迁 app 全部使用，维持精简版现状
 
 **Revision 2026-11（架构审查）**：三条修订：
-- **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，对账成功后自动删除。`pre_uninstall` hook 新增 `-PersistDir $persist_dir`，缺省时从版本目录推导（兼容旧 manifest）。
+- **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，persist 记录写入成功后自动删除（全部链接失败时保留，此时它是唯一真相源）。`pre_uninstall` hook 新增 `-PersistDir $persist_dir`，缺省时从版本目录推导（兼容旧 manifest）。
 - **记录语义为当前集**：对账后记录等于 manifest 声明的链接集（个别链接失败时为成功应用的子集）；manifest 已不再声明的条目在对账时解除链接，声明集清空时同时删除记录。
 - **reset 门卫改读 manifest**：`Invoke-PersistExternalReset` 的门卫从「记录文件存在」改为「manifest 声明 `persist_external`」，记录缺失的 app 不再被静默跳过。
 

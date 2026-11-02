@@ -93,8 +93,9 @@ Describe 'persist_external reconcile' {
         $records.Source | Should -Contain $srcA
     }
 
-    It 'removes the record when the manifest stops declaring persist_external' {
+    It 'removes both records when the manifest stops declaring persist_external' {
         Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
+        Copy-Item -LiteralPath $recordPath -Destination $legacyPath
         $empty = [pscustomobject]@{ persist_external = @() }
 
         Invoke-PersistExternalReconcile -Manifest $empty -PersistDir $persistDir -Dir $dir
@@ -104,13 +105,28 @@ Describe 'persist_external reconcile' {
         $legacyPath | Should -Not -Exist
     }
 
-    It 'drops a stale record when every link fails' {
+    It 'drops the stale record but keeps the legacy one when every link fails' {
         Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
+        Copy-Item -LiteralPath $recordPath -Destination $legacyPath
         Mock New-ExternalPersistLink { throw 'boom' }
 
-        Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir -ErrorAction SilentlyContinue
+        { Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir } | Should -Not -Throw
 
         $recordPath | Should -Not -Exist
+        $legacyPath | Should -Exist
+    }
+
+    It 'records only the links it applied when one link fails' {
+        Mock New-ExternalPersistLink {
+            if ($Source -eq $srcA) { throw 'boom' }
+            'Junction'
+        }
+
+        Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
+
+        $records = [array](Get-Content -LiteralPath $recordPath -Raw | ConvertFrom-Json)
+        $records.Count | Should -Be 1
+        $records.Source | Should -Be $srcB
     }
 
     It 'falls back to the legacy record when the persist record is corrupt' {
