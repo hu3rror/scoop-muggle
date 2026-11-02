@@ -13,7 +13,7 @@ _Avoid_: external persist、persist-ext
 _Avoid_: 链接状态文件、记录缓存
 
 **条目（link entry）**：
-`persist_external` 数组中的一个元素：外部路径字符串，或 `[来源, 目标名, 类型]` 元组（类型为 `file` / `directory`，`dir` 是 `directory` 的别名）。
+`persist_external` 数组中的一个元素：外部路径字符串，或 `[来源, 目标名, 类型]` 元组（类型只能是 `directory`，`dir` 是别名；只建目录 Junction）。
 _Avoid_: 项、item、元素
 
 **对账（reconcile）**：

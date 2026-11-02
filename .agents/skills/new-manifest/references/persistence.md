@@ -27,7 +27,7 @@ Custom key, documented in `docs/adr/0002-persist-external-retention.md` and impl
 Manifest shape — an array of items, each either:
 
 - a plain external path string: `["$env:AppData\\NeatReader"]`, or
-- a tuple `[source, targetName]` or `[source, targetName, kind]`, where `kind` is `"directory"` (alias `"dir"`) or `"file"`:
+- a tuple `[source, targetName]` or `[source, targetName, kind]`, where `kind` is `"directory"` (alias `"dir"`); `"file"` is rejected:
 
 ```json
 "persist_external": [
@@ -36,7 +36,7 @@ Manifest shape — an array of items, each either:
 ]
 ```
 
-(PicaComic precedent.) Without a tuple, the external path's leaf becomes the stored name and the kind is auto-detected at install time.
+(PicaComic precedent.) Without a tuple, the external path's leaf becomes the stored name and the entry is linked as a directory (junctions only; ADR-0004).
 
 Hook wiring — dot-source the helper and call the install/uninstall functions. Standard form goes in `post_install` and `pre_uninstall`:
 
