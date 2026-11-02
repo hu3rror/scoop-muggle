@@ -93,12 +93,43 @@ Describe 'persist_external reconcile' {
         $records.Source | Should -Contain $srcA
     }
 
+    It 'removes the record when the manifest stops declaring persist_external' {
+        Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
+        $empty = [pscustomobject]@{ persist_external = @() }
+
+        Invoke-PersistExternalReconcile -Manifest $empty -PersistDir $persistDir -Dir $dir
+
+        Should -Invoke Remove-ReparsePointSafe -Times 2
+        $recordPath | Should -Not -Exist
+        $legacyPath | Should -Not -Exist
+    }
+
+    It 'drops a stale record when every link fails' {
+        Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
+        Mock New-ExternalPersistLink { throw 'boom' }
+
+        Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir -ErrorAction SilentlyContinue
+
+        $recordPath | Should -Not -Exist
+    }
+
+    It 'falls back to the legacy record when the persist record is corrupt' {
+        Set-Content -LiteralPath $recordPath -Value '{not json'
+        @(
+            @{ Source = $srcA; Target = Join-Path $persistDir 'a'; LinkType = 'Junction' }
+        ) | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $legacyPath
+
+        Invoke-PersistExternalUninstall -Manifest $manifest -Dir $dir -PersistDir $persistDir
+
+        Should -Invoke Remove-ReparsePointSafe -Times 1 -ParameterFilter { $Path -eq $srcA }
+    }
+
     It 'warns about unmapped persist items but not about the record file' {
         New-Item -ItemType Directory -Path (Join-Path $persistDir 'stray') -Force | Out-Null
 
         Invoke-PersistExternalReconcile -Manifest $manifest -PersistDir $persistDir -Dir $dir
 
-        Should -Invoke Write-Warning -Times 1 -ParameterFilter { $Message -like '*orphaned*' }
+        Should -Invoke Write-Warning -Times 1 -ParameterFilter { $Message -like '*unmapped*' }
     }
 
     It 'writes the record through the install entry point' {

@@ -2,7 +2,7 @@
 
 **Revision 2026-11（架构审查）**：三条修订：
 - **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，对账成功后自动删除。`pre_uninstall` hook 新增 `-PersistDir $persist_dir`，缺省时从版本目录推导（兼容旧 manifest）。
-- **记录语义为当前集**：对账后记录等于 manifest 声明的链接集；manifest 已不再声明的条目在对账时解除链接。
+- **记录语义为当前集**：对账后记录等于 manifest 声明的链接集（个别链接失败时为成功应用的子集）；manifest 已不再声明的条目在对账时解除链接，声明集清空时同时删除记录。
 - **reset 门卫改读 manifest**：`Invoke-PersistExternalReset` 的门卫从「记录文件存在」改为「manifest 声明 `persist_external`」，记录缺失的 app 不再被静默跳过。
 
 官方 Scoop `persist` 只能持久化 `$dir`（安装目录）内的路径，够不到 `%APPDATA%` / `%LOCALAPPDATA%` 等外部目录。而本仓库部分 app 把用户数据写死在系统路径（Flutter、JVM、.NET、WebView2、商业软件、绿色版均无数据目录重定向机制）。为此本仓库自研 `persist_external`：在 `post_install` 将外部路径通过 Junction（目录）/ SymbolicLink（文件）链接到 `$persist_dir`，实现实时持久化，配套 `pre_uninstall` 解除链接、`.scoop-persist-external.json` 记录链接状态、`Invoke-PersistExternalReset` 重装系统后恢复。

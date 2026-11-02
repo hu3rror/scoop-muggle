@@ -268,8 +268,7 @@ function Read-ExternalLinkRecord {
             if ($content -isnot [array]) { $content = @($content) }
             return @($content)
         } catch {
-            warn "persist_external: Failed to read link record '$path', falling back to manifest parsing: $_"
-            return $null
+            warn "persist_external: Failed to read link record '$path': $_"
         }
     }
     return $null
@@ -474,7 +473,15 @@ function Invoke-PersistExternalReconcile {
     }
 
     $defs = @(Get-PersistExternalDefinition -Manifest $Manifest)
-    if (-not $defs) { return }
+    $defs = @(Get-PersistExternalDefinition -Manifest $Manifest)
+    if (-not $defs) {
+        # Nothing declared anymore: unlink every recorded entry and drop the records
+        foreach ($entry in (Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir)) {
+            Remove-ExternalLink -Source $entry.Source
+        }
+        Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+        return
+    }
 
     $desired = @($defs | ForEach-Object {
         [PSCustomObject]@{
@@ -502,7 +509,7 @@ function Invoke-PersistExternalReconcile {
 
             $itemPath = ConvertTo-TrimmedPath -Path $item.FullName
             if ($desired.Target -notcontains $itemPath) {
-                warn "persist_external: Found unmapped/orphaned persist item '$($item.Name)' in '$PersistDir'. If this item contains previous data, you may need to manually migrate it."
+                warn "persist_external: Found unmapped persist item '$($item.Name)' in '$PersistDir'. If this item contains previous data, you may need to manually migrate it."
             }
         }
     }
@@ -519,13 +526,16 @@ function Invoke-PersistExternalReconcile {
         }
     }
 
+    # Persist the applied subset; when nothing applied, the stale record must go
     if ($records) {
         Save-ExternalLinkRecord -PersistDir $PersistDir -Records $records
-        # Legacy record (version dir) superseded; drop it once the new record is written
-        $legacyPath = Get-LegacyExternalLinkRecordPath -Dir $Dir
-        if ($legacyPath -and (Test-Path -LiteralPath $legacyPath)) {
-            Remove-Item -LiteralPath $legacyPath -Force -ErrorAction SilentlyContinue
-        }
+    } else {
+        Remove-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
+    }
+    # Legacy record (version dir) superseded; drop it once reconcile applied
+    $legacyPath = Get-LegacyExternalLinkRecordPath -Dir $Dir
+    if ($legacyPath -and (Test-Path -LiteralPath $legacyPath)) {
+        Remove-Item -LiteralPath $legacyPath -Force -ErrorAction SilentlyContinue
     }
 }
 
