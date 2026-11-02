@@ -2,14 +2,8 @@
     persist-external.ps1
     --------------------
     Scoop 'persist_external' core implementation.
-    Links external paths (outside $dir, e.g. %AppData%\Code) to $persist_dir
-    via Junction/Symlink for real-time persistence. Runs in parallel with native 'persist'.
-
-    Public entry points:
-      - Invoke-PersistExternalInstall
-      - Invoke-PersistExternalUninstall
-      - Invoke-PersistExternalReconcile
-      - Invoke-PersistExternalReset
+    Links external directories (outside $dir, e.g. %AppData%\Code) to $persist_dir
+    via Junction for real-time persistence. Runs in parallel with native 'persist'.
 
     Licensed under the MIT License (see LICENSE in the repository root).
 #>
@@ -27,8 +21,6 @@ if (-not (Get-Command 'warn' -ErrorAction SilentlyContinue)) {
     function warn($msg) { Write-Warning $msg }
 }
 if (-not (Get-Command 'error' -ErrorAction SilentlyContinue)) {
-    # Scoop's own `error` writes host text and never throws; per-item failures are
-    # reported and processing continues, so keep the same shape here.
     function error($msg) { Write-Host "ERROR $msg" -ForegroundColor DarkRed }
 }
 if (-not (Get-Command 'info' -ErrorAction SilentlyContinue)) {
@@ -48,7 +40,6 @@ function Initialize-ScoopEnvironment {
     # Resolve Scoop root directory
     $scoopRoot = $env:SCOOP
     if (-not $scoopRoot -and $script:PersistExternalScriptPath) {
-        # Resolve 4 levels up: scripts -> <bucket> -> buckets -> <ScoopRoot>
         $parentDir = Split-Path (Split-Path (Split-Path (Split-Path $script:PersistExternalScriptPath)))
         if ($parentDir -and (Test-Path -LiteralPath $parentDir)) {
             $scoopRoot = $parentDir
@@ -76,7 +67,7 @@ function ConvertTo-TrimmedPath {
 }
 
 # ---------------------------------------------------------------------------
-# 1. Path resolution: expand $env:VAR / %VAR% / $home / ~
+# 1. Path resolution: expand $env:VAR
 # ---------------------------------------------------------------------------
 function Convert-ExternalPath {
     [CmdletBinding()]
@@ -84,13 +75,6 @@ function Convert-ExternalPath {
 
     $p = $RawPath.Trim()
 
-    if ($p -eq '$home' -or $p -eq '~') {
-        $p = $HOME
-    } elseif ($p -match '^(\$home|~)[/\\](?<rest>.*)$') {
-        $p = Join-Path $HOME $Matches['rest']
-    }
-
-    # Expand $env:VAR format
     $p = [regex]::Replace($p, '\$env:(?<name>[\w()]+)', {
             param($m)
             $varName = $m.Groups['name'].Value
@@ -101,20 +85,8 @@ function Convert-ExternalPath {
             $val
         }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
-    # Expand %VAR% format
-    $p = [regex]::Replace($p, '%(?<name>[\w()]+)%', {
-            param($m)
-            $varName = $m.Groups['name'].Value
-            $val = [Environment]::GetEnvironmentVariable($varName)
-            if ([string]::IsNullOrEmpty($val)) {
-                throw "persist_external: Unknown environment variable %$varName% (Source path: $RawPath)"
-            }
-            $val
-        }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-
-    # Verify absolute path
     if (-not [System.IO.Path]::IsPathRooted($p)) {
-        throw "persist_external: Path '$RawPath' expanded to non-absolute path '$p'. Please check if `$env:, `$home, or %VAR% prefix is missing."
+        throw "persist_external: Path '$RawPath' expanded to non-absolute path '$p'. Please check if `$env: prefix is missing."
     }
 
     return [System.IO.Path]::GetFullPath($p)
@@ -122,7 +94,6 @@ function Convert-ExternalPath {
 
 # ---------------------------------------------------------------------------
 # 2. Parse Manifest definitions
-#    Supports [source, target] or [source, target, 'file'|'directory']
 # ---------------------------------------------------------------------------
 function Get-PersistExternalDefinition {
     [CmdletBinding()]
@@ -134,15 +105,12 @@ function Get-PersistExternalDefinition {
 
     $result = @()
     foreach ($item in $raw) {
-        $typeHint = $null
         if ($item -is [array]) {
             $sourceRaw = $item[0]
             $targetName = $item[1]
             if ($item.Count -ge 3 -and $item[2]) {
-                $typeHint = switch -Regex ($item[2]) {
-                    '^(file)$' { 'File'; break }
-                    '^(dir|directory)$' { 'Directory'; break }
-                    default { throw "persist_external: Unknown type hint '$($item[2])', must be 'file' or 'directory'" }
+                if ($item[2] -notmatch '^(dir|directory)$') {
+                    throw "persist_external: Unknown type hint '$($item[2])', must be 'directory' (alias 'dir')"
                 }
             }
         } else {
@@ -158,70 +126,9 @@ function Get-PersistExternalDefinition {
         $result += [PSCustomObject]@{
             Source     = $source
             TargetName = $targetName
-            TypeHint   = $typeHint
         }
     }
     return $result
-}
-
-# Resolve item type when creating placeholders (e.g. .gitconfig vs .vscode)
-function Resolve-ExternalItemType {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory)][string]$Source,
-        [string]$TypeHint,
-        [string]$PersistTarget
-    )
-
-    if ($TypeHint) { return $TypeHint }
-
-    # Check physical paths if either exists on disk
-    if (Test-Path -LiteralPath $Source) {
-        $item = Get-Item -LiteralPath $Source -Force -ErrorAction SilentlyContinue
-        if ($null -ne $item) {
-            if ($item.PSIsContainer) { return 'Directory' } else { return 'File' }
-        }
-    }
-
-    if ($PersistTarget -and (Test-Path -LiteralPath $PersistTarget)) {
-        $item = Get-Item -LiteralPath $PersistTarget -Force -ErrorAction SilentlyContinue
-        if ($null -ne $item) {
-            if ($item.PSIsContainer) { return 'Directory' } else { return 'File' }
-        }
-    }
-
-    $leaf = Split-Path $Source -Leaf
-    $ext = [System.IO.Path]::GetExtension($leaf)
-
-    if ($leaf.StartsWith('.') -and $leaf -eq $ext) {
-        throw "persist_external: Cannot infer placeholder type for '$leaf'. Please specify explicit type hint in manifest, e.g. ['$Source', '$leaf', 'file']"
-    }
-
-    # Standard file extension heuristic:
-    # 1. $ext matches .ext format with 1-5 alphanumeric chars (no hyphens)
-    # 2. $leaf is not a multi-dot name (e.g. reverse-DNS names like com.company.app)
-    $isStandardExt = ($ext -match '^\.[a-zA-Z0-9]{1,5}$') -and (($leaf -split '\.').Count -le 2)
-
-    if ($isStandardExt) { return 'File' }
-    return 'Directory'
-}
-
-# Check privilege: file-level SymbolicLink requires Administrator or Developer Mode
-function Test-CanCreateSymlink {
-    [CmdletBinding()]
-    param()
-
-    $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-    ).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-    if ($isAdmin) { return $true }
-
-    try {
-        $devMode = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock' `
-            -Name 'AllowDevelopmentWithoutDevLicense' -ErrorAction Stop
-        return ($devMode -eq 1)
-    } catch {
-        return $false
-    }
 }
 
 # ---------------------------------------------------------------------------
@@ -232,8 +139,6 @@ function Get-ExternalLinkRecordPath {
     Join-Path $PersistDir '.scoop-persist-external.json'
 }
 
-# Legacy record location (version dir), kept for read-only fallback from
-# installs made before the record moved to the persist dir.
 function Get-LegacyExternalLinkRecordPath {
     param([string]$Dir)
     if (-not $Dir) { return $null }
@@ -268,7 +173,7 @@ function Read-ExternalLinkRecord {
         try {
             $content = Get-Content -LiteralPath $path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
             if ($content -isnot [array]) { $content = @($content) }
-            return @($content)
+            return @($content | ForEach-Object { if ($_ -is [string]) { $_ } else { $_.Source } })
         } catch {
             warn "persist_external: Failed to read link record '$path': $_"
         }
@@ -293,7 +198,6 @@ function Remove-ExternalLinkRecord {
     }
 }
 
-# Derive the persist dir from a version dir (\SCOOP\apps\<app>\<version>)
 function Resolve-ExternalPersistDir {
     param([Parameter(Mandatory)][string]$Dir)
     $cleanDir = ConvertTo-TrimmedPath -Path $Dir
@@ -334,14 +238,13 @@ function Remove-ReparsePointSafe {
 }
 
 # ---------------------------------------------------------------------------
-# 5. Core linking logic (handles migration, conflicts, and dangling links)
+# 5. Core linking logic
 # ---------------------------------------------------------------------------
 function New-ExternalPersistLink {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][string]$Source,
-        [Parameter(Mandatory)][string]$PersistTarget,
-        [string]$TypeHint
+        [Parameter(Mandatory)][string]$PersistTarget
     )
 
     $Source = ConvertTo-TrimmedPath -Path $Source
@@ -355,7 +258,6 @@ function New-ExternalPersistLink {
 
     # 1. Idempotency check: skip if already linked to target
     if ($sourceIsLink) {
-        # Take @()[0] for PS 5.1 compatibility when Junction Target returns List[string]
         $currentTarget = @($sourceItem.Target)[0]
         if ($currentTarget) {
             $normCurrent = [System.IO.Path]::GetFullPath(($currentTarget -replace '^\\\\\?\\', ''))
@@ -385,13 +287,7 @@ function New-ExternalPersistLink {
                 $sourceItem = $null
                 $sourceIsLink = $false
             }
-            # Create empty file/directory placeholder
-            $itemType = Resolve-ExternalItemType -Source $Source -TypeHint $TypeHint -PersistTarget $PersistTarget
-            if ($itemType -eq 'File') {
-                New-Item -ItemType File -Path $PersistTarget -Force | Out-Null
-            } else {
-                New-Item -ItemType Directory -Path $PersistTarget -Force | Out-Null
-            }
+            New-Item -ItemType Directory -Path $PersistTarget -Force | Out-Null
         }
         $targetItem = Get-Item -LiteralPath $PersistTarget -Force -ErrorAction Stop
     }
@@ -416,24 +312,14 @@ function New-ExternalPersistLink {
         New-Item -ItemType Directory -Path $sourceParent -Force | Out-Null
     }
 
-    # 6. Create link (Junction for directories, SymbolicLink for files)
-    $isDirTarget = $targetItem.PSIsContainer
-    $linkType = if ($isDirTarget) { 'Junction' } else { 'SymbolicLink' }
-
-    if ($isDirTarget) {
-        if (Get-Command 'New-DirectoryJunction' -ErrorAction SilentlyContinue) {
-            New-DirectoryJunction $Source $PersistTarget | Out-Null
-        } else {
-            New-Item -ItemType Junction -Path $Source -Target $PersistTarget -Force | Out-Null
-        }
+    # 6. Create the junction
+    if (Get-Command 'New-DirectoryJunction' -ErrorAction SilentlyContinue) {
+        New-DirectoryJunction $Source $PersistTarget | Out-Null
     } else {
-        if (-not (Test-CanCreateSymlink)) {
-            throw "persist_external: Symlink creation requires Administrator privilege or Developer Mode (Target: $Source)"
-        }
-        New-Item -ItemType SymbolicLink -Path $Source -Target $PersistTarget -Force | Out-Null
+        New-Item -ItemType Junction -Path $Source -Target $PersistTarget -Force | Out-Null
     }
 
-    return $linkType
+    return 'Junction'
 }
 
 # ---------------------------------------------------------------------------
@@ -464,7 +350,7 @@ function Remove-PersistExternalLinks {
         warn "persist_external: Installation record not found, falling back to manifest parsing"
         $sources = @(Get-PersistExternalDefinition -Manifest $Manifest | ForEach-Object { $_.Source })
     } else {
-        $sources = @($records | ForEach-Object { $_.Source })
+        $sources = @($records)
     }
     foreach ($source in ($sources | Select-Object -Unique)) {
         Remove-ExternalLink -Source $source
@@ -496,18 +382,16 @@ function Invoke-PersistExternalReconcile {
         [PSCustomObject]@{
             Source   = $_.Source
             Target   = ConvertTo-TrimmedPath -Path (Join-Path $PersistDir $_.TargetName)
-            TypeHint = $_.TypeHint
         }
     })
 
     $recorded = Read-ExternalLinkRecord -PersistDir $PersistDir -Dir $Dir
     foreach ($entry in $recorded) {
-        if ($desired.Source -notcontains $entry.Source) {
-            Remove-ExternalLink -Source $entry.Source
+        if ($desired.Source -notcontains $entry) {
+            Remove-ExternalLink -Source $entry
         }
     }
 
-    # Warn about unmapped persist data from previous versions
     if (Test-Path -LiteralPath $PersistDir) {
         $existingItems = Get-ChildItem -LiteralPath $PersistDir -Force -ErrorAction SilentlyContinue
         foreach ($item in $existingItems) {
@@ -521,12 +405,11 @@ function Invoke-PersistExternalReconcile {
         }
     }
 
-    # Process external persist links
     $records = @()
     foreach ($d in $desired) {
         try {
-            $linkType = New-ExternalPersistLink -Source $d.Source -PersistTarget $d.Target -TypeHint $d.TypeHint
-            $records += @{ Source = $d.Source; Target = $d.Target; LinkType = $linkType }
+            New-ExternalPersistLink -Source $d.Source -PersistTarget $d.Target | Out-Null
+            $records += $d.Source
         } catch {
             # Log error on individual failure and continue processing remaining items
             error "persist_external: Failed to process '$($d.Source)': $_"
@@ -535,13 +418,11 @@ function Invoke-PersistExternalReconcile {
 
     if ($records) {
         Save-ExternalLinkRecord -PersistDir $PersistDir -Records $records
-        # Legacy record (version dir) superseded; drop it once the persist record is written
         $legacyPath = Get-LegacyExternalLinkRecordPath -Dir $Dir
         if ($legacyPath -and (Test-Path -LiteralPath $legacyPath)) {
             Remove-Item -LiteralPath $legacyPath -Force -ErrorAction SilentlyContinue
         }
     } else {
-        # Nothing applied, so no new record exists; keep the legacy record as the only truth
         Remove-ExternalLinkRecord -PersistDir $PersistDir -PersistOnly
     }
 }
@@ -563,7 +444,6 @@ function Initialize-PersistExternalAlias {
         return
     }
 
-    # Use captured top-level script path
     $scriptPath = $script:PersistExternalScriptPath
     if (-not $scriptPath -or -not (Test-Path -LiteralPath $scriptPath)) {
         if ($PSScriptRoot) {
@@ -609,7 +489,6 @@ function Invoke-PersistExternalUninstall {
     )
 
     if (-not $PersistDir) {
-        # Older manifests call this hook without -PersistDir; derive it from the version dir.
         $PersistDir = Resolve-ExternalPersistDir -Dir $Dir
     }
 
@@ -617,7 +496,7 @@ function Invoke-PersistExternalUninstall {
 }
 
 # ---------------------------------------------------------------------------
-# 7. Public entry point for resetting persist_external links
+# 8. Reset entry point
 # ---------------------------------------------------------------------------
 function Invoke-PersistExternalReset {
     [CmdletBinding()]
