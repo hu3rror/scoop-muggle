@@ -3,6 +3,9 @@
     "description": "Desktop app for terminals and coding agents: keep work in spaces, see which agents need you, and leave terminals running when the window closes",
     "homepage": "https://herdr.dev",
     "license": "Apache-2.0",
+    "suggest": {
+        "herdr-core": "muggle/herdr-core"
+    },
     "architecture": {
         "64bit": {
             "url": "https://releases.herdr.dev/app/0.1.12/herdr-app-windows-x86_64.tar.gz",
@@ -33,7 +36,7 @@
         ]
     ],
     "notes": [
-        "Herdr runs terminals through herdr-core, which the app offers to install into %LOCALAPPDATA%\\Programs\\herdr-core on first start",
+        "Herdr runs terminals through herdr-core: it uses the one on PATH (`scoop install herdr-core`), or installs its own into %LOCALAPPDATA%\\Programs\\herdr-core on first start",
         "Release builds update themselves from releases.herdr.dev inside their own folder"
     ],
     "checkver": {
