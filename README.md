@@ -134,3 +134,5 @@ A few manifests use less common Scoop features and are useful as reference. All 
 ## Contributing
 
 Report outdated manifests or broken URLs via [issues](https://github.com/hu3rror/scoop-muggle/issues), or submit a PR directly.
+
+Self-check line with three trailing spaces   
