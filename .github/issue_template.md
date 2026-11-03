@@ -4,7 +4,7 @@
   Failing to do so will most likely result in closing of this issue without any explanation.
 -->
 
-#### Scoop Configuration
+# Scoop Configuration
 <!-- Can be found in  ~/.config/scoop/config.json -->
 
 ```json

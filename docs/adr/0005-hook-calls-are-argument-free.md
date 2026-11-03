@@ -7,16 +7,19 @@ Scoop 的 `Invoke-HookScript` 在当前作用域展开 hook 文本，`$dir`、`$
 **Status**: accepted
 
 **Considered Options**:
+
 - A. 不收：hook 继续传参，靠 ADR-0003 的契约测试压住漂移。缺点：每个 manifest 复述 Scoop 已有变量；脚本每新增一个读取变量都要同步 42 条 hook。
 - B. 无参规范形态 + 保留旧参数（选定）：新 manifest 写 dot-source + 裸调用；函数保留 `-Manifest`/`-PersistDir`/`-Dir` 为可选兼容参数，承接已安装版本保存的旧文本。
 - C. 彻底无参：破坏所有已安装用户的 uninstall 与 update 链路。否决。
 
 选定 B 的实现约束（均有 spike 实测）：
+
 - 参数不能命名为 `Manifest`/`PersistDir`/`Dir`。PowerShell 变量名大小写不敏感，同名参数会遮蔽 hook 作用域变量，函数内读到的就是未绑定的 `$null`。实现用 `[Alias()]` 把旧名映射到 `Legacy*` 参数，函数内按 `$PSBoundParameters` 判断走兼容分支。
 - 裸调用时 `$manifest`/`$persist_dir`/`$dir` 缺失，函数抛出带变量名的明确错误，而不是把 `$null` 静默送进对账逻辑。
 - `Uninstall` 的 `-PersistDir` 缺省时仍从 `-Dir` 推导（兼容旧版 `pre_uninstall` 文本没有 `$persist_dir` 的形态）。
 
 **契约变更**（`scripts/persist-external-hooks.Tests.ps1`）：
+
 - hook 文本必须裸调用函数，不得带 `-参数`；
 - 仍校验函数存在、dot-source 存在、`persist_external` manifest 成对声明 hook。
 

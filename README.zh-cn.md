@@ -46,12 +46,14 @@ scoop persist-external-reset
 ## 分类
 
 ### 阅读 / 文档
+
 - [goldendict-ng](https://github.com/xiaoyifang/goldendict-ng) — 词典查询程序
 - [anx-reader](https://github.com/Anxcye/anx-reader) — 带 AI 功能的电子书阅读器
 - [pdfpatcher](bucket/pdfpatcher.json) / [k2pdfopt](bucket/k2pdfopt.json) / [briss](bucket/briss.json) — PDF 编辑与排版优化
 - [zlibrary](bucket/zlibrary.json) — Z-Library 官方客户端
 
 ### 漫画
+
 - [yomikiru](https://github.com/mienaiyami/yomikiru)
 - [mangadex-dl](https://mangadex-dl.mansuf.link/)
 - [manhuagui-downloader](bucket/manhuagui-downloader.json)
@@ -59,6 +61,7 @@ scoop persist-external-reset
 - [neeview](bucket/neeview.json)
 
 ### 音乐 / 音频
+
 - [musicplayer2](https://github.com/zhongyang219/MusicPlayer2) — 播放、歌单、歌词、格式转换
 - [nora](https://github.com/Sandakan/Nora)
 - [dopamine-legacy](bucket/dopamine-legacy.json) / [dopamine-preview](bucket/dopamine-preview.json)
@@ -69,6 +72,7 @@ scoop persist-external-reset
 - [vitomu](bucket/vitomu.json) / [deemix-portable](bucket/deemix-portable.json) / [qbldx-mod](bucket/qbldx-mod.json) — 音频下载工具
 
 ### 网络 / 代理
+
 - [mihomo-shawl-service](bucket/mihomo-shawl-service.json) — mihomo 内置 Windows 服务封装
 - [sparkle](bucket/sparkle.json) / [clash-nyanpasu-nightly](bucket/clash-nyanpasu-nightly.json) / [goclashz](bucket/goclashz.json) — Mihomo/Clash 图形客户端
 - [mosdns](bucket/mosdns.json) / [mosdns-cn](bucket/mosdns-cn.json) — DNS 转发器
@@ -77,6 +81,7 @@ scoop persist-external-reset
 - [gopeed](bucket/gopeed.json) / [pget](bucket/pget.json) — 多线程下载器
 
 ### AI 工具
+
 - [cherry-studio](https://cherry-ai.com) — 多 LLM 桌面客户端
 - [chatall](http://chatall.ai) — 同时向多个模型提问
 - [witsy](bucket/witsy.json) — 桌面 AI 助手 / MCP 客户端
@@ -85,6 +90,7 @@ scoop persist-external-reset
 - [geminicommit-cli](bucket/geminicommit-cli.json) — 基于 Gemini 的 commit message 生成
 
 ### 系统 / 效率
+
 - [keepassxc](https://keepassxc.org) — 密码管理器
 - [locale-remulator](https://github.com/InWILL/Locale_Remulator) — 按应用调整区域和语言设置
 - [context-menu-manager](bucket/context-menu-manager.json) / [win11-classic-context-menu](bucket/win11-classic-context-menu.json)
@@ -94,12 +100,14 @@ scoop persist-external-reset
 - [eza](bucket/eza.json) — `ls` 的现代替代品
 
 ### 图像处理
+
 - [caesium](bucket/caesium.json) / [rimage](bucket/rimage.json) — 图片压缩
 - [jpegview-fork](https://github.com/sylikc/jpegview) — 轻量图片查看/编辑器
 - [picgo](bucket/picgo.json) — 图床上传工具
 - [icns](bucket/icns.json) — `.icns` 图标文件生成
 
 ### 游戏
+
 - [cheat-engine](bucket/cheat-engine.json)
 - [game-cheats-manager](https://github.com/dyang886/Game-Cheats-Manager)
 - [bg3-mod-manager](bucket/bg3-mod-manager.json)
@@ -115,7 +123,7 @@ scoop persist-external-reset
 以下几个 manifest 使用了不常见的 Scoop 特性，可作为编写参考，来源均直接指向上游项目自身的发布渠道。
 
 | Manifest | 技术要点 |
-|---|---|
+| --- | --- |
 | [163MusicLyrics](bucket/163MusicLyrics.json) / [PicaComic](bucket/PicaComic.json) | 通过扩展字段 `persist_external` 与辅助脚本 `scripts/persist-external.ps1`，实现应用安装目录（`$dir`）外路径（如 `%APPDATA%`）的无损实时持久化 |
 | [mihomo-shawl-service](bucket/mihomo-shawl-service.json) | 同时打包两个上游发行包，通过外部辅助脚本将程序注册为 Windows 服务，`pre_install`/`post_install`/`pre_uninstall`/`persist` 协同工作 |
 | [goldendict-ng](bucket/goldendict-ng.json) | `checkver` 用 `jsonpath` + `regex` + `replace` 从带 Qt 版本号的资源文件名中提取版本号，与 `autoupdate` 保持一致 |

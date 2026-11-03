@@ -5,7 +5,7 @@ The bucket has two mechanisms. Pick by how the app stores its user data.
 ## 1. Decide which mechanism
 
 | App behavior | Mechanism |
-|---|---|
+| --- | --- |
 | Data stays inside the install directory by design (configs, caches, profiles under `$dir`) | Native `persist` |
 | App redirects its data to `$dir` via a portable flag (`--portable`, `--user-data-dir`, `PORTABLE_EXECUTABLE_DIR`) | Native `persist`, and add the redirection in `pre_install` (cherry-studio precedent) |
 | App writes to `%APPDATA%` / `%LOCALAPPDATA%` (or elsewhere outside `$dir`) with no way to redirect | `persist_external` (bucket-specific extension) |

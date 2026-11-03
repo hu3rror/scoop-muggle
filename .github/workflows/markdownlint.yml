@@ -1,0 +1,26 @@
+name: Markdown Lint
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    name: Markdown Lint
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Bucket
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Run markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@913db5cf77ef624b914090bad9e1615f7f6e099d # v25.0.0
+        with:
+          globs: |
+            **/*.md
+            #node_modules

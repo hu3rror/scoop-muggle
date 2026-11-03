@@ -7,7 +7,7 @@
 Work down this list; stop at the first form the source actually supports.
 
 | Source shape | checkver | autoupdate |
-|---|---|---|
+| --- | --- | --- |
 | GitHub releases with `/releases` page | `"checkver": "github"` or `{"github": "<repo url>"}` | `url` with `$version` |
 | A JSON endpoint (GitHub API, `latest.json`, `update.json`) | `{"url": "<json>", "jsonpath": "$.<path>"}` — add `regex`/`replace` when the tag is not clean | `url` with `$version`, `hash` from the same JSON |
 | HTML page, version appears in plain text | `{"url": "<page>", "regex": "<pattern>"}`; add `"reverse": true` when newest is last | `url` with `$version` |
@@ -47,10 +47,11 @@ Mode chain, first success wins: `extract` (default) → `json` → `xpath` → `
 Unverifiable at build time (e.g. a source that publishes only a rolling URL): keep the manifest installable, write no autoupdate, and mark `[NEED-VERIFY]`.
 
 ## 5. Bucket precedents
+
 - `jsonpath` — goldendict-ng (`jsonpath` + `regex` + `replace` over a Qt-tagged asset name).
 - `regex` on HTML — vcredist-aio (multiline regex over a release-notes page).
 - `script` — hitomi-downloader (multi-page `Invoke-WebRequest` + `[regex]::Match`), spotx (try/catch + `Get-GitHubToken` + commit-date version).
 - `latest.yml` hash source — e.g. cherry-studio (`$baseurl/latest.yml` + regex with `$base64`).
 - `reverse`, `xpath`, `rdf`, `metalink` — valid upstream; use only when the source demands it.
 
-Wiki: https://github.com/ScoopInstaller/Scoop/wiki/Autoupdate
+Wiki: <https://github.com/ScoopInstaller/Scoop/wiki/Autoupdate>

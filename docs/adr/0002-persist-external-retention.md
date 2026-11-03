@@ -1,6 +1,7 @@
 # persist_external 机制保留：不可迁 app 全部使用，维持精简版现状
 
 **Revision 2026-11（架构审查）**：五条修订：
+
 - **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，persist 记录写入成功后自动删除（全部链接失败时保留，此时它是唯一真相源）。`pre_uninstall` hook 新增 `-PersistDir $persist_dir`，缺省时从版本目录推导（兼容旧 manifest）。
 - **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，persist 记录写入成功后自动删除（全部链接失败时保留，此时它是唯一真相源）。
 - **reset 门卫改读 manifest**：`Invoke-PersistExternalReset` 的门卫从「记录文件存在」改为「manifest 声明 `persist_external`」，记录缺失的 app 不再被静默跳过。
@@ -13,6 +14,7 @@
 **Status**: accepted
 
 **Considered Options**:
+
 - A. 保留自研精简版 persist_external（现状）：脚本已收敛（install/uninstall/reset 三入口），维护成本 = 每次 manifest 变更的样板 + 卸载链路，无需外部依赖
 - B. 引入 Scoop4kariiinUtils（`depends` + `Import-Module` + `Mount-ExternalRuntimeData`）：把维护外包给上游模块，但引入第三方依赖，且违背本仓库「纯 Scoop manifest（不引入外部运行时）」约束（Q2-c）
 - C. 混合：能迁的迁原生 persist、不能迁的用 A——已实际执行（cherry/lx/wonderpen 已迁），不可迁档结论为 A
@@ -23,7 +25,7 @@
 ## 不可迁 app 清单（2026-08 盘点：12 个 manifest / 11 个 app）
 
 | Manifest | 技术栈 | 数据路径 |
-|---|---|---|
+| --- | --- | --- |
 | 163MusicLyrics | C# / .NET WinForms | `%APPDATA%\MusicLyricApp` |
 | animeko + animeko-alpha | Kotlin Compose Multiplatform (JVM) | `%APPDATA%`/`%LOCALAPPDATA%\Him188` |
 | anx-reader | Flutter/Dart | `%APPDATA%`/`%LOCALAPPDATA%\com.anxcye` |

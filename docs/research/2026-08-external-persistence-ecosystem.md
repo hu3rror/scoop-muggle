@@ -34,7 +34,7 @@
 ### 4. 社区对非 portable app 的三档标准做法
 
 | 档位 | 做法 | 适用 |
-|---|---|---|
+| --- | --- | --- |
 | 1（首选） | app 支持 `--user-data-dir` / portable 模式 → 用**原生 `persist`** | cherry-studio、VSCode 类、多数 Electron app |
 | 2（次选） | `post_install` 脚本手动建 junction：`%APPDATA%\X` → `$persist_dir\X` | 少量路径、app 固定 |
 | 3（最重） | 外部模块工具（如 `Scoop4kariiinUtils`）统一管理 mount | 多路径、需要导入/迁移/备份能力 |

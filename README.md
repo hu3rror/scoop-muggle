@@ -46,12 +46,14 @@ scoop persist-external-reset
 ## Categories
 
 ### Reading & Documents
+
 - [goldendict-ng](https://github.com/xiaoyifang/goldendict-ng) — dictionary lookup
 - [anx-reader](https://github.com/Anxcye/anx-reader) — e-book reader with AI features
 - [pdfpatcher](bucket/pdfpatcher.json) / [k2pdfopt](bucket/k2pdfopt.json) / [briss](bucket/briss.json) — PDF editing and layout optimization
 - [zlibrary](bucket/zlibrary.json) — Z-Library desktop client
 
 ### Manga & Comics
+
 - [yomikiru](https://github.com/mienaiyami/yomikiru)
 - [mangadex-dl](https://mangadex-dl.mansuf.link/)
 - [manhuagui-downloader](bucket/manhuagui-downloader.json)
@@ -59,6 +61,7 @@ scoop persist-external-reset
 - [neeview](bucket/neeview.json)
 
 ### Music & Audio
+
 - [musicplayer2](https://github.com/zhongyang219/MusicPlayer2) — playback, playlists, lyrics, format conversion
 - [nora](https://github.com/Sandakan/Nora)
 - [dopamine-legacy](bucket/dopamine-legacy.json) / [dopamine-preview](bucket/dopamine-preview.json)
@@ -69,6 +72,7 @@ scoop persist-external-reset
 - [vitomu](bucket/vitomu.json) / [deemix-portable](bucket/deemix-portable.json) / [qbldx-mod](bucket/qbldx-mod.json) — audio downloaders
 
 ### Network & Proxy
+
 - [mihomo-shawl-service](bucket/mihomo-shawl-service.json) — mihomo bundled with a Windows service wrapper
 - [sparkle](bucket/sparkle.json) / [clash-nyanpasu-nightly](bucket/clash-nyanpasu-nightly.json) / [goclashz](bucket/goclashz.json) — Mihomo/Clash GUIs
 - [mosdns](bucket/mosdns.json) / [mosdns-cn](bucket/mosdns-cn.json) — DNS forwarder
@@ -77,6 +81,7 @@ scoop persist-external-reset
 - [gopeed](bucket/gopeed.json) / [pget](bucket/pget.json) — parallel-connection downloaders
 
 ### AI Tools
+
 - [cherry-studio](https://cherry-ai.com) — multi-LLM desktop client
 - [chatall](http://chatall.ai) — query multiple chat models concurrently
 - [witsy](bucket/witsy.json) — desktop AI assistant / MCP client
@@ -85,6 +90,7 @@ scoop persist-external-reset
 - [geminicommit-cli](bucket/geminicommit-cli.json) — commit message generation via Gemini
 
 ### System & Productivity
+
 - [keepassxc](https://keepassxc.org) — password manager
 - [locale-remulator](https://github.com/InWILL/Locale_Remulator) — per-app region/language simulation
 - [context-menu-manager](bucket/context-menu-manager.json) / [win11-classic-context-menu](bucket/win11-classic-context-menu.json)
@@ -94,12 +100,14 @@ scoop persist-external-reset
 - [eza](bucket/eza.json) — `ls` replacement
 
 ### Image Processing
+
 - [caesium](bucket/caesium.json) / [rimage](bucket/rimage.json) — image compression
 - [jpegview-fork](https://github.com/sylikc/jpegview) — lightweight image viewer/editor
 - [picgo](bucket/picgo.json) — image uploader
 - [icns](bucket/icns.json) — `.icns` file creation
 
 ### Gaming
+
 - [cheat-engine](bucket/cheat-engine.json)
 - [game-cheats-manager](https://github.com/dyang886/Game-Cheats-Manager)
 - [bg3-mod-manager](bucket/bg3-mod-manager.json)
@@ -115,7 +123,7 @@ Full manifest list: [bucket/](bucket)
 A few manifests use less common Scoop features and are useful as reference. All pull directly from the upstream project's own release channel.
 
 | Manifest | Notable technique |
-|---|---|
+| --- | --- |
 | [163MusicLyrics](bucket/163MusicLyrics.json) / [PicaComic](bucket/PicaComic.json) | Persists data outside the install directory (`$dir`), such as `%APPDATA%`, via the custom `persist_external` field paired with `scripts/persist-external.ps1` helper script. |
 | [mihomo-shawl-service](bucket/mihomo-shawl-service.json) | Bundles two upstream release URLs, wraps the binary as a Windows service through an external helper script, coordinates `pre_install`/`post_install`/`pre_uninstall`/`persist`. |
 | [goldendict-ng](bucket/goldendict-ng.json) | `checkver` pulls the version out of a Qt-tagged asset name using `jsonpath` + `regex` + `replace`, kept consistent with `autoupdate`. |

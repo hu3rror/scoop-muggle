@@ -12,20 +12,20 @@
 ### 🟢 可迁（确定，Electron）：1 个
 
 | App | 技术栈 | 证据 | 建议 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **wonderpen** | Electron（electron-builder NSIS） | Extras manifest 的 installer.script 解 `$PLUGINSDIR/app.7z`——electron-builder 安装器特征；Electron 内核原生支持 `--user-data-dir` | 迁移到原生 persist：`--user-data-dir="$dir\data"` + `persist: data` + post_install 一次性迁移 `%APPDATA%\WonderPen` |
 
 ### 🟡 需验证：2 个 → 已验证均为不可迁（#78，2026-08）
 
 | App | 技术栈 | 验证方法 | 结论 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **manhuagui-downloader** | Rust / **Tauri v2** | 读上游源码（`src-tauri/src/config.rs` / `lib.rs` / `logger.rs` / `tauri.conf.json`）+ 查 Tauri v2 文档 | **不可迁**。数据目录全部硬编码 `app.path().app_data_dir()`（=`%APPDATA%\com.lanyeeee.manhuagui-downloader`）：config.json、日志目录（`app_data_dir\日志`）、默认下载/导出目录（`漫画下载`/`漫画导出`）均在旗下。README 的"免安装版(portable)"仅指绿色 zip 免安装，数据仍落 `%APPDATA%`。Tauri v2 无内建 portable 模式或数据目录环境变量覆盖，需应用自行实现 portable 检测（本应用未实现） |
 | **game-cheats-manager** | 主程序 **Python**（PyInstaller/Nuitka 打包），trainers 为 C++/FLTK | 读上游源码（`src/scripts/config.py`） | **不可迁**。GCM Settings 配置目录（settings.json + db）**硬编码** `os.path.join(os.environ["APPDATA"], "GCM Settings")`，无任何重定向机制；无 portable 模式、无环境变量覆盖。trainer 下载目录（"Custom Paths"）仅是 settings.json 内可改的 `downloadPath` 配置键，非机制级重定向，且仍需 settings.json 先落 APPDATA |
 
 ### 🔴 不可迁：12 个
 
 | App | 技术栈 | 不可迁原因 |
-|---|---|---|
+| --- | --- | --- |
 | **manhuagui-downloader** | Rust / Tauri v2 | 见上方 🟡→🔴 验证记录（#78）：数据目录硬编码 `app_data_dir` |
 | **game-cheats-manager** | Python + C++ trainers | 见上方 🟡→🔴 验证记录（#78）：GCM Settings 配置目录硬编码 APPDATA |
 | **anx-reader** | Flutter/Dart | **Extras 已收录且放弃持久化**（无 persist、无 user-data-dir，仅 post_uninstall 清除 `%APPDATA%\com.anxcye\anx_reader`）——Flutter 无数据目录重定向机制 |

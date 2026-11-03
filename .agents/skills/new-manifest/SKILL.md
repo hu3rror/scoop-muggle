@@ -76,7 +76,7 @@ Done when: each gate passes, or its failure is fixed in the manifest before movi
 
 Stage only the manifest, then commit in the bucket's format:
 
-```
+```text
 git add bucket/<name>.json
 git commit -m "<name>: Add version <version>"
 ```
