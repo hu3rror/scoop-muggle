@@ -56,6 +56,8 @@ Exception — when the install itself runs the real installer under admin (Inno/
 A silent-setup frame may need the link created before setup writes `%LOCALAPPDATA%`.
 Every hook string is a contract: `scripts/persist-external-hooks.Tests.ps1` parses each `bucket/*.json` and fails CI on a call with any argument, a renamed function, or a `persist_external` manifest missing the uninstall hook.
 
+Manifests saved by older installs still pass `-Manifest`/`-Dir`/`-PersistDir`; the script keeps those aliases so their uninstall keeps working. Hooks you write never pass arguments.
+
 Behavior notes:
 
 - The helper keeps its own link record (`.scoop-persist-external.json`) inside `$persist_dir` per app, so uninstall can remove exactly the links this bucket created — it never touches real user data.
