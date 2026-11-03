@@ -38,23 +38,23 @@ Manifest shape — an array of items, each either:
 
 (PicaComic precedent.) Without a tuple, the external path's leaf becomes the stored name and the entry is linked as a directory (junctions only; ADR-0004).
 
-Hook wiring — dot-source the helper and call the install/uninstall functions. Standard form goes in `post_install` and `pre_uninstall`:
+Hook wiring — dot-source the helper and call the install/uninstall functions bare; they read `$dir`, `$persist_dir` and `$manifest` from the hook scope (ADR-0005):
 
 ```json
 "post_install": [
     ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
-    "Invoke-PersistExternalInstall -Manifest $manifest -PersistDir $persist_dir -Dir $dir"
+    "Invoke-PersistExternalInstall"
 ],
 "pre_uninstall": [
     ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
-    "Invoke-PersistExternalUninstall -Manifest $manifest -Dir $dir -PersistDir $persist_dir"
+    "Invoke-PersistExternalUninstall"
 ]
 ```
 
 Exception — when the install itself runs the real installer under admin (Inno/Silent), the link must exist before the installer runs, and services must be stopped before uninstall; then put the Install call in `pre_install` and keep service control around it. goodsync-10 precedent: `pre_install` = admin guard + dot-source + `Invoke-PersistExternalInstall` + run setup `/S` + stop `gs-server` process; `pre_uninstall` = admin guard + stop process + `gs-runner.exe /stop-remove-services` + dot-source + `Invoke-PersistExternalUninstall`.
 
 A silent-setup frame may need the link created before setup writes `%LOCALAPPDATA%`.
-Every hook string is a contract: `scripts/persist-external-hooks.Tests.ps1` parses each `bucket/*.json`, resolves the called function and its parameters against the script's AST, and fails CI on an undeclared parameter, a renamed function, or a `persist_external` manifest missing the uninstall hook.
+Every hook string is a contract: `scripts/persist-external-hooks.Tests.ps1` parses each `bucket/*.json` and fails CI on a call with any argument, a renamed function, or a `persist_external` manifest missing the uninstall hook.
 
 Behavior notes:
 

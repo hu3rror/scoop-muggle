@@ -2,7 +2,7 @@
 
 **Revision 2026-11（架构审查）**：五条修订：
 - **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，persist 记录写入成功后自动删除（全部链接失败时保留，此时它是唯一真相源）。`pre_uninstall` hook 新增 `-PersistDir $persist_dir`，缺省时从版本目录推导（兼容旧 manifest）。
-- **记录语义为当前集**：对账后记录等于 manifest 声明的链接集（个别链接失败时为成功应用的子集）；manifest 已不再声明的条目在对账时解除链接，声明集清空时同时删除记录。
+- **链接记录迁入 `$persist_dir`**：`.scoop-persist-external.json` 改由 `scripts/persist-external.ps1` 的 `Invoke-PersistExternalReconcile` 统一读写，位置为 `$persist_dir\.scoop-persist-external.json`；安装版本目录中的旧记录只读回退，persist 记录写入成功后自动删除（全部链接失败时保留，此时它是唯一真相源）。
 - **reset 门卫改读 manifest**：`Invoke-PersistExternalReset` 的门卫从「记录文件存在」改为「manifest 声明 `persist_external`」，记录缺失的 app 不再被静默跳过。
 - **链接通道收缩为目录 Junction**（ADR-0004）：file/SymbolicLink、`%VAR%`/`$home` 展开与类型探测分支移除，条目类型只接受 `dir`/`directory`；链接记录由 `{Source,Target,LinkType}` 对象改为源路径字符串数组（读取端仍兼容旧对象）。
 - **清单与计数更正**：下表是 2026-08 盘点快照；截至 2026-11 有 21 个 manifest 声明 `persist_external`，新增的 alma、herdr-gpui、hummingbird、hummingbird-nightly、pure-music、rgitui、ropy、sonora、zorite 按 new-manifest 流程加入，未做本 ADR 的源码级审计。
