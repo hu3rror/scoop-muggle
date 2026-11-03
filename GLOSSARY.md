@@ -23,3 +23,7 @@ _Avoid_: sync、repair、修复
 **孤儿链接（orphan link）**：
 链接记录中存在、但当前 manifest 不再声明的链接。
 _Avoid_: 残留链接、失效链接
+
+**外壳集成（explorer integration）**：
+Manifest 通过可选 reg 导入把应用接入 Windows 资源管理器的入口（右键菜单、URL scheme）。模板放 `scripts/<app>/`，`post_install` 生成可导入 reg 文件，导入与清除均由用户手动执行。
+_Avoid_: context menu 功能、右键菜单选项
