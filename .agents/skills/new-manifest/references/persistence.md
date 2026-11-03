@@ -61,7 +61,7 @@ Manifests saved by older installs still pass `-Manifest`/`-Dir`/`-PersistDir`; t
 Behavior notes:
 
 - The helper keeps its own link record (`.scoop-persist-external.json`) inside `$persist_dir` per app, so uninstall can remove exactly the links this bucket created — it never touches real user data.
-- `scoop update` re-runs `pre_install`/`post_install`; the functions are idempotent (link present → skip).
+- `scoop update` re-runs the outgoing manifest's `pre_install`/`post_install` and, on the reinstall run, its `pre_uninstall`/`post_uninstall` (`libexec/scoop-update.ps1:351,377`); the functions are idempotent (link present → skip).
 - Reconcile treats the record as the manifest's declared set: an entry removed from the manifest is unlinked on the next install/reset (persist data itself stays in place), an empty declared set deletes the record, and a partially-failed run records only the links it applied. If every link fails, the stale record is removed rather than kept while a legacy version-dir record, the only one left, stays in place.
 - `scoop persist-external-reset` (alias registered on install) re-links everything after a failed move.
 

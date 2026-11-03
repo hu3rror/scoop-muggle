@@ -53,3 +53,4 @@ Single-context: one root `GLOSSARY.md` + `docs/adr/`（无则跳过，随 domain
 ### 跑测试
 
 - `bin\test.ps1` 需要 Pester 5.2.0 + BuildHelpers 2.0.1（预装于 `Documents\WindowsPowerShell\Modules`，默认 PSModulePath 找不到）：先 `$env:PSModulePath = "$env:USERPROFILE\Documents\WindowsPowerShell\Modules;$env:PSModulePath"` 再跑；本机执行策略拦截未签名脚本，跑法必须带 Bypass：`powershell -NoProfile -ExecutionPolicy Bypass -File bin\test.ps1`。
+- 原生命令（reg.exe、setup.exe 等）成败只看 `$LASTEXITCODE`；中文系统下成功提示写 stderr（GBK 非 UTF-8），`$ErrorActionPreference='Stop'` 会把它抛成 `NativeCommandError`/`RemoteException` 误报失败——预期有输出的命令用重定向取回显，别拿 stderr 判断成败。

@@ -15,7 +15,6 @@ Rules; a precedent names a manifest in `bucket/`. Wiki pages at the end.
 
 ## Download shape
 
-| Field | Usage | Notes |
 | Field | Notes |
 |---|---|
 | `architecture` | Wraps per-arch `url`, `hash`, `bin`, `checkver`, `extract_dir`, `installer`, `pre_install`, `post_install`, `shortcuts`, `uninstaller`. Put arch-specific content here; see repo `AGENTS.md` for the hook merge rule. |
@@ -36,7 +35,7 @@ Rules; a precedent names a manifest in `bucket/`. Wiki pages at the end.
 | `shortcuts` | 4 elements: `[target, "<AppsSubDir>\\<Name>", startParams, iconPath]`; the last two optional. Precedent of a launcher shortcut: cherry-studio. |
 | `env_add_path` | Append a directory to PATH. |
 | `env_set` | `{"VAR": "value"}`; `$dir` available. |
-| `notes` | Array of lines shown after install. |
+| `notes` | Array of lines shown after install. One line per command or fact; no prose paragraphs. |
 | `psmodule` | `{"name": "..."}` — expose a PowerShell module as `$env:PSModulePath` target. posh-git, get-childitemcolor. |
 | `depends` | Install another bucket app first; `suggest` for optional companions (qaac/qaac-qtfiles pair). |
 
@@ -44,7 +43,11 @@ Rules; a precedent names a manifest in `bucket/`. Wiki pages at the end.
 
 Hook fields: `pre_install`, `post_install`, `pre_uninstall`, `post_uninstall`.
 `##` — array of explanatory strings, the only comment mechanism JSON has here.
-Hook variables (upstream): `$app`, `$architecture`, `$cmd`, `$manifest`, `$version`, `$persist_dir`, `$bucketsdir`, `$original_dir`, `$scoopdir`, `$global`. `$dir` is the current versioned directory, except in `post_install` where it points at the live install. `appdir <name>` resolves another scoop app's dir.
+Hook variables (upstream): `$app`, `$architecture`, `$manifest`, `$version`, `$persist_dir`, `$bucketsdir`, `$original_dir`, `$scoopdir`, `$global`, `$dir` — there is no `$cmd`, and no flag says whether the hook runs for install or update: an undefined `$cmd` guard under `Set-StrictMode -Off` is false forever (`bucket/notepad3.json:34` is such a dead guard; don't copy it). `$dir` is the versioned install directory, except in `post_install` where it is the `current` junction (`apps\<app>\current`). `appdir <name>` resolves another scoop app's dir.
+
+`scoop update` also runs the outgoing manifest's `pre_uninstall`/`post_uninstall` before reinstalling (`libexec/scoop-update.ps1:351,354,377`) — an uninstall hook must not assume the app is going away (see `persistence.md`).
+
+Verify hook semantics against the installed scoop sources (`$SCOOP/apps/scoop/current` is a git checkout) rather than trusting this list: `lib/install.ps1` drives install, `libexec/scoop-update.ps1` drives update, and `Invoke-HookScript` executes a hook.
 
 ## Persistence and update
 
