@@ -35,10 +35,11 @@
     "post_install": [
         "$installContext = (Resolve-Path \"$bucketsdir\\*\\scripts\\zed\\install-context.reg\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
         "$uninstallContext = (Resolve-Path \"$bucketsdir\\*\\scripts\\zed\\uninstall-context.reg\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
-        "if (!$installContext -or !$uninstallContext) { throw 'zed context menu templates not found in bucket/scripts!' }",
+        "if (!$installContext -or !$uninstallContext) { warn 'zed context menu templates not found in bucket/scripts; skipping context menu setup' } else {",
         "$appPath = $dir.Replace('\\', '\\\\')",
         "(Get-Content $installContext -Raw).Replace('{{dir}}', $appPath) | Set-Content \"$dir\\install-context.reg\" -Encoding Ascii",
         "(Get-Content $uninstallContext -Raw).Replace('{{dir}}', $appPath) | Set-Content \"$dir\\uninstall-context.reg\" -Encoding Ascii",
+        "}",
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
         "Invoke-PersistExternalInstall"
     ],
