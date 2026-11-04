@@ -1,12 +1,12 @@
 {
-    "version": "206",
+    "version": "212",
     "description": "Experimental Nintendo Switch 2 emulator derived from Eden, Yuzu and Sudachi (MSVC build).",
     "homepage": "https://github.com/Djihads80/Eglantine",
     "license": "GPL-3.0-or-later",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Djihads80/Eglantine/releases/download/build-206/eglantine-windows-x86_64.zip",
-            "hash": "029eb0ca2623e30bf2a490ad75cd32cc6d4bee72af3bdb48e2d1a8940edf5d8b"
+            "url": "https://github.com/Djihads80/Eglantine/releases/download/build-212/eglantine-windows-x86_64.zip",
+            "hash": "cfa3bf130b996ad0c00f5b3105de37fcfb724511fcd216b2856e09463794bedd"
         }
     },
     "shortcuts": [
