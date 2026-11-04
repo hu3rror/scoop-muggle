@@ -18,7 +18,7 @@ Fetch the URL and reduce it to the real download. One of:
 - **c. ghxi green 7z** — password-protected 7z, `-pmuggle` (`ghxi-green-7z.json`).
 - **d. direct URL** — plain download, often multi-asset or multi-arch (`direct-url.json`).
 
-Done when: archetype named, canonical URL resolved, hash source identified (release API, `latest.yml`, checksum file, or download-and-hash).
+Done when: archetype named, canonical URL resolved, and the hash comes from the highest source the project offers — GitHub release API `assets[].digest`, an upstream hash file, or the downloaded file, in that order (`references/manifest-fields.md`).
 
 ### 2. Collect evidence
 
@@ -41,7 +41,7 @@ Done when: `bucket/<name>.json` is free.
 
 ### 5. Fill the manifest
 
-Start from the archetype template and fill it per `references/manifest-fields.md`. Template keys with empty values are slots: replace with evidence or delete. Add the fields the app needs, in the repo's style.
+Start from the archetype template and fill it per `references/manifest-fields.md`. Template keys with empty values are slots: replace with evidence or delete. Add the fields the app needs, in the repo's style. An app that should register Explorer entries (context menu, URL scheme) also needs the Explorer integration template pair under `scripts/<app>/` — same reference.
 
 Done when: JSON parses, every field traces to evidence, and install/reinstall works from the manifest alone.
 
@@ -72,7 +72,13 @@ Done when: the file exists and parses as JSON.
 
 Done when: each gate passes, or its failure is fixed in the manifest before moving on.
 
-### 10. Commit
+### 10. Clean up
+
+Delete every temporary artifact this run produced: the evidence clone (`$env:TEMP\<name>`), downloaded installers, probe scripts, scratch directories. A stray directory at the bucket root is picked up as a bucket by the suite's discovery, so leaving one behind changes later runs.
+
+Done when: `git status --porcelain` lists only `bucket/<name>.json`.
+
+### 11. Commit
 
 Stage only the manifest, then commit in the bucket's format:
 
@@ -85,7 +91,7 @@ That is the bucket's commit format for new versions; updates read `<app>: Update
 
 Done when: `git log -1 --format=%s` reads `<name>: Add version <version>`, and the commit contains only `bucket/<name>.json`.
 
-### 11. Report
+### 12. Report
 
 Report the archetype, filename, checkver form, persist decision, gate results, the commit hash, and every `[NEED-VERIFY]` item. Stop.
 

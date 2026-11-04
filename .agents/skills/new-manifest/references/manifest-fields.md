@@ -13,6 +13,16 @@ Rules; a precedent names a manifest in `bucket/`. Wiki pages at the end.
 | `url` | The download URL. A `#/<name>` fragment renames the download before extraction (`#/dl.7z`, `#/dl.7z_`). |
 | `hash` | SHA256 hex by default; prefix `sha512:`, `sha1:`, `md5:` when the source publishes that. cherry-studio uses `sha512:` from `latest.yml`. |
 
+### Hash sources
+
+Three sources, in order; take the first the project offers and say which one you used:
+
+1. GitHub release API — each asset carries `assets[].digest` as `sha256:<hex>`: `gh api repos/<owner>/<repo>/releases/latest --jq '.assets[] | {name, digest}'`.
+2. An upstream hash file — `latest.yml`, `SHA256SUMS`, `*.sha256`, `checksums.txt`.
+3. The downloaded file itself — the slowest and the last resort here; hashing it needs the `Get-FileHash` shim from `AGENTS.md`.
+
+Cross-check against a second source when one exists: a lone digest that contradicts the asset's bytes only surfaces as a failed install. `autoupdate.hash` reads the same source as the manifest (`checkver-autoupdate.md`).
+
 ## Download shape
 
 | Field | Notes |
@@ -48,6 +58,12 @@ Hook variables (upstream): `$app`, `$architecture`, `$manifest`, `$version`, `$p
 `scoop update` also runs the outgoing manifest's `pre_uninstall`/`post_uninstall` before reinstalling (`libexec/scoop-update.ps1:351,354,377`) — an uninstall hook must not assume the app is going away (see `persistence.md`).
 
 Verify hook semantics against the installed scoop sources (`$SCOOP/apps/scoop/current` is a git checkout) rather than trusting this list: `lib/install.ps1` drives install, `libexec/scoop-update.ps1` drives update, and `Invoke-HookScript` executes a hook.
+
+### Explorer integration
+
+Optional registration of a context-menu entry or a URL scheme. The two templates live in `scripts/<app>/` — `install-context.reg` and `uninstall-context.reg` — and write the install path as `{{dir}}`. `post_install` resolves both under `$bucketsdir` and expands them into `$dir`, then stops: importing and removing the keys is the user's manual step (`GLOSSARY.md`, Explorer integration). `bucket/wu.json` and `bucket/zed.json` carry the live shape.
+
+Three rules ride on that shape. A missing template warns and skips, so the install survives an install path that lacks the bucket's `scripts/`. The keys are HKCU only, so the import needs no admin. `notes` gives both commands, the removal one marked "run before uninstalling", because `scoop uninstall` deletes `$dir` together with its copy of the templates.
 
 ## Persistence and update
 

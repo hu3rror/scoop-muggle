@@ -38,6 +38,17 @@ Mode chain, first success wins: `extract` (default) → `json` → `xpath` → `
 - bare hash: `^([a-fA-F0-9]+)$`
 - `hash filename` pairs: `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`
 
+The manifest's hash and `autoupdate.hash` share one source: two sources that disagree rewrite the hash on every `-ForceUpdate`. A GitHub release API source is a `json` hash, and the `jsonpath` key alone selects that mode:
+
+```json
+"hash": {
+    "url": "https://api.github.com/repos/<owner>/<repo>/releases/latest",
+    "jsonpath": "$.assets[?(@.name=='<asset>')].digest"
+}
+```
+
+`format_hash` strips the `sha256:` prefix the API adds; `api.github.com` URLs pick up `Get-GitHubToken` automatically.
+
 ## 4. Verify before reporting
 
 1. `bin/checkver.ps1 -App <name>` — the reported version must equal the manifest's `version`. The wrapper passes `-Dir bucket`; `-u` is not a parameter.
