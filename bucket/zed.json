@@ -33,6 +33,12 @@
         ]
     ],
     "post_install": [
+        "$installContext = (Resolve-Path \"$bucketsdir\\*\\scripts\\zed\\install-context.reg\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+        "$uninstallContext = (Resolve-Path \"$bucketsdir\\*\\scripts\\zed\\uninstall-context.reg\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+        "if (!$installContext -or !$uninstallContext) { throw 'zed context menu templates not found in bucket/scripts!' }",
+        "$appPath = $dir.Replace('\\', '\\\\')",
+        "(Get-Content $installContext -Raw).Replace('{{dir}}', $appPath) | Set-Content \"$dir\\install-context.reg\" -Encoding Ascii",
+        "(Get-Content $uninstallContext -Raw).Replace('{{dir}}', $appPath) | Set-Content \"$dir\\uninstall-context.reg\" -Encoding Ascii",
         ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
         "Invoke-PersistExternalInstall"
     ],
@@ -49,7 +55,9 @@
     ],
     "notes": [
         "Please disable auto-update in Zed's settings (\"auto_update\": false), or the updater installs a second copy outside Scoop's directory.",
-        "Settings and databases are kept in persist\\zed via persist_external, so they survive uninstall - purge with: scoop uninstall zed -p"
+        "Context menu: reg import \"$dir\\install-context.reg\"",
+        "Remove context menu: reg import \"$dir\\uninstall-context.reg\" (run before uninstalling)",
+        "Settings and databases are kept in persist\\zed via persist_external - purge with: scoop uninstall zed -p"
     ],
     "checkver": {
         "github": "https://github.com/zed-industries/zed"
