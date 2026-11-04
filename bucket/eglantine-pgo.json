@@ -1,12 +1,12 @@
 {
-    "version": "206",
+    "version": "212",
     "description": "Experimental Nintendo Switch 2 emulator derived from Eden, Yuzu and Sudachi (MinGW PGO build, fastest and self-contained).",
     "homepage": "https://github.com/Djihads80/Eglantine",
     "license": "GPL-3.0-or-later",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Djihads80/Eglantine/releases/download/build-206/eglantine-windows-x86_64-pgo.zip",
-            "hash": "09cb2eadcb51d754ab09b5434dd93787bc508bd9c2e13d80f440d0b3cdf7233a"
+            "url": "https://github.com/Djihads80/Eglantine/releases/download/build-212/eglantine-windows-x86_64-pgo.zip",
+            "hash": "95530f5a270e9ab6a74a139f8dc2cf2e33d089ec2223786ccd5c0c980881a1dc"
         }
     },
     "shortcuts": [
