@@ -2,7 +2,7 @@
 # Pester 5 does not expose file-scope variables inside It bodies.
 #
 # References that depend on the installing bucket ($app, $_, the $bucketsdir
-# glob) are skipped: their target is not in this repo.
+# glob) are skipped: their target depends on which bucket is installed.
 
 $repoRoot = Split-Path $PSScriptRoot -Parent
 $scriptsRoot = Join-Path $repoRoot 'scripts'
@@ -15,22 +15,28 @@ $seen = [System.Collections.Generic.HashSet[string]]::new()
 
 foreach ($file in $manifestFiles) {
     $manifest = [System.IO.File]::ReadAllText($file.FullName) | ConvertFrom-Json
-    $texts = @()
-    foreach ($key in $hookKeys) {
-        $texts += @($manifest.$key | Where-Object { $_ -is [string] })
-    }
-    foreach ($key in $scriptKeys) {
-        $texts += @($manifest.$key.script | Where-Object { $_ -is [string] })
-    }
+    $scopes = @($manifest)
+    foreach ($arch in $manifest.architecture.PSObject.Properties) { $scopes += $arch.Value }
 
-    foreach ($text in $texts) {
-        foreach ($match in [regex]::Matches($text, 'scripts[\\/]+(?<name>[A-Za-z0-9._-]+)')) {
-            $reference = "scripts/" + $match.Groups['name'].Value
-            if (-not $seen.Add("$($file.Name)|$reference")) { continue }
-            $referenceCases += @{
-                Name      = $file.Name
-                Reference = $reference
-                Exists    = Test-Path -LiteralPath (Join-Path $scriptsRoot $match.Groups['name'].Value)
+    foreach ($scope in $scopes) {
+        $texts = @()
+        foreach ($key in $hookKeys) {
+            $texts += @($scope.$key | Where-Object { $_ -is [string] })
+        }
+        foreach ($key in $scriptKeys) {
+            $texts += @($scope.$key.script | Where-Object { $_ -is [string] })
+        }
+
+        foreach ($text in $texts) {
+            foreach ($match in [regex]::Matches($text, 'scripts[\\/]+(?<path>[A-Za-z0-9._\\/-]+)')) {
+                $relative = $match.Groups['path'].Value.TrimEnd('\', '/')
+                $reference = 'scripts/' + ($relative -replace '[\\/]+', '/')
+                if (-not $seen.Add("$($file.Name)|$reference")) { continue }
+                $referenceCases += @{
+                    Name      = $file.Name
+                    Reference = $reference
+                    Exists    = Test-Path -LiteralPath (Join-Path $scriptsRoot $relative)
+                }
             }
         }
     }
