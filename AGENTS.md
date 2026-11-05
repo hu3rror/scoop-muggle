@@ -46,7 +46,7 @@ Single-context: one root `GLOSSARY.md` + `docs/adr/`（无则跳过，随 domain
 ### deprecated 目录
 
 - `lib/manifest.ps1`：deprecated/ 是 `scoop update/uninstall` 的 manifest 兜底来源（bucket/ 找不到时回退查 deprecated/）→ **删除 deprecated manifest 后，已安装该 app 的用户无法再 scoop update**。官方 ScoopInstaller/Main 也保留 deprecated/，归档弃用是生态惯例。
-- deprecated/ 不参与测试与 excavator 更新（失控存档），上游 URL 可能已过期。
+- deprecated/ 不参与 bucket 测试矩阵与 excavator 更新（失控存档），上游 URL 可能已过期；唯一例外是 `scripts/manifest-script-references.Tests.ps1` 对其 manifest 做只读的脚本引用检查。
 - 清理原则：只删「上游 URL 失效 + 无替代 + 无引用（README / 其他 manifest）」三条件均满足的死条目；`git rm` + 本地测试 + CI 验证。
 - 判定 URL 失效：`curl.exe -sL -o NUL -w "%{http_code}"`，404=失效、000=瞬时超时需复测完整 URL、451=法律封禁（GitHub DMCA）。
 
