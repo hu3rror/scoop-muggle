@@ -13,8 +13,8 @@ param (
     [string]$Target
 )
 
-# 导入同目录下的 DoradoUtils 模块
-Import-Module "$PSScriptRoot/DoradoUtils.psm1" -ErrorAction Stop
+# 导入仓库根目录 scripts 下的 DoradoUtils 模块
+Import-Module "$PSScriptRoot/../../scripts/DoradoUtils.psm1" -ErrorAction Stop
 
 try {
     if ($Action -eq 'Mount') {
