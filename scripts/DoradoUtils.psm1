@@ -72,7 +72,6 @@ function Invoke-ExternalCommand2 {
                 $s = $_ -replace '(\\+)"', '$1$1"'
                 # escape N consecutive backslash(es), which are at the end of the string, to 2N consecutive ones
                 $s = $s -replace '(\\+)$', '$1$1'
-                # escape double quotes
                 $s = $s -replace '"', '\"'
                 # https://github.com/ScoopInstaller/Scoop/issues/5231#issuecomment-1295840608
                 $s
@@ -137,9 +136,6 @@ function Out-UTF8File {
             [System.IO.File]::AppendAllText($FilePath, $InputObject)
         } else {
             if (!$NoNewLine) {
-                # Ref: https://stackoverflow.com/questions/5596982
-                # Performance Note: `WriteAllLines` throttles memory usage while
-                # `WriteAllText` needs to keep the complete string in memory.
                 [System.IO.File]::WriteAllLines($FilePath, $InputObject)
             } else {
                 # However `WriteAllText` does not add ending newline.
