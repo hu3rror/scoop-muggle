@@ -42,14 +42,16 @@ Hook wiring — dot-source the helper and call the install/uninstall functions b
 
 ```json
 "post_install": [
-    ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
+    ". (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
     "Invoke-PersistExternalInstall"
 ],
 "pre_uninstall": [
-    ". \"$(Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle'))/scripts/persist-external.ps1\"",
+    ". (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
     "Invoke-PersistExternalUninstall"
 ]
 ```
+
+The glob replaces `Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle')`: Scoop's `$bucket` is an internals value that is `$null` for a URL install, and `Find-BucketDirectory` is a lib helper. `$bucketsdir` is set by Scoop itself (`lib/buckets.ps1`), so every hook sees it.
 
 Exception — when the install itself runs the real installer under admin (Inno/Silent), the link must exist before the installer runs, and services must be stopped before uninstall; then put the Install call in `pre_install` and keep service control around it. goodsync-10 precedent: `pre_install` = admin guard + dot-source + `Invoke-PersistExternalInstall` + run setup `/S` + stop `gs-server` process; `pre_uninstall` = admin guard + stop process + `gs-runner.exe /stop-remove-services` + dot-source + `Invoke-PersistExternalUninstall`.
 
