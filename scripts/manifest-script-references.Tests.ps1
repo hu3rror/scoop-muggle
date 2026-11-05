@@ -1,9 +1,8 @@
 # Facts are resolved at discovery time and handed to each It as plain values:
 # Pester 5 does not expose file-scope variables inside It bodies.
 #
-# Scope: literal `scripts/<name>` references in hook text must point at something
-# under this repo's scripts/. Dynamic references (`$app`, `$_`, `$bucketsdir\*\...`)
-# are skipped: their target depends on the installing bucket, not on this repo.
+# References that depend on the installing bucket ($app, $_, the $bucketsdir
+# glob) are skipped: their target is not in this repo.
 
 $repoRoot = Split-Path $PSScriptRoot -Parent
 $scriptsRoot = Join-Path $repoRoot 'scripts'
