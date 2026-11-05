@@ -51,7 +51,7 @@ Hook wiring — dot-source the helper and call the install/uninstall functions b
 ]
 ```
 
-The glob replaces `Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle')`: Scoop's `$bucket` is an internals value that is `$null` for a URL install, and `Find-BucketDirectory` is a lib helper. `$bucketsdir` is set by Scoop itself (`lib/buckets.ps1`), so every hook sees it.
+The glob replaces `Find-BucketDirectory -Root -Name (coalesce $bucket 'muggle')`: `$bucket` comes from the install record (`libexec/scoop-uninstall.ps1:62`) and is `$null` for a URL install. `$bucketsdir` is defined by Scoop's own lib (`lib/buckets.ps1:1`), and the zed, wu and mobaxterm-sp hooks already read it.
 
 Exception — when the install itself runs the real installer under admin (Inno/Silent), the link must exist before the installer runs, and services must be stopped before uninstall; then put the Install call in `pre_install` and keep service control around it. goodsync-10 precedent: `pre_install` = admin guard + dot-source + `Invoke-PersistExternalInstall` + run setup `/S` + stop `gs-server` process; `pre_uninstall` = admin guard + stop process + `gs-runner.exe /stop-remove-services` + dot-source + `Invoke-PersistExternalUninstall`.
 
