@@ -49,7 +49,7 @@
         "Write-Host 'Running MobaXtermX.exe license generator...' -ForegroundColor Green",
         "$bucketDir = Find-BucketDirectory -Root -Name $bucket",
         "if ($bucketDir) {",
-        "    $execPath = Join-Path \"$bucketDir\\scripts\" 'MobaXtermX.exe'",
+        "    $execPath = Join-Path \"$bucketDir\\scripts\\mobaxterm-sp\" 'MobaXtermX.exe'",
         "    if (Test-Path $execPath) {",
         "        $username = $env:USERNAME",
         "        $tempDir = [System.IO.Path]::GetTempPath()",
