@@ -36,18 +36,25 @@
         }
     },
     "pre_install": [
-        "$helper = Join-Path (Find-BucketDirectory -Root -Name $bucket) 'scripts\\mihomo-shawl-service\\mihomo-shawl-setup.ps1'",
-        "if (!(Test-Path $helper)) { throw 'mihomo-shawl-setup.ps1 not found under scripts/mihomo-shawl-service!' }",
+        "$rel = 'scripts\\mihomo-shawl-service\\mihomo-shawl-setup.ps1'",
+        "$helper = Join-Path (Find-BucketDirectory -Root -Name $bucket) $rel",
+        "if (!(Test-Path $helper)) { $helper = (Resolve-Path \"$bucketsdir\\*\\$rel\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path }",
+        "if (!$helper -or !(Test-Path $helper)) { throw 'mihomo-shawl-setup.ps1 not found under scripts/mihomo-shawl-service in any bucket!' }",
         "& \"$helper\" -Phase pre_install -Dir \"$dir\" -PersistDir \"$persist_dir\""
     ],
     "post_install": [
-        "$helper = Join-Path (Find-BucketDirectory -Root -Name $bucket) 'scripts\\mihomo-shawl-service\\mihomo-shawl-setup.ps1'",
-        "if (!(Test-Path $helper)) { throw 'mihomo-shawl-setup.ps1 not found under scripts/mihomo-shawl-service!' }",
+        "$rel = 'scripts\\mihomo-shawl-service\\mihomo-shawl-setup.ps1'",
+        "$helper = Join-Path (Find-BucketDirectory -Root -Name $bucket) $rel",
+        "if (!(Test-Path $helper)) { $helper = (Resolve-Path \"$bucketsdir\\*\\$rel\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path }",
+        "if (!$helper -or !(Test-Path $helper)) { throw 'mihomo-shawl-setup.ps1 not found under scripts/mihomo-shawl-service in any bucket!' }",
         "& \"$helper\" -Phase post_install -Dir \"$dir\" -OriginalDir \"$original_dir\" -PersistDir \"$persist_dir\""
     ],
     "pre_uninstall": [
-        "$helper = Join-Path (Find-BucketDirectory -Root -Name $bucket) 'scripts\\mihomo-shawl-service\\mihomo-shawl-setup.ps1'",
-        "if (!(Test-Path $helper)) { throw 'mihomo-shawl-setup.ps1 not found under scripts/mihomo-shawl-service!' }",
+        "$rel = 'scripts\\mihomo-shawl-service\\mihomo-shawl-setup.ps1'",
+        "$helper = Join-Path (Find-BucketDirectory -Root -Name $bucket) $rel",
+        "if (!(Test-Path $helper)) { $helper = (Resolve-Path \"$bucketsdir\\*\\$rel\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path }",
+        "if (!$helper -or !(Test-Path $helper)) { $helper = Join-Path \"$dir\" 'mihomo-shawl-setup.ps1' }",
+        "if (!$helper -or !(Test-Path $helper)) { throw 'mihomo-shawl-setup.ps1 not found under scripts/mihomo-shawl-service in any bucket!' }",
         "& \"$helper\" -Phase uninstall -Dir \"$dir\" -PersistDir \"$persist_dir\""
     ],
     "persist": [
