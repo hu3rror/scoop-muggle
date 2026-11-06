@@ -38,15 +38,19 @@ Manifest shape — an array of items, each either:
 
 (PicaComic precedent.) Without a tuple, the external path's leaf becomes the stored name and the entry is linked as a directory (junctions only; ADR-0004).
 
-Hook wiring — dot-source the helper and call the install/uninstall functions bare; they read `$dir`, `$persist_dir` and `$manifest` from the hook scope (ADR-0005):
+Hook wiring — assign the helper, throw when the lookup is empty, dot-source the variable, then call the install/uninstall functions bare; they read `$dir`, `$persist_dir` and `$manifest` from the hook scope (ADR-0005):
 
 ```json
 "post_install": [
-    ". (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+    "$helper = (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+    "if (!$helper) { throw 'persist_external: persist-external.ps1 not found under scripts/ in any bucket' }",
+    ". $helper",
     "Invoke-PersistExternalInstall"
 ],
 "pre_uninstall": [
-    ". (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+    "$helper = (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+    "if (!$helper) { throw 'persist_external: persist-external.ps1 not found under scripts/ in any bucket' }",
+    ". $helper",
     "Invoke-PersistExternalUninstall"
 ]
 ```

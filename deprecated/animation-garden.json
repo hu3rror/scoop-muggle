@@ -18,10 +18,14 @@
         ]
     ],
     "post_install": [
-        "& (Resolve-Path \"$bucketsdir/*/deprecated/scripts/DoradoHelper.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path -Action Mount -PersistDir \"$persist_dir\" -Target \"$env:APPDATA/Him188\""
+        "$helper = (Resolve-Path \"$bucketsdir/*/deprecated/scripts/DoradoHelper.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+        "if (!$helper) { throw 'deprecated/scripts/DoradoHelper.ps1 not found in any bucket' }",
+        "& $helper -Action Mount -PersistDir \"$persist_dir\" -Target \"$env:APPDATA/Him188\""
     ],
     "pre_uninstall": [
-        "& (Resolve-Path \"$bucketsdir/*/deprecated/scripts/DoradoHelper.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path -Action Dismount -Target \"$env:APPDATA/Him188\""
+        "$helper = (Resolve-Path \"$bucketsdir/*/deprecated/scripts/DoradoHelper.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
+        "if (!$helper) { throw 'deprecated/scripts/DoradoHelper.ps1 not found in any bucket' }",
+        "& $helper -Action Dismount -Target \"$env:APPDATA/Him188\""
     ],
     "checkver": "github",
     "autoupdate": {

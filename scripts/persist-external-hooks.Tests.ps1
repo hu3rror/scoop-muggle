@@ -38,6 +38,7 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repoRoot 'bucket') -Fil
         $dotSourceCases += @{
             Name         = $file.Name
             HasDotSource = [bool]($stageText -match 'scripts[\\/]+persist-external\.ps1')
+            HasGuard     = [bool]($stageText -match 'if \(!\$helper\)')
         }
     }
 
@@ -75,6 +76,11 @@ Describe 'persist_external hook contract' {
         It '<Name>: dot-sources persist-external.ps1' -TestCases $dotSourceCases {
             param($Name, $HasDotSource)
             $HasDotSource | Should -BeTrue
+        }
+
+        It '<Name>: guards the dot-source' -TestCases $dotSourceCases {
+            param($Name, $HasGuard)
+            $HasGuard | Should -BeTrue -Because 'a missing helper must not surface as a dot-source error'
         }
 
         It '<Name>: <Hook> calls a function the script defines' -TestCases $functionCases {
