@@ -1,12 +1,12 @@
 {
-    "version": "0.4.514",
+    "version": "0.4.534",
     "description": "GUI client for herdr: Claude Code, Codex and pi agent sessions as clean chats.",
     "homepage": "https://alma.now",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/yetone/alma-releases/releases/download/v0.4.514/alma-0.4.514-win-x64.exe#/dl.7z",
-            "hash": "sha512:270d8b08e058232d74a4735d7ed5811f4b2e779a1ef840cc9dec4e4750b8747f5c1671a5eb4d9dec36a06fe44b3e27cd556216c46475d022f3bab57be8184816",
+            "url": "https://github.com/yetone/alma-releases/releases/download/v0.4.534/alma-0.4.534-win-x64.exe#/dl.7z",
+            "hash": "sha512:370bf6ecdc20097fe80b9af371d2067dd4c17ae8e447a718e25b81b5d0f12cd37c03102638df02303b62a090d10bb0e5ecbf8f600b641b4d2365ad42f51ae226",
             "pre_install": [
                 "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\" -Removal",
                 "Remove-Item \"$dir\\`$*\", \"$dir\\Uninst*\" -Recurse"
