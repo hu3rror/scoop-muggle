@@ -6,11 +6,11 @@
     "architecture": {
         "64bit": {
             "url": "https://git.mailliw.org/hummingbird/hummingbird/releases/download/latest/Hummingbird-x86_64.exe#/Hummingbird.exe",
-            "hash": "f816e3840dc625b64704439e1e2f9669cc929f61081b374af48deb0fee26e5db"
+            "hash": "6f5c6b4c96cc613759abcff7e95811969b6dd4d80da75a8861174aa2323dbc2e"
         },
         "arm64": {
             "url": "https://git.mailliw.org/hummingbird/hummingbird/releases/download/latest/Hummingbird-aarch64.exe#/Hummingbird.exe",
-            "hash": "b3f2978bb81db3a62da03210826de4ef52a3dc26d5c53f58fc97278e340e4b33"
+            "hash": "455cfea62ff557312d16054a56e15c9aa16495aa7884e65bb1f7e95c0b84b30c"
         }
     },
     "bin": "Hummingbird.exe",
