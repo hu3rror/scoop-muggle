@@ -1,5 +1,5 @@
 {
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "Rime input method init and update tool with Wanxiang, Ice, Frost, and Mint support",
     "homepage": "https://github.com/ca-x/snout",
     "license": {
@@ -9,8 +9,8 @@
     "notes": "Start with 'snout --init', or 'snout' for the TUI.",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/ca-x/snout/releases/download/v0.5.1/snout-v0.5.1-windows-x86_64.exe#/snout.exe",
-            "hash": "c05ed1dddfdbc6849b7f718286ca7c2c148a39affc464d48bb0603e14fd3bbb5"
+            "url": "https://github.com/ca-x/snout/releases/download/v0.5.2/snout-v0.5.2-windows-x86_64.exe#/snout.exe",
+            "hash": "e148b5b336fa9a0e68fa413f2d1dffaa302c5020846c1e3f98dfd5ab8cbf454c"
         }
     },
     "bin": "snout.exe",
