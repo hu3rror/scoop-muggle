@@ -1,16 +1,16 @@
 {
-    "version": "20261117.112756",
+    "version": "20261118.122630",
     "description": "Modern music player written in Rust using GPUI, focused on performance, extensibility and design (nightly build from master)",
     "homepage": "https://git.mailliw.org/hummingbird/hummingbird",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
             "url": "https://git.mailliw.org/hummingbird/hummingbird/releases/download/latest/Hummingbird-x86_64.exe#/Hummingbird.exe",
-            "hash": "ae96a719d14e3c3074b738f23231f4f42bb288ead581990185dc38111fa54a1f"
+            "hash": "042e62ff658ee983a15de44d036939857284904dd8fb5644c377c4ac015957f2"
         },
         "arm64": {
             "url": "https://git.mailliw.org/hummingbird/hummingbird/releases/download/latest/Hummingbird-aarch64.exe#/Hummingbird.exe",
-            "hash": "a9953df7299e4d1316e51aa7e9b8a079487adb35e133a3fcfd5f1a5251ffe901"
+            "hash": "d8c5eec501857c2c06547fa73695aa510a05408d1188e59848c7bf86b2f318a4"
         }
     },
     "bin": "Hummingbird.exe",
