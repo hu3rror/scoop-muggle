@@ -7,18 +7,18 @@
     "hash": "404192748cff041984ad9ab46f28fc44734cdbd196154256192f7d4225ccab95",
     "pre_install": [
         "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\"",
-        "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse -Force -ErrorAction SilentlyContinue"
+        "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse -Force -ErrorAction SilentlyContinue",
+        "Set-Content -Path \"$dir\\hongguo-drama.cmd\" -Value '@echo off', 'set \"PORTABLE_EXECUTABLE_DIR=%~dp0\"', 'for %%i in (\"%~dp0*.exe\") do if not \"%%~nxi\"==\"hongguo-drama.cmd\" start \"\" \"%%i\"' -Encoding ASCII"
     ],
-    "post_install": "Set-Content -Path \"$dir\\红果短剧.cmd\" -Value '@echo off', 'set \"PORTABLE_EXECUTABLE_DIR=%~dp0\"', 'start \"\" \"%~dp0红果短剧.exe\"' -Encoding ASCII",
     "bin": [
         [
-            "红果短剧.cmd",
+            "hongguo-drama.cmd",
             "hongguo-drama"
         ]
     ],
     "shortcuts": [
         [
-            "红果短剧.cmd",
+            "hongguo-drama.cmd",
             "红果短剧"
         ]
     ],
