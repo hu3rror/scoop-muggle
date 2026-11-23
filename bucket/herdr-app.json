@@ -14,25 +14,7 @@
         }
     },
     "bin": "herdr-app.exe",
-    "persist_external": [
-        [
-            "$env:UserProfile\\.config\\herdr-app",
-            "app-home",
-            "directory"
-        ]
-    ],
-    "post_install": [
-        "$helper = (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
-        "if (!$helper) { throw 'persist_external: persist-external.ps1 not found under scripts/ in any bucket' }",
-        ". $helper",
-        "Invoke-PersistExternalInstall"
-    ],
-    "pre_uninstall": [
-        "$helper = (Resolve-Path \"$bucketsdir/*/scripts/persist-external.ps1\" -ErrorAction SilentlyContinue | Select-Object -First 1).Path",
-        "if (!$helper) { throw 'persist_external: persist-external.ps1 not found under scripts/ in any bucket' }",
-        ". $helper",
-        "Invoke-PersistExternalUninstall"
-    ],
+    "persist": ["data"],
     "shortcuts": [
         [
             "herdr-app.exe",
