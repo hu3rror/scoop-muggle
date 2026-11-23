@@ -1,12 +1,12 @@
 {
-    "version": "3.7.111",
+    "version": "3.7.113",
     "description": "A Windows document reader based on SumatraPDF, adding Chinese ebook support, local OCR, PDF page editing, TOC recognition, annotations and read aloud",
     "homepage": "https://github.com/dengxibo/sumatrapdf-plus",
     "license": "GPL-3.0-only",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/dengxibo/sumatrapdf-plus/releases/download/3.7.111/SumatraPDF-Plus.exe",
-            "hash": "fb03b3cfc69e286dcb482247cc2b2361b36c62c4d9d8a960dba84c5b85809ba1"
+            "url": "https://github.com/dengxibo/sumatrapdf-plus/releases/download/3.7.113/SumatraPDF-Plus.exe",
+            "hash": "5c63d4da50eb586dad6035aa038ec45cc3e9f44514a42e198318c6b1b0b81dfd"
         }
     },
     "bin": "SumatraPDF-Plus.exe",
