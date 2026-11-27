@@ -1,18 +1,18 @@
 {
-    "version": "20261126.1",
+    "version": "20261125.1",
     "description": "Native client for Sheprd (formerly Herdr UI) on macOS, Linux, and Windows, built with Rust and GPUI. View terminal sessions, workspaces, Git worktrees, and agent activity through your local daemon.",
     "homepage": "https://sheprd.org",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/sheprd-labs/sheprd/releases/download/v20261126.1/Sheprd-20261126.1-x86_64-pc-windows-msvc.zip",
-            "hash": "94ab031e8fe80ac69f91593254a12be039379eaa78313070fd0bf99948b6fcf5",
-            "extract_dir": "Sheprd-20261126.1-x86_64-pc-windows-msvc"
+            "url": "https://github.com/sheprd-labs/sheprd/releases/download/v20261125.1/Sheprd-20261125.1-x86_64-pc-windows-msvc.zip",
+            "hash": "1f23bdc42bffb3e28d90914e07bb91171e2c2e8596c6dd8bdbd9daf853af9d6a",
+            "extract_dir": "Sheprd-20261125.1-x86_64-pc-windows-msvc"
         },
         "arm64": {
-            "url": "https://github.com/sheprd-labs/sheprd/releases/download/v20261126.1/Sheprd-20261126.1-aarch64-pc-windows-msvc.zip",
-            "hash": "15e3596e5050d917703d8be00077a6964b7657ec122da81b86db1a6921976c41",
-            "extract_dir": "Sheprd-20261126.1-aarch64-pc-windows-msvc"
+            "url": "https://github.com/sheprd-labs/sheprd/releases/download/v20261125.1/Sheprd-20261125.1-aarch64-pc-windows-msvc.zip",
+            "hash": "b39816d1f1ea390f1ad55e4d7815da0c460df901e494328ba5b39edf0edec02e",
+            "extract_dir": "Sheprd-20261125.1-aarch64-pc-windows-msvc"
         }
     },
     "bin": [
